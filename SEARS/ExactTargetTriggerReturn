@@ -1,0 +1,321 @@
+function sendEmail() {
+    /**     
+        by: Gautam Kanda/ 8-16
+        */
+    var returnID = nlapiGetRecordId();
+
+    nlapiLogExecution('DEBUG', 'Return Confirm Trigger ID=' + returnID);
+    sendReturnEmail(returnID);
+
+}
+
+function getSalesOrderExternalID(internalID) {
+    var externalid = nlapiLookupField("salesorder", internalID, "externalid");
+    return externalid;
+}
+
+
+function sendReturnEmail(transID) {
+
+		       try{
+		var ItemRecieptrec = nlapiLoadRecord('itemreceipt', transID);
+		var ParsedItemRecieptrec = parseRecord(ItemRecieptrec);
+		var returnAuthID=checkIfUndefined(ParsedItemRecieptrec.createdfrom.internalid);
+
+		var Returnrec = nlapiLoadRecord('returnauthorization', returnAuthID);
+	 var ParsedReturnrec = parseRecord(Returnrec);
+	 
+	 var currentReturnType=nlapiLookupField('returnauthorization', returnAuthID,'createdfrom.type');
+	 
+	var createdFromID=checkIfUndefined(ParsedReturnrec.createdfrom.internalid);
+
+	var cashRecord;
+	 var ParsedCashRecord;
+	 var salesOrderInternalID;
+	 
+if(currentReturnType =="CashSale"){
+	 cashRecord = nlapiLoadRecord("cashsale", createdFromID);
+		   	  ParsedCashRecord = parseRecord(cashRecord);
+		   	  salesOrderInternalID=ParsedCashRecord.createdfrom.internalid;
+}
+
+else if(currentReturnType =="SalesOrd"){
+	 nlapiLogExecution('DEBUG', ' Sales Order ='+ createdFromID);
+		   	salesOrderInternalID=createdFromID;
+}
+
+	 
+if(currentReturnType =="CashSale" || currentReturnType =="SalesOrd" ){
+    var salesOrderRecord = nlapiLoadRecord("salesorder",salesOrderInternalID );
+    var salesOrderParsedRecord = parseRecord(salesOrderRecord);
+
+	  var linesItemInfo = [];
+    var EmailAddress;
+    var SubscriberKey;
+    var OrderNumber;
+    var OrderURL; //NOT Ready YET
+    var OrderSubTotal; 
+    var GSTHST;
+    var PST;
+    var OrderTotal; 
+	var CardNumber;
+   
+   var Language="E";
+    var fromEmailAddress="customercare@sears.ca";
+    //new Fields
+
+
+    var email_addr = "<email_addr>";
+ 
+   
+
+    //Item Line Fields
+    var item_title = "<item_title>";
+    var item_image_url = "<item_image_url>";
+    var item_link = "<item_link>";
+    var item_instock; //DO we really need this ?
+    var item_attr1; //this is Dynamic - attr could be more or less
+    var item_attr2; //this is Dynamic - attr could be more or less
+    var item_qty = "<item_qty>";
+    var item_cost_disc; //need to be in the SO level
+    var item_cost_reg = "<item_cost_reg>";
+    var item_total = "<item_total>";
+
+    //Item Line item Charge Fields
+
+    var charge_desc;
+    var charge_qty;
+    var charge_amount;
+    var charge_total;
+    //Item Line item Charge Fields END
+
+    //Item Line Fields END
+
+    //Payment Line Fields
+
+    var payment_method = "<payment_method>";
+    var payment_amount = "<payment_amount>";
+
+    //Payment Line Fields END
+   
+
+
+    //new Fields END
+    try {
+
+        var customerId = nlapiLookupField("salesorder", salesOrderInternalID, "entity");
+        var email = nlapiLookupField("customer", customerId, "email");
+        email_addr = email_addr + email + "</email_addr>";
+
+
+//Checking the Language flag from Sales Order REcord
+    if(checkIfUndefined(salesOrderParsedRecord.custbody_locale)=="fr_CA"){
+          Language="F";
+           var fromEmailAddress="soutienclients@sears.ca";
+        }
+
+
+
+
+        //JSON Fields
+        SubscriberKey = email;
+        EmailAddress = email;
+        OrderNumber = getSalesOrderExternalID(salesOrderInternalID);
+       
+        OrderSubTotal = checkIfUndefined(ParsedReturnrec.subtotal);
+         OrderTotal = checkIfUndefined(ParsedReturnrec.total);
+       
+        GSTHST = checkIfUndefined(ParsedReturnrec.taxtotal);
+        PST = checkIfUndefined(ParsedReturnrec.tax2total);
+        
+     
+        //JSON Fields ENDS
+
+        //XML Data Fields
+      
+       for (var i = 0; i < ParsedReturnrec.item.length; i++) {
+
+            var lineItemInfo = [];
+             if(checkIfUndefined(ParsedReturnrec.item[i].custcol_item_type.name)=="Inventory Item") {
+            lineItemInfo.push("<item>");
+            
+          var currentItemRecordID=  checkIfUndefined(ParsedReturnrec.item[i].custcol_internal_id);
+              
+          var currentItemRecord = nlapiLoadRecord("inventoryitem", currentItemRecordID);
+          var currentItemParsedRecord=parseRecord(currentItemRecord);
+
+				 lineItemInfo.push(item_title + replaceSpecialChar(checkIfUndefined(currentItemParsedRecord.displayname) )+ "</item_title>");			         		
+	          	lineItemInfo.push(item_qty +checkIfUndefined(ParsedReturnrec.item[i].quantity) + "</item_qty>");
+		            lineItemInfo.push(item_cost_reg + checkIfUndefined(ParsedReturnrec.item[i].rate) + "</item_cost_reg>");
+		            lineItemInfo.push(item_total + checkIfUndefined(ParsedReturnrec.item[i].amount) + "</item_total>");
+
+		            lineItemInfo.push(item_image_url + checkIfUndefined(ParsedReturnrec.item[i].custcol_itemimageurl) + "</item_image_url>");
+		            lineItemInfo.push(item_link + checkIfUndefined(ParsedReturnrec.item[i].custcol_itemwebsiteurl) + "</item_link>");
+		          		
+          	
+            lineItemInfo.push("</item>");
+            linesItemInfo.push(lineItemInfo.join(" "));
+          }
+
+        }
+	 			try {  	
+	            CardNumber = checkIfUndefined(ParsedReturnrec.custbody_cc_number_last4);
+	           
+	        }
+	        catch (e) {
+	          CardNumber="";
+	        }
+
+	        try {
+	            payment_method = payment_method + checkIfUndefined(ParsedReturnrec.paymentmethod.name) + "  " + CardNumber  + "</payment_method>";
+	            payment_amount = payment_amount + checkIfUndefined(ParsedReturnrec.total) + "</payment_amount>";
+	        }
+	        catch (e) {
+	            payment_method = payment_method + "</payment_method>";
+	            payment_amount = payment_amount + "</payment_amount>";
+	        }
+
+		    }
+		    catch (e) {
+
+		    }
+
+    var XmlData = "<xml> <returned_items>"
+    
+         + linesItemInfo.join(" ")
+         +"</returned_items>"
+	    +"<refund_details>" +
+     "<detail>" +
+     payment_method
+         +
+         payment_amount +
+         "</detail>"
+     +
+     "</refund_details>" +
+    "</xml>";
+
+    var jsonOut = {
+        "Address": EmailAddress,
+        "SubscriberKey": EmailAddress,
+        "ContactAttributes": {
+            "SubscriberAttributes": {
+
+                "OrderNumber": OrderNumber,
+
+                "OrderURL": "",
+
+                "OrderSubTotal": OrderSubTotal,
+                "OrderTotal": OrderTotal,
+           
+                "GSTHST": GSTHST,            
+                "PST": PST,
+                "Language": Language,
+               
+                "XML_Data": XmlData
+
+                          }
+        }
+    }
+
+   var response = sendExactTargetEmail(jsonOut, "07082016_return_received_trigger",fromEmailAddress);
+		nlapiLogExecution('DEBUG', 'Return Confirm Email SENT ='  +response);
+  }
+  
+}
+catch (e) {
+
+		    }
+    return "";
+   
+}
+
+
+
+function replaceSpecialChar(str)
+{
+  str = str.replace(/&/g, "&amp;");
+  str = str.replace(/>/g, "&gt;");
+  str = str.replace(/</g, "&lt;");
+  str = str.replace(/"/g, "&quot;");
+  str = str.replace(/'/g, "&#039;");
+  return str;
+}
+
+
+function sendExactTargetEmail(dataIn, triggerKey,fromEmailAddress) {
+
+
+    // HTTP headers
+    var method = 'POST';
+    var token = getExactTargetToken();
+    var headers = new Array();
+    headers['Content-Type'] = 'application/json';
+    headers['Authorization'] = 'Bearer ' + token;
+    var restletUrl = "https://www.exacttargetapis.com/messaging/v1/messageDefinitionSends/key:" + triggerKey + "/send";
+
+    // var restletUrl =  "https://www.exacttargetapis.com/messaging/v1/messageDefinitionSends/key:Trans_Order_Conf/send";
+    var JsonObj = {
+        "From": {
+"Address": fromEmailAddress,
+   "Name": "Sears"      
+
+        }
+    }
+    JsonObj["To"] = dataIn;
+    JsonObj["OPTIONS"] = {
+        "RequestType": "SYNC"
+    };
+
+    var payload = JSON.stringify(JsonObj);
+
+    // HTTP headers
+    var restResponse = nlapiRequestURL(restletUrl, payload, headers, null, method).getBody();
+
+    return restResponse;
+
+}
+
+
+
+
+function getExactTargetToken() {
+    var method = 'GET';
+    var headers = new Array();
+    var restletUrl = 'https://auth.exacttargetapis.com/v1/requestToken';
+    headers['Content-Type'] = 'application/json';
+    var payload = JSON.stringify({
+
+        "clientId": "18r293cbd138ky7xcca32qlw",
+        "clientSecret": "nCmwc3CzmdiNnylcjjohw31p"
+
+
+    });
+    // HTTP headers
+
+    var restResponse = JSON.parse(nlapiRequestURL(restletUrl, payload, headers, null, method).getBody());
+   
+    return (restResponse.accessToken);
+}
+
+
+function checkIfUndefined(ValueIn) {
+
+    var valueOut = "";
+
+    if (ValueIn === null || ValueIn === undefined) {
+        valueOut = "";
+    }
+    else {
+        valueOut = ValueIn;
+    }
+    return valueOut;
+
+}
+
+function parseRecord(record) {
+
+    var recordString = JSON.stringify(record);
+    var recordObj = JSON.parse(recordString);
+
+    return recordObj;
+}

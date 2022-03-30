@@ -1,0 +1,19 @@
+/**
+ * counter.js
+ * @NApiVersion 2.x
+ */
+define(function(){
+    var counter = 0;
+
+    function incrementValue() { 
+        counter++;
+    }
+    function getValue() { 
+        return counter;
+    }
+
+    return {
+        increment: incrementValue,
+        value: getValue
+    }
+});

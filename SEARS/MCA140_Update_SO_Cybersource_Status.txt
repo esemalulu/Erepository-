@@ -1,0 +1,48 @@
+
+
+function beforeLoadSO(type){
+
+  log("Before Load","Executed..")
+}
+
+function beforeSubmitSO(type){
+
+}
+
+function afterSubmitSO(type){
+
+	var so_id = nlapiGetRecordId();
+	log("afterSubmitSO", "SO id: " + so_id);//"1504921"
+	var data = nlapiLoadRecord("salesorder",so_id);
+
+    var payment_count = data.getLineItemCount("paymentevent");
+
+	for (var i = 1; i <= payment_count; i++) {
+		
+		if(typeof data.getLineItemValue("paymentevent","type",i) != undefined && typeof data.getLineItemValue("paymentevent","eventtype",i) != undefined ){
+			if(data.getLineItemValue("paymentevent","type",i) === "Authorization Request" && data.getLineItemValue("paymentevent","eventtype",i) === "Processed by Gateway"){
+				var payment_response = data.getLineItemValue("paymentevent","response",i);
+				var ItemsinPaymentResponse = payment_response.split("<br />");
+				log("afterSubmitSO", "payment_response: " + payment_response);
+
+				for (var j = 0; j < ItemsinPaymentResponse.length; j++) {
+					var singleItem = ItemsinPaymentResponse[j];
+					var keyValue = singleItem.split(":");
+					if(keyValue[0].trim() === "reasonCode"){
+						var statusCode = keyValue[1];
+						log("afterSubmitSO", "cybersource_approval_status: " + statusCode);
+						nlapiSubmitField('salesorder', so_id, 'custbody_cybersource_approval_status', statusCode.trim(), true);
+					}
+				};
+			}
+		}
+	};
+}
+
+
+
+/* logger*/
+function log(name, message) {
+    nlapiLogExecution('DEBUG', name, message);
+}
+

@@ -1,0 +1,38 @@
+/**
+ * @NApiVersion 2.x
+ * @NScriptType ScheduledScript
+ * @NModuleScope public
+ */
+define([],
+/**
+ * @param {error} error
+ * @param {record} record
+ * @param {search} search
+ * @param {task} task
+ * @param {runtime} runtime
+ */
+function() {
+	var debug = null;
+	const params = {
+		search: 'custscript_getcleard'
+	};
+    /**
+     * Definition of the Scheduled script trigger point.
+     *
+     * @param {Object} scriptContext
+     * @param {string} scriptContext.type - The context in which the script is executed. It is one of the values from the scriptContext.InvocationType enum.
+     * @Since 2015.2
+     */
+    function execute(scriptContext) {
+    	//log.audit("***STATUS***", "STARTED");
+
+		//debug = runtime.getCurrentScript().getParameter(
+			//	params.search);
+	//	updatePurchaseOrders();
+
+		//log.debug("***STATUS***", debug);
+    }
+    return {
+        execute: execute
+    };
+});

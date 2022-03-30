@@ -1,0 +1,426 @@
+function sendEmail() {
+    /**     
+        by: Gautam Kanda/ 6-29
+        */
+    nlapiLogExecution('DEBUG', 'Shipping Confirm Trigger 1');
+    var fullfilmentID = nlapiGetRecordId();
+
+    nlapiLogExecution('DEBUG', 'Shipping Confirm Trigger ID=' + fullfilmentID);
+    sendItemfullfilment(fullfilmentID);
+
+}
+
+function getSalesOrderExternalID(internalID) {
+    var externalid = nlapiLookupField("salesorder", internalID, "externalid");
+    return externalid;
+}
+function sendItemfullfilment(transID) {
+    var itemFullfilmentRecord = nlapiLoadRecord("itemfulfillment", transID);
+    var itemFullfilmentParsedRecord = parseRecord(itemFullfilmentRecord);
+
+try{
+
+    //Sales Order Information
+    var salesOrderInternalID = itemFullfilmentParsedRecord.createdfrom.internalid;
+    var salesOrderRecord = nlapiLoadRecord("salesorder", salesOrderInternalID);
+    var salesOrderParsedRecord = parseRecord(salesOrderRecord);
+
+    var linesItemInfo = [];
+
+    var EmailAddress;
+    var SubscriberKey;
+    var FirstName;
+    var OrderNumber;
+    var OrderDate;
+    var OrderURL; //NOT Ready YET
+    var OrderSubTotal; 
+    var PromoApplied;
+    var SavingsPointsEarned;
+	 var PointsEarned;
+	 var loyaltyRedemption;
+    var ShippingCost;
+    var GSTHST;
+    var PST;
+    var OrderTotal; 
+    var OptIn="1";
+    var Language="E";
+    var fromEmailAddress="customercare@sears.ca";
+
+      var orderAssistFee;
+
+var CardNumber;
+
+    //new Fields
+
+
+    var email_addr = "<email_addr>";
+    var order_date = "<order_date>";
+
+    var est_dlvr_date; //Pending
+    var ship_name = "<ship_name>"; //first_name we dont have first name
+
+    var addr1 = "<addr1>";
+    var addr2 = "<addr2>";
+    var city = "<city>";
+    var province = "<province>";
+
+    var postal_code = "<postal_code>";
+    var shipping_method = "<shipping_method>";
+    var ship_via = "<ship_via>"//Pending NOT Comign in the SO Object 
+
+    var ship_TrackingNumber = "<ship_TrackingNumber>"
+
+    var number_items = "<number_items>";
+
+
+
+    //Item Line Fields
+    var item_title = "<item_title>";
+    var item_image_url = "<item_image_url>";
+    var item_link = "<item_link>";
+    var item_instock; //DO we really need this ?
+    var item_attr1; //this is Dynamic - attr could be more or less
+    var item_attr2; //this is Dynamic - attr could be more or less
+    var item_qty = "<item_qty>";
+    var item_cost_disc; //need to be in the SO level
+    var item_cost_reg = "<item_cost_reg>";
+    var item_total = "<item_total>";
+
+    //Item Line item Charge Fields
+
+    var charge_desc;
+    var charge_qty;
+    var charge_amount;
+    var charge_total;
+    //Item Line item Charge Fields END
+
+    //Item Line Fields END
+
+    //Payment Line Fields
+
+    var payment_method = "<payment_method>";
+    var payment_amount = "<payment_amount>";
+
+    //Payment Line Fields END
+    //recommend Line Fields
+
+    var rec_img;
+    var rec_url;
+
+    //recommend Line Fields END
+
+
+    //new Fields END
+    try {
+
+        var customerId = nlapiLookupField("salesorder", salesOrderInternalID, "entity");
+         var email = nlapiLookupField("customer", customerId, "email");
+       email_addr = email_addr + email + "</email_addr>";
+
+       //Checking the Language flag from Sales Order REcord
+    if(checkIfUndefined(salesOrderParsedRecord.custbody_locale)=="fr_CA"){
+          Language="F";
+           var fromEmailAddress="soutienclients@sears.ca";
+        }
+
+        //JSON Fields
+        SubscriberKey = email;
+        EmailAddress = email;
+        OrderNumber = getSalesOrderExternalID(salesOrderInternalID);
+        transDate = checkIfUndefined(itemFullfilmentParsedRecord.createddate);
+        OrderDate = transDate;
+        OrderSubTotal = checkIfUndefined(salesOrderParsedRecord.subtotal);
+         OrderTotal = checkIfUndefined(salesOrderParsedRecord.total);
+        ShippingCost = checkIfUndefined(salesOrderParsedRecord.shippingcost);
+        GSTHST = checkIfUndefined(salesOrderParsedRecord.taxtotal);
+        PST = checkIfUndefined(salesOrderParsedRecord.tax2total);
+		
+		PointsEarned=checkIfUndefined(salesOrderParsedRecord.custbody_rewards_earned);
+
+           OptIn= checkIfUndefined(salesOrderParsedRecord.custbody_email_opt_in);
+        if(OptIn==true){
+        	OptIn="1";
+        }else{
+        	OptIn="0";
+        }
+        
+        
+         for(var o=0; o< salesOrderParsedRecord.item.length; o++){
+          if(checkIfUndefined(salesOrderParsedRecord.item[o].custcol_item_type.name)=="Service"){
+          	
+          	if(checkIfUndefined(salesOrderParsedRecord.item[o].item.name) == "Order Assist Fee"){
+          		
+          	orderAssistFee=checkIfUndefined(salesOrderParsedRecord.item[o].rate);	
+          	}
+          	
+          }
+         
+         
+         }
+        
+
+        FirstName = checkIfUndefined(salesOrderParsedRecord.custbody_sears_cust_first_name);
+
+        //JSON Fields ENDS
+
+        //XML Data Fields
+        order_date = order_date + transDate + "</order_date>";
+        ship_name = ship_name + nlapiLookupField("salesorder", salesOrderInternalID, "shipaddressee") + "</ship_name>";
+        
+        ship_TrackingNumber=ship_TrackingNumber +checkIfUndefined(itemFullfilmentParsedRecord.item[0].custcol_sears_tracking_number)+ "</ship_TrackingNumber>";
+
+
+        try {
+            shipping_method = shipping_method + checkIfUndefined(salesOrderParsedRecord.shipmethod.name) + "</shipping_method>";
+            ship_via = ship_via + nlapiLookupField("salesorder", salesOrderInternalID, "shipcarrier") + "</ship_via>";
+        }
+        catch (e) {
+            shipping_method = shipping_method + "</shipping_method>";
+            ship_via = ship_via + "</ship_via>";
+        }
+
+		
+					 for(var d=0; d< salesOrderParsedRecord.item.length; d++){
+					 	
+					 		if(checkIfUndefined(salesOrderParsedRecord.item[d].custcol_item_type.name)=="Discount")
+          {
+  
+          	loyaltyRedemption=checkIfUndefined(salesOrderParsedRecord.item[d].amount);	
+          	
+          
+          }				}
+		
+		
+        //shipping_method = shipping_method + salesOrderParsedRecord.shipmethod.name + "</shipping_method>";
+        //ship_via = ship_via + nlapiLookupField("salesorder", salesOrderInternalID, "shipcarrier") + "</ship_via>";
+
+        addr1 = addr1 + checkIfUndefined(salesOrderParsedRecord.shipaddr1) + "</addr1>";
+        addr2 = addr2 + checkIfUndefined(salesOrderParsedRecord.shipaddr2 )+ "</addr2>";
+        city = city + checkIfUndefined(salesOrderParsedRecord.shipcity) + "</city>";
+        province = province + checkIfUndefined(salesOrderParsedRecord.shippingaddress.state) + "</province>";
+        postal_code = postal_code + checkIfUndefined(salesOrderParsedRecord.shipzip) + "</postal_code>";
+        number_items = number_items + checkIfUndefined(itemFullfilmentParsedRecord.item.length) + "</number_items>";
+
+        for (var i = 0; i < itemFullfilmentParsedRecord.item.length; i++) {
+
+            var lineItemInfo = [];
+            lineItemInfo.push("<line>");
+            
+          var currentItemRecordID=  checkIfUndefined(itemFullfilmentParsedRecord.item[i].custcol_internal_id);
+               
+         
+          var currentItemRecord = nlapiLoadRecord("inventoryitem", currentItemRecordID);
+          var currentItemParsedRecord=parseRecord(currentItemRecord);
+				 lineItemInfo.push(item_title + replaceSpecialChar(checkIfUndefined(currentItemParsedRecord.displayname)) + "</item_title>");
+				 
+				 
+				 for(var j=0; j< salesOrderParsedRecord.item.length; j++){
+	          	if(checkIfUndefined(salesOrderParsedRecord.item[j].custcol_internal_id)== currentItemRecordID){
+	          		
+		          	lineItemInfo.push(item_qty +checkIfUndefined(salesOrderParsedRecord.item[j].quantity) + "</item_qty>");
+		            lineItemInfo.push(item_cost_reg + checkIfUndefined(salesOrderParsedRecord.item[j].rate) + "</item_cost_reg>");
+		            lineItemInfo.push(item_total + checkIfUndefined(salesOrderParsedRecord.item[j].amount) + "</item_total>");
+
+		            lineItemInfo.push(item_image_url + checkIfUndefined(salesOrderParsedRecord.item[j].custcol_itemimageurl) + "</item_image_url>");
+		            lineItemInfo.push(item_link + checkIfUndefined(salesOrderParsedRecord.item[j].custcol_itemwebsiteurl) + "</item_link>");
+		          		
+          		}
+          	}
+            lineItemInfo.push("</line>");
+            linesItemInfo.push(lineItemInfo.join(" "));
+
+        }
+
+
+ try {  	
+            CardNumber = checkIfUndefined(salesOrderParsedRecord.custbody_cc_number_last4);
+           
+        }
+        catch (e) {
+          CardNumber="";
+        }
+
+
+        try {
+            payment_method = payment_method + checkIfUndefined(salesOrderParsedRecord.paymentmethod.name) + "  " + CardNumber  + "</payment_method>";
+
+            payment_amount = payment_amount + checkIfUndefined(salesOrderParsedRecord.total) + "</payment_amount>";
+        }
+        catch (e) {
+            payment_method = payment_method + "</payment_method>";
+
+            payment_amount = payment_amount + "</payment_amount>";
+        }
+
+    }
+    catch (e) {
+
+    }
+
+    var XmlData = "<xml><packages>"
+         +"<package>"
+         + order_date
+         + ship_name
+         + addr1
+         + addr2
+         + city
+         + province
+         + postal_code
+         + shipping_method
+         + ship_via
+         + ship_TrackingNumber
+         + number_items
+         + "<lines>"
+         + linesItemInfo.join(" ") +
+         "</lines>" +
+         "</package>" +
+         "</packages>"
+
+     +
+     "<payments>" +
+     "<payment>" +
+     payment_method
+         +
+         payment_amount +
+         "</payment>"
+     +
+     "</payments>" +
+    "</xml>";
+
+    var jsonOut = {
+        "Address": EmailAddress,
+        "SubscriberKey": EmailAddress,
+        "ContactAttributes": {
+            "SubscriberAttributes": {
+
+                "FirstName": FirstName,
+
+                "OrderNumber": OrderNumber,
+
+                "OrderURL": "",
+
+                "OrderSubTotal": OrderSubTotal,
+                "OrderTotal": OrderTotal,
+
+                "PromoApplied": "",
+
+                "Savings": "",
+
+                "PointsEarned": PointsEarned,
+				 "loyaltyRedemption":loyaltyRedemption,
+
+
+                "ShippingCost": ShippingCost,
+                 "orderAssistFee" :orderAssistFee,
+
+                "GSTHST": GSTHST,
+                 "OptIn": OptIn,
+                "PST": PST,
+                "Language": Language,
+                "PickUp": "N",//need to add valu
+                 "PickUpLocation": "www.googlemaps.ca",
+                "XML_Data": XmlData
+
+                          }
+        }
+    }
+}
+catch(e){
+
+}
+
+   var response = sendExactTargetEmail(jsonOut, "07132016_shipped_trigger",fromEmailAddress);
+    return response ;
+
+}
+
+function getExactTargetToken() {
+    var method = 'GET';
+    var headers = new Array();
+    var restletUrl = 'https://auth.exacttargetapis.com/v1/requestToken';
+    headers['Content-Type'] = 'application/json';
+    var payload = JSON.stringify({
+
+        "clientId": "18r293cbd138ky7xcca32qlw",
+        "clientSecret": "nCmwc3CzmdiNnylcjjohw31p"
+    });
+    // HTTP headers
+
+    var restResponse = JSON.parse(nlapiRequestURL(restletUrl, payload, headers, null, method).getBody());
+    //var html = 
+    //		'Token:<br>' +
+    //		restResponse.accessToken
+    //	response.write(html); 
+    return (restResponse.accessToken);
+}
+
+
+function sendExactTargetEmail(dataIn, triggerKey,fromEmailAddress) {
+
+
+    // HTTP headers
+    var method = 'POST';
+    var token = getExactTargetToken();
+    var headers = new Array();
+    headers['Content-Type'] = 'application/json';
+    headers['Authorization'] = 'Bearer ' + token;
+    var restletUrl = "https://www.exacttargetapis.com/messaging/v1/messageDefinitionSends/key:" + triggerKey + "/send";
+
+    // var restletUrl =  "https://www.exacttargetapis.com/messaging/v1/messageDefinitionSends/key:Trans_Order_Conf/send";
+    var JsonObj = {
+        "From": {
+"Address": fromEmailAddress,
+   "Name": "Sears"      
+
+        }
+    }
+    JsonObj["To"] = dataIn;
+    JsonObj["OPTIONS"] = {
+        "RequestType": "SYNC"
+    };
+
+    var payload = JSON.stringify(JsonObj);
+
+    // HTTP headers
+    var restResponse = nlapiRequestURL(restletUrl, payload, headers, null, method).getBody();
+
+    return restResponse;
+
+}
+
+
+
+
+
+function checkIfUndefined(ValueIn) {
+
+    var valueOut = "";
+
+    if (ValueIn === null || ValueIn === undefined) {
+        valueOut = "";
+    }
+    else {
+        valueOut = ValueIn;
+    }
+    
+    return valueOut;
+
+}
+function replaceSpecialChar(str)
+{
+  str = str.replace(/&/g, "&amp;");
+  str = str.replace(/>/g, "&gt;");
+  str = str.replace(/</g, "&lt;");
+  str = str.replace(/"/g, "&quot;");
+  str = str.replace(/'/g, "&#039;");
+  return str;
+}
+
+
+function parseRecord(record) {
+
+    var recordString = JSON.stringify(record);
+    var recordObj = JSON.parse(recordString);
+
+    return recordObj;
+}

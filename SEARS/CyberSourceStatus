@@ -1,0 +1,61 @@
+function postRESTlet(objRequest)
+{
+	var objResponse = {};
+	var logTitle = "CyberSourceStatus";
+    nlapiLogExecution ('DEBUG', logTitle, "*****START*****");
+    //var custTable = nlapiGetContext().getSetting('SCRIPT', 'custscript_table_id')
+
+	try
+	{
+        nlapiLogExecution ('DEBUG', logTitle, JSON.stringify(objRequest));
+        var orderid = searchSalesOrderByExternalId(objRequest.CaseManagementOrderStatus.Update.MerchantReferenceNumber);
+        nlapiLogExecution ('DEBUG', logTitle, "ORDER ID:"+orderid);
+        var salesorder = nlapiLoadRecord ('salesorder', orderid);
+        var reason = objRequest.CaseManagementOrderStatus.Update.ReviewerComments;
+        var memo = salesorder.getFieldValue('memo');
+        if (memo != null && memo != 'null') {
+            salesorder.setFieldValue ('memo', memo+','+reason);
+        }
+        else {
+            salesorder.setFieldValue ('memo', reason);
+        }
+        if (objRequest.CaseManagementOrderStatus.Update.NewDecision == 'ACCEPT') {
+            salesorder.setFieldText ('orderstatus', "Pending Fulfillment");
+            objResponse.message = "Order Has Been Approved";
+        }
+        else {
+            //salesorder.setFieldText ('orderstatus', "Closed");
+            var itemnum = salesorder.getLineItemCount ('item');
+            nlapiLogExecution ('DEBUG', logTitle, "ITEM NUM:"+itemnum);
+            for (var i=1; i <= itemnum; i++) {
+                salesorder.setLineItemValue ('item', 'isclosed', i, 'T');
+                nlapiLogExecution ('DEBUG', logTitle, "CLOSED LINE ITEM");
+                salesorder.commitLineItem ('item');
+            }
+            objResponse.message = "Order Has Been Closed";
+        }
+        nlapiSubmitRecord (salesorder);
+    }
+    catch (e)
+    {
+        objResponse.errorMessage = e;
+    }
+    nlapiLogExecution ('DEBUG', logTitle, "*****FINISH*****");
+    return objResponse;
+}
+
+function searchSalesOrderByExternalId (externalId) {
+    var internalid;
+    try {
+        var arrSalesOrder = nlapiSearchRecord('salesorder', null, [(new nlobjSearchFilter('externalid',null,'is',externalId))]);
+        if (arrSalesOrder && arrSalesOrder.length)
+        {
+            internalid = arrSalesOrder[0].getId();
+        }
+    }
+    catch (e) {
+        nlapiLogExecution ('DEBUG', "SEARHC SALES ORDER BY EXTERNAL ID", e);
+        return null;
+    }
+    return internalid;
+}
