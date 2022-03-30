@@ -1,0 +1,37 @@
+function sendEmail() {
+    var input_search = nlapiGetContext().getSetting('SCRIPT', 'custscript_pricelist_email_search') || "";
+    if (!input_search) {
+        nlapiLogExecution('AUDIT', ' NO Search available', ' NO Search available ');
+        return;
+    }
+    var search = nlapiLoadSearch('vendor', input_search);
+    var resultSet = search.runSearch().getResults(0, 999);
+    resultSet.forEach(function(searchResult) {
+        var opt_partner = searchResult.getValue('custentityprtnr_opt');
+        var dest_partner = searchResult.getValue('custentityprice_sheet_email_c');
+
+        if (dest_partner && opt_partner ) {
+            nlapiLogExecution('AUDIT', ' Data', ' dest_partner =  ' + dest_partner);
+            process_email(opt_partner, dest_partner, searchResult.getId());
+        }
+    });
+
+}
+
+function process_email(opt_partner, opt_destination, partner_id) {
+    nlapiLogExecution('AUDIT', ' Sending Email', ' partner_id =  ' + partner_id);
+
+    var opt_email = nlapiLookupField('employee', opt_partner, 'email');
+    var body = 'Hi there, \n\nWe are working on updating our records and I wanted to reach out for your most recent price list. \n\nIf you have a new price list could you please send it over in an excel file with the most updated wholesale cost for our account. If you have the following information please include in your file: \n1.Master case information including weights and dimensions \n2.UPCs \n3.MSRP/MAP information \n4.Any new product information including launch date \n\nIf the price list we have on file is the most up-to-date, please let me know and I will update our system accordingly.\n \nThanks!';
+    nlapiLogExecution('AUDIT', ' Sending Email', ' body =  ' + body);
+
+    nlapiSendEmail(opt_partner, opt_destination, 'Updated Price List', body, null, null, null, null, true, opt_email);
+    nlapiLogExecution('AUDIT', ' Sending Email', 'Email Sent');
+
+    nlapiSubmitField('vendor', partner_id, 'custentity_etailz_pricelist_last_sentl', nlapiDateToString(new Date()));
+
+    nlapiLogExecution('AUDIT', ' Setting Fields for  Email', 'Fields for id = ' + partner_id);
+
+
+
+}

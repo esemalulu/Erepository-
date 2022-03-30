@@ -1,0 +1,46 @@
+/**
+ * Module Description
+ * 
+ * Version    Date            Author           Remarks
+ * 1.00       16 Feb 2017     billk
+ *
+ */
+
+/**
+ * The recordType (internal id) corresponds to the "Applied To" record in your script deployment. 
+ * @appliedtorecord recordType
+ * 
+ * @param {String} type Operation types: create, edit, delete, xedit,
+ *                      approve, cancel, reject (SO, ER, Time Bill, PO & RMA only)
+ *                      pack, ship (IF only)
+ *                      dropship, specialorder, orderitems (PO only) 
+ *                      paybills (vendor payments)
+ * @returns {Void}
+ */
+function CopySKULineSolution(type) {
+
+	try {
+            var bodySolution = nlapiGetFieldValue('custbodyline_sol_push');
+
+		    if (type == 'edit' && bodySolution != '') {
+	        	var poID = nlapiGetRecordId();
+            	var loadRec = nlapiLoadRecord('purchaseorder', poID);
+            	var lineSolution = null;
+
+				for (var j = 1, len = loadRec.getLineItemCount('item'); j <= len; j++) {
+
+            		lineSolution = nlapiGetFieldValue('custcolsku_line_solution');
+					if (lineSolution == null ) {
+						loadRec.setLineItemValue('item','custcolsku_line_solution',j,bodySolution);
+					}
+
+					nlapiLogExecution('DEBUG', 'PO', 'type: ' + type + '; line #: ' + j + 'recid: ' + poID +'body sol ' + bodySolution + 'line solution ' + lineSolution + ' len ' + len);
+                }
+				var id = nlapiSubmitRecord(loadRec, true);
+            }
+
+    }
+	catch (err) {
+      	nlapiLogExecution('ERROR', 'Copy 3PM to Vendor', 'type: ' + type +'; errName: ' + err.name + '; errMsg: ' + err.message);
+    }
+}
