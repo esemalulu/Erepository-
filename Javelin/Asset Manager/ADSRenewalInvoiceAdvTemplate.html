@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<macrolist>
+<macro id="nlheader">
+<table cellborder="0" cellmargin="0" cellpadding="0" width="100%">
+	<tr>
+	<td align="left" vertical-align="top" width="50%"><!-- After 2014, must use ADS logo --><img height="70px" src="https://system.netsuite.com/c.265419/images/logo/javelin.gif" width="160px" /></td>
+	<td align="left" vertical-align="top" width="50%">
+	<p class="headeraddr">${companyInformation.companyName}<br />
+	3359 - 27th St. N.E., Suite 230,<br />
+	Calgary, Alberta, T1Y 5E4, Canada.<br /><br />Mary McGowan (mary.mcgowan@javelin-tech.com)<br />Phone: 905.815.1906 Fax: 905.815.1907</p>
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2">&nbsp;</td>
+	</tr>
+	<tr>
+	<td><span class="renewalheader"><b>Bill To: </b></span><br /><br />${record.entity.companyname}<br />${record.billaddress}</td>
+	<td>
+	<table border="0" cellmargin="0" cellpadding="0" width="100%">
+			<tr>
+		<td colspan="2"><span class="renewalheader"><b>Renewal Invoice</b></span></td>
+		</tr>
+		<tr>
+		<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+		<td>Date:</td>
+		<td>${record.trandate}</td>
+		</tr>
+		<tr>
+		<td>Invoice #:</td>
+		<td>${record.tranid}</td>
+		</tr>
+		<tr>
+		<td>Currency:</td>
+		<td>${record.currency}</td>
+		</tr>
+		<tr>
+		<td>Terms:</td>
+		<td>${record.terms}</td>
+		</tr>
+		<tr>
+		<td>Due Date:</td>
+		<td>${record.duedate}</td>
+		</tr>
+		<tr>
+		<td>Renewal Period:</td>
+		<td>${record.custbody_ax_print_renewalperiod}</td>
+		</tr>
+		</table>
+	</td>
+	</tr>
+</table>
+</macro>
+</macrolist>
+<style type="text/css">
+body {
+			font-family:Helvetica;
+			text-align: left;
+			font-size: 12px;
+			color: #365f91;
+		}
+		
+		td {
+			font-size: 11px;
+		}
+		
+		td.details {
+			font-size: 11px;
+			border: 1px solid #365f91;
+		}
+		
+		td.detailsright {
+			text-align: right;
+			font-size: 11px;
+			border: 1px solid #365f91;
+		}
+
+		td.textright {
+			text-align: right;
+			font-size: 11px;
+		}
+
+		.headertxt {
+			color: #FFFFFF;	
+		}
+		
+		p {
+			padding: 0;
+			margin: 0;
+			color: #365f91;
+		}
+		
+		p.headeraddr {
+			font-size: 10px;
+			color: #365f91;
+		}
+		
+		.renewalheader {
+			font-size: 14px;
+			color: #365f91;
+		}
+		.summarycells {
+			text-align: right;		
+			font-size: 11px;
+			border: 1px solid #365f91;
+		}
+		
+		</style></head>
+<body header="nlheader" header-height="22%">
+<span class="renewalheader"><b>SOLIDWORKS SUBSCRIPTION RENEWAL PRODUCTS</b></span><br />The Subscription Service for your SolidWorks product(s) is due to expire. SolidWorks is the 3D CAD design tool used by the Engineering department.<br /><br /><#if record.item?has_content>
+<table border-color="#365f91" border-width="1" cellmargin="0" cellpadding="4" width="100%"><!-- start items --><#list record.item as item><#if item_index==0>
+<thead>
+	<tr background-color="#365f91">
+	<td><span class="headertxt">Serial Number</span></td>
+	<td><span class="headertxt">Product</span></td>
+	<td><span class="headertxt">QTY</span></td>
+	<td><span class="headertxt">Rate</span></td>
+	<td><span class="headertxt">Ext Price</span></td>
+	</tr>
+</thead>
+</#if>
+	<tr>
+	<td class="details">${item.custcol_ax_swx_serialnum}</td>
+	<td class="details">${item.description}</td>
+	<td class="detailsright">${item.quantity}</td>
+	<td class="detailsright">${item.rate}</td>
+	<td class="detailsright">${item.amount}</td>
+	</tr>
+	</#list>
+	<tr>
+    	<td colspan="4" class="summarycells">
+			<table cellmargin="0" cellpadding="0">
+			<tr><td class="textright"><b>Subtotal</b><br/><br/></td></tr>
+			<tr><td class="textright"><b>GST/HST</b><br/><br/></td></tr>
+			<tr><td class="textright"><b>PST</b><br/><br/></td></tr>
+			<tr><td class="textright"><b>Total</b></td></tr>
+			</table>
+		</td>
+        <td class="detailsright">
+			<table cellmargin="0" cellpadding="0">
+			<tr><td class="textright">${record.subtotal}<br/><br/></td></tr>
+			<tr><td class="textright">${record.taxtotal}<br/><br/></td></tr>
+			<tr><td class="textright">${record.tax2total}<br/><br/></td></tr>
+			<tr><td class="textright"><b>${record.total}</b></td></tr>
+			</table>
+		</td>
+	</tr>
+	<!-- end items -->
+</table>
+</#if>
+<br/><br/>
+<table border-color="#365f91" border-width="1" cellmargin="0" cellpadding="4" width="100%">
+	<thead>
+		<tr background-color="#365f91">
+		<td><span class="headertxt">Payment Options</span></td>
+		<td><span class="headertxt">Subtotal</span></td>
+		<td><span class="headertxt">Taxes</span></td>
+		<td><span class="headertxt">Total</span></td>
+		</tr>
+	</thead>
+			<tr>
+		<td class="details">12 months, Net 30</td>
+		<td class="details">${record.custbody_ax_print_12m_subtotal}</td>
+		<td class="details">${record.custbody_ax_print_12m_gsthst}</td>
+		<td class="details">${record.custbody_ax_print_12m_total}</td>
+		</tr>
+		<tr>
+		<td class="details">36 months, Net 30<br /><b><span style="color: red">Savings: ${record.custbody_ax_print_36m_savings}</span></b></td>
+		<td class="details" style="text-align:center"><span style="text-decoration:line-through">${record.custbody_ax_print_36m_subtotal}</span><br />${record.custbody_ax_print_36m_subtotal_savings}</td>
+		<td class="details" style="text-align:center">${record.custbody_ax_print_36m_sts_gsthst}</td>
+		<td class="details" style="text-align:center">${record.custbody_ax_print_36m_total}</td>
+		</tr>
+		<tr>
+		<td class="details">36 months, estimated monthly payment, OAC</td>
+		<td class="details" colspan="3">Leasing Options available for 3 year renewals. Contact us for details</td>
+		</tr>
+		</table>
+
+<pbr/>
+
+<table cellborder="0" cellmargin="0" cellpadding="0" width="100%">
+	<tr>
+	<td>
+	<span style="color: red"><b>Note: Avoid ${record.custbody_ax_print_savingamt} late fee by ${record.enddate}</b> </span>
+	<br /><br />
+	<b>Terms &amp; Conditions</b><br/>
+	Please note that Enterprise licenses CANNOT be renewed once they have expired.  These licenses must be repurchased.  EPDM subscription is required at all times.
+	<br/><br/>
+	<b>Subscription Service Benefits</b>
+	<ul>
+	<li>Phone, Email and Remote Desktop Technical Support from Javelin&#39;s Certified Support Team.</li>
+	<li>Automatic software upgrades to the most up-to-date version of SolidWorks.</li>
+	<li>Customer Portal access to information, forums, webcasts, partner discounts and e-learning.</li>
+	<li>Exclusive to Javelin customers &acirc;&euro;&ldquo; Support Add-in Product for SolidWorks
+	<ul>
+	<li>Browse technical tips, videos and training events</li>
+	<li>Contact the technical support team</li>
+	<li>Rapid Prototyping quote request for 3D printing</li>
+	</ul>
+	</li>
+	</ul>
+	<br /><br /><b>Methods of payment</b>
+	<ul>
+	<li>For clients wishing to send payment in ${record.currency} funds via wire transfer, please use the following information:
+	<table width="100%">
+			<tr>
+		<td>Beneficiary: Javelin Technologies Inc.<br />Bank name: BMO Bank of Montreal<br />Bank address: 1841 Walkers Line, Burlington, ON L7M 0H6<br />Bank institution code: 001<br />Bank transit number: 38712</td>
+		<td>${record.custbody_ax_print_paymethod_acct_html}</td>
+		</tr>
+		</table>
+	</li>
+	<li>We also accept VISA and MasterCard.</li>
+	<li>Our Business #: 885041145</li>
+	</ul>
+	</td>
+	</tr>
+</table>
+</body>
+</pdf>

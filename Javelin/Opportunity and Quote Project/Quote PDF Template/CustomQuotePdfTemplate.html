@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<macrolist>
+	<macro id="myheader">
+		<div id="header1" width="100%">
+			<table width="100%" cellpadding="0">
+            <tr>
+            	<td><img src="https://system.netsuite.com/c.265419/images/logo/jvnHeatherLogo.jpg"/></td>
+                <td align="right" vertical-align="middle" background-color="#244685" width="80%">
+                	<div style="padding: 2px 10px 2px 10px">
+                		<p align="right" color="#FFFFFF" letter-spacing="5pt" font-size="20">QUOTATION</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+            	<td colspan="2" width="100%" align="right"><br/>Page No <pagenumber/></td>
+            </tr>
+            </table>
+		</div>
+	</macro>
+    
+    <macro id="myheadertc">
+		<div id="header1tc" width="100%">
+			<table width="100%" cellpadding="0">
+            <tr>
+            	<td><img src="https://system.netsuite.com/c.265419/images/logo/jvnHeatherLogo.jpg"/></td>
+                <td align="right" vertical-align="middle" background-color="#244685" width="80%">
+                	<div style="padding: 2px 10px 2px 10px">
+                		<p align="right" color="#FFFFFF" letter-spacing="5pt" font-size="20">TERMS AND CONDITIONS</p>
+                    </div>
+                </td>
+            </tr>
+            </table>
+		</div>
+	</macro>
+    
+    <macro id="myfooter">
+    	<div id="footer1" width="100%">
+        	<table width="100%" cellpadding="0">
+            <tr>
+                <td align="center" vertical-align="middle" background-color="#244685" width="100%">
+                	<div style="padding: 10px">
+                		<p align="right" color="#FFFFFF" font-size="12">
+                        	<b>JAVELIN TECHNOLOGIES INC.</b> &nbsp; | &nbsp; 
+                            www.javelin-tech.com &nbsp; | &nbsp; 
+                            <i>sales@javelin-tech.com</i> &nbsp; | &nbsp; 
+                            <b>1-877-219-6757</b>
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            </table>
+        </div>
+    </macro>
+</macrolist>
+
+<style>
+		body {
+			font-family:Helvetica;
+			margin: -0.4in;
+			text-align: left;
+		}
+		
+		p {
+			padding: 0;
+			margin: 0;
+		}
+</style>
+</head>
+<body size="letter">
+
+<table width="100%" cellborder="0" cellpadding="0" cellmargin="0">
+<tr>
+	<td align="right" width="60%">
+    	<br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/>
+		<p font-size="55" font-weight="bold" color="#244685">QUOTATION</p>
+        <p font-size="20" align="left"><NLCUSTOMERNAME></p>
+        <p font-size="20"><NLTRANID></p>
+        <p font-size="15"><NLREVISION></p>
+        <br/><br/>
+        <p font-size="20"><NLTRANDATE></p>
+	</td>
+	<td vertical-align="top" align="right" width="40%">
+		<img src="https://system.netsuite.com/c.265419/images/logo/jvnLogo.jpg" dpi="200"/>
+	</td>
+</tr>
+</table>
+
+<pbr header="myheader" header-height="100px" footer="myfooter" footer-height="40px"/>
+
+	<table width="100%" border="0" cellpadding="0" cellmargin="0" cellborder="0">
+    <tr><td align="center" width="100%">
+    	<!-- Company info header -->
+        <table width="100%" cellpadding="0" cellmargin="5" border="0">
+		<tr>
+			<td width="50%">
+            	<NLCUSTOMERNAME>
+                <br/><br/>
+                <NLCOMPANYINFO>
+			</td>
+			<td width="50%">
+				<NLTRANDATE>
+                <br/><br/>
+                <NLTRANID>
+            </td>
+		</tr>
+        <tr><td colspan="2"><br/></td></tr>
+		</table>
+    </td></tr>
+    
+	<tr><td align="center" width="100%">
+    	<!-- Ship to and Bill to info -->
+		<table width="95%" cellpadding="0" cellmargin="5" border="0">
+		<tr>
+			<td width="50%">
+            	<table width="100%" cellpadding="5" cellmargin="0" cellborder="1">
+                	<tr><td><p align="left" width="100%"><b>BILL TO</b></p></td></tr>
+                	<tr><td>
+                    	<p align="left" width="100%">
+                    		<NLBILLTOADDRESS>
+                        </p>
+                    </td></tr>
+				</table>
+			</td>
+			<td width="50%">
+				<table width="100%" cellpadding="5" cellmargin="0" cellborder="1">
+                	<tr><td><p align="left" width="100%"><b>SHIP TO</b></p></td></tr>
+                	<tr><td>
+                    	<p align="left" width="100%">
+                        	<NLSHIPTOADDRESS>
+                        </p>
+                    </td></tr>
+				</table>
+            </td>
+		</tr>
+		</table>
+        
+        <br/>
+        
+	</td></tr>
+    </table>
+
+	<!-- Item Table heahder -->
+    <table table-layout="fixed" width="100%" height="100%" border="2" cellpadding="2" border-color="#666">
+	<thead>
+		<tr background-color="#666">
+			<td width="30%">
+				<p align="left" style="padding:2px" color="#FFFFFF"><b>Item</b></p>						
+			</td>
+            <td width="10%">
+				<p align="left" style="padding:2px" color="#FFFFFF"><b>Qty</b></p>
+			</td>
+			<td width="40%">
+				<p align="left" style="padding:2px" color="#FFFFFF"><b>Description</b></p>
+			</td>
+			<td width="10%" white-space="nowrap">
+				<p align="left" style="padding:2px" color="#FFFFFF"><b>Price</b></p>
+			</td>
+			<td width="10%">
+				<p align="left" style="padding:2px" color="#FFFFFF"><b>Amount</b></p>
+			</td>
+		</tr>
+	</thead>
+	<!-- Item list -->
+    <tbody>
+		<!-- Suitelet generated -->
+		<NLITEMLIST>
+		<!-- end item list -->
+	</tbody>
+    </table>
+
+<!-- TAC Replacement-->
+<pbr header="myheadertc" header-height="90px" footer="myfooter" footer-height="60px"/>
+
+<NLTACBFOHTML>
+
+</body>
+</pdf>
