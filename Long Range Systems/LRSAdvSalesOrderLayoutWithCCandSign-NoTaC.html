@@ -1,0 +1,315 @@
+	<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="verdana" type="font" subtype="opentype" src="${nsfont.verdana}" src-bold="${nsfont.verdana_bold}" bytes="2"></link>
+<style type="text/css">
+body {
+	margin: -30px;
+}
+
+p, td, th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+
+th {
+	font-weight: bold;
+	color: #FFB501;
+	background-color: #000000;
+	background-repeat: repeat;
+}
+.headline {
+	font-family: Helvetica, sans-serif;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.disclaimer {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8px;
+}
+
+.lined {
+	border: 0.1px solid #000000;
+}
+.bodyfields {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #999999;
+	margin: 0px; padding-left: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	background-color: #f5f9fa;
+}
+.shipto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 20px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+.shiptolabel {
+	margin-left: 20px;
+}
+.style1 {
+	color: #FFB501;
+	font-weight: bold;
+}
+.style2 {color: #FFFF00}
+.style6 {color: #FFFFFF; font-weight: bold; }
+
+.blackbg {background-color: #000000}
+</style>
+</head>
+<body>
+
+<table width="100%" border="0" align="center" cellpadding="0">
+<tr class="blackbg">
+	<td height="7" colspan="2" valign="top">test</td>
+</tr>
+
+<tr>
+	<td width="60%" valign="top">
+		<#if companyInformation.logoUrl?length != 0>
+			<img src="${companyInformation.logoUrl}" width="414px" height="108px" style="float: left; margin: 7px" />
+		</#if>
+	</td>
+    <td width="40%" class="bodyfields" rowspan="2" valign="top">
+		<table width="100%" border="0" cellpadding="1">
+		<tr>
+			<td colspan="3" align="center"><span class="headline"><br/>${record@title}</span></td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center"><span class="headline">#${record.tranid}</span></td>
+		</tr>
+		<tr><td colspan="3"><br/></td></tr>
+
+		<tr>
+			<td align="right" ><b>Date</b></td>
+			<td width="10px"> </td>
+			<td>${record.trandate}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Acct. No. </b></td>
+			<td width="10px"> </td>
+			<td>${record.entity.entityid}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Shipping Method</b></td>
+			<td width="10px"> </td>
+			<td>${record.shipmethod}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Ship Date</b></td>
+			<td width="10px"> </td>
+			<td>${record.trandate}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Tracking #</b></td>
+			<td width="10px"> </td>
+			<td>${record.linkedtrackingnumbers}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Partial</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody3}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Terms</b></td>
+			<td width="10px"> </td>
+			<td>${record.terms}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>PO #</b></td>
+			<td width="10px"> </td>
+			<td>${record.otherrefnum}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Sales Type</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody2}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Sales Rep</b></td>
+			<td width="10px"> </td>
+			<td>${record.salesrep}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Ordered By</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody10}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Instructions</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody5}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Critical</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody9}</td>
+		</tr>
+		
+		<tr>
+			<td align="right"><b>Ship Hold</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody11}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Saturday</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody12}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Pager / ID</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody8}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>System ID</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody15}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Pager Type 1</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody16}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Pager Type 2</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody14}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Pager Type 3</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody17}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Zigbee Preset</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody20}</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+    <td valign="top">
+		<table border="0" cellpadding="1" >
+			<tr white-space="nowrap">					
+				<td white-space="nowrap" class="shiptolabel"> Bill To </td>
+				<td width="15" white-space="nowrap"> </td>
+				<td white-space="nowrap" class="shiptolabel"> Ship To</td>
+			</tr>
+			<tr white-space="nowrap">					
+				<td white-space="nowrap" class="shipto">${record.billaddress}</td>
+				<td width="15" white-space="nowrap"> </td>
+				<td white-space="nowrap" class="shipto">${record.shipaddress}</td>
+			</tr>
+        </table>
+	</td>
+</tr>
+</table>
+
+	
+	<#if record.item?has_content>
+		<table style="border: 1px solid black; border-collapse:collapse; width:100%">
+		<!-- start items -->
+		<#list record.item as item>
+			<#if item_index==0>
+				<thead>
+					<tr>
+					<th style="width: 20%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Item</th>
+					<th style="width: 10%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Quantity</th>
+					<th style="width: 20%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Description</th>
+					<th style="width: 10%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Unit Price</th>
+					<th style="width: 10%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Options</th>
+					<th style="width: 10%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Amount</th>
+					<th style="width: 20%; border-bottom: 0.5px solid black;">Item Notes</th>
+					</tr>
+				</thead>
+			</#if>
+			<tr>
+			<td class="lined">${item.item}</td>
+			<td class="lined">${item.quantity}</td>
+			<td class="lined">${item.description}</td>
+			<td class="lined">${item.rate}</td>
+			<td class="lined">${item.options}</td>
+			<td class="lined">${item.amount}</td>
+			<td class="lined">${item.custcol1}</td>
+			</tr>
+		</#list>
+		<!-- end items -->
+		</table>
+		</#if>
+		<table style="border: 0px solid black; border-collapse:collapse; width:100%">
+		<tr>
+			<td style="width:80%">&nbsp;</td>
+			<td style="width:10%"><b>${record.total@label}</b></td>
+			<td style="width:10%">${record.total}</td>
+			<td style="width:10%">&nbsp;</td>
+			</tr>
+		</table>
+	
+<table>
+<tr>
+	<td class="disclaimer">
+	By confirming acceptance of this sales order, via signature below or emailed confirmation, you are agreeing to the following: 
+	1) purchaser is a duly authorized representative of the ordering company with the authority to make this purchase, 2) purchaser 
+	agrees to payment in full per terms of this order through credit card on file, check, wire or ACH, 3) this order acknowledgement 
+	form is acceptable and binding, 4) a 15% restocking fee plus shipping/ handling will be charged on any product returned to manufacture 
+	for any reason within 15 days of shipping, 5) radio headsets may not be returned, 6) compliance with LRS's complete standard terms and 
+	conditions which may be found  at www.lrsus.com/terms-and-conditions/
+	</td>
+</tr>
+</table>
+
+<table cellpadding="5" width="100%">
+  <tr>
+    <td height="15" colspan="2" background-color="#000000"><span class="style1">PAYMENT TERMS </span></td>
+  </tr>
+<tr>
+    <td height="20">Circle One:   COD    Credit Card </td>
+    <td height="20">Circle One:   VISA     MC     DISC     AMEX </td>
+  </tr>
+  <tr>
+    <td height="20">Card #: ______________________________________________ </td>
+    <td height="20">Exp. Date: _______________________________________ </td>
+     </tr>
+  <tr>
+    <td height="20">CVV: ________________________ </td>
+    <td height="20">Date: ____________________________________________</td>
+  </tr>
+  <tr>
+    <td height="20">Printed Name : ____________________________________________</td>
+    <td height="20">Title: ____________________________________________</td>
+  </tr>
+  <tr>
+    <td height="20">Signature : ____________________________________________</td>
+  </tr>
+</table>
+
+</body>
+</pdf>

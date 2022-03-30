@@ -1,0 +1,358 @@
+	<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="verdana" type="font" subtype="opentype" src="${nsfont.verdana}" src-bold="${nsfont.verdana_bold}" bytes="2"></link>
+<style type="text/css">
+body {
+	margin: -30px;
+}
+
+p, td, th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+
+th {
+	font-weight: bold;
+	color: #FFB501;
+	background-color: #000000;
+	background-repeat: repeat;
+}
+.headline {
+	font-family: Helvetica, sans-serif;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.disclaimer {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8px;
+}
+
+.lined {
+	border: 0.1px solid #000000;
+}
+.bodyfields {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #999999;
+	margin: 0px; padding-left: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 16px;
+	background-color: #f5f9fa;
+}
+.shipto {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	line-height: 20px;
+	font-weight: bold;
+	margin-left: 20px;
+}
+.shiptolabel {
+	margin-left: 20px;
+}
+.style1 {
+	color: #FFB501;
+	font-weight: bold;
+}
+.style2 {color: #FFFF00}
+.style6 {color: #FFFFFF; font-weight: bold; }
+
+.blackbg {background-color: #000000}
+</style>
+</head>
+<body>
+
+<table width="100%" border="0" align="center" cellpadding="0">
+<tr class="blackbg">
+	<td height="7" colspan="2" valign="top">test</td>
+</tr>
+
+<tr>
+	<td width="60%" valign="top">
+		<#if companyInformation.logoUrl?length != 0>
+			<img src="${companyInformation.logoUrl}" width="414px" height="108px" style="float: left; margin: 7px" />
+		</#if>
+	</td>
+    <td width="40%" class="bodyfields" rowspan="2" valign="top">
+		<table width="100%" border="0" cellpadding="1">
+		<tr>
+			<td colspan="3" align="center"><span class="headline">${record@title}</span></td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center"><span class="headline">#${record.tranid}</span></td>
+		</tr>
+		<tr><td colspan="3"><br/></td></tr>
+
+		<tr>
+			<td align="right" ><b>Date</b></td>
+			<td width="10px"> </td>
+			<td>${record.trandate}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Acct. No. </b></td>
+			<td width="10px"> </td>
+			<td>${record.entity.entityid}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Shipping Method</b></td>
+			<td width="10px"> </td>
+			<td>${record.shipmethod}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Ship Date</b></td>
+			<td width="10px"> </td>
+			<td>${record.trandate}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Tracking #</b></td>
+			<td width="10px"> </td>
+			<td>${record.linkedtrackingnumbers}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Partial</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody3}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Terms</b></td>
+			<td width="10px"> </td>
+			<td>${record.terms}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>PO #</b></td>
+			<td width="10px"> </td>
+			<td>${record.otherrefnum}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Sales Type</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody2}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Sales Rep</b></td>
+			<td width="10px"> </td>
+			<td>${record.salesrep}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Ordered By</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody10}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Instructions</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody5}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Critical</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody9}</td>
+		</tr>
+		
+		<tr>
+			<td align="right"><b>Ship Hold</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody11}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Saturday</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody12}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Pager / ID</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody8}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>System ID</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody15}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Pager Type 1</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody16}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Pager Type 2</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody14}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Pager Type 3</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody17}</td>
+		</tr>
+
+		<tr>
+			<td align="right"><b>Zigbee Preset</b></td>
+			<td width="10px"> </td>
+			<td>${record.custbody20}</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr>
+    <td valign="top">
+		<table border="0" cellpadding="1" >
+			<tr white-space="nowrap">					
+				<td white-space="nowrap" class="shiptolabel"> Bill To </td>
+				<td width="15" white-space="nowrap"> </td>
+				<td white-space="nowrap" class="shiptolabel"> Ship To</td>
+			</tr>
+			<tr white-space="nowrap">					
+				<td white-space="nowrap" class="shipto">${record.billaddress}</td>
+				<td width="15" white-space="nowrap"> </td>
+				<td white-space="nowrap" class="shipto">${record.shipaddress}</td>
+			</tr>
+        </table>
+	</td>
+</tr>
+</table>
+
+	
+	<#if record.item?has_content>
+		<table style="border: 1px solid black; border-collapse:collapse; width:100%">
+		<!-- start items -->
+		<#list record.item as item>
+			<#if item_index==0>
+				<thead>
+					<tr>
+					<th style="width: 20%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Item</th>
+					<th style="width: 10%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Quantity</th>
+					<th style="width: 20%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Description</th>
+					<th style="width: 10%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Unit Price</th>
+					<th style="width: 10%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Options</th>
+					<th style="width: 10%; border-bottom: 0.5px solid black; border-right: 0.5px solid black">Amount</th>
+					<th style="width: 20%; border-bottom: 0.5px solid black;">Item Notes</th>
+					</tr>
+				</thead>
+			</#if>
+			<tr>
+			<td class="lined">${item.item}</td>
+			<td class="lined">${item.quantity}</td>
+			<td class="lined">${item.description}</td>
+			<td class="lined">${item.rate}</td>
+			<td class="lined">${item.options}</td>
+			<td class="lined">${item.amount}</td>
+			<td class="lined">${item.custcol1}</td>
+			</tr>
+		</#list>
+		<!-- end items -->
+		</table>
+		</#if>
+		<table style="border: 0px solid black; border-collapse:collapse; width:100%">
+		<tr>
+			<td style="width:80%">&nbsp;</td>
+			<td style="width:10%"><b>${record.total@label}</b></td>
+			<td style="width:10%">${record.total}</td>
+			<td style="width:10%">&nbsp;</td>
+			</tr>
+		</table>
+	
+<table>
+<tr>
+	<td class="disclaimer">
+	By confirming acceptance of this sales order, via signature below or emailed confirmation, you are agreeing to the following: 1) purchaser is a duly 
+	authorized representative of the ordering company with the authority to make this purchase, 2) purchaser agrees to payment in full per terms of this 
+	order through credit card on file, check, wire or ACH, 3) this order acknowledgement form is acceptable and binding, 4) a 15% restocking fee plus 
+	shipping/ handling will be charged on any product returned to manufacture for any reason within 15 days of shipping, 5) Radio headsets may not be 
+	returned, 6) compliance with LRS's complete standard terms and conditions as attached hereto.
+	</td>
+</tr>
+</table>
+
+<table cellpadding="5" width="100%">
+  <tr>
+    <td height="29" colspan="2" background-color="#000000"><span class="style1">PAYMENT TERMS </span></td>
+  </tr>
+<tr>
+    <td height="20">Circle One:   COD    Credit Card </td>
+    <td height="20">Circle One:   VISA     MC     DISC     AMEX </td>
+  </tr>
+  <tr>
+    <td height="20">Card #: ______________________________________________ </td>
+    <td height="20">Exp. Date: _______________________________________ </td>
+     </tr>
+  <tr>
+    <td height="20">CVV: ________________________ </td>
+    <td height="20">Date: ____________________________________________</td>
+  </tr>
+  <tr>
+    <td height="20">Printed Name : ____________________________________________</td>
+    <td height="20">Title: ____________________________________________</td>
+  </tr>
+  <tr>
+    <td height="20">Signature : ____________________________________________</td>
+  </tr>
+</table>
+
+<pbr></pbr>
+
+		<p style="font-weight: bold; text-align:center; width: 100%">
+		GENERAL TERMS AND CONDITIONS FOR LONG RANGE SYSTEMS, LLC<br/>
+		(FOR PURCHASERS)
+		</p>
+		
+
+<p style="font-size: 8.5px">
+These general terms and conditions ("General Terms and Conditions") govern all persons ("Purchasers") that purchase or license equipment, software, firmware, and/or services (collectively "Deliverables") from Long Range Systems, LLC ("LRS"). <br/>
+<br/>
+<b>Limited Software Use License.</b>  All software and firmware (collectively "Software") is licensed for use only by Purchaser and, in the case of Software for paging receivers, by customers of Purchasers. The Software is not sold. <br/>
+<br/>
+<b>Usage Restriction.</b>  Paging technology may at times not work due to structural and other types of interference with signal transmission and due to other reasons. Purchaser therefore agrees not to use any Deliverable for an application in which a paging failure might cause harm to a person, injury to a property, or a substantial business loss. Purchaser also agrees to abide by and strictly adhere to any rules, regulations and guidelines related to the use of any portion of any Deliverable to collect, store or transmit personally-identifiable information, including any "protected health information" (as defined by HIPAA), or billing or financial payment data, from any customer or other consumer.<br/>
+<br/>
+<b>Data Collection.</b>  In connection with the Deliverables, data provided by Purchaser and its customers may be collected in connection with surveys, consultations, and uses of the Deliverables, including email addresses, telephone numbers, locations of users (which may utilize geo-location technology), times of usage, times of paging, times of responses to paging, devices used, configuration preferences, cookies, and social network information. In order to provide LRS's customers with enhanced comparative benchmarking services with respect to customer industries, among other services, Purchaser hereby grants to LRS a royalty-free, perpetual, irrevocable license to use and distribute this data and results obtained through Purchaser's use of the Deliverables for any and all purposes; provided that LRS shall not identify any Purchaser, or distribute to third parties any "protected health information" (as defined by HIPAA) or billing or financial payment data of any customer or consumer of Purchaser, without the express prior consent of such Purchaser.  Purchaser warrants that Purchaser has the right to disclose, transfer or otherwise make available any Protected Health Information (as defined in 45 C.F.R. § 160.103) or other personally identifiable information that is made available to LRS by Purchaser or by Purchaser's customers in connection with the Software or other Deliverables. Without limiting the foregoing, Purchaser shall obtain all authorizations, consents or other permissions from Purchaser's customers (or the customer's authorized personal representative) for the disclosure of customers' personally identifiable information to LRS that are required by federal, state or local law, including, without limitation, the administrative simplification section of the Health Insurance Portability and Accountability Act of 1996 and its implementing regulations.<br/>
+<br/>
+<b>Limited Warranty.</b>  LRS warrants to only Purchaser that the Deliverables will perform in accordance with specifications for them that LRS has published prior to their delivery for a period of time as specified in the purchase agreement or purchase order relating to such Deliverables. This limited warranty shall be voided if any Deliverable is modified or serviced by someone other than LRS.  <br/>
+<br/>
+<b>Disclaimers.</b>  LRS HEREBY DISCLAIMS ALL IMPLIED WARRANTIES CONCERNING THE DELIVERABLES, INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY, ANY IMPLIED WARRANTY OF FITNESS FOR A PARTICULAR PURPOSE, OR ANY IMPLIED WARRANTY OF NON-INFRINGEMENT. PURCHASER ACCEPTS THE DELIVERABLES "AS IS," EXCEPT FOR THE EXPRESS LIMITED WARRANTY MADE HEREIN.<br/>
+<br/>
+<b>Limitation of Remedies.</b>  In the event of any breach of any express warranty made herein, LRS may at its option repair or replace any defective Deliverable or refund the money that Purchaser paid for it. LRS's total liability for any defect in any Deliverable or for any other breach of any of its duties and obligations to Purchaser shall be limited to the amount of money that was paid for the defective Deliverable or the other duty or obligation. LRS will in no event be liable for any lost profit or any other type of consequential damage.<br/>
+<br/>
+<b>Confidentiality.</b>  The Deliverables and all computer systems that deliver any portion of them contain confidential trade secret information. Purchaser shall not attempt to reverse engineer any portion of the Deliverables or such computer systems, such as to decompile any portion of the Software, nor aid anyone else in doing so. <br/>
+<br/>
+<b>Intellectual Property.</b>  No portion of any intellectual property right in the Deliverables is being transferred to the Purchaser or to its customers. Purchaser may not copy or modify any portion of the Deliverables, nor permit or aid anyone else in doing so. Notwithstanding, Purchaser may use the Deliverables as they are intended to be used, as expressed in written materials published by LRS. <br/>
+<br/>
+<b>Operational Authority and Licensing Requirements.</b>  Non-Federal government Purchasers may operate the Deliverables within the United States under the licensing authority issued to LRS by the Federal Communications Commission (FCC), provided, however, that such operation is: (a) subject to LRS's control, (b) conducted on a non-profit, cost shared basis with costs apportioned as part of the price for such Deliverable, (c) in accordance method of operation set forth in the manual for the deliverable, available for download at  http://lrsus.com/support  and (d) limited to the term of this Agreement, the term of LRS's authority, or a term otherwise specified by LRS, whichever expires earlier.  Notwithstanding the provision below entitled "No Third Party Beneficiary," users of any Deliverables acquired from Purchasers or other entities may contact LRS to determine if they may be eligible to operate under LRS's authority. Alternatively, Purchasers and users may obtain their own licensing authority; the FCC posts a list of licensing coordinators at http://wireless.fcc.gov/services/index.htm?job=licensing_3&amp;id=industrial_business. Purchasers and eligible users of any Deliverable agree to abide by and strictly adhere to any rules, regulations and guidelines, including the FCC's rules, governing the operation of the Deliverable. Changes or modifications to any portion of any Deliverable may void the Purchaser's or user's authority to operate the Deliverable and should not be made without the express approval of LRS. Moreover, use of any portion of any Deliverable outside the United States is subject to the rules and regulations of other countries and may be prohibited. Use of any Deliverable constitutes Purchaser's and user's acceptance of and agreement to these General Terms and Conditions, including any revisions to these General Terms and Conditions that may be required to reflect changes in the regulatory or other obligations imposed upon LRS. <br/>
+<br/>
+<b>Governing Law and Venue.</b>  These General Terms and Conditions and any agreement relating to them shall be construed in accordance with and governed by the laws of the State of Texas (without regard to its conflicts of laws). Any dispute relating to these General Terms and Conditions and any agreement relating to them may only be heard and resolved by a court in Dallas County in the State of Texas. Purchaser consents to the personal jurisdiction of such courts over it.  If any action at law or in equity is necessary to enforce or interpret any of the rights or obligations of the parties to these General Terms and Conditions, the prevailing party shall be entitled to reasonable attorneys' fees, costs, and necessary disbursements, in addition to any other relief to which it may be entitled.<br/>
+<br/>
+<b>No Assignment or Transfer.</b>  The rights and benefits provided under these General Terms and Conditions, as well as under any agreement that incorporates them, shall not be assigned without the express written permission of LRS.  Similarly, the Deliverables may not be transferred to any other person, without the express written permission of LRS. Notwithstanding, Purchaser may temporarily loan its customers paging receivers. Purchaser may also transfer the Deliverables, as well as the rights and benefits under these General Terms and Conditions and any agreement that incorporates them, as an ancillary part of a sale of its business or substantially all of its assets. Following any assignment or transfer, Purchaser shall remain bound by all of the duties and obligations that are set forth in these General Terms and Conditions and any agreement that incorporates them. <br/>
+<br/>
+<b>No Third Party Beneficiary.</b>  Except as otherwise expressly provided in this Agreement, these General Terms and Conditions, as well as any agreement that incorporates them, are solely for the benefit of Purchaser. Neither the customers of Purchaser, nor any other person is an intended beneficiary of these General Terms and Conditions or any agreement that incorporates them, nor shall any such person have the right to any benefit that is provided under these General Terms and Conditions or any agreement that incorporates them.<br/>
+<br/>
+<b>Merger.</b>  Except as otherwise specifically set forth herein, these General Terms and Conditions, and any agreement that incorporates them, supersede any oral or other representation that may have been made about these General Terms and Conditions, any agreement that incorporates them, or any of the Deliverables. These General Terms and Conditions, and any agreement that incorporates them, may not be modified or superseded, except by a written agreement or a written amendment that is signed by LRS. In the event of any inconsistency between these General Terms and Conditions or any agreement that incorporates them and any form or other document supplied by Purchaser, such as a purchase order, the terms of these General Terms and Conditions or any agreement that incorporates will prevail.<br/>
+<br/>
+<b>Severability.</b>  In the event that any portion of these General Terms and Conditions or any agreement that incorporates them is found to be invalid or unenforceable for any reason, the remaining portions shall continue to be in full force and effect.<br/>
+<br/>
+<b>Fees &amp; Payment.</b> Purchaser agrees to pay all Service and Deliverable fees, plus any applicable taxes, in accordance with the terms and payment method set forth in this agreement. Purchaser is responsible for providing accurate billing and contact information to LRS. LRS retains the right to suspend or terminate services if fees become past due.  LRS reserves the right to change Service rates by providing Customer at least 30 days' notice prior to billing. <br/>
+<br/>
+<b>Term &amp; Termination.</b>  Purchaser has the option of purchasing Monthly or Annual service plans which are non-refundable and not available for proration except as required by law.  Monthly agreements will auto-renew on a month-to-month basis until such time that a formal termination notice has been received by LRS. Prepaid Annual agreements will automatically renew at the end of each annual term unless Purchaser has given cancellation notice 30 days in advance of renewal term.  Monthly-billed Annual agreements will auto-renew on a perpetual month-to-month basis upon completion of the initial annual term until cancellation notice is received by LRS.  In the event that any agreement incorporating these General Terms and Conditions is terminated for any reason, all of the duties and obligations that the agreement and these General Terms and Conditions impose upon Purchaser shall continue in full force and effect, except any obligation to make payment for a Deliverable prior to its delivery. 
+</p>
+
+</body>
+</pdf>
