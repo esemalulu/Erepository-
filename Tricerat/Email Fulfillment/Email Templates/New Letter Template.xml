@@ -1,0 +1,138 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd"><pdf>
+<head>
+
+
+<style type="text/css">
+
+
+
+            table {
+				font-family: sans-serif;
+				font-size: 9pt;
+				margin-top: 10px;
+				table-layout: fixed;
+                border-collapse:collapse;
+			}
+			th {
+				font-weight: bold;
+				font-size: 10pt;
+				vertical-align: middle;
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 3px;
+				padding-top: 3px;
+				background-color: #cfdde7;
+				color: #0c547b;
+			}
+</style>
+</head>
+
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="10pt">
+<table width="785px" ><tr><td>
+
+
+<table>
+<tr>
+<td align="right" style="font-size: 120%;">
+ Welcome! 
+</td>
+</tr>
+<tr>
+<td>
+<img alt="" src="https://system.na2.netsuite.com/core/media/media.nl?id=2720865&c=643477&h=66f25e2afd16485f248d"  />
+</td>
+</tr>
+</table>
+
+
+<table>
+	<tr  style="font-size: 14px;" >
+	<td>
+	
+	Dear: ${customer.companyname}, <br /><br />
+	Thank you for your business! <br /><br />
+	Your order number <b>${salesorder.tranid}</b> has been fulfilled for <b>${salesorder.custbody_end_user}</b>. <br /><br />
+	Your Contract ID is <b>${salesorder.custbody_contract_name}</b> and provides coverage for the following products:
+
+	</td>   
+	</tr>
+
+</table>
+
+<br />
+
+         <table  width="785px" style="background-color: #cbe1b4 ; border: 1px solid grey; padding: 10px;">
+
+		 <tr style="color: blue; font-size: 16px; border-bottom: 1px solid #000000;" >
+                 <td style="border-bottom: 1px solid #000000; border-right: 1px solid #000000; padding: 5px;" width="85px" align="left">Quantity</td>
+                 <td style="border-bottom: 1px solid #000000; border-right: 1px solid #000000; padding: 5px;" width="450px" align="left">&nbsp;Item Description</td>
+                 <td style="border-bottom: 1px solid #000000; padding: 5px;" align="left">&nbsp;License Activation Code</td>
+
+		 </tr>
+		 
+		 		#ITEMLIST#
+	 
+
+		 </table>
+
+<br />
+
+<table>
+<tr  style="font-size: 14px;" >
+<td>
+
+For information on activating your new license, please see the attached pdf file.
+<br /><br /> 
+
+For general help with configuration options, troubleshooting, and more, please go to:<br />
+http://www.tricerat.com/tricerat-software-support-center
+<br /><br />
+
+Tricerat's Tricare Support is automatically activated the same day licenses
+are issued. It is good for one year unless otherwise noted. When calling in
+for support, please have your contract number ready as this is the
+easiest way to verify Tricare status.
+<br /><br />
+
+For further questions or help, email support@tricerat.com, or call 800-582-5167.
+<br /><br />
+ 
+
+	</td>	
+	</tr>
+
+</table>
+
+<br />
+<table>
+
+	
+<tr  style="font-size: 14px;" >
+    <td>
+	Best Regards,<br />
+    Tricerat Inc.<br />
+    http://www.tricerat.com<br />
+    +1 800.582.5167<br />
+    +1 410.715.4226<br />
+	</td>	
+	</tr>	
+	
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+</td></tr></table>
+</body></pdf>
