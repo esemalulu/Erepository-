@@ -1,0 +1,154 @@
+<project info="SuiteCloud IDE generated file, do not edit." setAttributesOnUpdate="false">
+  <folder name="DiC EDI Integrated Suite Scripts" bundleable="true">
+    <folder name="Com" bundleable="false">
+      <folder name="Mailbox" bundleable="false">
+        <file name="dic.cls.com.mailbox.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cls.com.mailbox.send2edi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.com.mailbox.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.com.mailbox.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <folder name="Send2EDI" bundleable="false">
+        <file name="dic.cls.com.send2edi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cues.com.send2edi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <folder name="Syn" bundleable="false">
+        <file name="dic.cues.com.syn.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <folder name="Util" bundleable="false">
+        <file name="dic.cls.com.util.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cls.util.window.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.date.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.dialog.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.encoder.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.mailbox.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.numeric.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.object.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.request.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.search.itemvendor.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.search.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.string.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.url.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cs.util.validate.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.com.util.form.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.com.util.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <file name="dic.cs.config.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.dierror.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.mess.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+    </folder>
+    <folder name="Hub" bundleable="false">
+      <folder name="Inbound" bundleable="false">
+        <folder name="VendorItem" bundleable="false">
+          <file name="dic.cls.hub.vi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ues.hub.vi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <file name="dic.cls.hub.inbound.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.hub.inbound.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <folder name="Match" bundleable="false">
+        <folder name="Item" bundleable="false">
+          <file name="dic.cls.hub.match.item.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.hub.match.item.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="Term" bundleable="false">
+          <file name="dic.cls.hub.match.term.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.hub.match.term.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="Vendor" bundleable="false">
+          <file name="dic.cls.hub.match.vendor.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.hub.match.vendor.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="Warehouse" bundleable="false">
+          <file name="dic.cls.hub.match.warehouse.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.hub.match.warehouse.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+      </folder>
+      <folder name="Outbound" bundleable="false">
+        <folder name="PurchaseOrder" bundleable="false">
+          <file name="dic.cls.hub.po.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ues.hub.po.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="VendorBill" bundleable="false">
+          <file name="dic.cls.hub.vb.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ues.hub.vb.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <file name="dic.cls.hub.outbound.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cls.hub.outbound.liem.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cls.hub.outbound.loi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.cls.hub.outbound.send2edi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.hub.outbound.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.hub.outbound.liem.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.hub.outbound.loi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <folder name="Setting" bundleable="false">
+        <file name="dic.cls.hub.setting.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.hub.setting.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <folder name="Synchronize" bundleable="false">
+        <folder name="MasterData" bundleable="false">
+          <file name="dic.cls.hub.syn.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.hub.syn.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="TaxGroup" bundleable="false">
+          <file name="dic.ues.hub.taxgroup.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="Term" bundleable="false">
+          <file name="dic.ues.hub.term.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+      </folder>
+      <file name="dic.cs.hub.config.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.hub.config.po.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.hub.config.syn.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.hub.config.taxgroup.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.hub.config.term.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.hub.config.vb.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.hub.config.vi.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+    </folder>
+    <folder name="Vendor" bundleable="false">
+      <folder name="Inbound" bundleable="false">
+        <file name="dic.cls.vendor.inbound.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.vendor.inbound.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <folder name="Match" bundleable="false">
+        <folder name="Customer" bundleable="false">
+          <file name="dic.cls.vendor.match.customer.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.vendor.match.customer.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="Item" bundleable="false">
+          <file name="dic.cls.vendor.match.item.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.vendor.match.item.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="Term" bundleable="false">
+          <file name="dic.cls.vendor.match.term.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.vendor.match.term.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="Warehouse" bundleable="false">
+          <file name="dic.cls.vendor.match.warehouse.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ss.vendor.match.warehouse.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+      </folder>
+      <folder name="Outbound" bundleable="false">
+        <folder name="FulfillOrder" bundleable="false">
+          <file name="dic.cls.vendor.ffo.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ues.vendor.ffo.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <folder name="Invoice" bundleable="false">
+          <file name="dic.cls.vendor.ivo.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+          <file name="dic.ues.vendor.ivo.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        </folder>
+        <file name="dic.cls.vendor.outbound.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.vendor.outbound.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <folder name="Setting" bundleable="false">
+        <file name="dic.cls.vendor.setting.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+        <file name="dic.ss.vendor.setting.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      </folder>
+      <file name="dic.cs.vendor.config.ffo.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+      <file name="dic.cs.vendor.config.ivo.js" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+    </folder>
+    <file name="dictionary.txt" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+    <file name="readme.bak" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+    <file name="readme.txt" bundleable="false" hideInBundle="false" isOnline="false" textFileEncoding="_utf8"/>
+  </folder>
+</project>

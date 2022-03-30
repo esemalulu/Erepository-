@@ -1,0 +1,15 @@
+					Name									|						Description					
+custcentertab_dic_integrated_suite_hub						|-EDI Integrated Suite (Hub)
+customscript_dic_ss_vendor_inbound							|-DiC EDI SL Inbound (Vendor)
+
+MailBoxType{
+	1: Inbound,
+	2: Outbound
+}
+
+SideType:{
+	1: Hub Side (Seller Side),
+	2: Vendor Side (BuyeSide)
+}
+
+customdeploy_dic_dep_ss_vendor_inbound						|DiC EDI SL Inbound (Vendor)
