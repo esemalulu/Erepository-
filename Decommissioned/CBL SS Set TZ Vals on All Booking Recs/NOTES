@@ -1,0 +1,17 @@
+TYPE
+Scheduled
+
+NAME
+CBL:SS: Set TZ Vals on All Booking Recs
+
+ID
+customscript_cbl_ss_settzvalsonallbkrec
+
+DESCRIPTION
+Scheduled Script to go through ALL booking records and attempt to set different date/time values of different timezones.
+Script simply load and saves record to trigger User Event script.
+
+PARAMETERS
+Last Proc ID	
+custscript_calctz_id
+Free Form Text

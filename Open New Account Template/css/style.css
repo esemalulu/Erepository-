@@ -1,0 +1,182 @@
+@charset "utf-8";
+/*----------intial declartaion of css----------*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite,
+code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td ,select,input,option{margin: 0; padding: 0; border: 0;	outline: 0; font-size: 100%; box-sizing:border-box;}
+
+article,aside,details,figcaption,figure,footer,header,nav,section,summary{display:block;}
+audio,canvas,video{display:inline-block;}
+audio:not([controls]){display:none; height:0;}
+pre{white-space:pre; white-space:pre-wrap; word-wrap:break-word}
+q{quotes:none}
+q:before,q:after{content:''; content:none}
+small{font-size:80%}
+sub,sup{font-size:75%; line-height:0; position:relative; vertical-align:baseline}
+sup{top:-0.5em;}
+sub{bottom:-0.25em}
+nav ul,nav ol{list-style:none; list-style-image:none;}
+button,input,select,textarea{font-size:100%; margin:0; vertical-align:baseline;}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:none; cursor:pointer; }
+/* remember to define focus styles! */
+:focus {outline: 0;}
+ol, ul {list-style: none;}
+/* tables still need 'cellspacing="0"' in the markup */
+table {border-collapse: separate; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+a{text-decoration:none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: "";}
+blockquote, q {quotes: "" "";}
+table {	border:0 none; border-collapse:collapse; border-spacing:0;}
+td { vertical-align:top; }
+img	{ border:0 none; max-width:100%; }
+a	{ outline:none; cursor:pointer; }
+/* End hide from IE Mac */ .none { display: none; } /* End Clearfix */
+article, aside, details, figcaption, figure, footer, header, nav, section {display:block}
+img{ max-width:100%;}
+/* For modern browsers */ 
+.cf:before, .cf:after { content:""; display:table; }
+.cf:after { clear:both; }
+/* For IE 6/7 (trigger hasLayout) */
+.cf { zoom:1; }
+
+/* general purpose classes */
+.nodisplay { display:none; }
+.nodisplay_strict { display:none !important; }
+.alignleft { float:left; }
+.alignnone { clear:both; font-size:0;line-height:0;margin:0;padding:0;border:0;height:0;width:0;}
+.alignright { float:right;}
+
+input::-webkit-input-placeholder { color: #000; opacity:1;} /* WebKit browsers */
+input:-moz-placeholder { color: #000; opacity:1;} /* Mozilla Firefox 4 to 18 */
+input::-moz-placeholder { color: #000; opacity:1;} /* Mozilla Firefox 19+ */
+input:-ms-input-placeholder { color: #000; opacity:1;} /* Internet Explorer 10+ */
+
+h1,h2,h3,h4,h5,h6{font-family:"museo-sans-rounded",sans-serif;}
+h1{font-size:48px;margin-bottom:0px;line-height:53px;font-weight:300;}
+h2{font-size:24px;line-height:30px;margin-bottom:0px;color:#000000;font-weight:500;}
+h3{font-size:18px;line-height:24px;margin-bottom:0px;font-weight:500;}
+h4{font-size:16px;margin-bottom:0px}
+h5{font-size:12px;margin-bottom:0px}
+p{font-size:15px;line-height:20px;}
+/* bg.png */
+body{margin:0;padding:0;font-family:"museo-sans-rounded",sans-serif;font-size:15px;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;font-weight:300;color:#474747;background: url(https://system.netsuite.com/core/media/media.nl?id=1260286&c=720154&h=9d8ff280a614b23e893b) no-repeat;background-position: right top;position: relative;}
+body:after{position: absolute;content:"";height:100%;width:100%;background:rgba(255,255,255,0.71);z-index:-1;top:0;left:0;}
+a , input[type="submit"] , .pdf-download span , .sbToggle , .open-account [type="checkbox"] + label:before , .open-account [type="checkbox"] + label:after , input[type="text"]{transition:all 0.3s linear;-moz-transition:all 0.3s linear;-webkit-transition:all 0.3s linear;-o-transition:all 0.3s linear;}
+
+/*-----------------------main styles starts here-----------------------------------------------*/
+.wrapper{position: relative;z-index: 1;}
+.main{max-width: 1000px; margin: 0 auto;position: relative;padding: 0 29px;}
+
+/*.main:after{position:absolute;content:"";background: rgba(255,255,255,0.71);top:0;left:0;height:100%;width:100%;}*/
+header {border-bottom: 1px solid #1bd900;}
+ .main-padding{}
+
+ 
+header h1{display:inline-block;position:relative;padding-top:0;margin-bottom:42px;color:#464646;}
+header h1:after{position:absolute;content:"";height:4px;width:100%;background:#1bd900;bottom:0;left:0;}
+.logo{padding-top:37px;padding-bottom:26px;}
+.logo a{display:block;height:58px;width:113px;}
+.logo a img{display:block;}
+form{position: relative;}
+header, section {position: relative;z-index: 1;}
+label{font-weight:300;color:#474747;font-size:15px;line-height: 20px;display:block;padding-bottom: 7px;}
+
+input[type="text"] , textarea{font-weight:300;color:#474747;font-size:15px;line-height: 20px;display: inline-block;font-family:"museo-sans-rounded",sans-serif;background:#fff;border-radius:15px;border:1px solid #1bd900;height:31px;padding:5px 10px;transition: border 0.3s;-webkit-transition: border 0.3s;    margin-bottom: 2px;}
+input[type="text"]:focus {border-color: #1a8d0a;}
+.error:focus{border-color:#f00 !important;}
+input[type="submit"] {color:#fff;background: #1bd900;text-align: center;width: 137px;margin:0 auto;display: block;border-radius: 15px;padding: 7px 0;}
+input[type="submit"]:hover , input[type="submit"]:focus{background:#474747;}
+
+.row {padding: 14px 0 17px 0;border-bottom: 1px solid #1bd900;}
+.row h2{padding-bottom: 15px;}
+.row.company input[type="text"]{width:407px;}
+
+.row .cover .cols{float: left;margin-right: 20px;}
+.row .cover .cols:last-child{margin-right: 0;}
+.row .cover.your-detail .respects-name.cols input[type="text"] {width:77px;}
+.row .cover.your-detail .firstname input[type="text"] , .row .cover.your-detail  .lastname input[type="text"] {width:276px;}
+.row.desctiption{border-bottom: none;}
+.pdf {margin:20px 0 36px 0;}
+.pdf-download {display: inline-block;}
+.pdf-download img{display: inline-block;vertical-align: middle;}
+.pdf-download span{color:#1bd900;font-size:15px;line-height: 20px;font-weight:300;display: inline-block;text-decoration: underline;margin-left: 20px;}
+.pdf-download:hover span , .pdf-download:focus span {color:#474747;}
+.cols{padding-bottom: 13px;}
+
+.row.detail .full .cols input[type="text"]{width:270px;}
+.row.billing-info input[type="text"]{width:408px;}
+
+.row.billing-info .cover .cols {float: left;margin-right: 20px;}
+.row.billing-info .cover .cols:last-child{margin-right: 0;}
+.row.billing-info .cover .cols input[type="text"] {width:227px;}
+.open-account [type="checkbox"]:focus + label:before{border-color:#474747;}
+.open-account [type="checkbox"] + label {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 0 0 44px;
+    margin: 0;
+	line-height: 34px;
+	-moz-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	-o-user-select:none;
+}
+
+.open-account [type="checkbox"] + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 31px;
+    height: 31px;
+    border: 1px solid #1bd900;
+	background:#fff;
+	
+}
+.open-account [type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+ .open-account [type="checkbox"] + label:after {
+   content: "";
+    position: absolute;
+    left: 10px;
+    width: 13px;
+    height: 13px;
+    background-color: #1bd900;
+    top: 10px;
+}
+
+.open-account [type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.open-account input[type=checkbox] {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}
+
+section {padding-bottom: 39px;}
+/*-----------header section styles goes here---------------*/
+
+
+/*-----------header section styles ends here----------------*/
+
+/*-----------mid section styles goes here-----------*/
+
+/*----------------mid section styles ends here-------*/
+
+/*----------------footer section  styles goes here-----------*/
+#post-code {width: 136px;}
+.preloader{ display:none;}
+/*----------------footer section styles ends here--------*/
+
+input.error, .sbHolder.error, .open-account [type="checkbox"] + label.error::before{border:1px solid #f00;}
+input.valid, .sbHolder.valid, .open-account [type="checkbox"] + label.valid::before{border:1px solid #1bd900;}
+.successmsg{color:#1bd900;text-align: center;display: none; margin-top: 10px;}

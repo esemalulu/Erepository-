@@ -1,0 +1,123 @@
+@CHARSET "UTF-8";
+.sbHolder{
+	background-color: #fff;
+	border: solid 1px #1bd900;
+	font-family: "museo-sans-rounded", sans-serif;
+	font-size: 15px;
+	font-weight: 300;
+	height: 31px;
+	position: relative;
+	width: 408px !important;
+	border-radius:15px;
+}
+.sbHolder.focused{border-color:#474747;}
+
+.sbSelector{
+	display: block;
+	height: 30px;
+	left: 0;
+	line-height: 30px;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 10px;
+	top: 0;
+	width: 100%;
+}
+.sbSelector{color:#474747;font-weight:300;}
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover{
+	/*color: #EBB52D;*/
+	outline: none;
+	text-decoration: none;
+}
+
+/* select-caret.png*/
+.sbToggle{
+	background: url(https://system.netsuite.com/core/media/media.nl?id=1260288&c=720154&h=6ba443ac682faa37588b) 10px center no-repeat;
+	display: block;
+	height: 31px;
+	outline: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 36px;
+	cursor:pointer;
+	
+}
+.sbToggle:hover{
+	/*background: url(../img/select-icons.png) 0 -167px no-repeat;*/
+}
+.sbToggleOpen{
+	/*background: url(../img/select-icons.png) 0 -16px no-repeat;*/
+	/*transform:rotate(180deg);
+	-webkit-transform:rotate(180deg);
+	-moz-transform:rotate(180deg);
+	-o-transform:rotate(180deg);
+	-ms-transform:rotate(180deg);*/
+	
+}
+.sbToggleOpen:hover{
+	/*background: url(../img/select-icons.png) 0 -66px no-repeat;*/
+}
+.sbHolderDisabled{
+	background-color: #3C3C3C;
+	border: solid 1px #515151;
+}
+.sbHolderDisabled .sbHolder{
+	
+}
+.sbHolderDisabled .sbToggle{
+	
+}
+.sbOptions{
+	background-color: #fff;
+	border: solid 1px #1bd900;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	/*top: 30px; now with js controlled*/
+	    width: 100%;
+	z-index: 1;
+	overflow-y: auto;
+}
+.sbOptions li{
+	padding: 0 7px;
+}
+.sbOptions a{
+	border-bottom: dotted 1px #474747;
+	display: block;
+	outline: none;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions a:link, .sbOptions a:visited{
+	color: #474747;
+	text-decoration: none;
+	
+}
+.sbOptions a:hover,
+.sbOptions a:focus,
+.sbOptions a.sbFocus{
+	color: #1bd900;
+}
+.sbOptions li.last a{
+	border-bottom: none;
+}
+.sbOptions .sbDisabled{
+	border-bottom: dotted 1px #515151;
+	color: #999;
+	display: block;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions .sbGroup{
+	border-bottom: dotted 1px #515151;
+	color: #EBB52D;
+	display: block;
+	font-weight: bold;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions .sbSub{
+	padding-left: 17px;
+}
+.sbOptions li:last-child a{border:none;}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <title>Welcome to Open account</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1000 , initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <!--css styles starts-->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+   
+    <link rel="stylesheet" href="css/jquery.selectbox.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">   
+    <!--css styles ends-->
+   
+    <!--script  starts-->
+        <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+          <script src="js/respond.min.js"></script>
+          <link rel="stylesheet" type="text/css" href="css/ie.css">
+          <![endif]-->
+          <!--script  ends-->
+
+      </head>
+      <body>
+        <!--header section starts-->
+        <header>
+                <!-- header section coding starts here-->	
+                <div class="main">
+                    <div class="logo">
+                        <a href="#" title="mindgym">
+                            <img src="images/logo.png" alt="logo" title="mindgym"/>
+                        </a>
+                    </div>   
+                    <h1>Open new account</h1>
+               </div>
+                <!-- header section coding ends here-->
+        </header>
+        <!--header section ends-->
+        <!-- midd section starts here-->
+        <section>
+            <form class="open-account" id="open-account-form">
+                
+                    <div class="row company">
+                   <div class="main"> <h2>Company</h2>
+                    <div class="cols">
+                        <label for="comapny-name">Company name</label>
+                        <input type="text" id="comapny-name" tabindex="1" name="company_name">
+                    </div></div>
+                </div>
+                
+              
+                    <div class="row detail">
+                   <div class="main"> <h2>Your details</h2>
+                   <div class="cover your-detail cf">
+                     <div class="cols respects-name">
+                        <label for="respect-name">Mr/Ms</label>
+                        <input type="text" id="respect-name" tabindex="2" name="mr_ms">
+                    </div>
+                     <div class="cols firstname">
+                        <label for="first-name">First name</label>
+                        <input type="text" id="first-name" tabindex="3" name="fname">
+                    </div>                        
+                     <div class="cols lastname">
+                        <label for="last-name">Last name</label>
+                        <input type="text" id="last-name" tabindex="4" name="lname">
+                    </div>
+                    </div>
+                    <div class="full"><div class="cols">
+                        <label for="job-title">Job title</label>
+                        <input type="text" id="job-title" tabindex="5" name="job">
+                    </div>
+                     <div class="cols">
+                        <label for="phone-number">Phone number</label>
+                        <input type="text" id="phone-number"  tabindex="6" name="phone">
+                    </div>
+                     <div class="cols">
+                        <label for="email-address">Email address</label>
+                        <input type="text" id="email-address" tabindex="7" name="email">
+                    </div></div></div>
+                    
+                </div>
+               
+                <div class="row billing-info">
+                	<div class="main">
+                        <h2>Billing information</h2>
+                        <div class="cols">
+                            <label for="to">To</label>
+                            <input type="text" id="to" tabindex="8" name="bill_to">
+                        </div>
+                        <div class="cols">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" tabindex="9" name="address1"> <br/> <br/>
+                            <input type="text" id="address-2" tabindex="10">
+                        </div>                    
+                        <div class="cover cf">
+                                 <div class="cols">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" tabindex="11" name="city">
+                                 </div>
+                                  <div class="cols">
+                                    <label for="contry-state">County/State</label>
+                                    <input type="text" id="contry-state" tabindex="12" name="state">
+                                 </div>
+                                  <div class="cols">
+                                    <label for="post-code">Postcode/Zip</label>
+                                    <input type="text" id="post-code" tabindex="13" name="zip">
+                                 </div>
+                                 
+                            </div>                        
+                        <div class="cols">
+                            <label for="country-selectbox">Country</label>
+                              <select class="custom-select felment" name="country" id="country-selectbox" tabindex="14">
+                                                <option value="" selected>Select</option>
+                                                <option value="Afghanistan">Afghanistan</option>
+                                            </select>
+        
+                        </div>
+                        <div class="cols">
+                            <label for="bill-phone-number">Phone number</label>
+                            <input type="text" id="bill-phone-number" tabindex="15" name="bill_phone">
+                        </div>
+                        <div class="cols">
+                            <label for="bill-email">Email address</label>
+                            <input type="text" id="bill-email" tabindex="16" name="bill_email">
+                        </div>
+                        <div class="cols">
+                            <label for="bill-payment-method">Preferred payment</label>
+                            <select class="custom-select" id="bill-payment-method" tabindex="17" name="bill_method">
+                                <option value="" selected="">Select</option>
+                                <option value="cash">cash</option>
+                            </select>
+                        </div>
+                     </div>
+                </div>
+                
+                <div class="row desctiption">
+                	<div class="main">
+                        <h2>Terms and conditions</h2>
+                        <p>These terms and conditions govern the supply of services provided by Mind Gym to you as a client. Please click on the link below to read the document. To confirm that you agree to the terms and conditions tick the check box next to 'I have read and understood the terms and conditions and agree to be bound by their terms' and submit the form.</p>
+                            <div class="pdf">
+                                    <a href="#" class="pdf-download" tabindex="18"><img src="images/pdf.png" alt="pdf" title="Download Terms and Conditions"><span>Download Terms and Conditions</span></a>
+                            </div>
+                            <input type="checkbox" id="condition" tabindex="19" name="terms">
+                            <label for="condition" >I have read and understood the terms and conditions and agree to be bound by their terms</label>
+                     </div>
+                </div>
+                
+               <div class="main"> <input type="submit" value="Submit form" title="Submit form" class="submit-button" tabindex="20"/>
+                <div class="successmsg">Thank you for interest</div></div>
+                
+            </form>
+        </section>
+        <!-- midd section ends here-->
+        <!-- image preloads starts here-->
+        <div class="preloader"> </div>
+        <!-- image preloads ends here-->
+        <!--footer ends here-->
+        <!--scripts starts here--> 
+        <script src="js/jquery.min.js"></script>
+        <script src="js/modernizr-2.7.1.min.js"></script>
+        <script src="js/jquery.selectbox-0.2.js"></script>
+        <script src="js/jquery.validate.js"></script>
+        <script src="js/general.js"></script>
+        <script src="js/validation.js"></script>
+         <script src="//use.typekit.net/jnk5ovd.js"></script>
+		<script>try{Typekit.load();}catch(e){}</script>
+        
+        <!--scripts ends here--> 
+    </body>
+    </html>

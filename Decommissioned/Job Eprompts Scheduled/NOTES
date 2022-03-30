@@ -1,0 +1,28 @@
+TYPE
+Scheduled
+
+NAME
+Job Eprompts Scheduled
+
+ID
+customscript_job_eprompts_scheduled
+
+DESCRIPTION
+The script initially runs a Job record search to get Jobs with Pending emails (Eprompt not sent) filtered by date and opted for Eprompt option. For each search result, the script checks the following: 
+1. Does this Job have any existing campaigns?
+2. Does this Job have any existing messages?
+3. Does this Course have any Eprompt tasks?
+4. Does this Job have any participants?
+
+If all conditions are met, the script creates an Email Campaign record (customrecord_emailcampaign) and an Email Message record (customrecord_emailmessage); a Mail job and a Mail queue (this involves a Web Service call to the Mind Gym Mail API URL).
+
+OWNER
+Andre Borgstrom
+
+PARAMETERS
+Job	
+custscript_mail_job	
+List/Record	
+Client Account
+
+
