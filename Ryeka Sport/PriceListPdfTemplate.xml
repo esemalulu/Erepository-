@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<style>
+		body {
+			font-family:Helvetica;
+			font-size: 11px;
+			margin: 0;
+			text-align: left;
+			height:100%;
+		}
+
+	</style>
+</head>
+
+<body size="letter" align="left">
+	<table width="100%" height="100%" border="0" cellpadding="0" cellmargin="0" cellborder="0">
+		<tr><td align="left" width="100%" height="100%">
+		<img src="https://checkout.netsuite.com/c.637239/site/images/ryekasportPriceListHeader.jpg"/><br/>
+		<br/>
+		#YEAR# #CLASS# WHOLESALE PRICE LIST (Generated On #DATE#)
+		</td></tr>
+	</table>
+	
+
+	<table  width="100%" cellpadding="2" cellmargin="0" cellborder="0.12">
+	<thead>
+		#ITEMHEADER#
+	</thead>
+	<tbody>
+		#ITEMBODY#
+	</tbody>
+	</table>
+
+	#FOOTERADDRESS#
+
+	</body>
+</pdf>
