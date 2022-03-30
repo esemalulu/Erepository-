@@ -1,0 +1,133 @@
+Javeline IRAP Scripts:
+Custom Records and Lists
+- SWX Asset Mgr Statuses (List)
+	- Validated 
+	- Pending Research
+	- Invalid
+
+- SWX Customer Asset Statuses (List)
+	- Quote Required
+	- Pending/Verbal Received
+	- Not Renewing
+	- Renewed
+
+- SWX Account To Customer Map (Custom Record)
+SWX Account to NetSuite Customer Map. Name field will hold Account value provided from monthly import
+
+- SWX Asset Monthly Load Stage (Custom Record)
+Monthly SWX Asset staging record.
+
+- SWX Customer Assets (Custom Record)
+Custom record to hold asset info/attributes for customers.
+
+- SWX Product To Item Map (Custom Record)
+Product Name to NetSuite Item map. Product Name from import will store in Name field	
+
+Email Template:
+Generator: Quote PDF Print Template
+- CustomQuotePdfTemplate.html
+
+TaC Option BFOed HTML Templates:
+- Stored under Documents > Customized Quote PDF > T&C Options folder
+
+
+------------------------------------------------------------------------------------------------------
+
+[Asset Manager]:
+Scheduled Script:
+- AUX:SS: Process SWX Asset Loads (AUX:SS: Process Hourly SWX Asset Load)
+(AX_SS_ProcessMonthlyAssetLoad.js)
+Runs every day/every hour
+/**
+ * Scheduled script to run hourly to process SWX Assets loaded from SWX Asset Monthly Load Stage custom record.
+ * System will do following for each record loaded
+ * 1. Identify Product Name to Netsuite Item
+ * 2. Identify Account Name to NetSuite Customer
+ * 3. Import matched records into SWX Customer Asset record.
+ * 4. When Customer and Item IDs are not identified, staged records will be marked as Pending Research.
+ *  	- This is to ensure no duplicate entries are created in Customer Asset Record.
+ * 	- When item(s) and/or customer(s) are manaully mapped, 
+	  those marked as Pending Validation will be 
+ * 	  reset to Unprocessed so that it can be reprocessed by scheduled script.
+ */
+
+Notification email is sent to email address(es) defined on Scheduled script parameter.
+There are two saved searches THis Saved search uses
+- Pending Validation SWX Product To Item Map  
+- Pending Validation SWX Account To Customer Map 
+Emails are sent out ONLY when there are items to validate
+
+
+User Event Script:
+- AUX:UE: Process SWX Mapping Correction
+(AX_UE_CorrectStagedAssetsForMapRecords.js.js)
+Applies to:
+	- SWX Product To Item Map custom Record
+	- SWX Account To Customer Map custom Record
+Fires on After Submit
+/**
+ * User event fired on after submit for SWX Account To Customer Map and SWX Product To Item Map record.
+ * When those records marked with Pending Validation is corrected, script will search staged asset record
+ * and take following actions:
+ * 1. Mark Asset Record as Unpreocessed and status as blank. This will allow Scheduled Script to pick up the item and process it again.
+ */
+
+
+[Opp/Quote Configurator]:
+User Event Script:
+- AUX:UE: Opportunity Item Configurator
+(AX_UE_OpportunityConfigurator.js)
+Applies to:
+	- Opportunity
+	- Quote
+Fires on On Load
+/**
+ * Places opportunity/quote configurator button when in Edit mode to allow users to access Opportunity/Quote Configurator Suitelet as popup window
+ * 
+ */
+
+Client Script (Record Level Deployment):
+- AUX:CS: Opportunity Record Client Script
+(AX_CS_OpportunityRec.js)
+Applies to:
+	- Opportunity
+	- Quote
+As of current version, this client script only contains single function that will grab data from configurator Suitelet
+and set it on Opportunity or Quote item lines.
+
+
+Suitelet Script
+- AUX:SL: Opp. Line Item Configurator
+(AX_SL_OpportunityConfigurator.js)
+
+** Uses UNDEPLOYED Client Script Specifically used for this Suitelet
+AUX:CS: Opp. Line Config Helper
+(AX_CS_OpportunityConfiguratorHelperClientScript.js)
+
+Suitelet that allows users to configure opportunity and quote records line item.
+IMPORTANT NOTE:
+This Suitelet make use of saved search to allow most flexibility.
+Saved Search: Opportunity/Quote Config 1st Level-Use by Script (customsearch_oppqte_config_1stlvlitems)
+
+
+[Quote to Opportunity Syncer]:
+User Event Script:
+- AUX:UE: Quote to Opp Line Item Sync
+(AX_UE_QuoteToOppLineitemSyncer.js)
+Applies to:
+	- Quote
+ * Script fires for beforeLoad and afterSubmit events. BeforeLoad event will place dynamic checkbox 
+ * to allow user to sync with linked opportunity record in Edit mode. 
+
+ * This script also places button for Custom Quote PDF generator on View Mode for Quote
+
+ * 
+ * AfterSubmit will attempt to sync line items from quote to opportunity
+
+[Custom Quote PDF Generator]:
+- AUX:SL: Customized Quote PDF Generator
+(preview AX_SL_PDF_QuoteGenerator.js)
+ * Custom PDF generator 
+ * All generated PDFs will be stored in "Customized Quote PDF".
+ * - Subfolders will be created for linked customer record.
+ * - Unless it's marked as Final Version, each created version will be marked as revision.
