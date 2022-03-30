@@ -1,0 +1,404 @@
+/**
+ * Sales Order User Event Script
+ *
+ * @file sweet_salesorder_server.js
+ * @require  sweet_opportunity_lib.js
+ */
+
+/**
+ * Constants
+ *
+ */
+var SWEET_JOB_SCHEDULED_THRESHOLD = 10;
+var SWEET_CANCELLATION_FEE_ITEM = '1507';
+var DEFFERRED_REVENUE = '413';
+var SALES_MISCELLANEOUS = '132';
+
+/**
+ * Before Load
+ *
+ * @function userevent_beforeLoad
+ * @param {String} type
+ * @param {String} form
+ */
+function userevent_beforeLoad(type, form) {
+  if (nlapiGetFieldValue('custbody_so_approvalinprogress') == 'T' &&
+    nlapiGetFieldValue('custbody_show_message') == 'T') {
+    var params = new Array();
+    params['custparamsalesorder'] = nlapiGetRecordId();
+    nlapiSetRedirectURL('SUITELET', 'customscript_so_approve_form', 'customdeploy_so_approve_form', null, params);
+    return;
+ }
+
+//uncomment below code to reset 'Opportunity' field value
+//    var fld = form.getField('opportunity');
+//    fld.setDisplayType('normal');
+
+//uncomment below code to reset 'Created From' field value
+//    var fld = form.getField('createdfrom');
+//    fld.setDisplayType('normal');
+  
+  switch (type.toLowerCase()) {
+    case 'copy':
+      initCopyOfSalesOrder();
+      break;
+    case 'create': // New or Transform from quote
+      initNewSalesOrder();
+      break;
+  }
+}
+
+/**
+ * Before Submit
+ *
+ * @function userevent_beforeSubmit
+ * @param {String} type
+ */
+function userevent_beforeSubmit(type) {
+  type = type.toLowerCase();
+  switch (type) {
+    case 'create':
+      generateLineIds();
+      
+      // Automatically set field values for DRRA & FCAR
+      // Set default field value for ''Deferred Revenue Reclassification   Account''
+      nlapiSetFieldValue('draccount', DEFFERRED_REVENUE);
+      // Set default field value for ''Foreign Currency Adjustment Revenue Account''
+      nlapiSetFieldValue('fxaccount', SALES_MISCELLANEOUS);
+            
+      break;
+    case 'edit':   
+      generateLineIds();  
+      if (isLocked()) {
+        throw nlapiCreateError('SWEET_SALESORDER_LOCKED_EDIT', 'You can\'t edit this sales order because it\'s locked.', true);
+      }
+      
+      // Automatically set field values for DRRA & FCAR
+      // Set default field value for ''Deferred Revenue Reclassification   Account''
+      nlapiSetFieldValue('draccount', DEFFERRED_REVENUE);
+      // Set default field value for ''Foreign Currency Adjustment Revenue Account''
+      nlapiSetFieldValue('fxaccount', SALES_MISCELLANEOUS);
+      
+      // Validate sales order items
+      if (nlapiGetFieldValue('status') != 'Pending Approval') {
+        // For each line item
+        var i = 1, n = nlapiGetLineItemCount('item') + 1;  
+        for (; i < n; i++) {
+
+          // Skip validation if the item type is 'Description'
+          var itemType = nlapiGetLineItemValue('item', 'itemtype', i);
+          if (itemType == 'Description') {
+            continue; // Skip
+          }
+          
+          var date = nlapiGetLineItemValue('item', 'custcol_bo_date', i);
+          var country = nlapiGetLineItemValue('item', 'custcol_bo_country', i);
+          var state = nlapiGetLineItemValue('item', 'custcol_bo_state', i);
+          sweet_so_lib_validateLineItemCheck(date, country, state, i);
+        }
+      }
+
+      break;
+    case 'delete':
+      if (isLocked()) {
+        throw nlapiCreateError('SWEET_SALESORDER_LOCKED_DELETE', 'You can\'t delete this sales order because it\'s locked.', true);
+      }
+//Load owner record
+var salesOrder = nlapiLoadRecord('salesorder', nlapiGetRecordId());
+var ownerEmail = '';
+    var ownerId = salesOrder.getFieldValue('custbody_owner');
+    if(ownerId && ownerId.length > 0 )
+    {
+       var owner = nlapiLoadRecord('employee', ownerId );
+       var ownerEmail = owner.getFieldValue('email');
+    }
+
+ // Load employee record
+       var employeeId = nlapiGetUser();
+       var employee = nlapiLoadRecord('employee', employeeId);
+  // Send email notification
+       var salesOrderNum = salesOrder.getFieldValue('tranid');
+       var subject = 'Sales Order #' + salesOrderNum + ' is deleted';
+       var body = employee.getFieldValue('firstname') + ' ' + employee.getFieldValue('lastname') + ' deleted the Sales Order ' + salesOrderNum + '.\n\n';
+
+      var recipients = 'david.atkinson@themindgym.com;rich.hodgson@themindgym.com;';
+     if(ownerEmail.length > 0 )
+           recipients += ownerEmail; 
+     nlapiSendEmail(employeeId, recipients, subject, body);
+
+      break;
+    case 'approve':
+      // When type is approve records items are not available. Therefore
+      // we must load the record rather than using nlapiGetField* functions.
+      var salesOrder = nlapiLoadRecord('salesorder', nlapiGetRecordId());
+      
+      // Validate sales order items
+      sweet_so_lib_validateRecord(salesOrder);
+      
+      // Count number of lines that requires a job
+      var i = 1, n = salesOrder.getLineItemCount('item') + 1;
+      nJobs = 0;
+      for (; i < n; i++) {
+        if (salesOrder.getLineItemValue('item', 'custcol_job_isjob', i) == 'T') {
+          nJobs++;
+        }
+      }
+      
+      // Set approved by field
+      salesOrder.setFieldValue('custbody_so_approvedby', nlapiGetUser());
+      
+       // Load employee record
+       var employeeId = salesOrder.getFieldValue('custbody_so_approvedby');
+       var employee = nlapiLoadRecord('employee', employeeId);
+
+      // Create jobs
+      nlapiLogExecution('DEBUG', 'Value of nJobs', nJobs);
+      if (nJobs >= SWEET_JOB_SCHEDULED_THRESHOLD) {
+        
+       // Send email notification
+       subject = 'Sales Order #' + salesOrder.getFieldValue('tranid') + ' Approval In Progress';
+       body = employee.getFieldValue('firstname') + ', \n\n';
+       body += 'Due to the number of items in this sales order (' + salesOrder.getFieldValue('tranid') + ') it will take slightly longer to approve. You will be notified by another email when the process is completed.\n\n';
+       nlapiSendEmail(employeeId, employeeId, subject, body);
+
+
+        nlapiLogExecution('DEBUG', 'Info', 'Schedule approval script.');
+        
+        // Flag sales order as 'approval in progress'
+        salesOrder.setFieldValue('custbody_locked', 'T');
+        salesOrder.setFieldValue('custbody_so_approvalinprogress', 'T');
+        salesOrder.setFieldValue('custbody_show_message', 'T');
+
+        // Save sales order
+        nlapiSubmitRecord(salesOrder);
+        
+        // Schedule script to create jobs
+        var params = new Array();
+        params['custscript_salesorder'] = salesOrder.getId();
+        var status = nlapiScheduleScript('customscript_so_approve_scheduled',null, params);
+		nlapiLogExecution('DEBUG', 'Schedule Status', 'Schedule Status for ' +salesOrder.getFieldValue('tranid') + ' = '+ status);
+
+       if(!status || status.length == 0 || status == 'INQUEUE')
+       {
+              // Send email notification
+              var salesOrderNum = salesOrder.getFieldValue('tranid');
+              subject = 'System cannot process the approval request for ' +  'Sales Order #' + salesOrderNum + ' now';
+              body = employee.getFieldValue('firstname') + ' ' + employee.getFieldValue('lastname') + ' submitted an approval request for the Sales Order ' + salesOrderNum + '.\n\n';
+              body += 'Unfortunately the number of concurrent approval requests the system is processing has exceeded its threshold! This means more than 20 sales orders with more than 10 booking items have been submitted at the same time!\n\n';
+              body += "Don’t worry, the IT helpdesk has also received this email and will resolve this for you. Once they have done this they will ask you to confirm if your sales order has been approved correctly.\n\n";
+              body += "If you don’t hear from the IT helpdesk within 2 days please contact the helpdesk. Apologies for any inconvenience this may cause.\n";
+              nlapiSendEmail(employeeId,employeeId,subject,body,'helpdesk@themindgym.com',null,null,null);
+      }
+
+      } else {
+        
+         nlapiLogExecution('DEBUG', 'Before creating jobs ', 'Before submit');
+
+        // Create jobs on-the-fly
+        sweet_so_lib_createJobs(salesOrder);
+
+         nlapiLogExecution('DEBUG', 'After creating jobs ', 'After submit');
+
+
+        // Save sales order
+        var RecordID = nlapiSubmitRecord(salesOrder);
+
+       nlapiLogExecution('DEBUG', 'Value of order submited is:', RecordID);
+
+
+       // Send email notification
+       subject = 'Sales Order #' + salesOrder.getFieldValue('tranid') + ' is Approved';
+       body = employee.getFieldValue('firstname') + ', \n\n';
+       body += 'Good news. The sales order (' + salesOrder.getFieldValue('tranid') + ') that you approved is now ready.\n\n';
+       nlapiSendEmail(employeeId, employeeId, subject, body);
+
+        // Update recevenue recognition
+        sweet_so_revrec_fillSchedule(nlapiGetRecordId());
+      }            
+      break;
+  }
+}
+
+/**
+ * AfterSubmit hook
+ *
+ * @param {String} type
+ * @return {Void}
+ */
+function userevent_afterSubmit(type) {
+  type = type.toLowerCase(); 
+  
+  // New record
+  var newRecord = nlapiGetNewRecord(); 
+  
+  // Old record
+  var oldRecord = nlapiGetOldRecord();
+  
+  recordId = nlapiGetRecordId();
+  _updateSalesFunnelData(recordId);
+  
+  SWEET.Opportunity.updateStatus(nlapiGetFieldValue('opportunity'));
+
+   // Schedule script to calculate opportunity totals
+   var params = new Array();
+   params['custscript_opportunity'] = nlapiGetFieldValue('opportunity');
+   nlapiScheduleScript('customscript_opportunity_calc_Totals', 'customdeploy_opportunity_calc_Totals', params);
+
+  //SWEET.Opportunity.setDates(nlapiGetFieldValue('opportunity'));
+  nlapiLogExecution('DEBUG', 'Sales order', nlapiGetRecordId());
+  sweet_so_revrec_setDates(nlapiGetRecordId());
+  nlapiLogExecution('DEBUG', 'Type', type);
+  switch (type) {
+    case 'edit':
+      nlapiLogExecution('DEBUG', 'Status', nlapiGetFieldValue('status'));
+      if (nlapiGetFieldValue('status') != 'Pending Approval') {
+        sweet_so_revrec_fillSchedule(nlapiGetRecordId());
+        
+        //Check if date has changed for sessions without a job
+        for (var j = 1; j < newRecord.getLineItemCount('item') + 1; j++) {
+          if ((newRecord.getLineItemValue('item', 'job', j) == null) && 
+            (newRecord.getLineItemValue('item','revrecschedule', j) != null) && 
+            (newRecord.getLineItemValue('item','linked', j) == 'T') &&
+            (newRecord.getFieldValue('custbody_so_linkedinvoice') == '')) {              // find item without job number, with rev rec schedule, when there is no linked invoice
+
+            for (var i = 1; i < oldRecord.getLineItemCount('item') + 1; i++) {
+              if (newRecord.getLineItemValue('item', 'custcol_lineid', j) == oldRecord.getLineItemValue('item', 'custcol_lineid', i)) { // find same line item in old sales order
+                var newDate = newRecord.getLineItemValue('item', 'custcol_bo_date', j);
+                var oldDate = oldRecord.getLineItemValue('item', 'custcol_bo_date', i);
+                nlapiLogExecution('DEBUG', 'Old date', oldDate);
+                nlapiLogExecution('DEBUG', 'New date', newDate);
+                if (oldDate != newDate) {
+                  sweet_so_revrec_checkNewDate(newRecord.getId(), 'no job', oldDate, newDate);
+                }
+              }             
+            }
+          } 
+        }  
+      }
+    }
+  }
+
+/**
+ * Generate a unique Id for each line item
+ *
+ * @function generateLineIds
+ */
+function generateLineIds() {
+  lineInc = nlapiGetFieldValue('custbody_lineincrement');
+  if (lineInc == null) {
+    lineInc = LINE_INCREMENT;
+  }
+  
+  var i = 1, n = nlapiGetLineItemCount('item') + 1;
+  for (;i < n; i++) {
+    lineId = nlapiGetLineItemValue('item', 'custcol_lineid', i);
+    if (lineId == null) {
+      nlapiSetLineItemValue('item', 'custcol_lineid', i, lineInc);
+      lineInc++;
+    }
+  }
+  
+  nlapiSetFieldValue('custbody_lineincrement', lineInc);
+}
+
+/**
+ * Initialise copy of a sales order
+ * 
+ * @function initCopyOfSalesOrder
+ * @return {void}
+ */
+function initCopyOfSalesOrder() {
+  // Reset line increment field.
+  // THE LINE BELOW IS NOT WORKING. WHY NOT!?
+  // NetSuite Support Case: #741306
+  nlapiSetFieldValue('custbody_lineincrement', LINE_INCREMENT);
+  
+  // For each item
+  var i = 1, n = nlapiGetLineItemCount('item') + 1;
+  for (;i < n; i++) {
+    
+    // Reset job
+    nlapiSetLineItemValue('item', 'job', i, null);
+    
+    // Reset line Id
+    nlapiSetLineItemValue('item', 'custcol_lineid', i, null);
+  }
+}
+
+/**
+ * Initialise new sales order
+ *
+ * @function initNewSalesOrder
+ * @return {void}
+ */
+function initNewSalesOrder() {
+  
+  // For each item...
+  var i = 1, n = nlapiGetLineItemCount('item') + 1;
+  for (;i < n; i++) {
+    
+    // Is this a booking?
+    var booking = nlapiGetLineItemValue('item', 'job', i);
+    if (booking) {
+      
+      // Yes - If quantity is zero then remove the item
+      var quantity = nlapiGetLineItemValue('item', 'quantity', i);
+      if (quantity < 1) {
+        nlapiRemoveLineItem('item', i);
+        i--;
+        n--;
+        continue;
+      }
+    }
+    
+    // Is this a cancellation fee?
+    var item = nlapiGetLineItemValue('item', 'item', i);
+    if (item == SWEET_CANCELLATION_FEE_ITEM) {
+
+      // Yes - If amount is zero then remove the item      
+      var amount = nlapiGetLineItemValue('item', 'amount', i);
+      if (amount <= 0) {
+        nlapiRemoveLineItem('item', i);
+        i--;
+        n--;
+        continue;
+      }
+    }
+  }
+}
+
+/**
+ * Cancel jobs related to Sales Order
+ *
+ * @function cancelJobs
+ */
+function cancelJobs() {
+  var salesOrder = nlapiLoadRecord('salesorder', nlapiGetRecordId());
+  var i = 1, n = salesOrder.getLineItemCount('item') + 1;
+  for (;i < n; i++) {   
+    var jobId = salesOrder.getLineItemValue('item', 'job', i);
+    if (jobId != null) {
+      cancelJob(jobId);
+    }
+  }
+}
+
+/**
+ * Cancel job
+ *
+ * @function cancelJob
+ * @param {String} jobId
+ */
+function cancelJob(jobId) {
+  var job = nlapiLoadRecord('job', jobId);
+  job.setFieldValue('entitystatus', JOB_STATUS_CANCELLED);
+  nlapiSubmitRecord(job);
+}
+
+/**
+ * Check if sales order is locked
+ * @return {Boolean}
+ */
+function isLocked() {
+  return (nlapiGetFieldValue('custbody_locked') == 'T');
+}

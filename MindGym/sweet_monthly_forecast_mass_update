@@ -1,0 +1,92 @@
+/**
+ * Scheduled Monthly Forecast Update
+ *
+ */
+
+/**
+ * Main
+ */
+function main_scheduled() {
+  var script = new SweetScriptScheduled();
+  script.debug = true;
+  
+  script.run();
+}
+
+ /**
+ * SweetScriptScheduled Class
+ *
+ */
+var SweetScriptScheduled = function() { 
+  
+  /**
+   * Run script
+   *
+   * @return void
+   */
+  this.run = function() {
+   
+    // 1. UPDATE QUOTE TOTALS
+    var updateCompleted = this._updateMonthlyForecast();
+    if (updateCompleted == false) {
+      return; // Script has been rescheduled
+    }
+  }
+  /**
+   * Update booking feedback status 
+   *
+   * @return {Boolean}
+   */
+  this._updateMonthlyForecast = function() {
+    var context = nlapiGetContext();
+    var startTime = new Date().getTime();
+    var today = new Date();
+    
+  // Create the filter
+    var filters = new Array();
+    filters.push(new nlobjSearchFilter('custbody_op_distribution_curve', null, 'noneof', '@NONE@'));
+    filters.push(new nlobjSearchFilter('custbody_op_closed', null, 'is', 'F'));
+    filters.push(new nlobjSearchFilter('custbody_op_mf_processed', null, 'is', 'F'));    
+  
+  // Run the search query    
+    var opportunities = nlapiSearchRecord('opportunity', null, filters);
+    nlapiLogExecution('DEBUG', 'number of opportunities', opportunities.length);
+    if (opportunities) {
+    } else {
+      return true;
+    }
+    
+    var j = 0, n = opportunities.length;
+    // Yes
+    for (; j < n; j++) {
+    nlapiLogExecution('DEBUG', 'opportunity being processed', j);
+      
+      // Check script usage
+      var remainingUsage = context.getRemainingUsage();
+      var nowTime = new Date().getTime();
+      var elapsedTime = ((nowTime - startTime) / 1000); // in seconds
+      
+      // If less than 10 credits are remaining or more than 6 minutes
+      nlapiLogExecution('DEBUG', 'remaining usage', remainingUsage);
+      if (remainingUsage < 100 || elapsedTime > 360) { 
+        var status = nlapiScheduleScript(context.getScriptId(), context.getDeploymentId());
+        return false;
+      }
+      
+      // Update monthly forecasts
+      var opportunity = nlapiLoadRecord('opportunity', opportunities[j].getId());
+    
+      if (opportunity.getFieldValue('custbody_op_distribution_curve')){
+        nlapiLogExecution('DEBUG', 'updating', opportunity.getId());
+        SWEET.Opportunity.createMonthlyForecast(opportunity.getId());
+      }
+      
+      opportunity.setFieldValue('custbody_op_mf_processed','T');
+      nlapiSubmitRecord(opportunity);
+    }
+
+    return true;
+  }
+  
+
+}
