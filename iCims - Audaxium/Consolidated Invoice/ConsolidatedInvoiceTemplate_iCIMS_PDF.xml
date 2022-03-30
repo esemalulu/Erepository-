@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "http://bfo.com/products/report/report-1.1.dtd">
+<pdf>
+  <head>
+    <style>
+			*					     {font-family:Helvetica;}
+			body					{font-size:11px; font-family:Helvetica;}
+			h1					    {font-size:20px; font-family:Helvetica;}
+			td.border				{border: 1px solid; border-color: #AAAAAA}
+            td.border-top-only		{border-top: 1px solid; border-color: #AAAAAA}
+			td.border-bottom-zero	{border-bottom: 0px;}
+			td.border-top-zero		{border-top: 0px;}
+			td.border-left-zero		{border-left: 0px;}
+			td.border-right-zero	{border-right: 0px;}
+			td.header				{font-size:11px; font-weight: bold;font-family:Helvetica;}
+			td.sub-header			{background-color: #AAAAAA; color: #fff; font-size:10px; font-weight: bold;font-family:Helvetica;}
+			td.common				{font-size:11px;}
+			td.no-border            {border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px;}
+			table.no-border          {border-bottom: 0px; border-top: 0px; border-left: 0px; border-right: 0px;}
+			table.space 			{border-spacing: 0pt 0pt;}
+			table.with-space 		{border-spacing: 1px 1px;}
+			table.main-border		{border: 0.25px solid; border-color: #AAAAAA; margin-left: 2px; margin-right: 2px;}
+			td.body                  {border-left: 0.25px solid; border-color: #AAAAAA; border-right: 0.25px solid;}
+			div.spacer			     {line-height: 10px; height: 20px;}
+			td.addressto			{height: 40px;}
+			table.remmitance		{font-size:10px;font-family:Helvetica;}
+			td.remmitance-header	{font-size:10px;font-weight: bold;font-family:Helvetica;}
+			td.remmitance-data	    {font-size:10px;font-family:Helvetica;}
+			th 					     {font-size:9px;font-weight: bold;font-family:Helvetica;}
+			p.footer                 {font-size:9px;font-weight: bold;font-family:Helvetica;}
+   </style>
+  </head>
+  <body size="letter">
+    <table table-layout="fixed" width="100%">
+      <tbody>
+        <tr>
+          <td>{NLMAINLOGO}</td>
+          <td colspan="2"/>
+          <td colspan="2">
+            <h1 vertical-align="top" align="right">Invoice</h1>
+          </td>
+        </tr>
+        <tr>
+          <td vertical-align="top">{NLMAINADDRESS}</td>
+          <td colspan="4"/>
+        </tr>
+        <tr>
+          <td colspan="5">&#160;</td>
+        </tr>
+        <tr>
+          <td class="header">Bill To</td>
+          <td colspan="2"/>
+          <td class="header" vertical-align="bottom">Date</td>
+          <td vertical-align="bottom">{INVOICEDATE}</td>
+        </tr>
+        <tr>
+          <td vertical-align="top" rowspan="3">{BILLTOADDRESS}</td>
+          <td colspan="2"/>
+          <td class="header">Invoice #</td>
+          <td>{INVOICENUMBER}</td>
+        </tr>
+        <tr>
+          <td colspan="4">&#160;</td>
+        </tr>
+        <tr>
+          <td colspan="2"/>
+          <td class="header">Terms</td>
+          <td>{INVOICETERMS}</td>
+        </tr>
+        <tr>
+          <td colspan="3"/>
+          <td class="header">Due Date</td>
+          <td>{INVOICEDUEDATE}</td>
+        </tr>
+        <tr>
+          <td colspan="3"/>
+          <td class="header">PO#</td>
+		  <!-- Added by Joe@Audaxium 8/26/2015 -->
+          <td>{INVOICEPONUM}</td>
+        </tr>
+        <tr>
+          <td colspan="5">&#160;</td>
+        </tr>
+      </tbody>
+    </table>{NLDETAILLINE}
+    <table table-layout="fixed" width="100%" class="remittance">
+      <tbody>
+        <tr>
+          <td colspan="5" color="#AAAAAA">--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td>
+        </tr>
+        <tr>
+          <td class="remmitance-header">iCIMS, Inc.</td>
+          <td/>
+          <td/>
+          <td class="remmitance-header">Remittance Slip</td>
+          <td/>
+        </tr>
+        <tr>
+          <td>&#160;</td>
+          <td>&#160;</td>
+          <td>&#160;</td>
+          <td>&#160;</td>
+          <td>&#160;</td>
+        </tr>
+        <tr>
+          <td class="remmitance-header">Bank Information</td>
+          <td/>
+          <td/>
+          <td class="remmitance-header">Customer</td>
+          <td class="remmitance-data" align="left">{CUSTOMERID}</td>
+        </tr>
+        <tr>
+          <td vertical-align="top" class="remmitance-data" rowspan="3">{BANKINFORMATION}</td>
+          <td/>
+          <td/>
+          <td class="remmitance-header">Invoice #</td>
+          <td class="remmitance-data">{INVOICENUM}</td>
+        </tr>
+        <tr>
+          <td/>
+          <td/>
+          <td class="remmitance-header">Amount Due</td>
+          <td class="remmitance-data">${TOTALAMOUNT}</td>
+        </tr>
+        <tr>
+          <td/>
+          <td/>
+          <td class="remmitance-header">Amount Paid</td>
+          <td class="remmitance-data">___________</td>
+        </tr>
+        <tr>
+          <td>&#160;</td>
+          <td>&#160;</td>
+          <td>&#160;</td>
+          <td>&#160;</td>
+          <td>&#160;</td>
+        </tr>
+        <tr>
+          <td class="remmitance-header" colspan="3" align="left">Credit Card Information</td>
+          <td class="remmitance-header">Make Checks Payable To</td>
+          <td/>
+        </tr>
+        <tr>
+          <td vertical-align="top" class="remmitance-data" align="left" colspan="2">Credit Card #:____________________________
+            <br/>Expiration Date:__________Month __________Year
+            <br/>Signature:_____________________________
+          </td>
+          <td/>
+          <td vertical-align="top" class="remmitance-data">{CHECKSPAYABLE}</td>
+          <td/>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</pdf>
