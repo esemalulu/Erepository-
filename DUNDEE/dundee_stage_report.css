@@ -1,0 +1,94 @@
+#DD_HOME {
+  padding-top: 10px;
+  width: 100%;
+  margin: 0;
+}
+#DD_HOME #block1 {
+  float: left;
+  width: 30%;
+}
+#DD_HOME #block2 {
+  float: left;
+  width: 30%;
+}
+#DD_HOME #block3 {
+  float: left;
+  width: 30%;
+}
+#DD_HOME .spacer {
+  float: left;
+  width: 5%;
+}
+
+#historicalblock {
+  padding-right: 8px;
+}
+
+.dd-wrapper {
+  position: relative;
+  border: 1px solid #CECECE;
+  margin: 0 0 18px 0;
+  background-color: #FFF;
+  -moz-box-shadow: 0 0 3px #C5C5C5;
+  -webkit-box-shadow: 0 0 3px #C5C5C5;
+  box-shadow: 0 0 3px #C5C5C5;
+  color: #666666;
+  font-size: 13px;
+}
+.dd-wrapper .dd-header {
+  height: 28px;
+  margin: 0;
+  background-color: #607799;
+  cursor: move;
+  position: relative;
+  padding: 0 7px 0 10px;
+  font-weight: bold;
+  background-color: #607799 !important;
+}
+.dd-header-text {
+  color: #FFFFFF;
+  font-size: 14px;
+  padding: 4px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.dd-body {
+  position: relative;
+}
+.dd-body .textpadding {
+  padding: 5px 0 7px 10px;
+}
+.gridview thead.header {
+  font-size: 11px;
+  color: #555555;
+  background-color: #e5e5e5;
+  text-transform: uppercase;
+}
+.gridview td {
+  height: 28px;
+  white-space: nowrap;
+  padding-left: 10px;
+  padding-right: 7px;
+}
+.gridview tbody tr:nth-child(odd) {
+  background-color: #FAFAFA !important;
+}
+.gridview tbody td {
+  padding: 4px 10px 4px !important;
+  border-top: 1px #DDDDDD solid !important;
+  border-left: 0px !important;
+  border-right: 0px !important;
+  border-bottom: 0px;
+  color: #333333 !important;
+  font-size: 12px;
+}
+.gridview tfoot td {
+  font-weight: bold;
+  background-color: #e5e5e5
+}
+.gridview tbody td.sectionheader {
+  font-weight: bold;
+}
+.gridview tbody td.withingroup {
+  padding-left: 20px !important;
+}

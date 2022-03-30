@@ -1,0 +1,42 @@
+<div class="dd-wrapper">
+  <div class="dd-header">
+    <h2 class="dd-header-text">Customers by Stage (Max 15 weeks)</h2>
+  </div>
+  <div class="dd-body">
+    <table class="gridview" cellspacing="0" cellpadding="0" width="100%">
+      <thead class="header">
+        <tr>
+          <td width="10%">Customer Status / Rep</td>
+          {{#each dates}}
+          <td width="6%" align="center">{{this}}</td>
+          {{/each}}
+        </tr>
+      </thead>
+    </table>
+    {{#each data}}
+    <table class="gridview" cellspacing="0" cellpadding="0" width="100%" stage="{{id}}">
+      <tbody>
+        <tr>
+          <td colspan="16" class="sectionheader">{{name}}</td>
+        </tr>
+        {{#each data}}
+        <tr>
+          <td class="withingroup" width="10%">{{name}}</td>
+          {{#each dates}}
+          <td width="6%" align="center">{{amount}}</td>
+          {{/each}}
+        </tr>
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td width="10%">Total</td>
+          {{#each totals}}
+          <td width="6%" align="center">{{amount}}</td>
+          {{/each}}
+        </tr>
+      </tfoot>
+    </table>
+    {{/each}}
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<h2>Total Customers / Leads</h2>
+<table cellpadding="0" cellspacing="0" width="100%" class="table">
+  <thead>
+    <tr>
+      <td align="center" width="40%">Sales Rep</td>
+      <td align="center" width="20%">Leads</td>
+      <td align="center" width="20%">Customers</td>
+      <td align="center" width="20%">Total</td>
+    </tr>
+  </thead>
+  <tbody>
+    <#assign totalLeads = 0>
+    <#assign totalCustomers = 0>
+    <#assign totalAll = 0>
+    <#list data.salesreps as rep>
+    <#assign total = rep.customers?number + rep.leads?number>
+    <#assign totalLeads = totalLeads + rep.leads?number>
+    <#assign totalCustomers = totalCustomers + rep.customers?number>
+    <#assign totalAll = totalAll + rep.leads?number + rep.customers?number>
+    <tr>
+      <td>
+        <#if rep.name?size == 0>
+          - None -
+        <#else>
+          ${rep.name}
+        </#if>
+      </td>
+      <td align="center">
+        <#if rep.leads?number == 0>
+          &nbsp;
+        <#else>
+          ${rep.leads}
+        </#if>
+      </td>
+      <td align="center">
+        <#if rep.customers?number == 0>
+          &nbsp;
+        <#else>
+          ${rep.customers}
+        </#if>
+      </td>
+      <td align="center">${total}</td>
+    </tr>
+    </#list>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td align="right">Total</td>
+      <td align="center">${totalLeads}</td>
+      <td align="center">${totalCustomers}</td>
+      <td align="center">${totalAll}</td>
+    </tr>
+  </tfoot>
+</table>

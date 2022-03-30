@@ -1,0 +1,35 @@
+<div class="dd-wrapper">
+  <div class="dd-header"><h2 class="dd-header-text">{{title}}</h2></div>
+  <div class="dd-body">
+    <table class="gridview" cellspacing="0" cellpadding="0" width="100%">
+      <thead class="header">
+        <tr>
+          <td width="80%">Sales Rep</td>
+          <td wdith="20%">#</td>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each reps}}
+        <tr>
+          <td>
+            {{#if name}}
+              {{name}}
+            {{else}}
+              - None -
+            {{/if}}
+          </td>
+          <td>{{searchurl count id type}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>
+            {{searchurl total repoverride type}}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

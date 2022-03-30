@@ -1,0 +1,37 @@
+body {
+  font-family: "MyriadPro";
+  font-size: 10pt;
+  header-height: 50px;
+}
+.header .title {
+  font-family: "MyriadPro Light";
+  font-size: 16pt;
+}
+.footer {
+  font-size: 8pt;
+}
+.table td {
+  line-height: 16pt;
+  border-bottom: 1px solid #ccc;
+}
+.table thead td {
+  font-weight: bold;
+  text-align: center;
+}
+.table tfoot td {
+  font-weight: bold;
+  background-color: #ccc;
+}
+.actionstable {
+  padding-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+.statustitle {
+  background-color: #ccc;
+  text-align: left;
+}
+.table .repname {
+  font-weight: bold;
+  text-align: left;
+}

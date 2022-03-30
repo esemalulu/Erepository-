@@ -1,0 +1,49 @@
+<div class="dd-wrapper">
+  <div class="dd-header"><h2 class="dd-header-text">{{title}}</h2></div>
+  <div class="dd-body">
+    <table class="gridview" cellspacing="0" cellpadding="0" width="100%">
+      <thead class="header">
+        <tr>
+          <td width="70%">SalesRep / Action</td>
+          <td width="12%">Total</td>
+          <td width="18%">%</td>
+        </tr>
+      </thead>
+    </table>
+    {{#each salesreps}}
+    <table class="gridview" cellspacing="0" cellpadding="0" width="100%">
+      <tbody>
+        <tr>
+          <td colspan="3" class="sectionheader">
+            {{#if name}}
+              {{name}}
+            {{else}}
+              - None -
+            {{/if}}
+          </td>
+        </tr>
+        {{#each actions}}
+        <tr>
+          <td width="70%" class="withingroup">
+            {{#if name}}
+              {{name}}
+            {{else}}
+              - None -
+            {{/if}}
+          </td>
+          <td width="12%">{{searchurlbystatus count repid statusid id}}</td>
+          <td width="18%">{{perc percentage}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td width="70%">Total</td>
+          <td width="12%">{{searchurlbystatus actionstotal id statusid "all"}}</td>
+          <td width="18%"></td>
+        </tr>
+      </tfoot>
+    </table>
+    {{/each}}
+  </div>
+</div>

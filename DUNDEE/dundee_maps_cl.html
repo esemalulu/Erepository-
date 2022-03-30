@@ -1,0 +1,61 @@
+<style type="text/css">
+  #dd_container {
+    margin-top: 10px;
+    width: 100%;
+  }
+  #dd_container table {
+    cellspacing: 0;
+    cellpadding: 0;
+  }
+  #dd_container table.container {
+    width: 100%;
+  }
+  #dd_container #map {
+    width: 100%;
+    height: 600px;
+    background-color: #ccc;
+  }
+  #dd_container .stage {
+    font-size: 1.1em;
+  }
+  .gm-style-iw p {
+    margin:0;
+  }
+  .bold {
+    font-weight: bold;
+  }
+</style>
+<script type="text/html" id="maps-body">
+  <table class="container">
+    <tr>
+      <td>
+        <div id="map" data-bind="map: $data">
+          <div data-bind="mapItems: pins">
+            <div data-bind="marker: $data">
+              <div data-bind="infoWindow: { anchor: $marker, visible: hintVisible, maxWidth: 300 }">
+                <a data-bind="attr: { href: url }" target="_blank"><h4 data-bind="html: title"></h4></a>
+                <p data-bind="html: address"></p>
+                <p data-bind="visible: phone">Phone:&nbsp;<span data-bind="text: phone"></span></p>
+                <p data-bind="visible: statusid">Status:&nbsp;<span data-bind="text: status"></span></p>
+                <p data-bind="visible: salesrepid">Sales Rep:&nbsp;<span data-bind="text: salesrep"></span></p>
+                <p data-bind="visible: actionid">Last Action:&nbsp;<span data-bind="text: action"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td width="300px" valign="top">
+        <h4>Legend:</h4>
+        <table width="100%" data-bind="foreach: statuslist">
+          <tr>
+            <td width="10%"><img data-bind="attr: { src: url }"/></td>
+            <td width="90%">
+              <div class="bold">[ <span data-bind="text: amount" class="stage"></span> ]</div>
+              <div data-bind="text: name" class="stage"></div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</script>

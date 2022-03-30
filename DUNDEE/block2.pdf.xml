@@ -1,0 +1,121 @@
+<h2>Leads by Status / Rep</h2>
+<table cellpadding="0" cellspacing="0" width="100%" class="table">
+  <thead>
+    <tr>
+      <td align="center" width="20%">Sales Rep</td>
+      <#list data.leadsHeader as status>
+      <td align="center" width="${70 / data.leadsHeader?size}%"><p align="center">${status.name}</p></td>
+      </#list>
+      <td align="center" width="10%"><p align="center">Total Leads</p></td>
+    </tr>
+  </thead>
+  <tbody>
+    <#if data.leadsRepList?size == 0>
+      <tr><td colspan="${data.leadsHeader?size + 2}" align="center">No Results to Display</td></tr>
+    </#if>
+    <#list data.leadsRepList as rep>
+    <tr>
+      <td align="left">
+        <#if rep.name?size == 0>
+          - None -
+        <#else>
+          ${rep.name}
+        </#if>
+      </td>
+      <#assign reptotal = 0>
+      <#list rep.status as status>
+      <#assign reptotal = reptotal?number + status.count?number>
+      <td align="center">
+        <#if status.count?number == 0>
+          &nbsp;
+        <#else>
+          ${status.count?number}
+        </#if>
+      </td>
+      </#list>
+      <td align="center">${reptotal?number}</td>
+    </tr>
+    </#list>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td align="right">Total</td>
+      <#assign total = 0>
+      <#list data.leadTotalsByStatus as statusTotal>
+        <#assign total = total + statusTotal.count?number>
+        <td align="center">
+          <#if statusTotal.count?number != 0>
+            ${statusTotal.count?number}
+          </#if>
+        </td>
+      </#list>
+      <td align="center">
+        <#if total != 0>
+          ${total}
+        </#if>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<pbr size="letter-landscape" />
+
+<h2>Customers by Status / Rep</h2>
+<table cellpadding="0" cellspacing="0" width="100%" class="table">
+  <thead>
+    <tr>
+      <td align="center" width="20%">Sales Rep</td>
+      <#list data.customersHeader as status>
+      <td align="center" width="${70 / data.leadsHeader?size}%"><p align="center">${status.name}</p></td>
+      </#list>
+      <td align="center" width="10%"><p align="center">Total Customers</p></td>
+    </tr>
+  </thead>
+  <tbody>
+    <#if data.customersRepList?size == 0>
+      <tr><td colspan="${data.customersHeader?size + 2}" align="center">No Results to Display</td></tr>
+    </#if>
+    <#list data.customersRepList as rep>
+    <tr>
+      <td align="left">
+        <#if rep.name?size == 0>
+          - None -
+        <#else>
+          ${rep.name}
+        </#if>
+      </td>
+      <#assign reptotal = 0>
+      <#list rep.status as status>
+      <#assign reptotal = reptotal?number + status.count?number>
+      <td align="center">
+        <#if status.count?number == 0>
+          &nbsp;
+        <#else>
+          ${status.count?number}
+        </#if>
+      </td>
+      </#list>
+      <td align="center">${reptotal?number}</td>
+    </tr>
+    </#list>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td align="right">Total</td>
+      <#assign total = 0>
+      <#list data.customerTotalsByStatus as statusTotal>
+        <#assign total = total + statusTotal.count?number>
+        <td align="center">
+          <#if statusTotal.count?number != 0>
+            ${statusTotal.count?number}
+          </#if>
+        </td>
+      </#list>
+      <td align="center">
+        <#if total?number != 0>
+          ${total?number}
+        </#if>
+      </td>
+    </tr>
+  </tfoot>
+</table>

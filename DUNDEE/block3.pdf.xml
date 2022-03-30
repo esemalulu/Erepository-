@@ -1,0 +1,60 @@
+<h2>Actions / Stage</h2>
+<#list data.statuslist as status>
+  <table cellpadding="0" cellspacing="0" width="60%" class="table" align="center" padding-top="20px">
+    <thead>
+      <tr>
+        <td align="left" colspan="2" class="statustitle"><p style="padding-left: 10px;">${status.name}</p></td>
+      </tr>
+      <tr>
+        <td align="center" width="80%">Sales Rep / Action</td>
+        <td align="center" width="20%">No.</td>
+      </tr>
+    </thead>
+    <tbody>
+      <#if status.salesreps?size == 0>
+      <tr><td colspan="2" align="center">No Data to Display</td></tr>
+      </#if>
+      <#assign statusTotal = 0>
+      <#list status.salesreps as salesrep>
+      <tr>
+        <td colspan="2" class="repname"><p style="padding-left: 10px;">
+          <#if salesrep.name?size == 0>
+            - None -
+          <#else>
+            ${salesrep.name}
+          </#if></p>
+        </td>
+      </tr>
+      <#assign actionTotal = 0>
+      <#list salesrep.actions as action>
+        <#assign actionTotal = actionTotal + action.count?number>
+      <tr>
+        <td><p style="padding-left: 20px;">
+          <#if action.name?size == 0>
+            - None -
+          <#else>
+            ${action.name}
+          </#if>
+        </p></td>
+        <td align="center">${action.count}</td>
+      </tr>
+      </#list>
+      <tr>
+        <td align="right">Total</td>
+        <td align="center"><b>${actionTotal}</b></td>
+      </tr>
+      <#assign statusTotal = statusTotal + actionTotal>
+      </#list>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td align="right">Status Total</td>
+        <td align="center">
+          <#if statusTotal != 0>
+            ${statusTotal}
+          </#if>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</#list>

@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<meta name="author" value="${data.company.name}" />
+	<meta name="layout" value="one-column"/>
+	<meta name="title" value="${data.reportname}"/>
+	<meta name="output-profile" value="Acrobat7"/>
+	<meta name="creator" value="${data.company.name}"/>
+	<style>
+		${data.styles}
+		#page2 {
+			footer-height: 175px;
+		}
+	</style>
+
+	<macrolist>
+		<macro id="header">
+			<table cellspacing="0" cellpadding="0" width="100%" class="header">
+				<tr>
+					<td align="center">
+						<img src="${data.logo}"/>
+					</td>
+				</tr>
+			</table>
+		</macro>
+		<macro id="footer">
+			<table cellspacing="0" cellpadding="0" width="100%" class="footer">
+				<tr>
+					<td width="65%" align="right">
+						<table cellpadding="0" cellspacing="0" width="80%" class="dundeespark">
+							<tr>
+								<td width="40%">
+									<p class="fullname" align="center" style="padding-left: 20px;">Dundee spark</p>
+								</td>
+								<td width="60%">
+									<p class="address" align="center">
+										${data.company.address} | ${data.company.phone}
+									</p>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td width="35%" align="left" class="settlement"><p align="left">Lease Settlement Program</p></td>
+				</tr>
+			</table>
+		</macro>
+		<macro id="footer_dd">
+			<table cellpadding="0" cellspacing="0" class="settlement" style="margin-bottom: 15px;">
+				<tr>
+					<td class="small-header" align="center">Disclaimer</td>
+				</tr>
+				<tr>
+					<td class="border-top"><p class="small-text">The offer price does not constitute a final offer, merely an expression of interest in completing a transaction at the stated settlement price for the purchase and sale of leasehold rental income streams or easement payment income streams subject to and in accordance with the Agreement for the Purchase and Sale of Rights (the "Agreement"), which provides the full transaction terms and conditions and which will be provided to you respecting the proposed transaction. The pricing provided above is based on market conditions as of the date hereof, the information you have provided to Dundee Spark and Dundee Spark's due diligence to date. Dundee Spark reserves to the right to not complete the transactions contemplated by this Settlement Price Statement and/or the Agreement, to revise the pricing based on final due diligence investigations and/or based on market conditions at the time of execution of the Agreement. The information contained herein was prepared by management of Dundee Spark based on information you have provided to Dundee Spark, is confidential and is intended solely for our internal informational use only and may not be reproduced, disseminated or distributed in whole or in part at any time, in any manner or for any purpose, except to your legal and financial advisors for purposes of considering the sale of future lease or easement payments to Dundee Spark. Dundee Spark makes no representations or warranties whatsoever respecting the financial, tax or legal aspects of the proposed transaction. You are advised to obtain your own independent financial, tax, legal or other advice in respect of the proposed transaction prior to entering into any agreement with Dundee Spark.</p></td>
+				</tr>
+			</table>
+			<table cellspacing="0" cellpadding="0" width="100%" class="footer">
+				<tr>
+					<td width="65%" align="right">
+						<table cellpadding="0" cellspacing="0" width="80%" class="dundeespark">
+							<tr>
+								<td width="40%">
+									<p class="fullname" align="center" style="padding-left: 20px;">Dundee spark</p>
+								</td>
+								<td width="60%">
+									<p class="address" align="center">
+										${data.company.address} | ${data.company.phone}
+									</p>
+								</td>
+							</tr>
+						</table>
+					</td>
+					<td width="35%" align="left" class="settlement"><p align="left">Lease Settlement Program</p></td>
+				</tr>
+			</table>
+		</macro>
+	</macrolist>
+
+  <link name="MyriadPro" type="font" subtype="truetype" embed="true"
+    src="${data.fonts.normal}"
+    src-italic="${data.fonts.italic}"
+    src-bold="${data.fonts.bold}"
+    src-bolditalic="${data.fonts.bolditalic}"/>
+  <link name="MyriadPro Light" type="font" subtype="truetype" embed="true"
+    src="${data.fonts.light}"
+    src-italic="${data.fonts.lightitalic}"/>
+
+</head>
+<body size="letter" footer="footer" header="header">
+
+	<!-- Addressee Section -->
+	<p>${data.reportdate}</p>
+	${data.customer.address}
+	<br/><br/>
+
+	<!-- Letter -->
+	<p>Dear ${data.customer.name},</p>
+	<p>On behalf of Dundee Spark, I would like to personally thank you for your interest in the Dundee Spark Land Lease Program and accepting our offer of a one-time lump-sum payment of <span class="bold">$${data.proposal.amount?number?string("###,###,###")}</span>. You are just a few steps away from receiving your funding.</p>
+	<p>On the following page, you will find a list of documents that we will need from you. Please send copies of the required documents to your Acquisitions Manager.</p>
+	<p>Once we have received all of your documentation, our office will begin to perform our due diligence review. The review can take up to two weeks. <span class="italics">(Please note that in some cases, additional information may be required)</span>. Your file will then be reviewed by our Investment Committee for approval. </p>
+	<p>The final step involves completing and signing the closing documentation.  Once that is finalized, your funding will follow shortly thereafter.
+		<#if data.proposal.compensation?number != 0>
+		<span class="italics">(As discussed, an additional $${data.proposal.compensation?number?string("###,###,###")} will be added to your lump-sum payment for you to put towards your legal fees)</span>.
+		</#if>
+	</p>
+	<p>We look forward to working with you and if you have any questions or concerns, your Acquisitions Manager, <br/><span class="bold">${data.proposal.salesrep}</span> will be pleased to assist you.</p>
+	<br/><br/>
+	<p>Regards,<br/></p>
+	<p><img src="${data.signature}"/></p>
+	<p>
+		<span class="bold">Warren Cherry</span><br/>
+		<span class="italics">Vice-President of Operations</span><br/>
+		Dundee Spark Land Lease Partners
+	</p>
+
+	<!-- Checkbox Documentation -->
+	<pbr footer="footer_dd"/>
+	<table cellspacing="0" cellpadding="0" width="100%" class="dd_heading">
+		<tr>
+			<td width="100%">
+				<p align="center">Due Diligence Documentation</p>
+			</td>
+		</tr>
+	</table>
+	<p>To begin our due diligence process, we will need the following documentation from you and returned back to us.</p>
+	<ul class="dd_list">
+		<#if data.proposal.docs.origleaseagreement == 'T'><li>Original Lease Agreement</li></#if>
+		<#if data.proposal.docs.govissuedid == 'T'><li>Passport or Birth Certificate</li></#if>
+		<#if data.proposal.docs.recentanntax == 'T'><li>Most Recent Annual Property Tax Statement</li></#if>
+		<#if data.proposal.docs.prooflastpay == 'T'><li>Proof of Last Three Mortgage Payments</li></#if>
+		<#if data.proposal.docs.twoyearleasepay == 'T'><li>Two Years of Historical Lease Payments</li></#if>
+		<#if data.proposal.docs.constatingdoc == 'T'><li>Copy of the Constating Documents of the Corporation</li></#if>
+	</ul>
+	<#if data.proposal.duediligence?string?length != 0>
+	<p>Additionally, we also have some notes on the due diligence process specific to your offer:</p>
+	<p>${data.proposal.duediligence}</p>
+	</#if>
+</body>
+</pdf>

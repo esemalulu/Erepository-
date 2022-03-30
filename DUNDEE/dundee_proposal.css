@@ -1,0 +1,140 @@
+body {
+  font-family: "MyriadPro";
+  font-size: 11pt;
+  header-height: 100px;
+  footer-height: 10px;
+}
+#page3 {
+  header-height: 70px;
+}
+h4 {
+  margin-bottom: 0px;
+  font-style: normal;
+}
+ul, ol {
+  marker-offset: 1.5em;
+}
+ul > li, ol > li {
+  padding-left: 2.5em;
+}
+.bold {
+  font-weight: bold;
+}
+.italics {
+  font-style: italic;
+}
+.header {
+  font-size: 10pt;
+}
+.footer {
+  font-size: 8pt;
+}
+.footer td {
+  vertical-align: middle;
+}
+.footer .settlement {
+  font-size: 16px;
+}
+.footer .settlement p {
+  margin-left: 5px;
+  color: rgb(52, 82, 114);
+}
+.footer table.dundeespark {
+  background-color: rgb(52, 82, 114);
+  color: white;
+  height: 30px;
+}
+.footer table.dundeespark td {
+  vertical-align: middle;
+}
+.footer table.dundeespark td p {
+  text-align: center;
+}
+.footer table.dundeespark td p.fullname {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+}
+.proposal {
+  font-size: 25px;
+  text-transform: uppercase;
+}
+.offervalue {
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+}
+
+table.settlement {
+  width: 100%;
+  border: 1px solid black;
+  table-layout: fixed;
+}
+table.settlement td {
+  font-size: 8pt;
+  vertical-align: middle;
+}
+table.settlement td p {
+  margin: 1px 10px;
+}
+table.settlement td.header {
+  font-weight: bold;
+  font-size: 11pt;
+  text-transform: uppercase;
+  background-color: #eee;
+  text-align: center;
+  line-height: 17pt;
+}
+table.settlement td.small-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #eee;
+  text-align: center;
+  line-height: 14pt;
+}
+table.settlement td.entryheight {
+  height: 15pt;
+}
+.offeramount {
+  font-size: 13pt !important;
+}
+.border-top {
+  border-top: 1px solid black;
+}
+.border-bottom {
+  border-bottom: 1px solid black;
+}
+.border-left {
+  border-left: 1px solid black;
+}
+.border-right {
+  border-right: 1px solid black;
+}
+.small-text {
+  font-size: 0.98em;
+}
+p.offerprice {
+  font-weight: bold;
+  font-size: 13pt;
+  margin-left: 12px;
+  margin-bottom: 5px;
+}
+table.signatures td {
+  margin: 5px;
+  font-size: 9pt;
+}
+table.dd_heading td {
+  border-top: 1px solid rgb(52, 82, 114);
+  border-bottom: 1px solid rgb(52, 82, 114);
+}
+table.dd_heading td p {
+  margin: 10px 0px;
+  text-transform: uppercase;
+  font-size: 30px;
+  font-family: "MyriadPro Light";
+}
+ul.dd_list > li {
+  margin-bottom: 15px;
+  padding-left: 80px;
+}
