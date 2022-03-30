@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<style>
+		body {
+			font-family:Helvetica;
+			font-size: 11px;
+			margin: 0;
+			text-align: left;
+			height:100%;
+		}
+
+		table.otc td {
+			font-size: 11px;
+		}
+
+		table td {
+			font-size: 11px;
+		}
+
+		p {
+			padding:0;
+			margin:0;
+		}
+
+		h1 {
+			font-family:Helvetica;
+			font-size: 14px;
+			font-weight: bold;
+			padding: 0px;
+			margin: 0px;
+		}
+
+		#header1 {
+			width: 100%;
+			text-align: left;
+		}
+
+		#header2 {
+			width: 100%;
+			text-align: left;
+		}
+		td.dateLabel {
+            width: 180px !important; /* 55% */
+            font-weight: bold;
+
+		}
+		td.dateField {
+            width: 160px !important; /* 45% */
+		}
+        td.containerLeft{
+            width: 55%;
+        }
+        td.containerRight{
+            width: 45%;
+        }
+		
+		.bigSizeFont{
+			font-size: 14px;
+		}
+	</style>
+	<macrolist>
+    	<macro id="myheader">
+			<div id="header1" width="100%">
+				<p width="100%">
+					<table width="100%" border="0" cellpadding="0" cellmargin="0">
+					<tr>
+						<td class="containerLeft" width="50%" valign="top">
+							<p align="left"><img src="http://schoolpress.cdn.whipplehill.net/whipplehill408/1/files/2013/01/misc_88937.png" width="170px" height="41px"/></p>
+							<br/>
+							#ADDRESSTEXT#
+						</td>
+						<td class="containerRight" valign="top" align="left">
+							<h1>Service Order</h1>
+							<span style="font-size: 10px">
+								Page <pagenumber/> of <totalpages/>
+							</span>
+							<p align="left" width="100%">
+								<br/>
+								<table width="100%" cellpadding="0" cellmargin="0" cellborder="0">
+								<tr>
+									<td class="dateLabel">Date</td>
+									<td class="dateField">#TRANDATE#</td>
+								</tr>
+								<tr>
+									<td class="dateLabel">Service Order #</td>
+									<td class="dateField">#TRANID#</td>
+								</tr>
+								<tr><td colspan="2"><br/></td></tr>
+								<tr>
+									<td class="dateLabel">Expiration Date</td>
+									<!-- duedate -->
+									<td class="dateField">#EXPDATE#</td>
+								</tr>
+								<tr>
+									<td class="dateLabel">Issued By</td>
+									<!-- custbody4 -->
+									<td class="dateField">#ISSUEDBY#</td>
+								</tr>
+								</table>
+							</p>
+						</td>
+					</tr>
+					</table>
+				</p>
+
+			</div>
+		</macro>
+	</macrolist>
+</head>
+
+	<body header="myheader" header-height="140px" size="letter" align="center">
+		<table width="100%" height="100%" border="0" cellpadding="0" cellmargin="0" cellborder="0">
+			<tr><td align="center" width="100%" height="100%">
+				<table width="100%" cellpadding="0" cellmargin="0" border="0">
+					<tr>
+						<td class="containerLeft" valign="top">
+							<p align="left" width="100%">
+								<b>Bill To</b><br/>
+								#BILLADDRESS#
+								<br/>
+							</p>
+
+							<p align="left">
+								<b>Client Contact</b><br/>
+								<!-- Data from field ID custbody7 (Client Contact) -->
+								#CLIENTCONTACTINFO#
+							</p>
+						</td>
+						<td class="containerRight" valign="top" align="left">
+							<p align="left" width="100%">
+								<table width="100%" cellpadding="0" cellmargin="0" cellborder="0">
+								<tr>
+									<td class="dateLabel">Project Start Date</td>
+									<!-- custbody5 -->
+									<td class="dateField">#PROJECTSTARTDATE#</td>
+								</tr>
+								<tr>
+									<td class="dateLabel">Annual Fees Start Date</td>
+									<!-- startdate -->
+									<td class="dateField">#ANNUALFEESTARTDATE#</td>
+								</tr>
+								<tr>
+									<td class="dateLabel">Annual Fees End Date</td>
+									<!-- enddate -->
+									<td class="dateField">#ANNUALFEEENDDATE#</td>
+								</tr>
+								<tr><td colspan="2"><br/></td></tr>
+								<tr>
+									<td class="dateLabel">Annual Fees Due Date</td>
+									<!-- custbody36 -->
+									<td class="dateField">#ANNUALFEEDUEDATE#</td>
+								</tr>
+								<tr>
+									<td class="dateLabel">Services Due Date</td>
+									<!-- custbody_test_terms_and_conditions -->
+									<td class="dateField">#SERVICEDUEDATE#</td>
+								</tr>
+								<tr>
+									<td class="dateLabel">Services Payment Terms</td>
+									<td class="dateField">#TERMS#</td>
+								</tr>
+								<tr>
+									<td class="dateLabel">Currency</td>
+									<td class="dateField">#CURRENCY#</td>
+								</tr>
+								</table>
+							</p>
+						</td>
+					</tr>
+				</table>
+			</td></tr>
+			</table>
+			<br/>
+
+			<table table-layout="fixed" width="670px" border="2" cellpadding="2" border-color="#666">
+			<thead>
+			<tr background-color="#666">
+				<td width="70px">
+					<p align="left" style="padding:2px" color="#FFFFFF"><b>Qty</b></p>
+				</td>
+				<td width="300px">
+					<p align="left" style="padding:2px" color="#FFFFFF"><b>Description</b></p>
+				</td>
+				<td width="100px" white-space="nowrap">
+					<p align="left" style="padding:2px" color="#FFFFFF"><b>Unit Price</b></p>
+				</td>
+				<td width="100px">
+					<p align="left" style="padding:2px" color="#FFFFFF"><b>Month(s)</b></p>
+				</td>
+				<td width="100px">
+					<p align="left" style="padding:2px" color="#FFFFFF"><b>Amount</b></p>
+				</td>
+			</tr>
+			</thead>
+
+			<tbody>
+			<!-- Suitelet generated -->
+			#ITEMLIST#
+			<!-- end item list -->
+			</tbody>
+		</table>
+
+		<table width="100%" border="0" cellpadding="5" cellborder="0">
+		#SUBANDTAX#
+		<tr>
+			<td width="70%">
+				<p align="left"> </p>
+			</td>
+			<td width="10%">
+				<p align="left"><b>Total</b></p>
+			</td>
+			<td width="20%">
+				<p align="right">$#TOTALAMOUNT#</p>
+			</td>
+		</tr>
+		</table>
+
+		<pbr/>
+		<p align="left">
+		<h1>Other Terms and Conditions:</h1>
+			#OTHERTACTEXT#
+		</p>
+
+	</body>
+</pdf>

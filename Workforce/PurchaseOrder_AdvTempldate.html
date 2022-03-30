@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="verdana" type="font" subtype="opentype" src="${nsfont.verdana}" src-bold="${nsfont.verdana_bold}" bytes="2"></link><macrolist>
+<macro id="nlheader">
+
+<table border="0" cellborder="0">
+	<tr>
+		<td align="left" style="width: 60%; text-align: left" rowspan="2">
+			<#if companyInformation.logoUrl?length != 0><img src="${companyInformation.logoUrl}" style="width: 200px; height: 57px"/> </#if>
+		</td>
+		<td align="right" colspan="2" ><span class="title" style="white-space: nowrap">${record@title}</span></td>
+	</tr>
+	
+	<tr>
+		<td align="center" style="font-size: 12pt;">
+			<b>DATE</b>
+
+		</td>
+		<td align="center" style="font-size: 12pt; white-space:nowrap">
+			<b>P.O. NO.</b>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="phoneFaxEmail" align="left" style="white-space: nowrap; padding-top: 10px">
+		${companyInformation.address1}, ${companyInformation.address2} ${companyInformation.city}, ${companyInformation.state} ${companyInformation.zip}<br/>			
+		Phone: ${companyInformation.phone} Fax: ${companyInformation.fax} AP@WorkForceSoftware.com
+		</td>
+		
+		<td align="center" style="font-size: 12pt;">
+			${record.trandate}
+		</td>
+		<td align="center" style="font-size: 12pt;">
+			#${record.tranid}
+		</td>
+	</tr>
+</table>
+</macro>
+<macro id="nlfooter">
+<table class="footer">
+	<tr>
+	
+	<td align="right"><pagenumber/> of <totalpages/>
+						</td>
+	</tr>
+</table>
+</macro>
+</macrolist>
+<style type="text/css">
+.phoneFaxEmail {
+	text-align: left;
+	font-size: 11px;
+}
+
+body {
+	margin-top: -25px;
+}
+
+table {
+				<#if .locale == "zh_CN">
+				  font-family: stsong, sans-serif;
+        <#elseif .locale == "zh_TW">
+          font-family: msung, sans-serif;
+        <#elseif .locale == "ja_JP">
+          font-family: heiseimin, sans-serif;
+        <#elseif .locale == "ko_KR">
+          font-family: hygothic, sans-serif;
+        <#elseif .locale == "ru_RU">
+          font-family: verdana;
+        <#else>
+          font-family: sans-serif;
+        </#if>
+				font-size: 9pt;
+				margin-top: 10px;
+				table-layout: fixed;
+				width: 100%;
+			}
+			th {
+				font-weight: bold;
+				font-size: 8pt;
+				vertical-align: middle;
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 3px;
+				padding-top: 5px;
+			}
+			td {
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 4px;
+				padding-top: 4px;
+			}
+			b {
+				font-weight: bold;
+			}
+			table.header td {
+				padding: 0px;
+				font-size: 10pt;
+			}
+			table.footer td {
+				padding: 0px;
+				font-size: 8pt;
+			}
+			table.itemtable th {
+				padding-bottom: 10px;
+				padding-top: 10px;
+			}
+			table.body td {
+				padding-top: 2px;
+			}
+			table.total {
+				page-break-inside: avoid;
+			}
+			tr.totalrow {
+				line-height: 200%;
+			}
+			td.totalboxtop {
+				font-size: 12pt;
+			}
+			td.addressheader {
+				font-size: 8pt;
+				padding-top: 6px;
+				padding-bottom: 2px;
+			}
+			td.address {
+				padding-top: 0px;
+			}
+			td.totalboxmid {
+				font-size: 28pt;
+				padding-top: 20px;
+			}
+			td.totalboxbot {
+				font-weight: bold;
+			}
+			span.title {
+				font-size: 23pt;
+			}
+			span.number {
+				font-size: 16pt;
+			}
+			span.itemname {
+				font-weight: bold;
+				line-height: 150%;
+			}
+			hr {
+				width: 100%;
+				height: 1px;
+			}
+		</style>
+</head>
+<body header="nlheader" header-height="15%" footer="nlfooter" footer-height="20pt">
+<table style="width: 100%">
+	<tr>
+		<td style="width: 47%">
+			<table style="border: 1px solid black">
+				<tr>
+					<td style="padding: 3px; border-bottom: 1px solid black">
+						<b>VENDOR (${record.entity})</b>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 3px">
+						<#if record.billaddress != ''>
+							${record.billaddress}
+						</#if>
+						<br/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width: 6%"><br/></td> 
+		<td style="width: 47%">
+			<table style="border: 1px solid black">
+				<tr>
+					<td style="padding: 3px; border-bottom: 1px solid black">
+						<b>SHIP TO</b>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 3px">
+						<#if record.shipaddress != ''>
+							${record.shipaddress}
+						</#if>
+						<br/>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+	<tr>
+		<td style="width: 47%">
+			<table style="border: 1px solid black">
+				<tr>
+					<td style="padding: 3px; border-bottom: 1px solid black">
+						<b>PURPOSE</b>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 3px;">
+						<#if record.custbody_po_purpose != ''>
+							${record.custbody_po_purpose}
+						</#if>
+						<br/><br/>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td style="width: 6%"><br/></td> 
+		<td style="width: 47%">
+			<table style="border: 1px solid black">
+				<tr>
+					<td style="padding: 3px; border-bottom: 1px solid black; border-right: 1px solid black; text-align:center">
+						<b>TERMS</b>
+					</td>
+					<td style="padding: 3px; border-bottom: 1px solid black; text-align:center">
+						<b>CONTACT PERSON</b>
+					</td>
+				</tr>
+				<tr>
+					<td style="padding: 3px">
+						<#if record.terms != ''>
+							${record.terms}
+						</#if>
+						<br/>
+					</td>
+					<td style="padding: 3px">
+						<#if record.employee != ''>
+							${record.employee}
+						</#if>
+						<br/>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<#if record.item?has_content>
+<table style="border: 1px solid black; border-collapse:collapse; width: 100%"><!-- start items --><#list record.item as item><#if item_index==0>
+<thead>
+	<tr>
+	<th align="center" style="border-right: 1px solid black; width: 10%">QUANTITY</th>
+	<th align="center" style="border-right: 1px solid black">VENDOR PART</th>
+	<th align="center" style="border-right: 1px solid black; width: 40%">DESCRIPTION</th>
+	<th align="center" style="border-right: 1px solid black; width: 11%">RATE</th>
+	<th align="center" style="border-right: 1px solid black">CUSTOMER</th>
+	<th align="center">AMOUNT</th>
+	</tr>
+</thead>
+</#if>
+	<tr>
+	<td align="center" style="border-right: 1px solid black; border-top: 1px solid black">${item.quantity}</td>
+	<td align="left" style="border-right: 1px solid black; border-top: 1px solid black">${item.vendorname}</td>
+	<td align="left" style="border-right: 1px solid black; border-top: 1px solid black; text-align: left">${item.description}</td>
+	<td align="right" style="border-right: 1px solid black; border-top: 1px solid black">
+		<#if record.currencysymbol != 'USD'>
+			${record.currencysymbol}
+		</#if>
+		${item.rate}
+	</td>
+	<td style="border-right: 1px solid black; border-top: 1px solid black">${item.customer}</td>
+	<td align="right" style="border-top: 1px solid black">
+		<#if record.currencysymbol != 'USD'>
+			${record.currencysymbol}
+		</#if>
+		${item.amount}
+	</td>
+	</tr>
+	</#list><!-- end items -->
+</table>
+</#if>
+<table>
+	<tr>
+	<td background-color="#ffffff" colspan="4">&nbsp;</td>
+	<td align="right" style="width: 30%; white-space: nowarp; border-top: 1px solid black; border-bottom: 1px solid black; border-left: 1px solid black; "><b>Total Purchase Order:</b></td>
+	<td align="right" style="border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black; "><b>${record.total}</b></td>
+	</tr>
+</table>
+
+<br/>
+
+<table style="border: 1px solid black; border-collapse:collapse; width: 70%">
+<tr>
+	<td align="left" style="border-right: 1px solid black; width: 50%">Manager Signature (up to $2500)</td>
+	<td align="left" style="width: 20%">Date Submitted</td>
+</tr>
+<tr>
+	<td align="left" style="border-right: 1px solid black; border-bottom: 1px solid black; width: 50%"><br/><br/></td>
+	<td align="left" style="width: 20%; border-bottom: 1px solid black;"><br/><br/></td>
+</tr>
+
+<tr>
+	<td align="left" style="border-right: 1px solid black; width: 50%">Authorization Signature ($2500 - $25000)</td>
+	<td align="left" style="width: 20%">Date Approved</td>
+</tr>
+<tr>
+	<td align="left" style="border-right: 1px solid black; border-bottom: 1px solid black; width: 50%"><br/><br/></td>
+	<td align="left" style="width: 20%; border-bottom: 1px solid black;"><br/><br/></td>
+</tr>
+
+<tr>
+	<td align="left" style="border-right: 1px solid black; width: 50%">Authorization Signature (over $25000)</td>
+	<td align="left" style="width: 20%">Date Approved</td>
+</tr>
+<tr>
+	<td align="left" style="border-right: 1px solid black;width: 50%"><br/><br/></td>
+	<td align="left" style="width: 20%;"><br/><br/></td>
+</tr>
+</table>
+
+
+
+</body>
+</pdf>

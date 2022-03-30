@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="verdana" type="font" subtype="opentype" src="${nsfont.verdana}" src-bold="${nsfont.verdana_bold}" bytes="2"></link><macrolist>
+<macro id="nlheader">
+<table border="0">
+	<tr>
+	<td align="left" rowspan="2" style="width: 60%; text-align: left"><#if companyInformation.logoUrl?length != 0><img src="${companyInformation.logoUrl}" style="width: 200px; height: 57px" /> </#if></td>
+	<td align="right" colspan="2"><span class="title" style="white-space: nowrap">${record@title}</span></td>
+	</tr>
+	<tr>
+	<td align="center" style="font-size: 12pt; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black"><b>DATE</b></td>
+	<td align="center" style="font-size: 12pt; border-top: 1px solid black; border-right: 1px solid black"><b>INVOICE #</b></td>
+	</tr>
+	<tr>
+	<td align="left" class="phoneFaxEmail" style="white-space: nowrap"><!-- ${companyInformation.address1}, ${companyInformation.address2} ${companyInformation.city}, ${companyInformation.state} ${companyInformation.zip}<br/> -->Phone: ${companyInformation.phone} Fax: ${companyInformation.fax} AR@WorkForceSoftware.com</td>
+	<td align="center" style="font-size: 12pt; border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black;border-bottom: 1px solid black;">${record.trandate}</td>
+	<td align="center" style="font-size: 12pt; border-top: 1px solid black; border-right: 1px solid black;border-bottom: 1px solid black;">${record.tranid}</td>
+	</tr>
+	<tr>
+	<td align="left" style="padding-left: 30px; padding-top: 10px"><b>Customer No: ${record.entity.accountnumber}</b><br /><br />${record.billaddress}</td>
+	<td colspan="2" style="padding-left: 30px; padding-top: 10px"><b>REMIT TO:</b><br />WorkForce Software<br />Dept CH 19758<br />Palatine, IL 60055-9758</td>
+	</tr>
+</table>
+</macro>
+<macro id="nlfooter">
+<table class="footer">
+	<tr>
+	<td align="right"><pagenumber/> of <totalpages/>
+						</td>
+	</tr>
+</table>
+</macro>
+</macrolist>
+<style type="text/css">
+.phoneFaxEmail {
+	text-align: left;
+	font-size: 11px;
+}
+
+body {
+	margin-top: -25px;
+}
+table {
+		<#if .locale == "zh_CN">
+		  font-family: stsong, sans-serif;
+        <#elseif .locale == "zh_TW">
+          font-family: msung, sans-serif;
+        <#elseif .locale == "ja_JP">
+          font-family: heiseimin, sans-serif;
+        <#elseif .locale == "ko_KR">
+          font-family: hygothic, sans-serif;
+        <#elseif .locale == "ru_RU">
+          font-family: verdana;
+        <#else>
+          font-family: sans-serif;
+        </#if>
+				font-size: 9pt;
+				margin-top: 10px;
+				table-layout: fixed;
+				width: 100%;
+			}
+			th {
+				font-weight: bold;
+				font-size: 8pt;
+				vertical-align: middle;
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 3px;
+				padding-top: 5px;			}
+			td {
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 4px;
+				padding-top: 4px;
+			}
+			b {
+				font-weight: bold;
+				color: #333333;
+			}
+			table.header td {
+				padding: 0px;
+				font-size: 10pt;
+			}
+			table.footer td {
+				padding: 0px;
+				font-size: 8pt;
+			}
+			table.itemtable th {
+				padding-bottom: 10px;
+				padding-top: 10px;
+			}
+			table.body td {
+				padding-top: 2px;
+			}
+			table.total {
+				page-break-inside: avoid;
+			}
+			tr.totalrow {
+				line-height: 200%;
+			}
+			td.totalboxtop {
+				font-size: 12pt;
+			}
+			td.addressheader {
+				font-size: 8pt;
+				padding-top: 6px;
+				padding-bottom: 2px;
+			}
+			td.address {
+				padding-top: 0px;
+			}
+			td.totalboxmid {
+				font-size: 28pt;
+				padding-top: 20px;
+			}
+			td.totalboxbot {
+				font-weight: bold;
+			}
+			span.title {
+				font-size: 23pt;
+				font-weight: bold;
+			}
+			span.number {
+				font-size: 12pt;
+			}
+			span.itemname {
+				font-weight: bold;
+				line-height: 150%;
+			}
+			hr {
+				width: 100%;
+				color: #d3d3d3;
+				background-color: #d3d3d3;
+				height: 1px;
+			}
+
+			table.body {
+				border-collapse:collapse;
+			}
+
+			table.body th {
+				font-weight: bold;
+				font-size: 8pt;
+				vertical-align: middle;
+				padding: 5px;
+			}
+
+			table.body td {
+				padding-top: 2px;
+			}</style></head>
+<body header="nlheader" header-height="25%" footer="nlfooter" footer-height="20pt">
+<table class="body">
+	<tr>
+	<th>&nbsp;</th>
+	<th>&nbsp;</th>
+	<th align="center" style="border-left: 1px solid black; border-top: 1px solid black; border-right: 1px solid black"><b>P.O. NO.</b></th>
+	<th align="center" style="border-top: 1px solid black; border-right: 1px solid black"><b>PROJECT</b></th>
+	<th align="center" style="1px solid black; border-top: 1px solid black; border-right: 1px solid black">TERMS</th>
+	</tr>
+	<tr>
+	<td>&nbsp;</td>
+	<td>&nbsp;</td>
+	<td align="center" style="border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black">${record.otherrefnum}</td>
+	<td align="center" style="white-space: normal; border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black">${record.custbody_aux_prjoninvoice}</td>
+	<td align="center" style="border-top: 1px solid black; border-bottom: 1px solid black; border-right: 1px solid black">${record.terms}</td>
+	</tr>
+</table>
+<#if record.item?has_content>
+<table class="itemtable" style="border: 1px solid black; border-collapse:collapse;"><!-- start items --><#list record.item as item><#if item_index==0>
+<thead>
+	<tr>
+	<th align="center" colspan="3" style="border-right: 1px solid black; border-bottom: 1px solid black">QTY</th>
+	<th align="center" colspan="12" style="border-right: 1px solid black; border-bottom: 1px solid black">DESCRIPTION</th>
+	<th align="center" colspan="4" style="border-right: 1px solid black; border-bottom: 1px solid black">RATE</th>
+	<th align="center" colspan="7" style="; border-bottom: 1px solid black">AMOUNT</th>
+	</tr>
+</thead>
+</#if>
+	<tr>
+	<td align="center" colspan="3" line-height="150%" style="border-right: 1px solid black;"><#if item.quantity != 0>${item.quantity} </#if></td>
+	<td colspan="12" style="border-right: 1px solid black;">${item.description}</td>
+	<td align="right" colspan="4" style="border-right: 1px solid black;"><#if record.currencysymbol != 'USD'>${record.currencysymbol} </#if>${item.rate}</td>
+	<td align="right" colspan="7"><#if record.currencysymbol != 'USD'>${record.currencysymbol} </#if>${item.amount}</td>
+	</tr>
+	</#list><!-- end items and display total row -->
+	<tr>
+	<td align="center" colspan="15" style="font-weight: bold; white-space:nowrap; border-top: 1px solid black; border-right: 1px solid black;">&nbsp;</td>
+	<td align="center" colspan="4" style="white-space:nowrap; font-weight: bold; font-size: 14px; border-top: 1px solid black;">${record.taxtotal@label}</td>
+	<td align="right" colspan="7" style="white-space:nowrap; font-weight: bold; font-size: 14px; border-top: 1px solid black;"><#if record.currencysymbol != 'USD'>${record.currencysymbol} </#if>${record.taxtotal}</td>
+	</tr>
+	<tr>
+	<td align="center" colspan="15" style="font-weight: bold; white-space:nowrap; border-right: 1px solid black;">${record.message}</td>
+	<td align="center" colspan="4" style="white-space:nowrap; font-weight: bold; font-size: 14px;">Total</td>
+	<td align="right" colspan="7" style="white-space:nowrap; font-weight: bold; font-size: 14px;"><#if record.currencysymbol != 'USD'>${record.currencysymbol} </#if>${record.total}</td>
+	</tr>
+</table>
+</#if></body>
+</pdf>
