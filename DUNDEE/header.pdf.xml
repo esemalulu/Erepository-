@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<meta name="author" value="${data.companyname}" />
+	<meta name="layout" value="one-column"/>
+	<meta name="title" value="${data.companyname}, ${data.reportname}"/>
+	<meta name="output-profile" value="Acrobat7"/>
+	<meta name="creator" value="${data.companyname}"/>
+	<style>
+		${data.styles}
+	</style>
+
+	<macrolist>
+		<macro id="footer">
+			<table cellspacing="0" cellpadding="0" width="100%" class="footer">
+				<tr>
+					<td width="33%" align="left"></td>
+					<td width="33%" align="center">- <pagenumber/> / <totalpages/> -</td>
+					<td width="33%" align="right">Report Created:<br/>${data.reportdate}</td>
+				</tr>
+			</table>
+		</macro>
+		<macro id="header">
+			<table cellspacing="0" cellpadding="0" width="100%" class="header">
+				<tr>
+					<td width="33%" align="left">
+						<img src="${data.logo}" width="165px" height="30px"/>
+					</td>
+					<td width="66%" align="right">
+						<p class="title">${data.reportname}</p>
+					</td>
+				</tr>
+			</table>
+		</macro>
+	</macrolist>
+
+	<link name="MyriadPro" type="font" subtype="truetype" embed="true"
+		src="${data.fonts.normal}"
+		src-italic="${data.fonts.italic}"
+		src-bold="${data.fonts.bold}"
+		src-bolditalic="${data.fonts.bolditalic}"/>
+	<link name="MyriadPro Light" type="font" subtype="truetype" embed="true"
+		src="${data.fonts.light}"
+		src-italic="${data.fonts.lightitalic}"/>
+
+</head>
+<body size="letter" footer="footer" header="header">
+
+	<#setting number_format=",##0">
+
+  ${data.blocks.block1}
+	<pbr size="letter-landscape" />
+	${data.blocks.block2}
+	<pbr size="letter" />
+	${data.blocks.block3}
+
+</body>
+</pdf>
