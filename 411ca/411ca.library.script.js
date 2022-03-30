@@ -1,0 +1,3910 @@
+/**
+ * Module Description
+ * 
+ * Version    Date            Author           Remarks
+ * 1.00       07 May 2013     mwise
+ *
+ */
+/**
+ * Module Description
+ * 
+ * Version    Date            Author           Remarks
+ * 1.00       1 Jan 2012     MWise
+ *
+ */
+var NETSUITE_URL;
+var NETSUITE_HOME;
+var PATHTOCUSTOMER;
+var PATHTOEMPLOYEE;
+var PATHTOSEARCH;
+var NETSUITECUSTOMER_411;
+
+var external_411ca_server = 'http://v2tools.411.ca';
+var external_411ca_ajax_server = 'http://frog.411.ca/nsi_v2_sandbox';
+var a9r_server = 'http://stage.411.ca';
+var ac_url=''; 
+var ao_url=''; 
+var ar_url=''; 
+var business411_url = '';
+var api_key = 'test_api_key';
+var TORONTO_BlendDedicatedCutOff = 149.99999;
+var CS_NOBODY_TO_ASSIGN_ID = 922447; // Dave, Kandarp
+
+var STI_url='';
+var STI_publish_website='';
+var STI_revoke_website='';
+var STI_auth_key='';
+var bid = '&who=ns&bid=';
+
+var EMPLOYEE411 = '';
+var EMPLOYEE_VLAD = '';
+var EMPLOYEE_MWISE;
+var EMPLOYEE_AROSENBLUM;
+var EMPLOYEE_CBERRIDGE;
+var EMPLOYEE_GILLESSHARGARY;
+var EMPLOYEE_IPRYSTUPA;
+var EMPLOYEE_EVOCANADA = '';
+var EMPLOYEE_ACCOUNTING = '';
+
+var REP_Blended =  '';
+var REP_EVO =  '';
+var TORONTO_WEBSPECIALIST = '';
+
+
+var ROLE_OAC = '';
+var ROLE_OAC_MGR = '';
+var ROLE_ADMIN = '';
+var ROLE_OAC_MTL = '';
+var ROLE_FINANCE = '';
+var ROLE_COLLECT = '';
+var ROLE_EST = '';
+var ROLE_RETENTION = '';
+var ROLE_OAC_MGR_ENH = '';
+var ROLE_OAC_MGR_MTL = '';
+
+var FORM_CUST_OACMGR;
+var FORM_CUST_OAC;
+var FORM_CUST_MTL;
+var FORM_CUST_COLLECTIONS;
+var FORM_CUST_FINANCE;
+
+
+var CUSTSTATUS_Active='';
+var CUSTSTATUS_Warm='';
+var CUSTSTATUS_Churned='';
+
+
+var EVO_MAIN_COMPANY_ID;
+var EVO_SALES_DEPARTMENT;
+var COAUTO_MAIN_COMPANY_ID;
+
+var greencheckmarkimage;
+var CONST_GlobalPushBackThreshhold = '21';  //21 days
+
+// ITEMS (Production)
+var ITEM_VBO_DISCOUNT_Listing_Mobile_new = '711';
+var ITEM_VBO_DISCOUNT_Website_Mobile_new = '703';
+var ITEM_VBO_DISCOUNT_Website_Silver_new = '707';
+var ITEM_VBO_DISCOUNT_Website_Silver20_new = '723';
+
+var ITEM_VBO_DISCOUNT_Listing_Mobile_rec = '712';
+var ITEM_VBO_DISCOUNT_Website_Mobile_rec = '704';
+var ITEM_VBO_DISCOUNT_Website_Silver_rec = '708';
+var ITEM_VBO_DISCOUNT_Website_Silver20_rec = '724';
+
+var ITEM_WEBSITEPACKAGE_Platinum_new = '';
+var ITEM_WEBSITEPACKAGE_Gold_new = '';
+var ITEM_WEBSITEPACKAGE_Silver_new = '';
+var ITEM_WEBSITEPACKAGE_Platinum_recur = '';
+var ITEM_WEBSITEPACKAGE_Gold_recur = '';
+var ITEM_WEBSITEPACKAGE_Silver_recur = '';
+
+var ITEM_WEBSITE_site='';
+var ITEM_WEBSITE_moreemail='';
+var ITEM_WEBSITE_morepages='';
+
+var ITEM_CUSTOMDISCOUNT;
+
+var ITEM_DISCOUNT_WEBSITE_New;
+var ITEM_DISCOUNT_WEBSITE_Recur;
+
+var ITEM_WEBSITE_site_InvokeToUpsell;
+var ITEM_WEBSITE_site_Invoke60DayOptOut;
+var ITEM_MOBILEWEBSITE_site_Invoke60DayOptOut;
+
+var ITEM_GOOGLE_ADS85_recur= '';
+var ITEM_GOOGLE_ADS135_recur= '';
+var ITEM_GOOGLE_ADS200_recur= '';
+var ITEM_GOOGLE_ADS300_recur= '';
+var ITEM_GOOGLE_ADS500_recur= '';
+
+var ITEM_GOOGLE_ADS85_new= '';
+var ITEM_GOOGLE_ADS135_new= '';
+var ITEM_GOOGLE_ADS200_new= '';
+var ITEM_GOOGLE_ADS300_new= '';
+var ITEM_GOOGLE_ADS500_new= '';
+
+var ITEM_GOOGLE_SETUPFEE='';
+
+var ITEM_GOOGLE_ADBASIC_new='';
+var ITEM_GOOGLE_ADSTANDARD_new='';
+var ITEM_GOOGLE_ADEXTREME_new='';
+var ITEM_GOOGLE_ADADVANCED_new='';
+
+var ITEM_GOOGLE_ADBASIC_recur='';
+var ITEM_GOOGLE_ADSTANDARD_recur='';
+var ITEM_GOOGLE_ADEXTREME_recur='';
+var ITEM_GOOGLE_ADADVANCED_recur='';
+
+var ITEM_MOBILELISTINGS_EXPLORENATIONAL_new = '662';
+var ITEM_MOBILELISTINGS_EXPLORENATIONAL_recur = '668';
+var ITEM_MOBILELISTINGS_EXPLOREPROVINCIAL_new = '661';
+var ITEM_MOBILELISTINGS_EXPLOREPROVINCIAL_recur = '669';
+var ITEM_MOBILELISTINGS_NATSPONSOR_DESKTOP_new = '660';
+var ITEM_MOBILELISTINGS_NATSPONSOR_DESKTOP_recur = '670';
+var ITEM_MOBILELISTINGS_NATSPONSOR_NODESKTOP_new = '663';
+var ITEM_MOBILELISTINGS_NATSPONSOR_NODESKTOP_recur = '671';
+var ITEM_MOBILELISTINGS_PROVSPONSOR_DESKTOP_new = '658';
+var ITEM_MOBILELISTINGS_PROVSPONSOR_DESKTOP_recur = '666';
+var ITEM_MOBILELISTINGS_PROVSPONSOR_NODESKTOP_new = '659';
+var ITEM_MOBILELISTINGS_PROVSPONSOR_NODESKTOP_recur = '667';
+var ITEM_MOBILELISTINGS_DESKTOP_new = '654';
+var ITEM_MOBILELISTINGS_DESKTOP_recur = '664';
+var ITEM_MOBILELISTINGS_NODESKTOP_new = '655';
+var ITEM_MOBILELISTINGS_NODESKTOP_recur = '665';
+var ITEM_MPPI_NEW = '652';
+var ITEM_MPPI_RECUR = '653';
+
+var ITEM_MOBILEWEBSITE_new='';
+var ITEM_MOBILEWEBSITE_recur='';
+
+var MPPI_MSAVED='';
+var MPPI_MSOLD='';
+var MPPI_MLESS50='';
+var MPPI_M5080='';
+var MPPI_M80120='';
+var MPPI_M120='';
+var MPPI_M30='';
+var MPPI_OSAVED='';
+var MPPI_OSOLD='';
+var MPPI_OLESS50='';
+var MPPI_O5080='';
+var MPPI_O80120='';
+var MPPI_O120='';
+var MPPI_O30='';
+var MPPI_M20='';
+var MPPI_O20='';
+var MPPI_MSOLD2013='';
+var MPPI_OSOLD2013='';
+
+
+//LISTS
+var A9R_PHONETYPE_PHONE;
+var A9R_PHONETYPE_CELL;
+var A9R_PHONETYPE_TOLLFREE;
+var A9R_PHONETYPE_FAX;
+
+var CALLSTATUS_Completed;
+var CALLSTATUS_Scheduled;
+
+var CAMPAIGN_WELCOME_EN = '1';
+var CAMPAIGN_WELCOME_FR = '8';
+
+var CHURNCLASS_Realtime = '1';
+var CHURNCLASS_AR = '2';
+var CHURNCLASS_ChurnBacklog = '3';
+
+var COMMLANGUAGE_FRENCH = '2';
+var COMMLANGUAGE_ENGLISH = '1';
+
+var CONTRACT_12  = '1';
+var CONTRACT_6  = '2';
+var CONTRACT_3  = '3';
+var CONTRACT_15  = '4';
+var CONTRACT_9  = '5';
+var CONTRACT_m2m  = '6';
+var CONTRACT_3m2m  = '7';
+var CONTRACT_m2mjuly2012promo = '9';
+var CONTRACT_2 = '10';
+
+//These are the correct values you've sent Audaxium. 
+//These are values on production.
+var ESTABLISHMENTSTATUS_Newsale = '1';
+var ESTABLISHMENTSTATUS_Assigned = '2';
+var ESTABLISHMENTSTATUS_InProgress = '3';
+var ESTABLISHMENTSTATUS_Established = '4';
+var ESTABLISHMENTSTATUS_Verified = '5';
+
+var EXTROLE_Sales = '1';
+var EXTROLE_Provisioner = '2';
+var EXTROLE_Verifiers = '3';
+var EXTROLE_OAC = '4';
+var EXTROLE_WebsiteSpecialist = '5';
+var EXTROLE_Retention = '6';
+var EXTROLE_AR = '7';
+var EXTROLE_Collector = '8';
+
+var LANGUAGE_ENGLISH = 'en_CA'; 
+var LANGUAGE_FRENCH = 'fr_FR'; 
+
+var LOCATION_TORONTO = '2';
+var LOCATION_MONTREAL = '3'; 
+
+var LOGOSTATUS_Attached;
+var LOGOSTATUS_Pending;
+var LOGOSTATUS_OnFile;
+var LOGOSTATUS_RetrieveFromWebsite;
+
+var LOGOTYPE_Pulled;
+var LOGOTYPE_Email;
+var LOGOTYPE_Created;
+var LOGOTYPE_Stock;
+
+var PAYMENTTYPE_MonthlyCreditCard = '1';
+var PAYMENTTYPE_QuarterlyCreditCard = '';
+var PAYMENTTYPE_SemiAnnualCreditCard = '';
+var PAYMENTTYPE_AnnualCreditCard = '';
+var PAYMENTTYPE_MonthlyInvoice = '';
+var PAYMENTTYPE_QuarterlyInvoice = '';
+var PAYMENTTYPE_SemiAnnualInvoice = '';
+var PAYMENTTYPE_AnnualInvoice = '';
+var PAYMENTTYPE_MonthlyPAP = '';
+var PAYMENTTYPE_QuarterlyPAP = '';
+var PAYMENTTYPE_SemiAnnualPAP = '';
+var PAYMENTTYPE_AnnualPAP = '';
+var PAYMENTTYPE_BiWeekly = '';
+var PAYMENTTYPE_QuarterlyMonthlyCreditCard = '';
+var PAYMENTTYPE_QuarterlyMonthlyInvoice = '';
+var PAYMENTTYPE_QuarterlyMonthlyPAP = '';
+var PAYMENTTYPE_COAUTOMonthlyInvoice = '';
+var PAYMENTTYPE_EVOMonthlyInvoice = '';
+
+var PHONETYPE_PHONE;
+var PHONETYPE_CELL;
+var PHONETYPE_TOLLFREE;
+var PHONETYPE_FAX;
+
+var PROVINCE_QUEBEC = 'QC';	
+
+var REPTYPE_Blended  = '1';
+var REPTYPE_Dedicated  = '2';
+
+var RETENTIONDISP_Seasonal = '1';
+var RETENTIONDISP_BusClosed = '2';
+var RETENTIONDISP_10DaysRemorse = '3';
+var RETENTIONDISP_NoROI = '4';
+var RETENTIONDISP_NeverPaid = '5';
+var RETENTIONDISP_NoContact = '6';
+var RETENTIONDISP_SendTo3rdParty = '7';
+var RETENTIONDISP_EVO;
+var RETENTIONDISP_VOB = '11';
+
+var RETENTIONSTATUS_RequestToCancel = '1';
+var RETENTIONSTATUS_SentToRetention = '2';
+var RETENTIONSTATUS_InQueue= '9';
+var RETENTIONSTATUS_CompletedByAccounting = '8';
+
+var RETENTIONFINALSTATUS_Saved = '1';
+var RETENTIONFINALSTATUS_RetainedWithChanges = '2';
+var RETENTIONFINALSTATUS_Cancelled = '3';
+
+var RETENTIONOFFERDISPOSITIONS_Accepted = '1';
+var RETENTIONOFFERDISPOSITIONS_NotInterested = '2';
+var RETENTIONOFFERDISPOSITIONS_NotApplicable = '3';
+
+var SALESTYPE_New='';
+var SALESTYPE_Renew='';
+var SALESTYPE_Upsell='';
+
+var SUBSCRIPTION_SOFTIN;
+var SUBSCRIPTION_SOFTOUT;
+var SUBSCRIPTION_CONFIN;
+var SUBSCRIPTION_CONFOUT;
+
+var STATUS_ClosedWon  = '13';
+var STATUS_Cancelled  = '111';
+
+var TAXGROUP_CA_GST= '12';
+var TAXGROUP_CA_Zero = '13';
+var TAXGROUP_HST = '534';
+var TAXGROUP_CA_S_BC = '536';
+var TAXGROUP_CA_S_NS = '542';
+var TAXGROUP_QUE = '562';
+var TAXGROUP_CA_QUEBEC = '649';
+var TAXGROUP_CA_S_BC_5 = '672';
+var TAXGROUP_PEI = '681';
+	
+var VERTICALTYPES_SF;
+var VERTICALTYPES_NoSF;	
+
+var VERTICAL_SF_Food = '1';
+var VERTICAL_SF_Digital = '2';
+var VERTICAL_SF_Auto = '3';
+var VERTICAL_SF_EventsFlowers = '4';
+var VERTICAL_SF_HealthBeauty = '5';
+var VERTICAL_SF_Other = '6';
+var VERTICAL_NoSF_Seasonal = '1';
+var VERTICAL_NoSF_NotSeasonal = '2';
+var VERTICAL_NoSF_HomeOffice = '3';
+var VERTICAL_NoSF_EventsPlanning = '4';
+var VERTICAL_NoSF_RealEstate = '5';
+var VERTICAL_NoSF_FinanceLegal = '6';
+var VERTICAL_NoSF_Other = '7';
+
+var WEBSITEPACKAGE_Platinum = '4';
+var WEBSITEPACKAGE_Gold = '3';
+var WEBSITEPACKAGE_Silver = '2';
+var WEBSITEPACKAGE_Copper = '1';
+
+var WEBSITEPUBSTATUS_Published = '1';
+var WEBSITEPUBSTATUS_NotPublished = '2';
+var WEBSITEPUBSTATUS_UnPublished = '3';
+
+var WEBSITESALESCHAN_Sales = '2';
+var WEBSITESALESCHAN_InitialList = '1';
+var WEBSITESALESCHAN_OAC = '3';
+var WEBSITESALESCHAN_SelfServe = '4';
+var WEBSITESALESCHAN_OACUpSell = '5';
+var WEBSITESALESCHAN_AUTOINVOKE = '6';
+
+var WEBSITEUPSELLSTATUS_Attempt = '1';
+var WEBSITEUPSELLSTATUS_Converted = '2';
+var WEBSITEUPSELLSTATUS_Lost = '3';
+var WEBSITEUPSELLSTATUS_60DayOptOut = '4';
+
+var YESNO_Yes = '1';
+var YESNO_No = '2';
+
+var YESBASIC_Yes = '1';
+var YESBASIC_Basic = '2';
+
+var ARTEAM_TeamA = '';
+var ARTEAM_TeamB = '';
+var ARTEAM_TeamC = '';
+var ARTEAM_TeamMontreal = '';
+
+var DECLINETYPE_CC = '';
+var DECLINETYPE_PAP = '';
+
+var CC_STATUS_DECLINED='';
+var CC_STATUS_APPROVED='';
+var CC_STATUS_PENDING='';
+
+var PAYMENT_BYCREDITCARD = '1';
+var PAYMENT_BYCHEQUE = '2';
+var PAYMENT_ONLINE = '3';
+
+//TEMPLATES
+var ADISREADY_MULTI_EN = '';
+var ADISREADY_MULTI_FR = '';
+var ADISREADY_SINGLE_EN = '';
+var ADISREADY_SINGLE_FR = '';
+var ADISREADY_MULTI_DED_EN = '';
+var ADISREADY_MULTI_DED_FR = '';
+var ADISREADY_SINGLE_DED_EN = '';
+var ADISREADY_SINGLE_DED_FR = '';
+
+var ADISREADY_MULTI_DED_EN_EVO = '245';
+var ADISREADY_MULTI_DED_FR_EVO = '246';
+var ADISREADY_SINGLE_DED_EN_EVO = '247';
+var ADISREADY_SINGLE_DED_FR_EVO = '248';
+var ADISREADY_MULTI_EN_EVO = '249';
+var ADISREADY_MULTI_FR_EVO = '250';
+var ADISREADY_SINGLE_EN_EVO = '251';
+var ADISREADY_SINGLE_FR_EVO = '252';
+
+var BUSINESSCARDS_EN = '';
+var BUSINESSCARDS_FR = '';
+var BUSINESSCARDS_DED_EN = '';
+var BUSINESSCARDS_DED_FR = '';
+
+var REQUESTTOCANCEL_EN = '';
+var REQUESTTOCANCEL_FR = '';
+
+var TEMPLATE_WELCOME411_EN = '85';					
+var TEMPLATE_WELCOME411_FR = '108';					
+
+//EMAIL TEMPLATES FOR VERTICALS
+var VERTICALTEMPLATE_EN_SF_Food = '';
+var VERTICALTEMPLATE_EN_SF_Digital = '';
+var VERTICALTEMPLATE_EN_SF_Auto = '';
+var VERTICALTEMPLATE_EN_SF_EventsFlowers = '';
+var VERTICALTEMPLATE_EN_SF_HealthBeauty = '';
+var VERTICALTEMPLATE_EN_SF_Other = '';
+var VERTICALTEMPLATE_EN_NoSF_Seasonal = '';
+var VERTICALTEMPLATE_EN_NoSF_NotSeasonal = '';
+var VERTICALTEMPLATE_EN_NoSF_HomeOffice = '';
+var VERTICALTEMPLATE_EN_NoSF_EventsPlanning = '';
+var VERTICALTEMPLATE_EN_NoSF_RealEstate = '';
+var VERTICALTEMPLATE_EN_NoSF_FinanceLegal = '';
+var VERTICALTEMPLATE_EN_NoSF_Other = '';
+var VERTICALTEMPLATE_FR_SF_Food = '';
+var VERTICALTEMPLATE_FR_SF_Digital = '';
+var VERTICALTEMPLATE_FR_SF_Auto = '';
+var VERTICALTEMPLATE_FR_SF_EventsFlowers = '';
+var VERTICALTEMPLATE_FR_SF_HealthBeauty = '';
+var VERTICALTEMPLATE_FR_SF_Other = '';
+var VERTICALTEMPLATE_FR_NoSF_Seasonal = '';
+var VERTICALTEMPLATE_FR_NoSF_NotSeasonal = '';
+var VERTICALTEMPLATE_FR_NoSF_HomeOffice = '';
+var VERTICALTEMPLATE_FR_NoSF_EventsPlanning = '';
+var VERTICALTEMPLATE_FR_NoSF_RealEstate = '';
+var VERTICALTEMPLATE_FR_NoSF_FinanceLegal = '';
+var VERTICALTEMPLATE_FR_NoSF_Other = '';
+
+var WEBSITEREADYTEMPLATE_EN_DOMAIN = '';
+var WEBSITEREADYTEMPLATE_FR_DOMAIN = '';
+var WEBSITEREADYTEMPLATE_DEDREP_EN_DOMAIN = '';
+var WEBSITEREADYTEMPLATE_DEDREP_FR_DOMAIN = '';
+var WEBSITEREADYTEMPLATE_EN_NODOMAIN = '';
+var WEBSITEREADYTEMPLATE_FR_NODOMAIN = '';
+var WEBSITEREADYTEMPLATE_DEDREP_EN_NODOMAIN = '';
+var WEBSITEREADYTEMPLATE_DEDREP_FR_NODOMAIN = '';
+
+var WEBSITEREADYTEMPLATE_EN_OPTOUT = '';
+var WEBSITEREADYTEMPLATE_FR_OPTOUT = '';
+var WEBSITEREADYTEMPLATE_DEDREP_EN_OPTOUT = '';
+var WEBSITEREADYTEMPLATE_DEDREP_FR_OPTOUT = '';
+
+var GETAWEBSITETEMPLATE_EN = '102';
+var GETAWEBSITETEMPLATE_FR = '116';
+var GETAWEBSITETEMPLATE_DEDREP_EN = '225';
+var GETAWEBSITETEMPLATE_DEDREP_FR = '226';
+
+var SPONSORSHIPTEMPLATE_EN = '235';
+var SPONSORSHIPTEMPLATE_FR = '237';
+var SPONSORSHIPTEMPLATE_DEDREP_EN = '236';
+var SPONSORSHIPTEMPLATE_DEDREP_FR = '238';
+
+var OPTOUTNOTICETEMPLATE_EN;
+var OPTOUTNOTICETEMPLATE_FR;
+var OPTOUTNOTICETEMPLATE_DEDREP_EN;
+var OPTOUTNOTICETEMPLATE_DEDREP_FR;
+
+var TCTEMPLATE_EN_NoLogo_NoWeb = '';
+var TCTEMPLATE_EN_NoLogo_Web = '';
+var TCTEMPLATE_EN_NoLogo_Domain = '';
+var TCTEMPLATE_EN_Logo_NoWeb = '';
+var TCTEMPLATE_EN_Logo_Web = '';
+var TCTEMPLATE_EN_Logo_Domain = '';
+var TCTEMPLATE_DEDREP_EN_NoLogo_NoWeb = '';
+var TCTEMPLATE_DEDREP_EN_NoLogo_Web = '';
+var TCTEMPLATE_DEDREP_EN_NoLogo_Domain = '';
+var TCTEMPLATE_DEDREP_EN_Logo_NoWeb = '';
+var TCTEMPLATE_DEDREP_EN_Logo_Web = '';
+var TCTEMPLATE_DEDREP_EN_Logo_Domain = '';
+var TCTEMPLATE_FR_NoLogo_NoWeb = '';
+var TCTEMPLATE_FR_NoLogo_Web = '';
+var TCTEMPLATE_FR_NoLogo_Domain = '';
+var TCTEMPLATE_FR_Logo_NoWeb = '';
+var TCTEMPLATE_FR_Logo_Web = '';
+var TCTEMPLATE_FR_Logo_Domain = '';
+var TCTEMPLATE_DEDREP_FR_NoLogo_NoWeb = '';
+var TCTEMPLATE_DEDREP_FR_NoLogo_Web = '';
+var TCTEMPLATE_DEDREP_FR_NoLogo_Domain = '';
+var TCTEMPLATE_DEDREP_FR_Logo_NoWeb = '';
+var TCTEMPLATE_DEDREP_FR_Logo_Web = '';
+var TCTEMPLATE_DEDREP_FR_Logo_Domain = '';	
+							
+//PAYENT TEMPLATES
+var PAYMENT_CCEXPIRES_EN = '';
+var PAYMENT_CCEXPIRES_FR = '';
+
+var LATEPAYMENT_1DAY_EN = '';
+var LATEPAYMENT_1DAY_FR = '';
+var LATEPAYMENT_1DAY_DEDREP_EN = '';
+var LATEPAYMENT_1DAY_DEDREP_FR = '';
+
+var LATEPAYMENT_30DAYS_EN = '';
+var LATEPAYMENT_30DAYS_FR = '';
+var LATEPAYMENT_30DAYS_DEDREP_EN = '';
+var LATEPAYMENT_30DAYS_DEDREP_FR = '';
+
+var LATEPAYMENT_60DAYS_EN = '';
+var LATEPAYMENT_60DAYS_FR = '';
+var LATEPAYMENT_60DAYS_DEDREP_EN = '';
+var LATEPAYMENT_60DAYS_DEDREP_FR = '';
+
+var LATEPAYMENT_90DAYS_EN = '';
+var LATEPAYMENT_90DAYS_FR = '';
+var LATEPAYMENT_90DAYS_DEDREP_EN = '';
+var LATEPAYMENT_90DAYS_DEDREP_FR = '';
+
+var BUSCARDFOLLOWUP_EN = '';
+var BUSCARDFOLLOWUP_FR = '';
+var BUSCARDFOLLOWUP_DEDREP_EN = '';
+var BUSCARDFOLLOWUP_DEDREP_FR = '';
+
+var ARNOTIFICATION_DAY1_EN = '';
+var ARNOTIFICATION_DAY1_FR = '';
+var ARNOTIFICATION_DAY4_EN = '';
+var ARNOTIFICATION_DAY4_FR = '';
+var ARNOTIFICATION_DAY6_EN = '';
+var ARNOTIFICATION_DAY6_FR = '';
+var ARNOTIFICATION_DAY15_EN = '';
+var ARNOTIFICATION_DAY15_FR = '';
+var ARNOTIFICATION_DAY20_EN = '';
+var ARNOTIFICATION_DAY20_FR = '';
+var ARNOTIFICATION_DAY31_EN = '';
+var ARNOTIFICATION_DAY31_FR = '';
+var ARNOTIFICATION_DAY42_EN = '';
+var ARNOTIFICATION_DAY42_FR = '';
+
+var WELCOMECALLSTATUS_READY= '18';
+var WELCOMECALLSTATUS_FOLLOWUP = '19';
+var WELCOMECALLSTATUS_ATTEMPT1 = '1';
+var WELCOMECALLSTATUS_ATTEMPT1VM = '2';
+var WELCOMECALLSTATUS_AT1 = '20';
+var WELCOMECALLSTATUS_AT2 = '21';
+var WELCOMECALLSTATUS_AT3 = '22';
+var WELCOMECALLSTATUS_COMPLETED = '23';
+var WELCOMECALLSTATUS_COULDNOTCONTACT = '15';
+
+var DEPT_ADMIN='11';
+var DEPT_ACCOUNTING='14';
+var DEPT_HR='13';
+var DEPT_MGMT='12';
+var DEPT_CS='16';
+var DEPT_AR='17';
+var DEPT_OAC='31';
+var DEPT_PROV='18';
+var DEPT_RET='29';
+var DEPT_VER='3';
+var DEPT_WEB='27';
+var DEPT_DATA='10';
+var DEPT_PM='9';
+var DEPT_PMARK='15';
+var DEPT_MARKETING='24';
+var DEPT_PRODUCTS='25';
+var DEPT_RD='26';
+var DEPT_SALES='1';
+var DEPT_BAD='22';
+var DEPT_CHANNEL='6';
+var DEPT_INSIDE='2';
+var DEPT_CR='19';
+var DEPT_OUT='23';
+var DEPT_OUTSIDE='4';
+var DEPT_APPT='5';
+var DEPT_EVO='32';
+var DEPT_SALES='21';
+
+var PRINTFORM_Invoice='';
+
+var VISA_STATUS_new = '1';
+var VISA_STATUS_active = '2';
+var VISA_STATUS_deactivated = '3';
+
+var VISA_LOADSTATUS_new = '1';
+var VISA_LOADSTATUS_initialized = '2';
+var VISA_LOADSTATUS_loaded = '3';
+
+var VISA_ENTITYTYPE_customer = '1';
+var VISA_ENTITYTYPE_employee = '2';
+
+var ACCOUNT_12800_PrepaidExpenses = '140';
+var ACCOUNT_60007_Advertising_Customers = '568';
+var ACCOUNT_66400_Promotion = '247';
+
+
+function initialize(){
+	var environment = nlapiGetContext().getEnvironment();
+
+	switch (environment) {
+	case 'SANDBOX' : 	
+						
+		//411 SERVERS 
+		NETSUITE_URL = 'https://system.sandbox.netsuite.com/';
+		NETSUITE_HOME = NETSUITE_URL + 'app/center/card.nl?sc=-29';
+		PATHTOCUSTOMER  = NETSUITE_URL + 'app/common/entity/custjob.nl?id=';
+		PATHTOEMPLOYEE  = NETSUITE_URL + 'app/common/entity/employee.nl?id=';
+		PATHTOSEARCH  = NETSUITE_URL + 'app/common/search/searchresults.nl?searchid=';
+		NETSUITECUSTOMER_411 = '441527';
+
+		a9r_server = 'http://stage.411.ca';
+		external_411ca_server = 'http://demo.411.ca';
+		external_411ca_ajax_server = 'http://frog.411.ca/nsi_v2_sandbox';
+		ac_url = a9r_server+ '/ac/account-settings/business/';
+		ao_url = a9r_server+ '/ac/dashboard/business/';
+		ar_url = a9r_server+ '/ac/dashboard/business/'; 
+		business411_url = '/business/profile/'; 
+		api_key = 'test_api_key';
+		
+		//VEOXSITES SERVERS
+		//STI_url='http://uat3.veloxsites.com';
+		//STI_publish_website='/includes/411/actions/invoke.php?auth=';
+		//STI_revoke_website='/includes/411/actions/revoke.php?auth=';
+		//STI_auth_key='4de3655dc76b2';
+		
+		
+		STI_url='http://stage.411.ca';
+		STI_auth_key='4de3655dc76b2';
+		STI_publish_website='/api/website?key=' + api_key + '&call=invoke&customer_id=';
+		STI_revoke_website='/api/website?key=' + api_key + '&call=revoke&customer_id=';
+//		http://stage.411.ca/api/website?key=test_api_key&call=invoke&customer_id=411
+//		http://stage.411.ca/api/website?key=test_api_key&call=revoke&customer_id=411
+		
+		//EMPLOYEES
+		EMPLOYEE411 = '1093888';
+		EMPLOYEE_VLAD = '8568';
+		EMPLOYEE_MWISE = '782882';
+		EMPLOYEE_AROSENBLUM='783586';
+		EMPLOYEE_CBERRIDGE='740013';
+		//EMPLOYEE_GILLESSHARGARY= '';
+		EMPLOYEE_IPRYSTUPA = '547990';
+		EMPLOYEE_EVOCANADA = '2559609';
+
+		EMPLOYEE_ACCOUNTING = '2864076';
+		
+		REP_Blended =  '780238';
+		REP_EVO =  '922444';
+		TORONTO_WEBSPECIALIST = '922444';
+		
+		
+		//BUILT IN ROLES
+		ROLE_OAC = '1067';
+		ROLE_OAC_MGR = '1072';
+		ROLE_ADMIN = '3';
+		ROLE_OAC_MTL = '1070';
+		ROLE_FINANCE = '1066';
+		ROLE_COLLECT = '1071';
+		ROLE_EST = '1073';
+		ROLE_OAC_MGR_ENH = '1075';
+		ROLE_OAC_MGR_MTL = '1074';
+		ROLE_RETENTION = '1076';
+				
+		FORM_CUST_OACMGR = '46';
+		FORM_CUST_OAC = '46';
+		FORM_CUST_FINANCE = '37';
+		FORM_CUST_COLLECTIONS= '31';
+		FORM_CUST_MTL = '46';
+
+		EVO_MAIN_COMPANY_ID = '1167868';
+		EVO_SALES_DEPARTMENT = '32';
+		COAUTO_MAIN_COMPANY_ID = '';
+		
+		greencheckmarkimage = 'https://system.sandbox.netsuite.com/core/media/media.nl?id=39505&c=579798&h=f8fc357276eef66a8aef';
+		
+		CUSTSTATUS_Active='1';
+		CUSTSTATUS_Warm='2';
+		CUSTSTATUS_Churned='3';
+
+		// ITEMS (Sandbox)
+		ITEM_VBO_DISCOUNT_Listing_Mobile_new = '711';
+		ITEM_VBO_DISCOUNT_Website_Mobile_new = '703';
+		ITEM_VBO_DISCOUNT_Website_Silver_new = '707';
+		
+		ITEM_VBO_DISCOUNT_Listing_Mobile_rec = '712';
+		ITEM_VBO_DISCOUNT_Website_Mobile_rec = '704';
+		ITEM_VBO_DISCOUNT_Website_Silver_rec = '708';
+		
+		ITEM_WEBSITEPACKAGE_Gold_new = '628';
+		ITEM_WEBSITEPACKAGE_Silver_new = '623';
+		ITEM_WEBSITEPACKAGE_Gold_recur = '604';
+		ITEM_WEBSITEPACKAGE_Silver_recur = '627';
+		ITEM_WEBSITEPACKAGE_Platinum_new = '630';
+		ITEM_WEBSITEPACKAGE_Platinum_recur = '631';
+		ITEM_WEBSITEPACKAGE_Copper_new = '';
+		ITEM_WEBSITEPACKAGE_Copper_recur = '';
+
+		ITEM_WEBSITE_site_InvokeToUpsell = '672';
+		ITEM_WEBSITE_site_Invoke60DayOptOut = '688';
+		ITEM_MOBILEWEBSITE_site_Invoke60DayOptOut = '689';
+		
+		ITEM_CUSTOMDISCOUNT = '512';
+		ITEM_DISCOUNT_WEBSITE_New = '654';
+		ITEM_DISCOUNT_WEBSITE_Recur = '655';
+		
+		ITEM_WEBSITE_site='632';
+		ITEM_WEBSITE_moreemail='621';
+		ITEM_WEBSITE_morepages='625';
+		
+		
+		ITEM_GOOGLE_ADS85_new= '673';
+		ITEM_GOOGLE_ADS135_new= '673';
+		ITEM_GOOGLE_ADS200_new= '673';
+		ITEM_GOOGLE_ADS300_new= '673';
+		ITEM_GOOGLE_ADS500_new= '673';
+		ITEM_GOOGLE_SETUPFEE= '684';
+		
+		ITEM_GOOGLE_ADS85_recur= '674';
+		ITEM_GOOGLE_ADS135_recur= '674';
+		ITEM_GOOGLE_ADS200_recur= '674';
+		ITEM_GOOGLE_ADS300_recur= '674';
+		ITEM_GOOGLE_ADS500_recur= '674';
+
+		ITEM_GOOGLE_ADBASIC_new='';
+		ITEM_GOOGLE_ADSTANDARD_new='';
+		ITEM_GOOGLE_ADEXTREME_new='';
+		ITEM_GOOGLE_ADADVANCED_new='';
+
+		ITEM_GOOGLE_ADBASIC_recur='';
+		ITEM_GOOGLE_ADSTANDARD_recur='';
+		ITEM_GOOGLE_ADEXTREME_recur='';
+		ITEM_GOOGLE_ADADVANCED_recur='';
+
+		ITEM_MOBILELISTINGS_EXPLORENATIONAL_new = '656';
+		ITEM_MOBILELISTINGS_EXPLOREPROVINCIAL_new = '658';
+		
+		ITEM_MOBILEWEBSITE_new='685';
+		ITEM_MOBILEWEBSITE_recur='686';
+
+		//LISTS
+		A9RPHONETYPE_PHONE = '1';
+		A9RPHONETYPE_TOLLFREE = '2';
+		A9RPHONETYPE_FAX = '3';
+		A9RPHONETYPE_CELL = '4';
+		
+		CALLSTATUS_Completed = 'COMPLETE';
+		CALLSTATUS_Scheduled = 'SCHEDULED';
+		
+		CAMPAIGN_WELCOME_EN = '1';
+		CAMPAIGN_WELCOME_FR = '8';
+		
+		CHURNCLASS_Realtime = '1';
+		CHURNCLASS_AR = '2';
+		CHURNCLASS_ChurnBacklog = '3';
+
+		COMMLANGUAGE_FRENCH = '2';
+		COMMLANGUAGE_ENGLISH = '1';
+		
+		CONTRACT_12  = '1';
+		CONTRACT_6  = '2';
+		CONTRACT_3  = '3';
+		CONTRACT_15  = '4';
+		CONTRACT_9  = '5';
+		CONTRACT_m2m  = '6';
+		CONTRACT_3m2m  = '7';								
+		CONTRACT_m2mjuly2012promo = '9';
+		CONTRACT_2 = '10';
+		
+	
+		ESTABLISHMENTSTATUS_Newsale = '5';
+		ESTABLISHMENTSTATUS_Assigned = '1';
+		ESTABLISHMENTSTATUS_InProgress = '2';
+		ESTABLISHMENTSTATUS_Established = '3';
+		ESTABLISHMENTSTATUS_Verified = '4';
+		
+		EXTROLE_Sales = '1';
+		EXTROLE_Provisioner = '2';
+		EXTROLE_Verifiers = '3';
+		EXTROLE_OAC = '4';
+		EXTROLE_WebsiteSpecialist = '5';
+		EXTROLE_Retention = '6';
+		EXTROLE_AR = '7';
+		EXTROLE_Collector = '8';
+		
+		WELCOMECALLSTATUS_READY= '8';
+		WELCOMECALLSTATUS_FOLLOWUP = '9';
+		WELCOMECALLSTATUS_ATTEMPT1 = '1';
+		WELCOMECALLSTATUS_ATTEMPT1VM = '2';
+		
+		LANGUAGE_ENGLISH = 'en_CA'; 
+		LANGUAGE_FRENCH = 'fr_FR'; 
+		
+		LOCATION_TORONTO = '2';
+		LOCATION_MONTREAL = '3'; 
+
+		LOGOSTATUS_Attached = '1';
+		LOGOSTATUS_Pending = '2';
+		LOGOSTATUS_OnFile = '3';
+		LOGOSTATUS_RetrieveFromWebsite = '4';
+		
+		LOGOTYPE_Pulled = '1';
+		LOGOTYPE_Email = '2';
+		LOGOTYPE_Created = '3';
+		LOGOTYPE_Stock = '4';
+		
+		PAYMENTTYPE_MonthlyCreditCard = '1';
+		PAYMENTTYPE_QuarterlyCreditCard = '2';
+		PAYMENTTYPE_SemiAnnualCreditCard = '3';
+		PAYMENTTYPE_AnnualCreditCard = '4';
+		PAYMENTTYPE_MonthlyInvoice = '5';
+		PAYMENTTYPE_QuarterlyInvoice = '6';
+		PAYMENTTYPE_SemiAnnualInvoice = '7';
+		PAYMENTTYPE_AnnualInvoice = '8';
+		PAYMENTTYPE_MonthlyPAP = '9';
+		PAYMENTTYPE_QuarterlyPAP = '10';
+		PAYMENTTYPE_SemiAnnualPAP = '11';
+		PAYMENTTYPE_AnnualPAP = '12';
+		PAYMENTTYPE_BiWeekly = '13';
+		PAYMENTTYPE_QuarterlyMonthlyCreditCard = '14';
+		PAYMENTTYPE_QuarterlyMonthlyInvoice = '15';
+		PAYMENTTYPE_QuarterlyMonthlyPAP = '16';
+		PAYMENTTYPE_COAUTOMonthlyInvoice = '17';
+		PAYMENTTYPE_EVOMonthlyInvoice = '18';
+		
+		PHONETYPE_PHONE = '1';
+		PHONETYPE_FAX = '2';
+		PHONETYPE_CELL = '3';
+		PHONETYPE_TOLLFREE = '4';
+
+		PROVINCE_QUEBEC = 'QC';		
+		
+		REPTYPE_Blended  = '1';
+		REPTYPE_Dedicated  = '2';
+			
+		RETENTIONDISP_Seasonal = '1';
+		RETENTIONDISP_BusClosed = '2';
+		RETENTIONDISP_10DaysRemorse = '3';
+		RETENTIONDISP_NoROI = '4';
+		RETENTIONDISP_NeverPaid = '5';
+		RETENTIONDISP_NoContact = '6';
+		RETENTIONDISP_SendTo3rdParty = '7';
+		RETENTIONDISP_EVO = '10';
+			
+		RETENTIONSTATUS_RequestToCancel = '1';
+		RETENTIONSTATUS_SentToRetention = '2';
+		RETENTIONSTATUS_InQueue= '9';
+		RETENTIONSTATUS_CompletedByAccounting = '8';
+	
+		RETENTIONFINALSTATUS_Saved = '1';
+		RETENTIONFINALSTATUS_RetainedWithChanges = '2';
+		RETENTIONFINALSTATUS_Cancelled = '3';
+		
+		RETENTIONOFFERDISPOSITIONS_Accepted = '1';
+		RETENTIONOFFERDISPOSITIONS_NotInterested = '2';
+		RETENTIONOFFERDISPOSITIONS_NotApplicable = '3';
+				
+		ARTEAM_TeamA = '1';
+		ARTEAM_TeamB = '2';
+		ARTEAM_TeamC = '5';
+		ARTEAM_TeamMontreal2= '6';
+		ARTEAM_TeamMontreal1 = '7';
+		
+		DECLINETYPE_CC = '1';
+		DECLINETYPE_PAP = '2';
+		
+		CC_STATUS_DECLINED='3';
+		CC_STATUS_APPROVED='2';
+		CC_STATUS_PENDING='1';
+		
+		SALESTYPE_New='3';
+		SALESTYPE_Renew='1';
+		SALESTYPE_Upsell='13';
+		
+		SUBSCRIPTION_SOFTIN = '1';
+		SUBSCRIPTION_SOFTOUT = '2';
+		SUBSCRIPTION_CONFIN = '3';
+		SUBSCRIPTION_CONFOUT = '4';
+				
+		STATUS_ClosedWon  = '13';
+		STATUS_Cancelled  = '111';
+		
+		TAXGROUP_CA_GST= '12';
+		TAXGROUP_CA_Zero = '13';
+		TAXGROUP_HST = '534';
+		TAXGROUP_CA_S_BC = '536';
+		TAXGROUP_CA_S_NS = '542';
+		TAXGROUP_QUE = '562';
+		TAXGROUP_CA_QUEBEC = '649';
+		TAXGROUP_CA_S_BC_5 = '672';
+		TAXGROUP_PEI = '681';
+		
+		VERTICALTYPES_SF = '1';
+		VERTICALTYPES_NoSF = '2';	
+		
+		VERTICAL_SF_Food = '1';
+		VERTICAL_SF_Digital = '2';
+		VERTICAL_SF_Auto = '3';
+		VERTICAL_SF_EventsFlowers = '4';
+		VERTICAL_SF_HealthBeauty = '5';
+		VERTICAL_SF_Other = '6';
+		VERTICAL_NoSF_Seasonal = '1';
+		VERTICAL_NoSF_NotSeasonal = '2';
+		VERTICAL_NoSF_HomeOffice = '3';
+		VERTICAL_NoSF_EventsPlanning = '4';
+		VERTICAL_NoSF_RealEstate = '5';
+		VERTICAL_NoSF_FinanceLegal = '6';
+		VERTICAL_NoSF_Other = '7';
+		
+		WEBSITEPACKAGE_Gold = '3';
+		WEBSITEPACKAGE_Silver = '2';
+		WEBSITEPACKAGE_Copper = '1';
+		WEBSITEPACKAGE_Platinum = '4';
+		
+		WEBSITEPUBSTATUS_Published = '1';
+		WEBSITEPUBSTATUS_NotPublished = '2';
+		WEBSITEPUBSTATUS_UnPublished = '3';
+		
+		WEBSITESALESCHAN_Sales = '2';
+		WEBSITESALESCHAN_InitialList = '1';
+		WEBSITESALESCHAN_OAC = '3';
+		WEBSITESALESCHAN_SelfServe = '4';
+		WEBSITESALESCHAN_OACUpSell = '5';
+		WEBSITESALESCHAN_AUTOINVOKE = '6';
+		
+		WEBSITEUPSELLSTATUS_Attempt = '1';
+		WEBSITEUPSELLSTATUS_Converted = '2';
+		WEBSITEUPSELLSTATUS_Lost = '3';
+		WEBSITEUPSELLSTATUS_60DayOptOut = '4';
+		
+		YESNO_Yes = '1';
+		YESNO_No = '2';
+
+		YESBASIC_Yes = '1';
+		YESBASIC_Basic = '2';
+	
+		//TEMPLATES
+		ADISREADY_MULTI_EN = '198';
+		ADISREADY_MULTI_FR = '204';
+		ADISREADY_SINGLE_EN = '199';
+		ADISREADY_SINGLE_FR = '205';
+		ADISREADY_MULTI_DED_EN = '196';
+		ADISREADY_MULTI_DED_FR = '200';
+		ADISREADY_SINGLE_DED_EN = '197';
+		ADISREADY_SINGLE_DED_FR = '203';
+		ADISREADY_MULTI_DED_EN_EVO = '245';
+		ADISREADY_MULTI_DED_FR_EVO = '246';
+		ADISREADY_SINGLE_DED_EN_EVO = '247';
+		ADISREADY_SINGLE_DED_FR_EVO = '248';
+		ADISREADY_MULTI_EN_EVO = '249';
+		ADISREADY_MULTI_FR_EVO = '250';
+		ADISREADY_SINGLE_EN_EVO = '251';
+		ADISREADY_SINGLE_FR_EVO = '252';
+		
+		BUSINESSCARDS_EN = '163';
+		BUSINESSCARDS_FR = '162';
+		BUSINESSCARDS_DED_EN = '161';
+		BUSINESSCARDS_DED_FR = '160';
+
+		REQUESTTOCANCEL_EN = '170';
+		REQUESTTOCANCEL_FR = '171';
+
+		TEMPLATE_WELCOME411_EN = '85';
+		TEMPLATE_WELCOME411_FR = '108';
+		
+		//EMAIL TEMPLATES FOR VERTICALS
+		VERTICALTEMPLATE_EN_SF_Food = '126';
+		VERTICALTEMPLATE_EN_SF_Digital = '127';
+		VERTICALTEMPLATE_EN_SF_Auto = '128';
+		VERTICALTEMPLATE_EN_SF_EventsFlowers = '129';
+		VERTICALTEMPLATE_EN_SF_HealthBeauty = '130';
+		VERTICALTEMPLATE_EN_SF_Other = '131';
+		VERTICALTEMPLATE_EN_NoSF_Seasonal = '133';
+		VERTICALTEMPLATE_EN_NoSF_NotSeasonal = '134';
+		VERTICALTEMPLATE_EN_NoSF_HomeOffice = '135';
+		VERTICALTEMPLATE_EN_NoSF_EventsPlanning = '136';
+		VERTICALTEMPLATE_EN_NoSF_RealEstate = '137';
+		VERTICALTEMPLATE_EN_NoSF_FinanceLegal = '138';
+		VERTICALTEMPLATE_EN_NoSF_Other = '132';
+		VERTICALTEMPLATE_FR_SF_Food = '148';
+		VERTICALTEMPLATE_FR_SF_Digital = '146';
+		VERTICALTEMPLATE_FR_SF_Auto = '151';
+		VERTICALTEMPLATE_FR_SF_EventsFlowers = '147';
+		VERTICALTEMPLATE_FR_SF_HealthBeauty = '149';
+		VERTICALTEMPLATE_FR_SF_Other = '150';
+		VERTICALTEMPLATE_FR_NoSF_Seasonal = '145';
+		VERTICALTEMPLATE_FR_NoSF_NotSeasonal = '142';
+		VERTICALTEMPLATE_FR_NoSF_HomeOffice = '141';
+		VERTICALTEMPLATE_FR_NoSF_EventsPlanning = '139';
+		VERTICALTEMPLATE_FR_NoSF_RealEstate = '144';
+		VERTICALTEMPLATE_FR_NoSF_FinanceLegal = '140';
+		VERTICALTEMPLATE_FR_NoSF_Other = '143';
+
+		//EMAIL TEMPLATES : TERMS AND CONDITIONS DAY 2
+		TCTEMPLATE_EN_Logo_Domain = '178';
+		TCTEMPLATE_FR_Logo_Domain = '179';
+		TCTEMPLATE_DEDREP_EN_Logo_Domain = '184';
+		TCTEMPLATE_DEDREP_FR_Logo_Domain = '185';
+		TCTEMPLATE_EN_Logo_NoWeb = '180';
+		TCTEMPLATE_FR_Logo_NoWeb = '181';
+		TCTEMPLATE_DEDREP_EN_Logo_NoWeb = '186';
+		TCTEMPLATE_DEDREP_FR_Logo_NoWeb = '187';
+		TCTEMPLATE_EN_Logo_Web = '182';
+		TCTEMPLATE_FR_Logo_Web = '183';
+		TCTEMPLATE_DEDREP_EN_Logo_Web = '188';
+		TCTEMPLATE_DEDREP_FR_Logo_Web = '189';
+		TCTEMPLATE_EN_NoLogo_Domain = '176';
+		TCTEMPLATE_FR_NoLogo_Domain = '177';
+		TCTEMPLATE_DEDREP_EN_NoLogo_Domain = '190';
+		TCTEMPLATE_DEDREP_FR_NoLogo_Domain = '191';
+		TCTEMPLATE_EN_NoLogo_NoWeb = '172';
+		TCTEMPLATE_FR_NoLogo_NoWeb = '173';
+		TCTEMPLATE_DEDREP_EN_NoLogo_NoWeb = '192';
+		TCTEMPLATE_DEDREP_FR_NoLogo_NoWeb = '193';
+		TCTEMPLATE_EN_NoLogo_Web = '174';
+		TCTEMPLATE_FR_NoLogo_Web = '175';
+		TCTEMPLATE_DEDREP_EN_NoLogo_Web = '194';
+		TCTEMPLATE_DEDREP_FR_NoLogo_Web = '195';
+		
+		//EMAIL TEMPLATES : WEBSITE DAY 6 
+		WEBSITEREADYTEMPLATE_EN_DOMAIN = '227';
+		WEBSITEREADYTEMPLATE_FR_DOMAIN = '228';
+		WEBSITEREADYTEMPLATE_DEDREP_EN_DOMAIN = '229';
+		WEBSITEREADYTEMPLATE_DEDREP_FR_DOMAIN = '230';
+		WEBSITEREADYTEMPLATE_EN_NODOMAIN = '231';
+		WEBSITEREADYTEMPLATE_FR_NODOMAIN = '232';
+		WEBSITEREADYTEMPLATE_DEDREP_EN_NODOMAIN = '233';
+		WEBSITEREADYTEMPLATE_DEDREP_FR_NODOMAIN = '234';
+		WEBSITEREADYTEMPLATE_EN_OPTOUT = '260';
+		WEBSITEREADYTEMPLATE_FR_OPTOUT = '260';
+		WEBSITEREADYTEMPLATE_DEDREP_EN_OPTOUT = '260';
+		WEBSITEREADYTEMPLATE_DEDREP_FR_OPTOUT = '260';
+		
+		//EMAIL TEMPLATES : GET A WEBSITE WEEK 10 
+		GETAWEBSITETEMPLATE_EN = '102';
+		GETAWEBSITETEMPLATE_FR = '116';
+		GETAWEBSITETEMPLATE_DEDREP_EN = '225';
+		GETAWEBSITETEMPLATE_DEDREP_FR = '226';
+	
+		//EMAIL TEMPLATES : OPT OUT FINAL NOTICE
+		OPTOUTNOTICETEMPLATE_EN = '261';
+		OPTOUTNOTICETEMPLATE_FR= '261';
+		OPTOUTNOTICETEMPLATE_DEDREP_EN= '261';
+		OPTOUTNOTICETEMPLATE_DEDREP_FR= '261';
+		
+		//EMAIL TEMPLATES : HAVE A WEBSITE... SEND SPONSORSHIP WEEK 10 
+		SPONSORSHIPTEMPLATE_EN = '235';
+		SPONSORSHIPTEMPLATE_FR = '237';
+		SPONSORSHIPTEMPLATE_DEDREP_EN = '236';
+		SPONSORSHIPTEMPLATE_DEDREP_FR = '238';
+
+		PAYMENT_CCEXPIRES_EN = '159';
+		PAYMENT_CCEXPIRES_FR = '169';
+
+		LATEPAYMENT_1DAY_EN = '';
+		LATEPAYMENT_1DAY_FR = '';
+		LATEPAYMENT_1DAY_DEDREP_EN = '';
+		LATEPAYMENT_1DAY_DEDREP_FR = '';
+		
+		LATEPAYMENT_30DAYS_EN = '';
+		LATEPAYMENT_30DAYS_FR = '';
+		LATEPAYMENT_30DAYS_DEDREP_EN = '';
+		LATEPAYMENT_30DAYS_DEDREP_FR = '';
+		
+		LATEPAYMENT_60DAYS_EN = '';
+		LATEPAYMENT_60DAYS_FR = '';
+		LATEPAYMENT_60DAYS_DEDREP_EN = '';
+		LATEPAYMENT_60DAYS_DEDREP_FR = '';
+		
+		LATEPAYMENT_90DAYS_EN = '';
+		LATEPAYMENT_90DAYS_FR = '';
+		LATEPAYMENT_90DAYS_DEDREP_EN = '';
+		LATEPAYMENT_90DAYS_DEDREP_FR = '';							
+
+		BUSCARDFOLLOWUP_EN = '167';
+		BUSCARDFOLLOWUP_FR = '168';
+		BUSCARDFOLLOWUP_DEDREP_EN = '164';
+		BUSCARDFOLLOWUP_DEDREP_FR = '166';
+		
+		MPPI_MSAVED='1';
+		MPPI_MSOLD='2';
+		MPPI_MLESS50='3';
+		MPPI_M5080='4';
+		MPPI_M80120='5';
+		MPPI_M120='6';
+		MPPI_M30='7';
+		MPPI_OSAVED='8';
+		MPPI_OSOLD='9';
+		MPPI_OLESS50='10';
+		MPPI_O5080='11';
+		MPPI_O80120='12';
+		MPPI_O120='13';
+		MPPI_O30='14';
+		MPPI_M20='15';
+		MPPI_O20='16';
+		MPPI_MSOLD2013='17';
+		MPPI_OSOLD2013='18';
+		
+		ITEM_MPPI_NEW = '652';
+		ITEM_MPPI_RECUR = '653';
+
+		DEPT_ADMIN='11';
+		DEPT_ACCOUNTING='14';
+		DEPT_HR='13';
+		DEPT_MGMT='12';
+		DEPT_CS='16';
+		DEPT_AR='17';
+		DEPT_OAC='31';
+		DEPT_PROV='18';
+		DEPT_RET='29';
+		DEPT_VER='3';
+		DEPT_WEB='27';
+		DEPT_DATA='10';
+		DEPT_PM='9';
+		DEPT_PMARK='15';
+		DEPT_MARKETING='24';
+		DEPT_PRODUCTS='25';
+		DEPT_RD='26';
+		DEPT_SALES='1';
+		DEPT_BAD='22';
+		DEPT_CHANNEL='6';
+		DEPT_INSIDE='2';
+		DEPT_CR='19';
+		DEPT_OUT='23';
+		DEPT_OUTSIDE='4';
+		DEPT_APPT='5';
+		DEPT_EVO='32';
+		DEPT_SALES='21';
+
+		PAYMENT_BYCREDITCARD = '1';
+		PAYMENT_BYCHEQUE = '2';
+		PAYMENT_ONLINE = '3';
+		
+		ARNOTIFICATION_DAY1_EN = '254';
+		ARNOTIFICATION_DAY1_FR = '254';
+		ARNOTIFICATION_DAY4_EN = '255';
+		ARNOTIFICATION_DAY4_FR = '257';
+		ARNOTIFICATION_DAY6_EN = '254';
+		ARNOTIFICATION_DAY6_FR = '254';
+		ARNOTIFICATION_DAY15_EN = '254';
+		ARNOTIFICATION_DAY15_FR = '254';
+		ARNOTIFICATION_DAY20_EN = '254';
+		ARNOTIFICATION_DAY20_FR = '254';
+		ARNOTIFICATION_DAY31_EN = '258';
+		ARNOTIFICATION_DAY31_FR = '259';
+		ARNOTIFICATION_DAY42_EN = '254';
+		ARNOTIFICATION_DAY42_FR = '254';
+		
+		PRINTFORM_Invoice='100';
+		
+		VISA_STATUS_new = '1';
+		VISA_STATUS_active = '2';
+		VISA_STATUS_deactivated = '3';
+
+		VISA_LOADSTATUS_new = '1';
+		VISA_LOADSTATUS_initialized = '2';
+		VISA_LOADSTATUS_loaded = '3';
+		
+		VISA_ENTITYTYPE_customer = '1';
+		VISA_ENTITYTYPE_employee = '2';
+		
+		ACCOUNT_12800_PrepaidExpenses = '140';
+		ACCOUNT_12850_PrepaidPromotion = '140';
+		ACCOUNT_60007_Advertising_Customers = '568';
+		ACCOUNT_66400_Promotion = '247';
+		
+		break;
+			
+	case 'PRODUCTION' :
+
+		//SERVERS
+		NETSUITE_URL = 'http://system.netsuite.com/';
+		NETSUITE_HOME = NETSUITE_URL + 'app/center/card.nl?sc=-29';
+		PATHTOCUSTOMER  = NETSUITE_URL + 'app/common/entity/custjob.nl?id=';
+		PATHTOEMPLOYEE  = NETSUITE_URL + 'app/common/entity/employee.nl?id=';
+		PATHTOSEARCH  = NETSUITE_URL + 'app/common/search/searchresults.nl?searchid=';
+		NETSUITECUSTOMER_411 = '441527';
+		
+		a9r_server = 'http://411.ca';
+		external_411ca_server = 'http://v2tools.411.ca';
+		external_411ca_ajax_server = 'http://frog.411.ca/nsi_v2';
+		api_key = 'e0b377066030db41bb7160f3ebc479fa';
+		ac_url = a9r_server+ '/ac/account-settings/business/';
+		ao_url = a9r_server+ '/ac/dashboard/business/';
+		ar_url = a9r_server+ '/ac/dashboard/business/'; 
+		business411_url = '/business/profile/'; 
+	
+		//STI_url='http://vscr1.veloxsites.com';
+		//STI_publish_website='/includes/411/actions/invoke.php?auth=';
+		//STI_revoke_website='/includes/411/actions/revoke.php?auth=';
+		//STI_auth_key='4de3655dc76b2';
+	
+		STI_url='http://411.ca';
+		STI_auth_key='4de3655dc76b2';
+		STI_publish_website='/api/website?key=' + api_key + '&call=invoke&customer_id=';
+		STI_revoke_website='/api/website?key=' + api_key + '&call=revoke&customer_id=';
+
+		
+		//EMPLOYEES
+		EMPLOYEE411 = '1461708';
+		EMPLOYEE_VLAD = '8568';
+		EMPLOYEE_MWISE = '782882';
+		EMPLOYEE_AROSENBLUM='783586';
+		EMPLOYEE_CBERRIDGE='740013';
+		EMPLOYEE_GILLESSHARGARY= '701871';
+		EMPLOYEE_IPRYSTUPA = '547990';
+		EMPLOYEE_EVOCANADA = '2559609';
+		
+		REP_Blended =  '780238';
+		REP_EVO =  '922444';
+		TORONTO_WEBSPECIALIST = '922444';
+		
+		//BUILT IN ROLES
+		ROLE_OAC = '1079';
+		ROLE_OAC_MGR = '1078';
+		ROLE_ADMIN = '3';
+		ROLE_OAC_MTL = '1084';
+		ROLE_FINANCE = '1080';
+		ROLE_COLLECT = '1081';
+		ROLE_EST = '1087';
+		ROLE_OAC_MGR_ENH = '1090';
+		ROLE_OAC_MGR_MTL = '1092';
+		ROLE_RETENTION = '1094';
+		
+		FORM_CUST_OACMGR = '41';
+		FORM_CUST_OAC = '52';
+		FORM_CUST_MTL = '54';
+		FORM_CUST_FINANCE = '48';
+		FORM_CUST_COLLECTIONS= '53';
+		
+		EVO_MAIN_COMPANY_ID = '2055665';
+		EVO_SALES_DEPARTMENT = '29';
+		COAUTO_MAIN_COMPANY_ID = '1925693';
+		
+		greencheckmarkimage = 'https://system.netsuite.com/core/media/media.nl?id=133034&c=579798&h=760ec4f8235d57d8cb9e';
+		
+		CUSTSTATUS_Active='1';
+		CUSTSTATUS_Warm='2';
+		CUSTSTATUS_Churned='3';
+
+		ARTEAM_TeamA = '1';
+		ARTEAM_TeamB = '2';
+		ARTEAM_TeamC = '3';
+		ARTEAM_TeamMontreal2 = '4';
+		ARTEAM_TeamMontreal1 = '5';
+		
+		DECLINETYPE_CC = '1';
+		DECLINETYPE_PAP = '2';
+		
+		CC_STATUS_DECLINED='3';
+		CC_STATUS_APPROVED='2';
+		CC_STATUS_PENDING='1';
+		
+		
+		//ITEMS
+		ITEM_WEBSITEPACKAGE_Gold_new = '558';
+		ITEM_WEBSITEPACKAGE_Silver_new = '557';
+		ITEM_WEBSITEPACKAGE_Gold_recur = '603';
+		ITEM_WEBSITEPACKAGE_Silver_recur = '604';
+		ITEM_WEBSITEPACKAGE_Platinum_new = '605';
+		ITEM_WEBSITEPACKAGE_Platinum_recur = '606';
+		ITEM_WEBSITEPACKAGE_Copper_new = '571';
+		ITEM_WEBSITEPACKAGE_Copper_recur = '602';
+		
+		ITEM_CUSTOMDISCOUNT = '512';
+		ITEM_DISCOUNT_WEBSITE_New = '650';
+		ITEM_DISCOUNT_WEBSITE_Recur = '651';
+		
+		ITEM_WEBSITE_site='615';
+		ITEM_WEBSITE_moreemail='617';
+		ITEM_WEBSITE_morepages='619';
+		
+		ITEM_WEBSITE_site_InvokeToUpsell = '682';
+		ITEM_WEBSITE_site_Invoke60DayOptOut = '';
+		ITEM_MOBILEWEBSITE_site_Invoke60DayOptOut = '';
+		
+		ITEM_GOOGLE_ADS85_new= '607';
+		ITEM_GOOGLE_ADS135_new= '608';
+		ITEM_GOOGLE_ADS200_new= '609';
+		ITEM_GOOGLE_ADS300_new= '611';
+		ITEM_GOOGLE_ADS500_new= '613';
+		ITEM_GOOGLE_SETUPFEE= '614';
+		
+		ITEM_GOOGLE_ADS85_recur= '639';
+		ITEM_GOOGLE_ADS135_recur= '635';
+		ITEM_GOOGLE_ADS200_recur= '636';
+		ITEM_GOOGLE_ADS300_recur= '637';
+		ITEM_GOOGLE_ADS500_recur= '638';
+
+		ITEM_GOOGLE_ADBASIC_new='687';
+		ITEM_GOOGLE_ADSTANDARD_new='689';
+		ITEM_GOOGLE_ADEXTREME_new='691';
+		ITEM_GOOGLE_ADADVANCED_new='693';
+
+		ITEM_GOOGLE_ADBASIC_recur='688';
+		ITEM_GOOGLE_ADSTANDARD_recur='690';
+		ITEM_GOOGLE_ADEXTREME_recur='692';
+		ITEM_GOOGLE_ADADVANCED_recur='694';
+
+		ITEM_MOBILEWEBSITE_new='683';
+		ITEM_MOBILEWEBSITE_recur='684';
+
+		ITEM_MOBILELISTINGS_EXPLORENATIONAL_new = '662';
+		ITEM_MOBILELISTINGS_EXPLORENATIONAL_recur = '668';
+		ITEM_MOBILELISTINGS_EXPLOREPROVINCIAL_new = '661';
+		ITEM_MOBILELISTINGS_EXPLOREPROVINCIAL_recur = '669';
+		ITEM_MOBILELISTINGS_NATSPONSOR_DESKTOP_new = '660';
+		ITEM_MOBILELISTINGS_NATSPONSOR_DESKTOP_recur = '670';
+		ITEM_MOBILELISTINGS_NATSPONSOR_NODESKTOP_new = '663';
+		ITEM_MOBILELISTINGS_NATSPONSOR_NODESKTOP_recur = '671';
+		ITEM_MOBILELISTINGS_PROVSPONSOR_DESKTOP_new = '658';
+		ITEM_MOBILELISTINGS_PROVSPONSOR_DESKTOP_recur = '666';
+		ITEM_MOBILELISTINGS_PROVSPONSOR_NODESKTOP_new = '659';
+		ITEM_MOBILELISTINGS_PROVSPONSOR_NODESKTOP_recur = '667';
+		ITEM_MOBILELISTINGS_DESKTOP_new = '654';
+		ITEM_MOBILELISTINGS_DESKTOP_recur = '664';
+		ITEM_MOBILELISTINGS_NODESKTOP_new = '655';
+		ITEM_MOBILELISTINGS_NODESKTOP_recur = '665';
+		ITEM_MPPI_NEW = '652';
+		ITEM_MPPI_RECUR = '653';
+
+		//LISTS
+		A9RPHONETYPE_PHONE = '1';
+		A9RPHONETYPE_TOLLFREE = '2';
+		A9RPHONETYPE_FAX = '3';
+		A9RPHONETYPE_CELL = '4';
+		
+		CALLSTATUS_Completed = 'COMPLETE';
+		CALLSTATUS_Scheduled = 'SCHEDULED';
+		
+		CAMPAIGN_WELCOME_EN = '3';
+		CAMPAIGN_WELCOME_FR = '9';
+		
+		COMMLANGUAGE_FRENCH = '2';
+		COMMLANGUAGE_ENGLISH = '1';
+		
+		CHURNCLASS_Realtime = '1';
+		CHURNCLASS_AR = '2';
+		CHURNCLASS_ChurnBacklog = '3';
+		
+		CONTRACT_12  = '1';
+		CONTRACT_6  = '2';
+		CONTRACT_3  = '3';
+		CONTRACT_15  = '4';
+		CONTRACT_9  = '5';
+		CONTRACT_m2m  = '6';
+		CONTRACT_3m2m  = '7';								
+		CONTRACT_m2mjuly2012promo = '9';
+		CONTRACT_2 = '10';
+		
+		ESTABLISHMENTSTATUS_Newsale = '1';
+		ESTABLISHMENTSTATUS_Assigned = '2';
+		ESTABLISHMENTSTATUS_InProgress = '3';
+		ESTABLISHMENTSTATUS_Established = '4';
+		ESTABLISHMENTSTATUS_Verified = '5';
+		
+		EXTROLE_Sales = '1';
+		EXTROLE_Provisioner = '2';
+		EXTROLE_Verifiers = '3';
+		EXTROLE_OAC = '4';
+		EXTROLE_WebsiteSpecialist = '5';
+		EXTROLE_Retention = '6';
+		EXTROLE_AR = '7';
+		EXTROLE_Collector = '8';
+
+		LANGUAGE_ENGLISH = 'en_CA'; 
+		LANGUAGE_FRENCH = 'fr_FR'; 
+		
+		LOCATION_TORONTO = '2';
+		LOCATION_MONTREAL = '3'; 
+
+		LOGOSTATUS_Attached = '1';
+		LOGOSTATUS_Pending = '2';
+		LOGOSTATUS_OnFile = '3';
+		LOGOSTATUS_RetrieveFromWebsite = '4';
+		
+		LOGOTYPE_Pulled = '1';
+		LOGOTYPE_Email = '2';
+		LOGOTYPE_Created = '3';
+		LOGOTYPE_Stock = '4';
+		
+		PAYMENTTYPE_MonthlyCreditCard = '1';
+		PAYMENTTYPE_QuarterlyCreditCard = '2';
+		PAYMENTTYPE_SemiAnnualCreditCard = '3';
+		PAYMENTTYPE_AnnualCreditCard = '4';
+		PAYMENTTYPE_MonthlyInvoice = '5';
+		PAYMENTTYPE_QuarterlyInvoice = '6';
+		PAYMENTTYPE_SemiAnnualInvoice = '7';
+		PAYMENTTYPE_AnnualInvoice = '8';
+		PAYMENTTYPE_MonthlyPAP = '9';
+		PAYMENTTYPE_QuarterlyPAP = '10';
+		PAYMENTTYPE_SemiAnnualPAP = '11';
+		PAYMENTTYPE_AnnualPAP = '12';
+		PAYMENTTYPE_BiWeekly = '13';
+		PAYMENTTYPE_QuarterlyMonthlyCreditCard = '14';
+		PAYMENTTYPE_QuarterlyMonthlyInvoice = '15';
+		PAYMENTTYPE_QuarterlyMonthlyPAP = '16';							
+		PAYMENTTYPE_COAUTOMonthlyInvoice = '17';
+		PAYMENTTYPE_EVOMonthlyInvoice = '18';
+		
+		PHONETYPE_PHONE = '1';
+		PHONETYPE_FAX = '2';
+		PHONETYPE_CELL = '3';
+		PHONETYPE_TOLLFREE = '4';
+		
+		PROVINCE_QUEBEC = 'QC';		
+		
+		REPTYPE_Blended  = '1';
+		REPTYPE_Dedicated  = '2';
+		
+		RETENTIONDISP_Seasonal = '1';
+		RETENTIONDISP_BusClosed = '2';
+		RETENTIONDISP_10DaysRemorse = '3';
+		RETENTIONDISP_NoROI = '4';
+		RETENTIONDISP_NeverPaid = '5';
+		RETENTIONDISP_NoContact = '6';
+		RETENTIONDISP_SendTo3rdParty = '9';
+		RETENTIONDISP_EVO = '10';
+		
+		RETENTIONSTATUS_RequestToCancel = '1';
+		RETENTIONSTATUS_SentToRetention = '2';
+		RETENTIONSTATUS_InQueue= '9';
+		RETENTIONSTATUS_CompletedByAccounting = '8';
+
+		RETENTIONFINALSTATUS_Saved = '1';
+		RETENTIONFINALSTATUS_RetainedWithChanges = '2';
+		RETENTIONFINALSTATUS_Cancelled = '3';
+		
+		SALESTYPE_New='3';
+		SALESTYPE_Renew='1';
+		SALESTYPE_Upsell='13';
+		
+		SUBSCRIPTION_SOFTIN = '1';
+		SUBSCRIPTION_SOFTOUT = '2';
+		SUBSCRIPTION_CONFIN = '3';
+		SUBSCRIPTION_CONFOUT = '4';
+		
+		STATUS_ClosedWon  = '13';
+		STATUS_Cancelled  = '111';		
+		
+		TAXGROUP_CA_GST= '12';
+		TAXGROUP_CA_Zero = '13';
+		TAXGROUP_HST = '534';
+		TAXGROUP_CA_S_BC = '536';
+		TAXGROUP_CA_S_NS = '542';
+		TAXGROUP_QUE = '562';
+		TAXGROUP_CA_QUEBEC = '649';
+		TAXGROUP_CA_S_BC_5 = '672';
+		TAXGROUP_PEI = '681'; 
+		
+		VERTICALTYPES_SF = '1';
+		VERTICALTYPES_NoSF = '2';	
+		
+		VERTICAL_SF_Food = '1';
+		VERTICAL_SF_Digital = '2';
+		VERTICAL_SF_Auto = '3';
+		VERTICAL_SF_EventsFlowers = '4';
+		VERTICAL_SF_HealthBeauty = '5';
+		VERTICAL_SF_Other = '6';
+		VERTICAL_NoSF_Seasonal = '1';
+		VERTICAL_NoSF_NotSeasonal = '2';
+		VERTICAL_NoSF_HomeOffice = '3';
+		VERTICAL_NoSF_EventsPlanning = '4';
+		VERTICAL_NoSF_RealEstate = '5';
+		VERTICAL_NoSF_FinanceLegal = '6';
+		VERTICAL_NoSF_Other = '7';
+		
+		WEBSITEPACKAGE_Gold = '3';
+		WEBSITEPACKAGE_Silver = '2';
+		WEBSITEPACKAGE_Platinum = '4';
+		WEBSITEPACKAGE_Copper = '1';
+		
+		WEBSITEPUBSTATUS_Published = '1';
+		WEBSITEPUBSTATUS_NotPublished = '2';
+		WEBSITEPUBSTATUS_UnPublished = '3';
+		
+		WEBSITESALESCHAN_Sales = '2';
+		WEBSITESALESCHAN_InitialList = '1';
+		WEBSITESALESCHAN_OAC = '3';
+		WEBSITESALESCHAN_SelfServe = '4';
+		WEBSITESALESCHAN_OACUpSell = '5';
+		WEBSITESALESCHAN_AUTOINVOKE = '6';
+		
+		WEBSITEUPSELLSTATUS_Attempt = '1';
+		WEBSITEUPSELLSTATUS_Converted = '2';
+		WEBSITEUPSELLSTATUS_Lost = '3';
+		WEBSITEUPSELLSTATUS_60DayOptOut = '4';
+		
+		YESNO_Yes = '1';
+		YESNO_No = '2';
+		
+		YESBASIC_Yes = '1';
+		YESBASIC_Basic = '2';
+	
+		//TEMPLATES
+		ADISREADY_MULTI_EN = '302';
+		ADISREADY_MULTI_FR = '303';
+		ADISREADY_SINGLE_EN = '304';
+		ADISREADY_SINGLE_FR = '305';
+		ADISREADY_MULTI_DED_EN = '298';
+		ADISREADY_MULTI_DED_FR = '299';
+		ADISREADY_SINGLE_DED_EN = '300';
+		ADISREADY_SINGLE_DED_FR = '301';
+		ADISREADY_MULTI_DED_EN_EVO = '371';
+		ADISREADY_MULTI_DED_FR_EVO = '372';
+		ADISREADY_SINGLE_DED_EN_EVO = '373';
+		ADISREADY_SINGLE_DED_FR_EVO = '374';
+		ADISREADY_MULTI_EN_EVO = '375';
+		ADISREADY_MULTI_FR_EVO = '376';
+		ADISREADY_SINGLE_EN_EVO = '377';
+		ADISREADY_SINGLE_FR_EVO = '378';
+		
+		BUSINESSCARDS_EN = '203';
+		BUSINESSCARDS_FR = '246';
+		BUSINESSCARDS_DED_EN = '247';
+		BUSINESSCARDS_DED_FR = '248';
+
+		REQUESTTOCANCEL_EN = '142';
+		REQUESTTOCANCEL_FR = '312';
+
+		TEMPLATE_WELCOME411_EN = '143';
+		TEMPLATE_WELCOME411_FR = '160';
+		
+		//EMAIL TEMPLATES : TERMS AND CONDITIONS
+		TCTEMPLATE_EN_Logo_Domain = '144';
+		TCTEMPLATE_FR_Logo_Domain = '274';
+		TCTEMPLATE_DEDREP_EN_Logo_Domain = '275';
+		TCTEMPLATE_DEDREP_FR_Logo_Domain = '276';
+		TCTEMPLATE_EN_Logo_NoWeb = '277';
+		TCTEMPLATE_FR_Logo_NoWeb = '278';
+		TCTEMPLATE_DEDREP_EN_Logo_NoWeb = '279';
+		TCTEMPLATE_DEDREP_FR_Logo_NoWeb = '280';
+		TCTEMPLATE_EN_Logo_Web = '281';
+		TCTEMPLATE_FR_Logo_Web = '282';
+		TCTEMPLATE_DEDREP_EN_Logo_Web = '283';
+		TCTEMPLATE_DEDREP_FR_Logo_Web = '284';
+		TCTEMPLATE_EN_NoLogo_Domain = '285';
+		TCTEMPLATE_FR_NoLogo_Domain = '286';
+		TCTEMPLATE_DEDREP_EN_NoLogo_Domain = '287';
+		TCTEMPLATE_DEDREP_FR_NoLogo_Domain = '288';
+		TCTEMPLATE_EN_NoLogo_NoWeb = '289';
+		TCTEMPLATE_FR_NoLogo_NoWeb = '290';
+		TCTEMPLATE_DEDREP_EN_NoLogo_NoWeb = '291';
+		TCTEMPLATE_DEDREP_FR_NoLogo_NoWeb = '292';
+		TCTEMPLATE_EN_NoLogo_Web = '294';
+		TCTEMPLATE_FR_NoLogo_Web = '295';
+		TCTEMPLATE_DEDREP_EN_NoLogo_Web = '296';
+		TCTEMPLATE_DEDREP_FR_NoLogo_Web = '297';
+															
+		//EMAIL TEMPLATES : WEBSITE DAY 6 
+		WEBSITEREADYTEMPLATE_EN_DOMAIN = '148';
+		WEBSITEREADYTEMPLATE_FR_DOMAIN = '165';
+		WEBSITEREADYTEMPLATE_DEDREP_EN_DOMAIN = '315';
+		WEBSITEREADYTEMPLATE_DEDREP_FR_DOMAIN = '316';
+		WEBSITEREADYTEMPLATE_EN_NODOMAIN = '317';
+		WEBSITEREADYTEMPLATE_FR_NODOMAIN = '318';
+		WEBSITEREADYTEMPLATE_DEDREP_EN_NODOMAIN = '319';
+		WEBSITEREADYTEMPLATE_DEDREP_FR_NODOMAIN = '320';
+
+		WEBSITEREADYTEMPLATE_EN_OPTOUT = '';
+		WEBSITEREADYTEMPLATE_FR_OPTOUT = '';
+		WEBSITEREADYTEMPLATE_DEDREP_EN_OPTOUT = '';
+		WEBSITEREADYTEMPLATE_DEDREP_FR_OPTOUT = '';
+	
+		
+		//EMAIL TEMPLATES : GET A WEBSITE WEEK 10 
+		GETAWEBSITETEMPLATE_EN = '158';
+		GETAWEBSITETEMPLATE_FR = '175';
+		GETAWEBSITETEMPLATE_DEDREP_EN = '336';
+		GETAWEBSITETEMPLATE_DEDREP_FR = '337';
+		
+		//EMAIL TEMPLATES : HAVE A WEBSITE... SEND SPONSORSHIP WEEK 10 
+		SPONSORSHIPTEMPLATE_EN = '338';
+		SPONSORSHIPTEMPLATE_FR = '339';
+		SPONSORSHIPTEMPLATE_DEDREP_EN = '340';
+		SPONSORSHIPTEMPLATE_DEDREP_FR = '341';
+
+		//EMAIL TEMPLATES : OPT OUT FINAL NOTICE
+		OPTOUTNOTICETEMPLATE_EN = '';
+		OPTOUTNOTICETEMPLATE_FR= '';
+		OPTOUTNOTICETEMPLATE_DEDREP_EN= '';
+		OPTOUTNOTICETEMPLATE_DEDREP_FR= '';
+
+		//EMAIL TEMPLATES FOR VERTICALS
+		VERTICALTEMPLATE_EN_SF_Food = '195';
+		VERTICALTEMPLATE_EN_SF_Digital = '191';
+		VERTICALTEMPLATE_EN_SF_Auto = '201';
+		VERTICALTEMPLATE_EN_SF_EventsFlowers = '193';
+		VERTICALTEMPLATE_EN_SF_HealthBeauty = '197';
+		VERTICALTEMPLATE_EN_SF_Other = '199';
+		VERTICALTEMPLATE_EN_NoSF_Seasonal = '189';
+		VERTICALTEMPLATE_EN_NoSF_NotSeasonal = '183';
+		VERTICALTEMPLATE_EN_NoSF_HomeOffice = '181';
+		VERTICALTEMPLATE_EN_NoSF_EventsPlanning = '177';
+		VERTICALTEMPLATE_EN_NoSF_RealEstate = '187';
+		VERTICALTEMPLATE_EN_NoSF_FinanceLegal = '179';
+		VERTICALTEMPLATE_EN_NoSF_Other = '185';
+		VERTICALTEMPLATE_FR_SF_Food = '196';
+		VERTICALTEMPLATE_FR_SF_Digital = '192';
+		VERTICALTEMPLATE_FR_SF_Auto = '202';
+		VERTICALTEMPLATE_FR_SF_EventsFlowers = '194';
+		VERTICALTEMPLATE_FR_SF_HealthBeauty = '198';
+		VERTICALTEMPLATE_FR_SF_Other = '200';
+		VERTICALTEMPLATE_FR_NoSF_Seasonal = '190';
+		VERTICALTEMPLATE_FR_NoSF_NotSeasonal = '184';
+		VERTICALTEMPLATE_FR_NoSF_HomeOffice = '182';
+		VERTICALTEMPLATE_FR_NoSF_EventsPlanning = '178';
+		VERTICALTEMPLATE_FR_NoSF_RealEstate = '188';
+		VERTICALTEMPLATE_FR_NoSF_FinanceLegal = '180';
+		VERTICALTEMPLATE_FR_NoSF_Other = '186';
+
+		PAYMENT_CCEXPIRES_EN = '206';
+		PAYMENT_CCEXPIRES_FR = '229';
+
+		LATEPAYMENT_1DAY_EN = '207';
+		LATEPAYMENT_1DAY_FR = '231';
+		LATEPAYMENT_1DAY_DEDREP_EN = '212';
+		LATEPAYMENT_1DAY_DEDREP_FR = '230';
+		
+		LATEPAYMENT_30DAYS_EN = '233';
+		LATEPAYMENT_30DAYS_FR = '234';
+		LATEPAYMENT_30DAYS_DEDREP_EN = '208';
+		LATEPAYMENT_30DAYS_DEDREP_FR = '232';
+		
+		LATEPAYMENT_60DAYS_EN = '209';
+		LATEPAYMENT_60DAYS_FR = '235';
+		LATEPAYMENT_60DAYS_DEDREP_EN = '237';
+		LATEPAYMENT_60DAYS_DEDREP_FR = '238';
+		
+		LATEPAYMENT_90DAYS_EN = '210';
+		LATEPAYMENT_90DAYS_FR = '236';
+		LATEPAYMENT_90DAYS_DEDREP_EN = '239';
+		LATEPAYMENT_90DAYS_DEDREP_FR = '240';							
+
+		BUSCARDFOLLOWUP_EN = '204';
+		BUSCARDFOLLOWUP_FR = '249';
+		BUSCARDFOLLOWUP_DEDREP_EN = '250';
+		BUSCARDFOLLOWUP_DEDREP_FR = '251';
+
+		MPPI_MSAVED='1';
+		MPPI_MSOLD='2';
+		MPPI_MLESS50='3';
+		MPPI_M5080='4';
+		MPPI_M80120='5';
+		MPPI_M120='6';
+		MPPI_M30='7';
+		MPPI_OSAVED='8';
+		MPPI_OSOLD='9';
+		MPPI_OLESS50='10';
+		MPPI_O5080='11';
+		MPPI_O80120='12';
+		MPPI_O120='13';
+		MPPI_O30='14';
+		MPPI_M20='15';
+		MPPI_O20='16';
+		MPPI_MSOLD2013='17';
+		MPPI_OSOLD2013='18';
+		
+		DEPT_ADMIN='11';
+		DEPT_ACCOUNTING='14';
+		DEPT_HR='13';
+		DEPT_MGMT='12';
+		DEPT_CS='16';
+		DEPT_AR='17';
+		DEPT_OAC='31';
+		DEPT_PROV='18';
+		DEPT_RET='29';
+		DEPT_VER='3';
+		DEPT_WEB='27';
+		DEPT_DATA='10';
+		DEPT_PM='9';
+		DEPT_PMARK='15';
+		DEPT_MARKETING='24';
+		DEPT_PRODUCTS='25';
+		DEPT_RD='26';
+		DEPT_SALES='1';
+		DEPT_BAD='22';
+		DEPT_CHANNEL='6';
+		DEPT_INSIDE='2';
+		DEPT_CR='19';
+		DEPT_OUT='23';
+		DEPT_OUTSIDE='4';
+		DEPT_APPT='5';
+		DEPT_EVO='32';
+		DEPT_SALES='21';
+
+		PAYMENT_BYCREDITCARD = '1';
+		PAYMENT_BYCHEQUE = '2';
+		PAYMENT_ONLINE = '3';
+		
+		
+		ARNOTIFICATION_DAY1_EN = '409';
+		ARNOTIFICATION_DAY1_FR = '410';
+		ARNOTIFICATION_DAY4_EN = '428';
+		ARNOTIFICATION_DAY4_FR = '429';
+		ARNOTIFICATION_DAY6_EN = '411';
+		ARNOTIFICATION_DAY6_FR = '412';
+		ARNOTIFICATION_DAY6_EN = '411';
+		ARNOTIFICATION_DAY6_FR = '412';
+		ARNOTIFICATION_DAY15_EN = '413';
+		ARNOTIFICATION_DAY15_FR = '414';
+		ARNOTIFICATION_DAY20_EN = '415';
+		ARNOTIFICATION_DAY20_FR = '416';
+		ARNOTIFICATION_DAY31_EN = '417';
+		ARNOTIFICATION_DAY31_FR = '418';
+		ARNOTIFICATION_DAY42_EN = '419';
+		ARNOTIFICATION_DAY42_FR = '420';
+		
+		PRINTFORM_Invoice='100';
+		
+		VISA_STATUS_new = '1';
+		VISA_STATUS_active = '2';
+		VISA_STATUS_deactivated = '3';
+
+		VISA_LOADSTATUS_new = '1';
+		VISA_LOADSTATUS_initialized = '2';
+		VISA_LOADSTATUS_loaded = '3';
+		
+		VISA_ENTITYTYPE_customer = '1';
+		VISA_ENTITYTYPE_employee = '2';
+
+		ACCOUNT_12800_PrepaidExpenses = '140';
+		ACCOUNT_12850_PrepaidPromotion = '588';
+		ACCOUNT_60007_Advertising_Customers = '587';
+		ACCOUNT_66400_Promotion = '247';
+		
+		break;			 
+	}	
+}
+
+
+function getDateofFirstOrder(customerid) {
+
+	var searchresults = null;
+	try {
+		var customers = new Array(customerid);
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter('internalid', null, 'anyof',	customers);
+
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('firstorderdate');
+		searchresults = nlapiSearchRecord('customer', null, filters, columns);
+	} catch (e) {
+		nlapiLogExecution('Error', ' getInternalID Search failed', e.getDetails());
+		return 0;
+	}
+	if (searchresults != null) {
+		if (searchresults.length == 1) {
+			var result = searchresults[0];
+			return result.getValue('firstorderdate');
+		}
+	}
+	return null;
+
+}
+
+function getFinancialHistory(customerInternalId) {
+
+	var searchresults = null;
+	
+	try {
+		var customers = new Array(customerInternalId);
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter('internalid', null, 'anyof',	customers);
+		filters[1] = new nlobjSearchFilter("recordtype", "transaction", "is", "customerpayment");
+		filters[2] = new nlobjSearchFilter("mainline", "transaction", "is", "T");
+
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('firstorderdate', null, "group");
+		columns[1] = new nlobjSearchColumn('lastorderdate', null, "group");
+		columns[2] = new nlobjSearchColumn("entityid", null, "group");
+
+		columns[3] = new nlobjSearchColumn("totalamount", "transaction", "min");
+		columns[4] = new nlobjSearchColumn("totalamount", "transaction", "max");
+		
+		columns[5] = new nlobjSearchColumn("trandate", "transaction", "min");
+		columns[6] = new nlobjSearchColumn("trandate", "transaction", "max");
+		
+		columns[7] = new nlobjSearchColumn("totalamount", "transaction", "avg");
+		columns[8] = new nlobjSearchColumn("internalid", "transaction", "count");
+		columns[9] = new nlobjSearchColumn("totalamount", "transaction", "sum");
+
+		searchresults = nlapiSearchRecord('customer', null, filters, columns);
+		
+		if (searchresults != null) {
+			if (searchresults.length == 1) {
+				var result = searchresults[0];
+			
+				var financialHistory = {
+					'firstOrderDate': result.getValue(columns[0]),
+					'lastOrderDate': result.getValue(columns[1]),
+				
+					'minPaymentAmount': result.getValue(columns[3]),
+					'maxPaymentAmount': result.getValue(columns[4]),
+				
+					'firstPaymentDate': result.getValue(columns[5]),
+					'lastPaymentDate': result.getValue(columns[6]),
+				
+					'avgPaymentAmount': result.getValue(columns[7]),
+					'numOfPayments': result.getValue(columns[8]),
+					'totalPaymentAmount': result.getValue(columns[9])
+				};
+			
+				return financialHistory;
+			}
+		}
+	
+	} catch (e) {
+		nlapiLogExecution("Error", "getFinancialHistory " + customerInternalId, e);
+	}
+	
+	return null;
+}
+
+function tenureLabel(tenure){
+	var label ='';
+	if (tenure==1){
+		label = 'approx. 1 Month';
+	}
+	else {
+		if (tenure<12){
+			label = 'approx. ' + tenure + ' Months';
+		}
+		else {
+			if (tenure==12){
+				label = 'approx 1 Year';
+			}
+			else {
+				if (tenure==13){
+					label = 'approx 1 Year & 1 Month';
+				}
+				else {
+					if (tenure>13&&tenure<24){
+						tenure = tenure - 12;
+						label = 'approx 1 Year & ' + tenure + ' Months';
+					}
+					else {
+						label = '2 Years (or more)';
+					}
+				}
+			}
+		}
+	}
+	return label;		
+}
+
+
+function getMPPIPrice(mppi_bucket){
+	switch (mppi_bucket){
+	case '1'	: 
+		return 0;
+		break;
+	case '2'	: 
+		return 15;
+		break;
+	case '3'	: 
+		return 0;
+		break;
+	case '4'	: 
+		return 5;
+		break;
+	case '5'	: 
+		return 5;
+		break;
+	case '6'	: 
+		return 20;
+		break;
+	case '7'	: 
+		return 0;
+		break;
+	case '8'	: 
+		return 0;
+		break;
+	case '9'	: 
+		return 20;
+		break;
+	case '10'	: 
+		return 10;
+		break;
+	case '11'	: 
+		return 20;
+		break;
+	case '12'	: 
+		return 20;
+		break;
+	case '13'	: 
+		return 20;
+		break;
+	case '14'	: 
+		return 20;
+		break;
+	case '15'	: 
+		return 20;
+		break;
+	case '16'	: 
+		return 20;
+		break;
+	}
+}
+
+
+function getBusinessProfile(custpl){
+	nlapiLogExecution("Debug", "Call A9R: Get Business Profile: "+ custpl , "Start" );	
+	initialize();
+	var loopcontrol = 1;
+	while (loopcontrol <=4){
+		try {
+			var response = nlapiRequestURL( a9r_server+'/api/ns-profile-info?key='+api_key+'&id='+custpl );
+			nlapiLogExecution("Debug", "Call 411: NS Profile" , a9r_server+'/api/ns-profile-info?key='+api_key+'&id='+custpl );
+			var result_st = response.getBody();
+		 	loopcontrol = 4;
+		 	var myArray = eval("[" + result_st + "]");  
+			var profile;
+			nlapiLogExecution("Debug", "Call 411: Get Business Profile" , custpl+ " RESULTS: "+result_st );	
+			if (myArray[0].result=='fail') {
+				nlapiLogExecution("System", "Profile not found on 411: "+ custpl, myArray[0].message );
+				profile = new Array();
+				profile['notfound']=true;
+				return profile;		
+			}
+			if (myArray[0].result=='ok') {
+				var profile_st = myArray[0].profile;
+				profile = eval(profile_st );
+				return profile;
+			}
+		}
+		catch (e)
+		{
+			//nlapiLogExecution("Error", "Trap for e", e);
+			if (e=='SyntaxError: missing ] after element list') {
+				loopcontrol = loopcontrol+1;					
+				if (loopcontrol<4){
+					nlapiLogExecution("System", "getBusinessProfile failed, connection timed out, retrying..., for "+ custpl , e);	
+				}
+				else{
+					nlapiLogExecution("System", "getBusinessProfile failed, connection timed out for "+ custpl , e);		
+					profile = new Array();
+					profile['timedout']=true;		
+					return profile;
+				}
+			}
+			else {
+				if (e.getCode()=='SSS_REQUEST_TIME_EXCEEDED') {
+					loopcontrol = loopcontrol+1;					
+					if (loopcontrol<4){
+						nlapiLogExecution("System", "getBusinessProfile failed, connection timed out, retrying..., for "+ custpl , e);	
+					}
+					else{
+						nlapiLogExecution("System", "getBusinessProfile failed, connection timed out for "+ custpl , e);		
+						profile = new Array();
+						profile['timedout']=true;		
+						return profile;
+					}
+				}
+				else{
+					nlapiLogExecution("Error", "getBusinessProfile failed for "+ custpl , e);
+					return null;	
+				}
+			}
+		}
+	}
+	return null;	
+}	
+
+
+function getDeclinedStatus(customerid){
+	var results = getDeclinedRecords(customerid);
+	var ar = new Array();
+	var total = 0;
+	if (results==null){
+		return null; 
+	}
+	else {
+		nlapiLogExecution('Debug', 'getDeclined status results ' , results.length);
+		for (var i = 1; i <= results.length; i++) {        
+			var searchresult = results[ i-1 ];
+			total = parseFloat(total) + parseFloat(searchresult.getValue('custrecord_declines_amount'));
+		}
+		ar[0]=results.length;
+		ar[1]=parseFloat(total);
+		
+		nlapiLogExecution('Debug', 'getDeclined status ' + ar[0], ar[1]);
+		return ar; 
+	}
+}
+
+
+function getEmailAddress(employeeid){
+	var rec = nlapiLoadRecord('employee', employeeid);
+	var email = rec.getFieldValue('email');
+	return email;
+}
+
+function approveFulfillOAC(rec){
+	
+	try { 
+		nlapiLogExecution("Debug", "Custom approve fulfill", rec);
+		var so = nlapiLoadRecord('salesorder', rec);
+		so.setFieldValue('orderstatus', "B");
+		so.setFieldValue('custbody_provisioned_by', nlapiGetUser());
+		so.setFieldValue('custbody_provisioned_date', nlapiDateToString(new Date()));
+		so.setFieldValue('custbody5', nlapiGetUser() );
+		so.setFieldValue('custbody_verfied_date',nlapiDateToString(new Date()));
+		nlapiSubmitRecord(so);
+		var fulfillRecord = nlapiTransformRecord('salesorder', rec,'itemfulfillment');
+		nlapiSubmitRecord( fulfillRecord );
+	}catch (e) {
+		nlapiLogExecution("Debug", "Error", e);
+	}
+	
+}
+
+
+
+function create411UserAccount(custObj, custpl, firstname, lastname, email){
+	
+	nlapiLogExecution("Debug","Create411useraccount()", "start");
+	try {
+		var acctInfo = getUserInfoFrom411(custpl);
+		if (acctInfo!=null){
+			if (acctInfo[0].login.toUpperCase() == email.toUpperCase()) {
+				nlapiLogExecution("Debug", "User Account already created: "+ email, "Link is "+ acctInfo[0].loginurl);
+				custObj.setFieldValue('custentity_a9r_login', email);
+				custObj.setFieldValue('custentity_a9r_resetpasswordurl', acctInfo[0].loginurl);
+				nlapiSubmitRecord(custObj, true);
+				return true;
+			}
+		}
+	
+		
+		firstname = encodeURIComponent(firstname);
+		lastname = encodeURIComponent(lastname);
+		
+		var response = nlapiRequestURL( a9r_server+'/api/create-business-user-account?key='+api_key+'&customer_id='+custpl+'&email='+email+'&firstname='+firstname+'&lastname='+lastname);
+		var result_st = response.getBody();
+		nlapiLogExecution("Debug", "create user account: "+custpl+"|"+email+"|"+firstname+"|"+lastname, a9r_server+'/api/create-business-user-account?key='+api_key+'&customer_id='+custpl+'&email='+email+'&firstname='+firstname+'&lastname='+lastname);
+	 	nlapiLogExecution("Debug", "create user account: "+custpl+"|"+email+"|"+firstname+"|"+lastname, result_st);
+	 	var myArray = eval("[" + result_st + "]");  
+	 	
+	 	
+	 	if (myArray[0].status==true) {
+			nlapiLogExecution("Debug", "create user account status", 'true');
+			var acctInfo = getUserInfoFrom411(custpl);
+			var loopcontrol=1;
+			while (loopcontrol <=10&&acctInfo==null){
+				acctInfo = getUserInfoFrom411(custpl);
+				loopcontrol = loopcontrol +1;
+			}
+			if (acctInfo!=null){
+				custObj.setFieldValue('custentity_a9r_login', email);
+				custObj.setFieldValue('custentity_a9r_resetpasswordurl', acctInfo[0].loginurl);
+				nlapiSubmitRecord(custObj, true);
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	 	
+		if (myArray[0].status=='false') {
+			nlapiLogExecution("Debug", "create user account status false", myArray[0].message);
+			return false;
+		}
+
+	}
+	catch (e){
+		nlapiLogExecution('Error', "Create411userAccount()",e);
+		return false;
+	}
+		
+		
+}
+
+function getUserInfoFrom411(custpl){
+	try {
+		var response = nlapiRequestURL( a9r_server+'/communication/get-reset-password-info?key='+api_key+'&customer_id='+custpl);
+		var result_st = response.getBody();
+		nlapiLogExecution("Debug", "getuserInfoFrom411 result_st", result_st);
+	 	var myArray = eval("[" + result_st + "]");  
+		if (myArray[0].result=='successful') {
+			nlapiLogExecution('Debug', "getUserInfoFrom411() url", myArray[0].loginurl);
+			return myArray;
+		}
+		else{nlapiLogExecution('Debug', "getUserInfoFrom411() result",myArray[0].result);}
+	}
+	catch (e){
+		nlapiLogExecution('Error', "getUserInfoFrom411()",e);
+	}
+	return null;
+	//  returns myarray or null if there is an error 
+	//  login = myArray[0].login;
+	//  url = myArray[0].loginurl;
+	
+}
+
+function updateSignature(){
+	try{
+		var repid = nlapiGetFieldValue('custentitycustservrep');
+		var emp = nlapiLoadRecord('employee', repid);
+		var firstname = emp.getFieldValue('firstname');
+		var lastname = emp.getFieldValue('lastname');
+		var email = emp.getFieldValue('email');
+		var phone = emp.getFieldValue('phone');
+
+		if (firstname==null){
+			firstname = '';
+		}
+		if (lastname==null){
+			lastname = '';
+		}
+		if (phone==null){
+			phone = '';
+		}
+		if (email==null){
+			email = '';
+		}
+		nlapiSetFieldValue('custentity_comm_signature_name', firstname + " " + lastname , true, true);
+		nlapiSetFieldValue('custentity_comm_signature_officephone', phone, true, true);		
+		nlapiSetFieldValue('custentity_comm_signature_emailaddress', email, true, true );
+		nlapiSetFieldValue('custentity_updatesignature', 'F');
+	}
+	catch (e)
+	{
+		nlapiLogExecution('ERROR', e.getCode(), e.getDetails());      
+	}	
+	
+}
+
+function updateARSignature(){
+	try{
+		var repid = nlapiGetFieldValue('custentityarrep');
+		var emp = nlapiLoadRecord('employee', repid);
+		var firstname = emp.getFieldValue('firstname');
+		var lastname = emp.getFieldValue('lastname');
+		var email = emp.getFieldValue('email');
+		var phone = emp.getFieldValue('officephone');
+		var ext = emp.getFieldValue('custentity4');
+		if (firstname==null){
+			firstname = '';
+		}
+		if (lastname==null){
+			lastname = '';
+		}
+		if (phone==null){
+			phone = '';
+		}
+		if (email==null){
+			email = '';
+		}
+		if (ext==null){
+			ext = '';
+		}
+		nlapiSetFieldValue('custentity_arrepsignature_name', firstname + " " + lastname , true, true);
+		nlapiSetFieldValue('custentity_arrepsignature_telephone', phone, true, true);		
+		nlapiSetFieldValue('custentity_arrepsignature_email', email, true, true );
+		nlapiSetFieldValue('custentity_arrepsignature_ext', ext, true, true );
+		nlapiSetFieldValue('custentity_updatearsignature', 'F');
+	}
+	catch (e)
+	{
+		nlapiLogExecution('ERROR', e.getCode(), e.getDetails());      
+	}	
+	
+}
+
+
+function vvsMakeCall( vvsTel) {
+	initialize();
+	
+	var callstatus = nlapiGetFieldValue('custentity_welcomecallstatus');
+	if (callstatus== WELCOMECALLSTATUS_READY){
+		nlapiSetFieldValue('custentity_welcomecallstatus', WELCOMECALLSTATUS_AT1);
+		
+	}
+	
+	
+	var vvsUserID = nlapiGetUser();
+	var origtel = vvsTel;
+/*	var telinfo = telephones[entry];
+	var vvsTel;
+	if (telinfo==null){
+		alert("Unable to dial telephone number: Missing information");
+		return false;
+	}
+	*/
+	//vvsTel = telinfo[0];
+	vvsTel = vvsTel.replace(/^\s+|\s+$|\s+|\-+|\(+|\)+/g, "");
+	
+	if ( isNaN ( vvsTel ) ) {
+		alert("Unable to dial telephone number: Includes chars.");
+		return false;
+	}
+	if ( vvsTel.substr(0,1) == '1' ) {
+		if ( ( vvsTel.length < 10 ) || ( vvsTel.length > 11 ) ) {
+			alert("Unable to dial telephone number: Wrong length");
+			return false;
+		}
+	}
+	else {
+		if ( vvsTel.length != 10 ) {
+			alert("Unable to dial telephone number: Wrong length");
+			return false;
+		}
+	}
+
+	var vvsPhoneCallPost = new Array();
+	vvsPhoneCallPost['vvsProsbaPhone'] = vvsTel;
+	vvsPhoneCallPost['vvsProsbaUzver'] = vvsUserID;
+	
+	nlapiLogExecution("Debug", "vvsDial:ProsbaPhone=", vvsTel);
+	nlapiLogExecution("Debug", "vvsDial:ProsbaUzver=", vvsUserID);
+	
+	try {
+		
+		//alert("dialing..." + vvsTel);
+		var now = new Date();
+		nlapiRequestURL( 'http://frog.411.ca/web_serv/postCallFromNSModule.php?' + '&' + Math.round(now.getTime() * Math.random()), vvsPhoneCallPost, null );
+		
+		var today = new Date();
+		//var calltime = getCurrentTime();
+		var calltime = addMinutesToCurrentTime(0);
+		var endtime = addMinutesToCurrentTime(1);
+		addPhoneCall("Call Logged",origtel, nlapiDateToString(today), nlapiDateToString(today),  nlapiGetRecordId(), 'T', calltime, endtime, CALLSTATUS_Completed, false);
+		
+	}
+	catch(e){
+		nlapiLogExecution("Error", "Dial Call "+vvsTel,e);
+		alert(e);
+	}
+		
+	return true;
+}
+
+function createPhoneLabel(phone, ptype){
+	initialize();
+	var lbl='';
+	switch (ptype){
+		case PHONETYPE_PHONE 	: 	lbl = 'TEL# '+phone;
+									break;
+		case PHONETYPE_TOLLFREE	: 	lbl = 'Toll-Free# '+phone;
+									break;
+		case PHONETYPE_FAX		:  	lbl = 'FAX# '+phone;
+									break;
+		case PHONETYPE_CELL		: 	lbl = 'CELL# '+phone;
+									break;
+	}
+	return lbl;
+}
+
+function createOnScreenPhoneLabel(phone, ptype, break_line) {
+	var lbl=  createPhoneLabel(phone, ptype);
+	return lbl;
+}
+
+function createCallButton(phone, ptype, break_line) {
+	var lbl=  createPhoneLabel(phone, ptype);
+	nlapiLogExecution("Debug", "Create callbutton" + ptype, lbl);
+	var link = '';
+	if ((phone != '') && (phone != null)) {
+		phone = phone.replace(new RegExp("[^0-9]", "gi"), '');
+		nlapiLogExecution("Debug", "Create tel Link with corrected tel", phone);
+		link = '<input type=button style="width: 200px;" value="Call: '+ lbl +'" onClick="JavaScript:vvsMakeCall(\''+ phone + '\');">' + break_line;
+		nlapiLogExecution("Debug", "Create call button Link ", link);
+	}
+	return link;
+}
+
+function createCallButton2(form, no, phone, ptype, break_line) {
+	initialize();
+	var lbl='';
+	switch (ptype){
+		case PHONETYPE_PHONE 	: 	lbl = 'TEL# '+phone;
+									break;
+		case PHONETYPE_TOLLFREE	: 	lbl = 'Toll-Free# '+phone;
+									break;
+		case PHONETYPE_FAX		:  	lbl = 'FAX# '+phone;
+									break;
+		case PHONETYPE_CELL		: 	lbl = 'CELL# '+phone;
+									break;
+	}
+	nlapiLogExecution("Debug", "Create callbutton" + ptype, lbl);
+	var link = '';
+	if ((phone != '') && (phone != null)) {
+		phone = phone.replace(new RegExp("[^0-9]", "gi"), '');
+		nlapiLogExecution("Debug", "Create tel Link with corrected tel", phone);
+		
+		var url = nlapiResolveURL('SUITELET', 'customscript_makecall', 'customdeploy_makecall');
+		var callButton = 'JavaScript:var MiniWin=window.open(\'' + NETSUITE_URL + url + '&tel='+phone+'\',  \'_self\'); MiniWin.focus();';
+		form.addButton('custpage_call'+phone, "Call: "+ lbl, callButton);		
+		
+	//	link = '<input type=button style="width: 200px;" value="Call: '+ lbl +'" onClick="JavaScript:vvsMakeCall(\''+ phone +'\');">' + break_line;
+	//	nlapiLogExecution("Debug", "Create call button Link ", link);
+	
+	}
+	//return link;
+}
+
+
+function create411Link(customer_id) {
+	initialize();
+	var link = '';
+
+	if ((customer_id != '') && (customer_id != null)) {
+		link = ' <input type=button  style="width: 150px; background-color: #5BB645;" value="411.ca" onClick="JavaScript:var MiniWin=window.open(\'' + a9r_server + '/business/profile/' + customer_id+ '\', \'_blank\'); MiniWin.focus()";>';
+	}
+	return link;
+}
+
+function createYPLink(phone, ptype, break_line) {
+	initialize();
+	var lbl='';
+	switch (ptype){
+		case PHONETYPE_PHONE 	: 	lbl = 'TEL# '+phone;
+									break;
+		case PHONETYPE_TOLLFREE	: 	lbl = 'Toll-Free# '+phone;
+									break;
+		case PHONETYPE_FAX		:  	lbl = 'FAX# '+phone;
+									break;
+		case PHONETYPE_CELL		: 	lbl = 'CELL# '+phone;
+									break;
+	}
+	//nlapiLogExecution("Debug", "Create YP Link lbl" + ptype, lbl);
+	var link = '';
+	if ((phone != '') && (phone != null)) {
+		phone = phone.replace(new RegExp("[^0-9]", "gi"), '');
+		//nlapiLogExecution("Debug", "Create YP Link with corrected tel", phone);
+		link = '<input type=button style="width: 200px;  background-color: #ffff99;" value="YP '+ lbl +'" onClick="JavaScript:var MiniWin=window.open(\'http://www.yellowpages.ca/search/?src=&stype=re&pac=' + phone.substring(0,3) + '&pex=' + phone.substring(3,6) + '&pnum=' + phone.substring(6,10) + '&Search.x=0&Search.y=0\', \'_blank\'); MiniWin.focus();">' + break_line;
+		//nlapiLogExecution("Debug", "Create YP Link ", link);
+	}
+	return link;
+}
+
+function getEmployees(rolefilter, infolabel){
+	var searchresults = null;
+	try {
+		var filters = new Array();
+	
+		filters[0] = new nlobjSearchFilter( 'giveaccess', null, 'is', 'T' ); 
+		filters[1] = new nlobjSearchFilter( 'isinactive', null, 'is', 'F' ); 
+		
+		if (rolefilter!=null&&rolefilter!=''){
+			filters[2] = new nlobjSearchFilter( 'custentity_extendedrole', null, 'anyof', rolefilter ); 
+		}
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('entityid');
+		columns[1] = new nlobjSearchColumn('firstname');
+		columns[2] = new nlobjSearchColumn('lastname');
+		columns[3] = new nlobjSearchColumn('department');
+		columns[4] = new nlobjSearchColumn('giveaccess');
+		columns[5] = new nlobjSearchColumn('isinactive');
+		columns[6] = new nlobjSearchColumn('email');
+		columns[7] = new nlobjSearchColumn('internalid');
+		searchresults = nlapiSearchRecord( 'employee', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', 'getEmployees Search failed' + infolabel, e.getDetails());
+	}
+	return searchresults;
+}
+
+
+function getInvoices(customerid){
+	   
+	try {
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter('entity', null, 'anyof', customerid);
+		filters[1] = new nlobjSearchFilter('mainline', null, 'is', 'T');
+		filters[2] = new nlobjSearchFilter('memorized', null, 'is', 'F');
+		   
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('amount');
+		columns[1] = new nlobjSearchColumn('statusref');
+		columns[2] = new nlobjSearchColumn('trandate');
+		columns[3] = new nlobjSearchColumn('tranid');
+		columns[4] = new nlobjSearchColumn('status');
+		columns[5] = new nlobjSearchColumn('internalid');
+			  
+		var searchresults = nlapiSearchRecord('invoice', null, filters, columns);
+		return searchresults;
+	}
+	catch (e){
+		nlapiLogExecution("Error", "get Invoices", details);
+	}
+	return null;
+}
+
+function getCustomerPortfolioHistory(customerid){
+	
+	var searchresults = null;
+	try {
+		var customers =new Array(customerid);
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter('custrecord_custport_customerid', null, 'anyof', customers); 
+			
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('custrecord_custport_date');
+		columns[1] = new nlobjSearchColumn('custrecord_custport_monthlytotal');
+		columns[2] = new nlobjSearchColumn('custrecord_custport_listingrevenue');
+		columns[3] = new nlobjSearchColumn('custrecord_custport_google');
+		columns[4] = new nlobjSearchColumn('custrecord_custport_googlerevenue');
+		columns[5] = new nlobjSearchColumn('custrecord_custport_website');
+		columns[6] = new nlobjSearchColumn('custrecord_custport_websiterevenue');
+		columns[7] = new nlobjSearchColumn('custrecord_custport_mobilewebsite');
+		columns[8] = new nlobjSearchColumn('custrecord_custport_mobilewebsiterevenue');
+		columns[9] = new nlobjSearchColumn('custrecord_custport_mobilelisting');
+		columns[10] = new nlobjSearchColumn('custrecord_custport_mobilelistingrevenue');
+		columns[11] = new nlobjSearchColumn('custrecord_custport_status');
+		
+		searchresults = nlapiSearchRecord( 'customrecord_custport', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error',  ' get cust portfolios Search failed' , e.getDetails());
+		return null;
+	}
+	return searchresults;
+}
+
+
+
+
+function getLastOpenInvoiceAmount(customerid){
+	   
+	try {
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter('entity', null, 'anyof', customerid);
+		filters[1] = new nlobjSearchFilter('mainline', null, 'is', 'T');
+		filters[2] = new nlobjSearchFilter('memorized', null, 'is', 'F');
+		   
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('amount');
+		columns[1] = new nlobjSearchColumn('status');
+			  
+		var searchresults = nlapiSearchRecord('invoice', null, filters, columns);
+		//var searchresults = nlapiSearchRecord('transaction', null, filters, columns);
+		if (searchresults==null){
+			return 0;
+		}	
+
+		var openamount = 0;
+		for ( var i = 0; searchresults != null && i < searchresults.length; i++ ){	
+			var searchresult = searchresults[ i ];
+			var status = searchresult.getValue('status');
+			var amount = searchresult.getValue('amount');
+			if (status=='Open'){
+				openamount = parseFloat(openamount) + parseFloat(amount);
+			}
+		}
+		return openamount;
+	}
+	catch (e){
+		alert(e);
+	}
+	return 0;
+}
+
+function updateLastAssigned(empId) {
+	nlapiSubmitField('employee', empId, ['custentity_last_assigned_datetime'], [nlapiDateToString(new Date(), "datetimetz")]);
+}
+
+function getOACTeamEmployees(accttype, amount) {
+	
+	nlapiLogExecution('Debug', 'get OAC Team Employees', "Team: "+ accttype);
+	var searchresults = null;
+	try {
+		var filters = new Array();
+	
+		filters[0] = new nlobjSearchFilter( 'giveaccess', null, 'is', 'T' ); 
+		filters[1] = new nlobjSearchFilter( 'isinactive', null, 'is', 'F' ); 
+		filters[2] = new nlobjSearchFilter( 'custentity_cxaccounttype', null, 'anyof', accttype);
+		filters[3] = new nlobjSearchFilter( 'custentity_cx_account_min_amount', null, 'lessthanorequalto', amount);
+		filters[4] = new nlobjSearchFilter( 'custentity_cx_account_max_amount', null, 'greaterthanorequalto', amount);
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('entityid');
+		columns[1] = new nlobjSearchColumn('firstname');
+		columns[2] = new nlobjSearchColumn('lastname');
+		columns[3] = new nlobjSearchColumn('department');
+		columns[4] = new nlobjSearchColumn('giveaccess');
+		columns[5] = new nlobjSearchColumn('isinactive');
+		columns[6] = new nlobjSearchColumn('email');
+		columns[7] = new nlobjSearchColumn('internalid');
+		columns[8] = new nlobjSearchColumn('custentity_last_assigned_datetime');
+		columns[9] = new nlobjSearchColumn('custentity_work_shifts');
+		
+		searchresults = nlapiSearchRecord( 'employee', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', 'getEmployees Search failed', e.getDetails());
+	}
+	if (searchresults==null){
+		nlapiLogExecution('Debug', 'get OAC Team Employees', "Found No members for team: "+accttype);
+		return null;
+	}
+	nlapiLogExecution('Debug', 'get OAC Team Employees', "Found " + searchresults.length + " members");
+	return searchresults;
+}
+
+//called by Assignment Suitelet, Establishment Suitelet, Verify Suitelet, Establishment Suitelet Client
+function getEmployeeInfo(assignee, infolabel){
+	//nlapiLogExecution('Debug' , 'START: getEmployeeInfo()', assignee);
+	try {
+		var emp= nlapiLoadRecord('employee', assignee);
+	//	nlapiLogExecution('Debug', 'getEmployeeInfo()' + infolabel, emp.getFieldValue('email'));
+		var info = new Array();
+		info[0] = emp.getFieldValue('email');
+		info[1] = emp.getFieldValue('firstname');
+		info[2] = emp.getFieldValue('lastname');
+		info[3] = emp.getFieldValue('phone');
+		info[4] = emp.getFieldValue('department');
+		info[5] = emp.getFieldValue('location');
+		
+		
+		
+		if (info[0] ==null){
+			info[0] = '';
+		} 
+		if (info[1] ==null){
+			info[1] = '';
+		} 
+		if (info[2] ==null){
+			info[2] = '';
+		} 
+		//nlapiLogExecution('Debug' , 'Complete: getEmployeeInfo()', info[0]);
+		return info;
+	}
+	catch (e){
+		nlapiLogExecution('Error', 'getEmployeeInfo(): Unable to get employee info' + infolabel, assignee+ e.getDetails());
+		return new Array('','','','');
+	}	
+}
+
+
+
+function getCategories(customerid){
+	var searchresults = null;
+	try {
+		var filters = new Array();
+	
+		filters[0] = new nlobjSearchFilter( 'custrecord_custcats_customer', null, 'anyof', customerid); 
+			
+		columns = new Array();
+		columns[0] = new nlobjSearchColumn('custrecord_custcats_category');
+		columns[1] = new nlobjSearchColumn('custrecord_custcats_city');
+		columns[2] = new nlobjSearchColumn('custrecord_custcats_product');
+		columns[3] = new nlobjSearchColumn('custrecord_custcats_producttype');
+		
+		searchresults = nlapiSearchRecord( 'customrecord_customercategories', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', 'getCategories Search failed', e.getDetails());
+	}
+	return searchresults;
+}
+
+function getPrimaryContact( customer_entityid )
+{
+	var result_list = new Array();
+
+	var filters = new Array();
+	filters[0] = new nlobjSearchFilter( 'internalid', null, 'is', customer_entityid, null );
+	filters[1] = new nlobjSearchFilter( 'role', 'contact', 'anyof', 'Primary Contact', null );
+	
+	var results = new Array();
+	results[0] = new nlobjSearchColumn("firstname", "contact");
+	results[1] = new nlobjSearchColumn("middlename", "contact");
+	results[2] = new nlobjSearchColumn("lastname", "contact");
+	results[3] = new nlobjSearchColumn("role", "contact");
+	results[4] = new nlobjSearchColumn("email", "contact");
+	results[5] = new nlobjSearchColumn("phone", "contact");
+	results[6] = new nlobjSearchColumn('custentity411custid');
+	results[7] = new nlobjSearchColumn("entityid", "contact");
+
+	// Execute the search
+	var searchresults = nlapiSearchRecord( 'customer', null, filters, results );
+
+	for ( var i = 0; searchresults != null && i < searchresults.length; i++ )
+	{
+	   var searchresult = searchresults[ i ];
+
+	   var firstname = searchresult.getValue( 'firstname', 'contact' );
+	   var middlename = searchresult.getValue( 'middlename', 'contact' );
+	   var lastname = searchresult.getValue( 'lastname', 'contact' );
+	   var email = searchresult.getValue( 'email', 'contact' );
+	   var phone = searchresult.getValue( 'phone', 'contact' );
+	   var customer_id = searchresult.getValue( 'custentity411custid' );
+	   var entityid = searchresult.getValue( 'entityid', 'contact' );
+
+	   result_list[ i ] = new Array(firstname, middlename, lastname, email, phone, entityid, customer_id);
+	}
+
+	return result_list;
+}
+
+function getNSContacts( customer_entityid ){
+	
+	nlapiLogExecution("Debug", "getNSContacts()", customer_entityid);
+	var result_list = new Array();
+
+	var filters = new Array();
+	filters[0] = new nlobjSearchFilter( 'internalid', null, 'is', customer_entityid, null );
+		var results = new Array();
+	results[0] = new nlobjSearchColumn("firstname", "contact");
+	results[1] = new nlobjSearchColumn("middlename", "contact");
+	results[2] = new nlobjSearchColumn("lastname", "contact");
+	results[3] = new nlobjSearchColumn("role", "contact");
+	results[4] = new nlobjSearchColumn("email", "contact");
+	results[5] = new nlobjSearchColumn("phone", "contact");
+	results[6] = new nlobjSearchColumn('custentity411custid');
+	results[7] = new nlobjSearchColumn("entityid", "contact");
+
+	// Execute the search
+	var searchresults = nlapiSearchRecord( 'customer', null, filters, results );
+
+	for ( var i = 0; searchresults != null && i < searchresults.length; i++ )
+	{
+	   var searchresult = searchresults[ i ];
+
+	   var firstname = searchresult.getValue( 'firstname', 'contact' );
+	   var middlename = searchresult.getValue( 'middlename', 'contact' );
+	   var lastname = searchresult.getValue( 'lastname', 'contact' );
+	   var role = searchresult.getText( 'role', 'contact' );
+	   var email = searchresult.getValue( 'email', 'contact' );
+	   var phone = searchresult.getValue( 'phone', 'contact' );
+	   var customer_id = searchresult.getValue( 'custentity411custid' );
+	   var entityid = searchresult.getValue( 'entityid', 'contact' );
+
+	   result_list[ i ] = new Array(firstname, middlename, lastname, role, email, phone, entityid, customer_id);
+	}
+
+	return result_list;
+}
+
+function getContacts( customer_entityid ){
+	
+	nlapiLogExecution("Debug", "getNSContacts()", customer_entityid);
+	var result_list = new Array();
+
+	var filters = new Array();
+	filters[0] = new nlobjSearchFilter( 'internalid', null, 'is', customer_entityid, null );
+		var results = new Array();
+	results[0] = new nlobjSearchColumn("firstname", "contact");
+	results[1] = new nlobjSearchColumn("middlename", "contact");
+	results[2] = new nlobjSearchColumn("lastname", "contact");
+	results[3] = new nlobjSearchColumn("role", "contact");
+	results[4] = new nlobjSearchColumn("email", "contact");
+	results[5] = new nlobjSearchColumn("phone", "contact");
+	results[6] = new nlobjSearchColumn('custentity411custid');
+	results[7] = new nlobjSearchColumn("entityid", "contact");
+
+	// Execute the search
+	var searchresults = nlapiSearchRecord( 'customer', null, filters, results );
+
+	for ( var i = 0; searchresults != null && i < searchresults.length; i++ )
+	{
+	   var searchresult = searchresults[ i ];
+
+	   var firstname = searchresult.getValue( 'firstname', 'contact' );
+	   var middlename = searchresult.getValue( 'middlename', 'contact' );
+	   var lastname = searchresult.getValue( 'lastname', 'contact' );
+	   var role = searchresult.getText( 'role', 'contact' );
+	   var email = searchresult.getValue( 'email', 'contact' );
+	   var phone = searchresult.getValue( 'phone', 'contact' );
+	   var customer_id = searchresult.getValue( 'custentity411custid' );
+	   var entityid = searchresult.getValue( 'entityid', 'contact' );
+
+	   result_list[ i ] = new Array(firstname, middlename, lastname, role, email, phone, entityid, customer_id);
+	}
+
+	return result_list;
+}
+
+function getCustomerTaxCode(customerid){
+	
+	var custObj = nlapiLoadRecord('customer', customerid);
+	var cust_taxcode = custObj.getFieldValue('taxitem');
+    if (cust_taxcode==null){ 
+    	cust_taxcode = updateCustomerTaxCode(customerid);
+    }	
+	return cust_taxcode;
+}
+
+function updateCustomerTaxCode(customerid){
+	
+	initialize();
+	
+	var custObj = nlapiLoadRecord('customer', customerid);
+	var parent = custObj.getFieldValue('parent');
+	var country = custObj.getFieldValue('billcountry');
+	
+	nlapiLogExecution("debug", "Country", country);
+	
+	if (parent==EVO_MAIN_COMPANY_ID){
+		custObj.setFieldValue('taxitem', TAXGROUP_CA_QUEBEC);
+		nlapiSubmitRecord(custObj);
+		return TAXGROUP_CA_QUEBEC;
+	}
+	
+	if (country=='US'){
+		custObj.setFieldValue('taxitem', TAXGROUP_CA_Zero);
+		nlapiSubmitRecord(custObj);
+		return TAXGROUP_CA_Zero;
+	}
+	
+	var taxcode = TAXGROUP_HST; //default value
+	var searchresults = null;
+	try {
+		var filters = new Array();
+	
+		filters[0] = new nlobjSearchFilter('internalid', null, 'anyof', customerid); 
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('shipstate');
+		columns[1] = new nlobjSearchColumn('billstate');
+		columns[2] = new nlobjSearchColumn('state');
+		columns[3] = new nlobjSearchColumn('isdefaultshipping');
+		columns[4] = new nlobjSearchColumn('isdefaultbilling');
+		
+		searchresults = nlapiSearchRecord( 'customer', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', recordtype+ ' customer query failed' , e);
+	}
+	
+	
+	try {
+		var taxState = null;
+
+		if (searchresults){
+			if (searchresults.length>1) {
+				for ( var x=0, xl=searchresults.length; x<xl; x++ ) {
+					var searchresult = searchresults[x];
+					if (searchresult.getValue('isdefaultbilling')==='T') {
+						taxState = searchresult.getValue('billstate');
+						break;
+					}
+				}
+				if ( ! taxState ) {
+					for ( var x=0, xl=searchresults.length; x<xl; x++ ) {
+					var searchresult = searchresults[x];
+					if (searchresult.getValue('isdefaultshipping')==='T') {
+						taxState = searchresult.getValue('shipstate');
+						break;
+					}
+				}
+				}
+			}else if (searchresults.length===1) {
+				var searchresult = searchresults[0];
+				taxState = searchresult.getValue('billstate');
+				if ( ! taxState ) {
+					taxState = searchresult.getValue('shipstate');
+				}
+				if ( ! taxState ) {
+					taxState = searchresult.getValue('state');
+				}
+			}
+		}
+		
+		switch (taxState) {
+			case 'AB' :
+			case 'MB' :
+			case 'ND' :
+			case 'NT' :
+			case 'NU' :
+			case 'SK' :
+			case 'YT' :
+				taxcode = TAXGROUP_CA_GST;
+				break;
+			case 'BC' :
+				taxcode = TAXGROUP_CA_S_BC_5;
+				break;
+			case 'NS' :	
+				taxcode = TAXGROUP_CA_S_NS;
+				break;
+			case 'PE' :
+				taxcode = TAXGROUP_PEI;
+				break;
+			case 'QC' :	
+				taxcode = TAXGROUP_CA_QUEBEC;
+				break;
+			case 'NB' :
+			case 'NL' :
+			case 'ON' :
+			default :
+				taxcode = TAXGROUP_HST;
+				break;
+		}
+		custObj = nlapiLoadRecord('customer', customerid);
+		custObj.setFieldValue('taxitem', taxcode);
+		nlapiSubmitRecord(custObj);
+	}
+	catch (e){
+		nlapiLogExecution("Error", "Updating Customer Tax Code Function: "+customerid+ " " +taxcode, e.getDetails());
+		return TAXGROUP_HST;
+	}
+	return taxcode;
+}
+
+function getExternalProductType(typein) {
+	nlapiLogExecution("Debug", "getextID", typein);
+	switch (typein){
+		case "1" :	
+			return "20";
+			break;
+		case "2" :	
+			return "10";
+			break;
+		case "5" :	
+			return "40";
+			break;
+		case "6" :	
+			return "30";
+			break;
+	}
+} 
+
+
+function getExternalID(recordtype, value){
+	//nlapiLogExecution('Debug', recordtype + ' - getexternalID for' + value, 'start');
+	var searchresults = null;
+	try {
+		var filters = new Array();
+	
+		filters[0] = new nlobjSearchFilter('internalid', null, 'anyof', value ); 
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('externalid');
+		searchresults = nlapiSearchRecord( recordtype, null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', recordtype+ ' getExternalID Search failed' , e.getDetails());
+	}
+	if (searchresults==null){
+		return 0;
+	}
+	if (searchresults.length>1){
+		return 0;
+	}
+	var searchresult = searchresults[0];
+	var extid = searchresult.getValue('externalid');
+	return extid;
+}
+
+function getResponseReason(respcode){
+//	nlapiLogExecution('Debug', "get resp reason", respcode);
+	switch (respcode){
+	case "480"	:	
+		return "HOLD CARD* CALL";
+		break;
+	case "481"	:	
+		return "DECLINE";
+		break;
+	case "477"	:	
+		return "CALL FOR AUTHORIZATION";
+		break;
+	case "479"	:	
+		return "PICK UP CARD* CALL BANK";
+		break;
+	case "482"	:	
+		return "DECLINED* EXPIRED CARD";
+		break;
+	case "901"	:	
+		return "NSF - NOT SUFFICIENT FUNDS";
+		break;
+	case "903"	:	
+		return "PAYMENT STOPPED/RECALLED";
+		break;
+	case "905"	:	
+		return "ACCOUNT CLOSED";
+		break;
+	case "916"	:	
+		return "NOT IN ACCORD WITH AGREE PDA";
+		break;
+	default		: 	
+		return respcode;
+		break;
+	}
+}
+
+
+function getInternalProductType(typein) {
+	nlapiLogExecution("Debug", "getintprodtype", typein);
+	switch (typein){
+		case "10" :
+			return "2";
+			break;
+		case "20" :	
+			return "1";
+			break;
+		case "30" :
+			return "6";
+			break;
+		case "40"	:
+			return "5";
+			break;
+		case 10		:	
+			return "2";
+			break;
+		case 20		:	
+			return "1";
+			break;
+		case 30		:	
+			return "6";
+			break;
+		case 40		:	
+			return "5";
+			break;
+		case "m10"	:	
+			return "2";
+			break;
+		case "m20"	:	
+			return "1";
+			break;
+		case "m30"	:	
+			return "6";
+			break;
+		case "m40"	:	
+			return "5";
+			break;
+	}
+	
+} 
+
+function getCustomerInternalIDFromPL(pl){
+	nlapiLogExecution("debug", "getCustomerInternalIDFromPL:", pl);
+	try {
+		var searchresults = getCustomerInfoFromPL(pl);
+	}
+	catch (e){
+		nlapiLogExecution('Error', ' getCustInternalID Search failed' , e);
+		return -1;
+	}
+	if (searchresults==null){
+		nlapiLogExecution('Debug', 'getcustinternalID', 'searchresults null');
+		return -2;
+	}
+	if (searchresults.length>1){
+		nlapiLogExecution('Debug', 'getcustinternalID', 'searchresults returned more then 1');
+		return -3;
+	}
+	var searchresult = searchresults[0];
+	var intid = searchresult.getValue('internalid');
+	return intid;
+}
+
+function getCustomerInfoFromPL(pl){
+	nlapiLogExecution("debug", "getCustomerInternalIDFromPL:", pl);
+	//alert(pl);
+	var searchresults = null;
+	try {
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter('custentity411custid', null, 'equalto', pl ); 
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('internalid');
+		columns[1] = new nlobjSearchColumn('custentity_retentionstatus');
+		columns[2] = new nlobjSearchColumn('status');
+		columns[3] = new nlobjSearchColumn('custentity_customeralert');
+		columns[4] = new nlobjSearchColumn('balance');
+		columns[5] = new nlobjSearchColumn('entityid');
+		columns[6] = new nlobjSearchColumn('custentity_closedate');
+		columns[7] = new nlobjSearchColumn('custentity_location');
+		searchresults = nlapiSearchRecord( 'customer', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', ' getCustInternalID Search failed' , e);
+		return null;
+	}
+	if (searchresults==null){
+		nlapiLogExecution('Debug', 'getcustinternalID', 'searchresults null');
+		return null;
+	}
+	if (searchresults.length>1){
+		nlapiLogExecution('Debug', 'getcustinternalID', 'searchresults returned more then 1');
+		return null;
+	}
+	return searchresults;
+	
+}
+
+function getCustomerID_EVOMerchant(merchantid){
+	nlapiLogExecution("debug", "getCustomerID_EvoMerch:", merchantid);
+	
+	var searchresults = null;
+	try {
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter('custentity_externalvendorid', null, 'is', merchantid ); 
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('internalid');
+		searchresults = nlapiSearchRecord( 'customer', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', ' getcustomerid_evomerch Search failed' , e);
+		return null;
+	}
+	if (searchresults==null){
+		nlapiLogExecution('Debug', 'getcustomerid_evomerch', 'searchresults null');
+		return null;
+	}
+	if (searchresults.length>1){
+		nlapiLogExecution('Debug', 'getcustomerid_evomerch', 'searchresults returned more then 1');
+		return null;
+	}
+	var searchresult = searchresults[0];
+	var intid = searchresult.getValue('internalid');
+	return intid;
+	
+}
+
+function getInternalID(recordtype, value){
+	//nlapiLogExecution('Debug', recordtype + ' - getexternalID for' + value, 'start');
+	var searchresults = null;
+	try {
+		var filters = new Array();
+	
+		filters[0] = new nlobjSearchFilter('externalid', null, 'anyof', value ); 
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('internalid');
+		searchresults = nlapiSearchRecord( recordtype, null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', recordtype+ ' getInternalID Search failed' , e.getDetails());
+	}
+	if (searchresults==null){
+		nlapiLogExecution('Debug', 'getinternalID', 'searchresults null');
+		return 0;
+	}
+	if (searchresults.length>1){
+		nlapiLogExecution('Debug', 'getinternalID', 'searchresults returned more then 1');
+		return 0;
+	}
+	var searchresult = searchresults[0];
+	var intid = searchresult.getValue('internalid');
+	return intid;
+}
+
+function getSalesOrderInternalID(so){
+	//nlapiLogExecution('Debug', recordtype + ' - getexternalID for' + value, 'start');
+	var searchresults = null;
+	try {
+		var filters = new Array();
+	
+		filters[0] = new nlobjSearchFilter('number', null, 'equalto', so); 
+		filters[1] = new nlobjSearchFilter('mainline', null, 'is', 'T');
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('internalid');
+		searchresults = nlapiSearchRecord( 'salesorder', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', ' so getInternalID Search failed' , e.getDetails());
+	}
+	if (searchresults==null){
+		nlapiLogExecution('Debug', 'so getinternalID', 'searchresults null');
+		return 0;
+	}
+	if (searchresults.length>1){
+		nlapiLogExecution('Debug', 'so getinternalID', 'searchresults returned more then 1');
+		return 0;
+	}
+	var searchresult = searchresults[0];
+	var intid = searchresult.getValue('internalid');
+	return intid;
+}
+
+
+function getContactsByEntity( customer_entityid , recordtype)
+{
+	var result_list = new Array();
+
+	var filters = new Array();
+	filters[0] = new nlobjSearchFilter( 'internalid', recordtype, 'is', customer_entityid );
+	var results = new Array();
+	results[0] = new nlobjSearchColumn("entityid");
+	
+	// Execute the search
+	var searchresults = nlapiSearchRecord( 'contact', null, filters, results );
+	if(searchresults==null){
+		nlapiLogExecution("debug", "getcontacts", "No results");
+		return null;
+	}
+	nlapiLogExecution("debug", "getcontacts", searchresults.length);
+	
+	return searchresults;
+}
+
+
+
+
+function getChildrenAccounts(entityID){
+	//alert(entityID);
+	
+	nlapiLogExecution("DEBUG", "cancelChildrenAccounts", entityID);
+	
+	var searchresults = null;
+	try {
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter( 'entityid', 'parentcustomer', 'is', entityID);
+			
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('custentity411custid');
+		columns[1] = new nlobjSearchColumn('internalid');
+		
+		columns[2] = new nlobjSearchColumn('custentity_websiterevokedate');
+		
+		columns[3] = new nlobjSearchColumn('custentity_downgradedate');
+		columns[4] = new nlobjSearchColumn('custentity_comm_campaign');
+		columns[5] = new nlobjSearchColumn('custentity_donotsendcomm');
+		columns[6] = new nlobjSearchColumn('entitystatus');
+		columns[7] = new nlobjSearchColumn('custentity_retentionstatus');
+		columns[8] = new nlobjSearchColumn('custentity_accountingcancelque');
+		columns[9] = new nlobjSearchColumn('custentity_retentionaccountant');
+		columns[10] = new nlobjSearchColumn('custentity_retcancelrequestresolution');
+		
+		searchresults = nlapiSearchRecord( 'customer', null, filters, columns );
+		
+	}
+	catch (e){
+		nlapiLogExecution('Error', 'cancelChildrenQuery failed'+customerPL, e.getDetails());
+	}
+	return searchresults;
+	
+}
+
+
+function getCustomDescription(recordtype, value){
+	nlapiLogExecution('Debug', recordtype + ' - getdesc for' + value, 'start');
+	var searchresults = null;
+	try {
+		var filters = new Array();
+	
+		filters[0] = new nlobjSearchFilter('internalid', null, 'anyof', value ); 
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('name');
+		if (recordtype=='customrecord_cities'){
+			columns[1] = new nlobjSearchColumn('custrecord_cities_province');		
+		}
+		searchresults = nlapiSearchRecord( recordtype, null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', recordtype+ ' getDesc Search failed' , e);
+	}
+	if (searchresults==null){
+		//nlapiLogExecution('Debug', 'getexternalID', 'searchresults null');
+			return '';
+	}
+	if (searchresults.length>1){
+		//nlapiLogExecution('Debug', 'getexternalID', 'searchresults returned more then 1');
+		return '';
+	}
+	var searchresult = searchresults[0];
+	var desc = searchresult.getValue('name');
+	if (recordtype=='customrecord_cities'){
+		desc = desc + ", " + searchresult.getText('custrecord_cities_province');
+	}
+	return desc;
+}
+
+function getNumberOfDays(earlierdate, laterdate){
+	
+	if (earlierdate==laterdate){
+		return 0;
+	}
+	
+	for ( var i = 1; i<=10000; i++ ){ 	
+		if (laterdate==nlapiAddDays(earlierdate, i)){
+			return i;
+		}
+	}
+	return null;
+	
+}
+
+
+function getItemTypeByInternalId(internalid){
+	nlapiLogExecution("Debug", "Get Item type for", internalid);
+	var searchresults = null;
+	try {
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter('internalid' , null, 'anyof', internalid);
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('type');  
+		searchresults = nlapiSearchRecord( 'item', null, filters, columns );
+		if (searchresults==null){
+			nlapiLogExecution('Debug', 'get item type returned no results for item requested', internalid);	
+			return null;
+		}
+		if (searchresults.length==1){
+			var searchresult = searchresults[0];
+			var typeval =  searchresult.getValue( 'type');
+			var typetext =  searchresult.getText( 'type');
+			nlapiLogExecution('Debug', 'get item type returned for val', typeval);	
+			nlapiLogExecution('Debug', 'get item type returned for text', typetext);	
+			return typeval;
+		}
+		return null;
+	}
+	catch (e){
+		nlapiLogExecution('Error', 'GET ITEM TYPE QUERY : Failed', e);
+		return null;
+	}
+}
+
+
+
+
+
+function getItemDescription(internalid){
+	var itemtype = getItemTypeByInternalId(internalid);
+	var name='';
+	switch (itemtype){
+	case 'Assembly':
+		var itemObj = nlapiLoadRecord('assemblyitem', internalid);
+		name = itemObj.getFieldValue('itemid');
+		break;
+	case 'InvtPart':
+		var itemObj = nlapiLoadRecord('inventoryitem', internalid);
+		name = itemObj.getFieldValue('itemid');
+		break;
+	case 'Description':
+		var itemObj = nlapiLoadRecord('descriptionitem', internalid);
+		name = itemObj.getFieldValue('itemid');
+		break;
+	case 'Discount':
+		var itemObj = nlapiLoadRecord('discountitem', internalid);
+		name = itemObj.getFieldValue('itemid');
+		break;
+	case 'NonInvtPart':
+		var itemObj = nlapiLoadRecord('noninventoryitem', internalid);
+		name = itemObj.getFieldValue('itemid');
+		break;
+	case 'Service':
+		var itemObj = nlapiLoadRecord('serviceitem', internalid);
+		name = itemObj.getFieldValue('itemid');
+		break;
+	case 'Kit':
+		var itemObj = nlapiLoadRecord('kititem', internalid);
+		name = itemObj.getFieldValue('itemid');
+		break;
+	
+	case 'Group':
+		var itemObj = nlapiLoadRecord('itemgroup', internalid);
+		name = itemObj.getFieldValue('itemid');
+		break;
+	}
+	return name;
+}
+
+
+function getItemDisplayName(internalid){
+	var itemtype = getItemTypeByInternalId(internalid);
+	var name='';
+	switch (itemtype){
+	case 'Assembly':
+		var itemObj = nlapiLoadRecord('assemblyitem', internalid);
+		name = itemObj.getFieldValue('displayname');
+		break;
+	case 'InvtPart':
+		var itemObj = nlapiLoadRecord('inventoryitem', internalid);
+		name = itemObj.getFieldValue('displayname');
+		break;
+	case 'Description':
+		var itemObj = nlapiLoadRecord('descriptionitem', internalid);
+		name = itemObj.getFieldValue('displayname');
+		break;
+	case 'Discount':
+		var itemObj = nlapiLoadRecord('discountitem', internalid);
+		name = itemObj.getFieldValue('displayname');
+		break;
+	case 'NonInvtPart':
+		var itemObj = nlapiLoadRecord('noninventoryitem', internalid);
+		name = itemObj.getFieldValue('displayname');
+		break;
+	case 'Service':
+		var itemObj = nlapiLoadRecord('serviceitem', internalid);
+		name = itemObj.getFieldValue('displayname');
+		break;
+	case 'Kit':
+		var itemObj = nlapiLoadRecord('kititem', internalid);
+		name = itemObj.getFieldValue('displayname');
+		break;
+	case 'Group':
+		var itemObj = nlapiLoadRecord('itemgroup', internalid);
+		name = itemObj.getFieldValue('displayname');
+		break;
+	}
+	return name;
+}
+
+
+function isItemOnOACProductList(itemid){
+	
+	try {
+		var itemObj = nlapiLoadRecord('serviceitem', itemid);
+		return itemObj.getFieldValue('custitem_oacproductlist');
+	}
+	catch (e){
+		if (e=='SSS_RECORD_TYPE_MISMATCH'){
+			try {
+				var itemObj = nlapiLoadRecord('itemgroup', itemid);
+				return itemObj.getFieldValue('custitem_oacproductlist');
+			}
+			catch (e){
+				if (e=='SSS_RECORD_TYPE_MISMATCH'){
+					try {
+						var itemObj = nlapiLoadRecord('discountitem', itemid);
+						return itemObj.getFieldValue('custitem_oacproductlist');
+					}
+					catch (e){
+						if (e=='SSS_RECORD_TYPE_MISMATCH'){
+							nlapiLogExecution('Error', "GetItemDescription: Item is not a service item or discount item" , itemid);
+							return 'F';
+						}
+					}
+				}
+			}		
+		}
+	}
+	return 'F';
+	
+}
+
+function getOrderAddress(orderid){
+	var searchresults = null;
+	try {
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter( 'tranid', null, 'is', orderid );
+		filters[1] = new nlobjSearchFilter( 'mainline', null, 'is', 'T' );
+	//	filters[2] = new nlobjSearchFilter( 'accounttype', null, 'anyof', 'Income');
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('billaddress1');
+		columns[1] = new nlobjSearchColumn('billaddress2');
+		columns[2] = new nlobjSearchColumn('shipaddress1');
+		columns[3] = new nlobjSearchColumn('shipaddress2');
+		
+
+if (searchresults==null){
+	nlapiLogExecution('Debug', 'getOrderAddress ', "Returned no results");
+
+}
+else {
+	nlapiLogExecution('Debug', 'getOrderAddress  Results:', searchresults.length);
+	
+}
+		
+		searchresults = nlapiSearchRecord( 'salesorder', null, filters, columns );
+
+
+	}
+	catch (e){
+		nlapiLogExecution('Error', 'getOrderAddress failed', e.getDetails());
+	}
+	return searchresults;
+}
+
+function getOrderDetails(orderid){
+	var searchresults = null;
+	try {
+		var filters = new Array();
+		filters[0] = new nlobjSearchFilter( 'tranid', null, 'is', orderid );
+		filters[1] = new nlobjSearchFilter( 'mainline', null, 'is', 'F' );
+		filters[2] = new nlobjSearchFilter( 'accounttype', null, 'anyof', 'Income');
+		
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('item');
+		columns[1] = new nlobjSearchColumn('rate');
+		columns[2] = new nlobjSearchColumn('custcolproduct_cat_id');
+		columns[3] = new nlobjSearchColumn('custcol_productdescription');
+		columns[4] = new nlobjSearchColumn('custcolproduct_feature_id');
+		columns[5] = new nlobjSearchColumn('custcol_product_cat_ref_text');
+		columns[6] = new nlobjSearchColumn('custcolproduct_city_id');
+		columns[7] = new nlobjSearchColumn('custcol_prodlocation');
+		columns[8] = new nlobjSearchColumn('quantity');
+		columns[9] = new nlobjSearchColumn('internalid');
+		searchresults = nlapiSearchRecord( 'salesorder', null, filters, columns );
+	}
+	catch (e){
+		nlapiLogExecution('Error', 'getOrderDetailsSearch failed', e.getDetails());
+	}
+	return searchresults;
+}
+
+function logMessage(customer, author, recipient, subject, body){
+	
+	var message = nlapiCreateRecord('message');
+	message.setFieldValue('entity', customer);
+	message.setFieldValue('subject', subject);
+	message.setFieldValue('message', body);
+	message.setFieldValue('author', author);
+	message.setFieldValue('recipient', customer);
+	try {
+		nlapiSubmitRecord( message );
+	}
+	catch (e){
+		nlapiLogExecution ('DEBUG', 'System', 'Unable to log email message sent:' + customer+ " "+ e.getDetails()); 	
+		return false;
+	}
+	return true;
+}
+
+function addnote(title, memo, user, entity){
+
+	var note = nlapiCreateRecord("note");	
+    note.setFieldValue('note', memo);		
+	note.setFieldValue('title', title);			    
+  	note.setFieldValue('entity', entity);
+ 	note.setFieldValue('author', user);
+	note.setFieldValue('direction', '1');
+	  	  	
+  	try 	{        
+  		nlapiSubmitRecord(note, true);
+  	}
+    catch(e)    
+ 	{     
+ 			nlapiLogExecution('ERROR',  e.getDetails());        
+   	} 	
+}
+
+function addPhoneCall(title, telnumber, startdate, completeddate, companyID, timedevent, starttime, endtime, status, showRecord){
+
+	
+	
+	
+ 	var callId =null;
+	var call = nlapiCreateRecord("phonecall");	
+    
+	call.setFieldValue('title', title);		
+  	call.setFieldValue('phone', telnumber);			    
+  	call.setFieldValue('company', companyID);
+	call.setFieldValue('startdate',  startdate);		
+	call.setFieldValue('completeddate',  completeddate);		
+	call.setFieldValue('timedevent',  timedevent);		
+	call.setFieldValue('starttime',  starttime);		
+	call.setFieldValue('endtime',  endtime);		
+	call.setFieldValue('status',  status);		
+	
+
+	
+//	nlapiLogExecution("Debug", "starttime", starttime);
+//	nlapiLogExecution("Debug", "endtime", endtime);
+	
+	try {   
+  		callId = nlapiSubmitRecord(call, true, true );
+ 	}
+    catch(e)    
+ 	{       
+ 		nlapiLogExecution("Error", "Unable to add phone call", e);
+    	alert(e.getDetails());	
+   	} 	
+   	
+    if (showRecord){
+	   	var url = nlapiResolveURL('RECORD', 'phonecall', callId, "VIEW");
+		window.open(url, 'Phone Call', "location = 0, toolbar = 0, status= 0, menubar= 0, resizable= 0, scrollbars= 0, width=1400, height=825");
+    }
+		
+	
+}
+
+function addtask(title, assigned, startdate, timedevent, starttime, endtime, duedate, remindertype, reminderminutes, priority, status, message, custid, transactionid, owner, sendemail)
+{
+
+	var taskRecord = nlapiCreateRecord('task');
+	
+	try {
+		taskRecord.setFieldValue('title', title);
+		taskRecord.setFieldValue('assigned', assigned);
+		taskRecord.setFieldValue('startdate', startdate);
+		taskRecord.setFieldValue('timedevent', timedevent);
+		taskRecord.setFieldValue('starttime', starttime);
+		taskRecord.setFieldValue('endtime', endtime);
+		taskRecord.setFieldValue('duedate', duedate);
+		taskRecord.setFieldValue('priority', priority);
+		taskRecord.setFieldValue('status', status);
+		taskRecord.setFieldValue('remindertype', remindertype);
+		taskRecord.setFieldValue('reminderminutes', reminderminutes);
+		taskRecord.setFieldValue('message', message);
+		taskRecord.setFieldValue('company', custid);
+		taskRecord.setFieldValue('transaction', transactionid);
+		taskRecord.setFieldValue('owner', owner);	
+		taskRecord.setFieldValue('sendemail', sendemail);	
+		
+		var taskid = nlapiSubmitRecord(taskRecord, true, false);
+		return taskid;
+	}
+	catch (e)
+	{
+		nlapiLogExecution ('DEBUG', 'System', 'Unable to save task: ' + title + " for "+ custid+ " " +e.getDetails()); 	  
+		//alert(e.getDetails());
+ 		//	console.log('ERROR', e.getCode(), e.getDetails());   
+		return null;
+	}
+	
+	
+	
+}
+
+function fieldupdate(recordObj, dbfield, field){
+	var currentValue = recordObj.getFieldValue(dbfield);
+	var newValue = request.getParameter(field);
+	if (currentValue!=newValue){
+		recordObj.setFieldValue(dbfield, newValue);
+	}	
+	return ;	
+}
+
+function stringToArray(str){
+	nlapiLogExecution("Debug", "STRINGTOARRAY", str);
+	try {
+		if (str==null||str==''){
+			return '';
+		}
+		if (str.charAt((str.length-1))!=','){
+			str = str + ',';
+		}
+		var newarray = str.split(',');
+		
+		if (newarray[newarray.length]==null || newarray[newarray.length]==''){
+			newarray.pop();
+		}
+		return newarray;
+	}
+	catch (e){
+		nlapiLogExecution("Error", "StringToArray:"+str, e.getDetails());
+	}
+}
+
+function parseTelNumber(formattedTelnumber){
+	try{
+		var stripped = '';
+		if (formattedTelnumber!=null){
+			for (var i=1; i <= formattedTelnumber.length; i++){
+				var _char = formattedTelnumber.charAt(i);
+				if (_char=='0'||_char=='1'||_char=='2'||_char=='3'||_char=='4'||_char=='5'||_char=='6'||_char=='7'||_char=='8'||_char=='9'){
+					stripped += _char;	
+				}
+			}
+		}
+		return stripped;
+	}
+	catch(e){
+		nlapiLogExecution("Error", "Unable to parse telephone number", formattedTelnumber);
+		return '';
+	}
+}	
+
+function parseJSON( data ) {
+
+	var rvalidchars = '/^[\],:{}\s]*$/';
+	var rvalidescape = '/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g';
+	var rvalidtokens = '/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g';
+	var rvalidbraces = '/(?:^|:|,)(?:\s*\[)+/g';
+	
+	if ( typeof data !== "string" || !data ) {
+		return null;
+	}
+
+	// Attempt to parse using the native JSON parser first
+	if ( window.JSON && window.JSON.parse ) {
+		return window.JSON.parse( data );
+	}
+
+	// Make sure the incoming data is actual JSON
+	// Logic borrowed from http://json.org/json2.js
+	if ( rvalidchars.test( data.replace( rvalidescape, "@" )
+			.replace( rvalidtokens, "]" )
+			.replace( rvalidbraces, "")) ) {
+
+		return ( new Function( "return " + data ) )();
+
+	}
+	
+	//invalid json
+	return null;
+}
+
+
+
+
+
+/*
+ * DATE FUNCTIONS
+ */
+
+
+
+function getCurrentTime(){
+	
+	var today = new Date();
+	var hours = today.getHours();
+	var day  = today.getDate();
+	var newhour = hours +3;
+	if (hours>23){
+		hours = 23;
+	}
+	var EST = new Date(today.getFullYear(), today.getMonth(), day, newhour, today.getMinutes(), today.getSeconds(), today.getMilliseconds());
+	var time  = nlapiDateToString(EST, 'timeofday');
+	return time;
+	
+}
+
+
+function advanceDateToMonday(datein){
+	
+	var add = 0;
+	var day = datein.getDay();
+	if (day==0||day==6){  //SUNDAY OR SATURDAY
+		switch (day) {
+			case 0 : 	add = 1;
+						break;	
+			case 6 : 	add = 2;
+						break;	
+			default:	add = 0;
+						break;	
+		}		
+		return nlapiAddDays(datein, add);
+	}
+	else{
+		return datein;	
+	}
+	
+/*
+
+var d=new Date();
+var weekday=new Array(7);
+weekday[0]="Sunday";
+weekday[1]="Monday";
+weekday[2]="Tuesday";
+weekday[3]="Wednesday";
+weekday[4]="Thursday";
+weekday[5]="Friday";
+weekday[6]="Saturday";
+
+*/
+	
+}
+
+function isDate1SameAsDate2(date1, date2) {
+
+	var d1=0;
+	var d2=0;
+	var m1=0;
+	var m2=0;
+	var y1=0;
+	var y2=0;
+
+
+	d1=date1.getDate();
+	m1=date1.getMonth();
+	y1=date1.getYear();
+	d2=date2.getDate();
+	m2=date2.getMonth();
+	y2=date2.getYear();
+	
+	if (y2==y1&&d2==d1&&m2==m1){
+		return true;
+	}
+	return false;
+
+}
+
+
+function isDate1BeforeDate2(date1, date2) {
+	var d1=0;
+	var d2=0;
+	var m1=0;
+	var m2=0;
+	var y1=0;
+	var y2=0;
+
+
+	
+	d1=date1.getDate();
+	m1=date1.getMonth();
+	y1=date1.getYear();
+	d2=date2.getDate();
+	m2=date2.getMonth();
+	y2=date2.getYear();
+	
+	if (y2>y1)
+	{
+		return true;
+	}			
+	if (y2<y1)
+	{
+		return false;
+		
+	}		
+	
+	// dates are in the same year, compare months
+	if (m2>m1)
+	{
+		return true;
+	}
+	if (m2<m1)
+	{
+		return false;
+	} 	
+
+	//dates are in the same month and year, compare day	
+	if (d2>d1)
+	{
+		return true;
+	}	
+	if (d2<d1)
+	{
+		return false;
+	}
+	
+	//dates are the same
+		return false;
+}
+
+
+function numberOfDays(date1, date2) {
+		//console.log("in numberOfDays: " + date1 + '  '+ date2);  
+	try 	{        
+  		var one_day=1000*60*60*24;
+  		//console.log("in numberOfDays" + date1 + '  '+ date2); 
+		var ndays =  Math.ceil((date2.getTime()-date1.getTime())/(one_day));
+		//console.log("numberOfDays: " + ndays);  
+		return ndays;
+ 	}
+    catch(e)    
+ 	{       
+ 		//alert( e.getDetails());
+ 		//console.log('ERROR', e.getCode(), e.getDetails());  
+ 		return 0; 
+   	} 	
+	
+	return 0; 	
+}
+
+function getFirstDayofTheMonthDate(datein){
+
+	var pastdate = new Date ( datein.getFullYear(), datein.getMonth(), 1);
+	return pastdate;
+}
+
+function getLastDayofTheMonthDate(datein){
+	var startdate = getFirstDayofTheMonthDate(datein);
+	var enddate = nlapiAddDays(nlapiAddMonths(startdate,1),-1);
+	return enddate;
+	
+}
+
+
+function isDateOnMonday(today){
+	
+	
+	var day = today.getDay();
+	if (day==1){
+		return true;
+	}
+	return false;
+	
+/*
+  
+var d=new Date();
+var weekday=new Array(7);
+weekday[0]="Sunday";
+weekday[1]="Monday";
+weekday[2]="Tuesday";
+weekday[3]="Wednesday";
+weekday[4]="Thursday";
+weekday[5]="Friday";
+weekday[6]="Saturday";
+
+ */
+	
+}
+
+
+
+function howManyDaysUntilNextTuesday(today){
+	
+	
+	var day = today.getDay();
+	switch (day) {
+		case 0 : 	return 2;
+					break;	
+		case 1 : 	return 1;
+					break;	
+		case 2 : 	return 7;
+					break;	
+		case 3 : 	return 6;
+					break;	
+		case 4 : 	return 5;
+					break;	
+		case 5 : 	return 4;
+					break;	
+		case 6 : 	return 3;
+					break;	
+			
+	}
+	return 1;
+
+/*
+  
+var d=new Date();
+var weekday=new Array(7);
+weekday[0]="Sunday";
+weekday[1]="Monday";
+weekday[2]="Tuesday";
+weekday[3]="Wednesday";
+weekday[4]="Thursday";
+weekday[5]="Friday";
+weekday[6]="Saturday";
+
+ */
+	
+}
+
+
+
+function addMinutesToCurrentTime(minutes){
+	
+	var today = new Date();
+	var hours = today.getHours();
+	var day  = today.getDate();
+	var newhour = hours;
+	//if (hours>23){
+	//	hours = 23;
+	//}
+	var EST = new Date(today.getFullYear(), today.getMonth(), day, newhour, today.getMinutes()+minutes, today.getSeconds(), today.getMilliseconds());
+	var time  = nlapiDateToString(EST, 'timeofday');
+	return time;
+	
+}
+
+function getInvoiceDueDate(invoiceDate, billingDay) {
+	var dueDate = invoiceDate;
+	
+	if (billingDay < 1 || billingDay > 31) {
+		billingDay = 1;
+	}
+	
+	var tmp = new Date(invoiceDate.getTime());
+	tmp.setDate(billingDay);
+	// Don't have this day in the invoice month?
+	if (invoiceDate.getMonth() != tmp.getMonth()) {
+		// Set to the last day of the invoice month
+		tmp.setDate(0);
+		dueDate = tmp;
+	} else {
+		// Set to the 'billing day' if it's in this month and after the invoice date
+		if (invoiceDate.getFullYear() == tmp.getFullYear()
+			&& invoiceDate.getMonth() == tmp.getMonth()
+			&& invoiceDate.getDate() < tmp.getDate()) {
+			dueDate = tmp;
+		}
+	}
+	
+	return dueDate;
+}
+
+function formatDateToStr(sec) {
+	if (sec <= 0) return "";
+	
+	var date_time = new Date();
+	date_time.setTime(sec * 1000);
+
+	return nlapiDateToString(date_time);
+}
+
+var ca411DateTime = {
+	// ref. customlist_time_zones
+	timeZones : {
+		1 : {'winter' : 3.5, 'summer' : 2.5}, // Newfoundland Time
+		2 : {'winter' : 4, 'summer' : 3}, // Atlantic Time
+		3 : {'winter' : 5, 'summer' : 4}, // Eastern Time
+		4 : {'winter' : 6, 'summer' : 5}, // Central Time
+		5 : {'winter' : 6, 'summer' : 6}, // Central/Mountain Time (Saskatchewan)
+		6 : {'winter' : 7, 'summer' : 6}, // Mountain Time
+		7 : {'winter' : 8, 'summer' : 7} // Pacific Time
+	},
+	officeTimeZone: 3, // Eastern Time
+
+	isSummerTime : function(dt){
+		var callDate = dt,
+				secondSundayMarch = new Date(callDate.getFullYear(), 2, 8),
+				firstSundayNovember = new Date(callDate.getFullYear(), 10, 1);
+
+		if(secondSundayMarch.getDay() !== 0){
+			secondSundayMarch.setDate(secondSundayMarch.getDate() + 7 - secondSundayMarch.getDay());
+		}
+		if(firstSundayNovember.getDay() !== 0){
+			firstSundayNovember.setDate(firstSundayNovember.getDate() + 7 - firstSundayNovember.getDay());
+		}
+
+		return (callDate < firstSundayNovember && callDate > secondSundayMarch);
+	},
+	
+	diffTimeZone:function(from, to, isSummerTime){
+		var t = isSummerTime ? 'summer' : 'winter';
+		return ca411DateTime.timeZones[from][t] - ca411DateTime.timeZones[to][t];
+	},
+
+	convertTimeByTimeZone: function(dt, from, to){
+		if(from === to){
+			return new Date(dt.getFullYear(),dt.getMonth(),dt.getDate(),dt.getMinutes(), m+dm,dt.getSeconds());
+		}
+		var isSummerTime = ca411DateTime.isSummerTime(dt),
+				df = ca411DateTime.diffTimeZone(from, to, isSummerTime),
+				dh = parseInt(df),
+				dm = ((df*60) % 60),
+				h = dt.getHours(),
+				m = dt.getMinutes();
+		return new Date(dt.getFullYear(),dt.getMonth(),dt.getDate(),h+dh, m+dm,dt.getSeconds());
+	},
+	strTimeToMinutes:function(str){
+		var t = str.match(/(\d+):(\d+)\s(am|pm|AM|PM)/),
+				h = parseInt(t[1]) == 12 ? 0 : parseInt(t[1]),
+				m = parseInt(t[2]),
+				a = t[3].toLowerCase() === 'pm' ? 12 * 60 : 0;
+
+		return h * 60 + m + a ;
+	}
+};
