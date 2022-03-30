@@ -1,0 +1,52 @@
+/**
+ * KPI History record creating script
+ *
+ * This script will create a record each day that captures values of specific KPI's that day
+ *
+ * Script should be scheduled to run every workday (exclude Saturday and Sunday)
+ *
+ */
+
+/**
+ * Main
+ */
+ function scheduled_kpi_history(type) {
+ 
+  // Get today's date
+  var today = new Date();
+  var strToday = nlapiDateToString(today);
+
+  // Number of overdue bookings
+  var searchResults = nlapiSearchRecord('job', 'customsearch_job_overdue');
+  var overdueBookings = searchResults ? searchResults.length : 0;
+
+  // Number of bookings pending coach
+  searchResults = nlapiSearchRecord('job', 'customsearchcst_bookings_pend_coach_21d');
+  var bookingsPendingCoach = searchResults ? searchResults.length : 0;
+
+
+  // Number of open opportunities in UK
+  searchResults = nlapiSearchRecord('opportunity', 'customsearch_kpi_opportunities_number_uk');
+  if (searchResults) {
+    var searchResult = searchResults[0];
+    var openOpportunitiesUK = searchResult.getValue('internalId', null, 'count');
+  }
+
+  // Number of open opportunities in US
+  searchResults = nlapiSearchRecord('opportunity', 'customsearch_kpi_opportunities_number_us');
+  if (searchResults) {
+    var searchResult = searchResults[0];
+    var openOpportunitiesUS = searchResult.getValue('internalId', null, 'count');
+  }
+
+  // Create and submit record
+  var kpiHistory = nlapiCreateRecord('customrecord_kpi_history'); 
+
+  kpiHistory.setFieldValue('custrecord_kpi_date', strToday);
+  kpiHistory.setFieldValue('custrecord_kpi_overduebookings', overdueBookings);
+  kpiHistory.setFieldValue('custrecord_kpi_bookingspendingcoach', bookingsPendingCoach);
+  kpiHistory.setFieldValue('custrecord_kpi_openopportunitiesuk', openOpportunitiesUK);
+  kpiHistory.setFieldValue('custrecord_kpi_openopportunitiesus', openOpportunitiesUS);
+
+  nlapiSubmitRecord(kpiHistory);
+ }
