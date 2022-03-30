@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <link
+    rel="stylesheet"
+    href="https://5118830-sb1.app.netsuite.com/core/media/media.nl?id=223544&c=5118830_SB1&h=puXEj-pd2LwE4v2QJNoq2YeIHiSmFJ9VLldtW_uKtVt3FKM-&_xt=.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://5118830-sb1.app.netsuite.com/core/media/media.nl?id=223543&c=5118830_SB1&h=K3PTjgocyfhjd7eR6Yvtsvlt5AfsVjiBG2ad9CIi4MGtiAWM&_xt=.css"
+  />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://5118830-sb1.app.netsuite.com/core/media/media.nl?id=223539&c=5118830_SB1&h=kYSqzeqvEdHe7z8ZOVe0_15nVnyRAo8R_af1S5_eXfkbPFh5&_xt=.js"></script>
+    <script src="https://5118830-sb1.app.netsuite.com/core/media/media.nl?id=223541&c=5118830_SB1&h=n_hcMAKK4RXp2oTR0hMpDvVQ9VI7zoS8yB3RlITtWtGIM0EM&_xt=.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var searchParams = new URLSearchParams(window.location.search);
+        var customerId = searchParams.get('customerId');
+        var data = $.ajax({
+          url: portalEndpoint() + '&customerId=' + customerId,
+          type: 'GET',
+          dataType: 'jsonp',
+          async: false,
+          complete: function(data){
+            console.log('invoices loaded');
+          }
+          }).responseText;
+
+          var invoices = JSON.parse(data);
+          console.log(invoices);
+          invoices.forEach(function(invoice) {
+            var row = '<tr id=' + invoice.internalId + '><td><input class="invoice_check" style="height: 30px" type="checkbox"></td><td>' + invoice.tranid + '</td><td>' + invoice.trandate + '</td><td>' + invoice.duedate + '</td><td>' + invoice.total + '</td><td>' + invoice.amountremaining + '</td></tr>';
+            $("#invoice-table tbody").append(row);
+          });
+      });
+    </script>
+    <style>
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+      
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      </style>
+  </head>
+  <body>
+      <h1 style="margin-left: 20px">Open Invoices for Agency 123</h1>
+      <div align="center">
+      <table id="invoice-table" class="invoice-table" style="width: 70%; margin: 5px; text-align: left;">
+        <thead style="font-size: 16pt;">
+          <th></th>
+          <th>Invoice Number</th>
+          <th>Date</th>
+          <th>Due Date</th>
+          <th>Total</th>
+          <th>Amount Remaining</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+      </div>
+      <div align="right" style="margin-top: 10px; margin-right: 30%">
+        <button type="button" class="inv-submit-button" id="inv-submit-button" name="agency-submit">Continue to Payment</button>
+      </div>
+  </body>
+</html>
