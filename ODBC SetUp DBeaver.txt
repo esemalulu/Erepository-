@@ -1,0 +1,5 @@
+JDBC URL: jdbc:ns://1227068.connect.api.netsuite.com:1708;ServerDataSource=NetSuite.com;encrypted=1;Ciphersuites=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384;CustomProperties=(AccountID=1227068;RoleID=3)
+
+DRIVER: Download JDBC Driver from NetSuite and Install
+Class Name: com.netsuite.jdbc.openaccess.OpenAccessDriver
+Driver Location: C:\Program Files (x86)\NetSuite\NetSuite JDBC Drivers\NQjc.jar
