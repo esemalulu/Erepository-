@@ -1,0 +1,224 @@
+/**
+ * @NApiVersion 2.x
+ * @NScriptType ClientScript
+ * @NModuleScope SameAccount
+ *
+ * This script was provided by Starling Solutions.
+ *
+ * Controls button logic and contains functions related to Excel Validator suitelet.
+ *
+ *  Version     Date            Author              Ticket         Remarks
+ ***********************************************************************************************************************
+ *  1.0         23 Sep 2020     Nicholas Bell       STP-146         Initial Remarks
+ ***********************************************************************************************************************
+ */
+
+define(['N/search'],
+
+	function (search) {
+
+		var LOCAL_CACHE = {};
+
+
+		/**
+		 * Function to be executed after page is initialized.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.mode - The mode in which the record is being accessed (create, copy, or edit)
+		 *
+		 * @since 2015.2
+		 */
+		function pageInit (scriptContext) {
+
+		}
+
+
+		/**
+		 * Function to be executed when field is changed.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.sublistId - Sublist name
+		 * @param {string} scriptContext.fieldId - Field name
+		 * @param {number} scriptContext.lineNum - Line number. Will be undefined if not a sublist or matrix field
+		 * @param {number} scriptContext.columnNum - Line number. Will be undefined if not a matrix field
+		 *
+		 * @since 2015.2
+		 */
+		function fieldChanged (scriptContext) {
+
+		}
+
+
+		/**
+		 * Function to be executed when field is slaved.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.sublistId - Sublist name
+		 * @param {string} scriptContext.fieldId - Field name
+		 *
+		 * @since 2015.2
+		 */
+		function postSourcing (scriptContext) {
+
+		}
+
+
+		/**
+		 * Function to be executed after sublist is inserted, removed, or edited.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.sublistId - Sublist name
+		 *
+		 * @since 2015.2
+		 */
+		function sublistChanged (scriptContext) {
+
+		}
+
+
+		/**
+		 * Function to be executed after line is selected.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.sublistId - Sublist name
+		 *
+		 * @since 2015.2
+		 */
+		function lineInit (scriptContext) {
+
+		}
+
+
+		/**
+		 * Validation function to be executed when field is changed.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.sublistId - Sublist name
+		 * @param {string} scriptContext.fieldId - Field name
+		 * @param {number} scriptContext.lineNum - Line number. Will be undefined if not a sublist or matrix field
+		 * @param {number} scriptContext.columnNum - Line number. Will be undefined if not a matrix field
+		 *
+		 * @returns {boolean} Return true if field is valid
+		 *
+		 * @since 2015.2
+		 */
+		function validateField (scriptContext) {
+
+			return true;
+		}
+
+
+		/**
+		 * Validation function to be executed when sublist line is committed.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.sublistId - Sublist name
+		 *
+		 * @returns {boolean} Return true if sublist line is valid
+		 *
+		 * @since 2015.2
+		 */
+		function validateLine (scriptContext) {
+
+			return true;
+		}
+
+
+		/**
+		 * Validation function to be executed when sublist line is inserted.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.sublistId - Sublist name
+		 *
+		 * @returns {boolean} Return true if sublist line is valid
+		 *
+		 * @since 2015.2
+		 */
+		function validateInsert (scriptContext) {
+
+			return true;
+		}
+
+
+		/**
+		 * Validation function to be executed when record is deleted.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @param {string} scriptContext.sublistId - Sublist name
+		 *
+		 * @returns {boolean} Return true if sublist line is valid
+		 *
+		 * @since 2015.2
+		 */
+		function validateDelete (scriptContext) {
+
+			return true;
+		}
+
+
+		/**
+		 * Validation function to be executed when record is saved.
+		 *
+		 * @param {Object} scriptContext
+		 * @param {Record} scriptContext.currentRecord - Current form record
+		 * @returns {boolean} Return true if record is valid
+		 *
+		 * @since 2015.2
+		 */
+		function saveRecord (scriptContext) {
+
+			return true;
+		}
+
+
+		// Helper Functions
+
+		/**
+		 * 	Returns all the results of a search by grabbing them 1000 at a time.
+		 *
+		 * @param {Search} thisSearch - Object representation of a search
+		 * @return {Result[]} results - Array of object representations of search results
+		 */
+		function getSearchResults (thisSearch) {
+
+			var results   = [];
+			var pagedData = thisSearch.runPaged({ pageSize : 1000 });
+
+			if (pagedData.count == 0) {
+				return results;
+			}
+
+			var page = pagedData.fetch({ index : 0 });
+			results  = page.data;
+
+			while (!page.isLast) {
+				page    = page.next();
+				results = results.concat(page.data);
+			}
+
+		}
+
+
+		return {
+			pageInit       : pageInit,
+			// fieldChanged   : fieldChanged,
+			// postSourcing   : postSourcing,
+			// sublistChanged : sublistChanged,
+			// lineInit       : lineInit,
+			// validateField  : validateField,
+			// validateLine   : validateLine,
+			// validateInsert : validateInsert,
+			// validateDelete : validateDelete,
+			// saveRecord     : saveRecord
+		};
+
+	});

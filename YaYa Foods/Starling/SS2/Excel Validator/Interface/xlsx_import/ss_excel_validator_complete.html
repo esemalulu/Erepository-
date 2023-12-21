@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Upload a sheet (.xlsx/.xls) file and import the data therein.">
+        <title>XLS(X) Data Import</title>
+        <!-- Starling CSS Sheet -->
+        <link rel="stylesheet" href="/core/media/media.nl?id=5242&c=7527462&h=W0hfE3JzEIcz9BT2Z6X7NnGKcXQAhp1i5pH36-WpCsXjsyVD&mv=l1fbdfz4&_xt=.css">
+        <script src="/core/media/media.nl?id=5252&c=7527462&h=mHHPdQWNAfVmZYQBEHZniotD_OKfz-JqrqM_-_tcrph5lUWQ&mv=l1fbdgqw&_xt=.js"></script>
+    </head>
+    <body>
+        <table id="interface">
+            <tr width="100%">
+                <td width="25px"></td>
+                <td>
+                    <div>
+                        <div id="drop_zone"  ondragover="dragOverHandler(event)" ondragend="dragEnd(event)" ondragleave="dragLeave(event)">
+                            <p id="dz_desc">Drag an Excel file (.xls or .xlsx) here to be validated...</p>
+                        </div>
+                        <br>
+                        <input id="select_file" type="file" name="files" style="display:none;">
+                        <button class='ss_button' id="choose_file" >Choose File</button>
+                        <span id="file_name">No file chosen</span>
+                        <br /><br />
+
+                        <div class = "action_table">
+                            <p><b>Modifiers</b></p>
+                            <table>
+                                <tr>
+                                    <th>Modifier</th>
+                                    <th>Selection</th>
+                                    <th>Description</th>
+                                </tr>
+                                <tr>
+                                    <td>Dynamic Mode</td>
+                                    <td align="center"><input type="checkbox" id="isDynamic"></td>
+                                    <td>Open/save record in dynamic mode. Closer to UI input, allows sourcing on fields that are not explicitly set.</td>
+                                </tr>
+                                <tr>
+                                    <td>SDS Import</td>
+                                    <td align="center"><input type="checkbox" id="isSdsImport"></td>
+                                    <td>Creates SDS groups, creates folders for files, and attaches the groups to linked items.</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class = "action_table">
+                            <p><b>Actions</b></p>
+                            <table>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Selection</th>
+                                    <th>Description</th>
+                                    <th>Key</th>
+                                </tr>
+                                <tr>
+                                    <td>Add</td>
+                                    <td align="center">
+                                        <input type="checkbox" id="add">
+                                    </td>
+                                    <td>Add one new record per line in the excel file. (Default) </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Update</td>
+                                    <td align="center"><input type="checkbox" id="update"></td>
+                                    <td>Update records using the current excel file.  (Can be combined with add.) </td>
+                                    <td><input class="textInput" type="text" id="foreignKeyUpdate"></td>
+                                </tr>
+                                <tr>
+                                    <td>Many to One</td>
+                                    <td align="center"><input type="checkbox" id="manyToOne"></td>
+                                    <td>Add/Update lines on a record using a key matched to one column on the Excel file.</td>
+                                    <td><input class="textInput" type="text" id="foreignKey"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br />
+                        <button class='ss_button' id="validate" name="Validate">Validate</button>
+                        <input class='ss_button_submit' id="upload" type="submit" name="Upload" style="display: none;">
+                        <button class='ss_button' id="listFiles" name="List Files" style="display: none;">List Files</button>
+                        <p id="user_message" style="display : none; color : red; font-weight : bold"></p>
+                        <br>
+                    </div>
+                    <br><br>
+                    <div id="output"></div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- File Validator Starling Account -->
+        <script lang="javascript" src="/core/media/media.nl?id=5243&c=7527462&h=qiYt0OQoS-HjpWN31piQVgz4-65xg3xr9gMszA-5ZMk3pIBF&mv=l1fbdgqw&_xt=.js"></script>
+        <!-- Main JS Starling -->
+        <script lang="javascript" src="/core/media/media.nl?id=5244&c=7527462&h=ckegjRENmIhUhJYtBZVN6yDWTgKC56vKnJaAQKS1j1bzAyBO&mv=l1fbdgqw&_xt=.js"></script>
+        <!--  Modal  -->
+        <div id="loading" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <p>Please Wait, Validating Worksheets.</p>
+            </div>
+
+        </div>
+    </body>
+</html>
