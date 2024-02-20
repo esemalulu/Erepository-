@@ -1,0 +1,133 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<style>
+    th {
+        text-transform: uppercase !important;
+        color: #666;
+        font-weight: normal !important;
+    }
+    #potable {
+        width: calc(100vw - 60px);
+    }
+    #potable td {
+        max-height: 30px !important;
+        max-width: 300px;
+        height: 30px !important;
+        white-space: initial;
+        overflow: hidden;
+        border-bottom: 1px solid black;
+    }
+    #potable th {
+        background-color: #fff;
+    }
+    #potable tr {
+        background-color: #f3f3f3;
+    }
+    .order td {
+        border-top: 1px solid #AAA;
+        background-image: linear-gradient(to bottom, #EEE, #DDD);
+        vertical-align: top;
+    }
+    .childtable {
+        padding-left: 50px !important;
+    }
+    .childtable th {
+        border-bottom: none !important;
+    }
+    .childtable table {
+        border-spacing: 0;
+        border-collapse: collapse;
+        width: 1400px;
+    }
+    .childtable th {
+        text-align: left;
+	    background-color: #e5e5e5;
+	    border-top: 1px solid #c7c7c7;
+	    border-right: 1px solid #EBEBEB;
+	    border-left: 1px solid #EBEBEB;
+    }
+    .fixedHeader-floating th {
+        font-size: 11px;
+    }
+    .childtable tr:nth-child(odd) {
+        background-color: #F5F5F5 !important;
+    }
+    .childtable tr:nth-child(even) {
+        background-color: #EEE !important;
+    }
+    .detailbutton {
+        text-decoration: none;
+        background-color: white;
+        padding: 2px 6px 2px 6px;
+        border-top: 1px solid #909090;
+        border-right: 1px solid #909090;
+        border-bottom: 1px solid #909090;
+        border-left: 1px solid #909090;
+        border-radius: 3px;
+    }
+    
+    .hidden {
+        display: none;
+    }
+	.rvs-primary-button, .rvs-primary-button:visited {
+	    border-radius: 3px;
+	    border: #125ab2 1px solid;
+	    background-color: #2c88f7;
+	    color: #FFFFFF !important;
+	    display: inline-block;
+	    text-align: center;
+	    padding: 5px 0px;
+	    font-weight: 600;
+	    font-size: 14px;
+	    letter-spacing: .3px;
+	    font-family: Open Sans,Helvetica,Arial,sans-serif;
+	    padding: 5px 10px;
+	}
+	.rvs-primary-button:hover {
+	    background-color: #1467cc;
+	    cursor: pointer;
+	}
+	.rvs-secondary-button, .rvs-secondary-button:visited {
+	    border-radius: 3px;
+	    border: #b2b2b2 1px solid;
+	    background-color: #ededed;
+	    color: #000000;
+	    display: inline-block;
+	    text-align: center;
+	    padding: 5px 0px;
+	    font-weight: 600;
+	    font-size: 14px;
+	    letter-spacing: .3px;
+	    font-family: Open Sans,Helvetica,Arial,sans-serif;
+	    padding: 5px 10px;
+	}
+	.rvs-secondary-button:hover {
+	    background-color: #d9d9d9;
+	    cursor: pointer;
+	}
+	.noselect {
+	  -webkit-touch-callout: none; /* iOS Safari */
+	    -webkit-user-select: none; /* Safari */
+	     -khtml-user-select: none; /* Konqueror HTML */
+	       -moz-user-select: none; /* Firefox */
+	        -ms-user-select: none; /* Internet Explorer/Edge */
+	            user-select: none; /* Non-prefixed version, currently
+	                                  supported by Chrome and Opera */
+	}
+</style>
+
+<!-- <input type='button' class="rvs-primary-button" data-bind="click: refresh" value='Refresh'>
+<input id='print' type='button' class="rvs-primary-button" data-bind="click: print" value='Print'> <span style='font-size: 22px; color: #AAA;'>|</span>
+<input type='button' id='expandall' class='rvs-secondary-button' value='Expand All'>
+<input type='button' id='collapseall' class='rvs-secondary-button' value='Collapse All'> <span style='font-size: 22px; color: #AAA;'>|</span>
+<input type='button' class="rvs-secondary-button" data-bind="click: selectAll" value='Select All'>
+<input type='button' class="rvs-secondary-button" data-bind="click: deselectAll" value='Deselect All'>
+<br/>
+<br/> -->
+<div>
+    <input type='button' id='expandall' class='rvs-secondary-button' value='Expand All'>
+    <input type='button' id='collapseall' class='rvs-secondary-button' value='Collapse All'>
+    <br/><br/>
+    <table id='potable' class="nowrap"></table>
+</div>

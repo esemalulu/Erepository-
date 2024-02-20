@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> <!-- FontAwesome 5 -->
+<div id='modalanchor'></div>
+<!-- Main Table -->
+<table class="rvs-table-stripe rvs-table" >  
+    <thead class="rvs-table-header">
+        <tr>
+            <th class="rvs-cell-sm"  style="text-align: center">CONFIGURE</th>
+            <th class="rvs-cell-lg">ITEM</th>
+            <th class="rvs-cell-sm">UNITS</th>
+			<th class="rvs-cell-sm">QUANTITY</th>
+			<th class="rvs-cell-sm">RATE</th>
+			<th class="rvs-cell-sm">AMOUNT</th>
+			<th class="rvs-cell-md">PART NOTES</th>
+            <th class="rvs-cell-md">VENDOR PART #</th>
+            <th class="rvs-buttoncell"/>
+        </tr>
+    </thead>
+   <tbody data-bind=" template:{name: itemTemplateToUse, foreach: lineItems }, list: lineItems"></tbody>
+</table>
+
+<table class="rvs-table rvs-table-header">
+	<tr>
+		<td>
+			<div class="rvs-secondary-button add-button-long" data-bind="click: $root.addLine" title="Add Item"><span id="icon-plus">+&nbsp;</span><span>Add Item</span></div>
+		</td>
+	</tr>
+</table>
+
+<!-- Item Line Templates -->
+<script id="viewLineTmpl" type="text/html">
+<tr class="item">
+	<td colspan="9">
+		<table class="rvs-childtable-wrapper" style="width:100%">
+			<tr>
+				<td class="rvs-cell-sm" data-bind="click: $root.editLine"></td>
+        		<td class="rvs-cell-lg" data-bind="click: $root.editLine, text: item() ? item().name : null"></td>
+				<td class="rvs-cell-sm" data-bind="click: $root.editLine, text: selectedUOMText()"></td>
+				<td class="rvs-cell-sm" data-bind="click: $root.editLine, text: quantity()"></td>
+				<td class="rvs-cell-sm" data-bind="click: $root.editLine, text: rate()"></td>
+				<td class="rvs-cell-sm" data-bind="click: $root.editLine, text: amount()"></td>
+        		<td class="rvs-cell-md" data-bind="click: $root.editLine, text: partsNotes().length < 60 ? partsNotes() : partsNotes().substring(0,55)+'(...)'"></td>
+				<td class="rvs-cell-md" data-bind="click: $root.editLine, text: vendorPartNo()"></td>
+				<td class="rvs-buttoncell" data-bind="click: $root.editLine">
+					<div class="rvs-button-wrapper">
+						<div class="rvs-secondary-button row-button" id="edit" data-bind="click: $root.editLine" title="Edit">Edit</div>
+						<div class="rvs-delete-button row-button" id="remove" data-bind="click: $root.removeLine" title="Remove">Remove</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</script>
+
+<script id="editLineTmpl" type="text/html">
+<tr class="item selected">
+	<td colspan="9">
+		<table class="rvs-childtable-wrapper" style="width:100%">
+			<tr>
+				<td class="rvs-cell-sm" style="text-align: center"><div class="rvs-icon-button rvs-icon-button" data-bind="click: $root.configureLine" title="Open..."><i class="fas fa-external-link-alt"></div></td>
+				<td class="rvs-cell-lg" rvs-cell-padding><input id="lineitem_input"  placeholder="Start typing..." data-bind="setupItemInputs, value: item().name"></td>
+				<td class="rvs-cell-sm" data-bind="text: selectedUOMText()"></td>
+				<td class="rvs-cell-sm rvs-cell-padding"><input class="rvs-input-cell" data-bind="textInput: $root.selectedLine().quantity"/></td>
+				<td class="rvs-cell-sm rvs-cell-padding" data-bind="text: $root.selectedLine().rate"/></td>
+				<td class="rvs-cell-sm rvs-cell-padding" data-bind="text: $root.selectedLine().amount"/></td>
+				<td class="rvs-cell-md"><textarea rows="3" class="rvs-input-cell" data-bind="textInput: $root.selectedLine().partsNotes"/></td>
+				<td class="rvs-cell-md rvs-cell-padding" data-bind="text: $root.selectedLine().vendorPartNo"/></td>
+				<td class="rvs-buttoncell">
+					<div class="rvs-button-wrapper">
+       		  	  		<div class="rvs-primary-button row-button" id="save" data-bind="click: $root.saveLine" title="Save">Save</div>
+						<div class="rvs-secondary-button row-button" id="cancel" data-bind="click: $root.cancelLine" title="Cancel">Cancel</div>
+					</div>
+    			</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</script>
+
+<script id="blankHeaderTmpl" type="text/html">
+</script>
+
+
+<!-- Line Item Popup. Note the use of the "data-bind=with" in the top level div -->
+<div class="rvs-modal" id="modal-opline" data-bind="with: $root.selectedLine" title="Configure by Item Category">
+	<div class="rvs-primary-button row-button" id="savePopup" data-bind="click: $root.savePopup" title="Save">Save</div>
+	<div class="rvs-secondary-button row-button" id="cancelPopup" data-bind="click: $root.cancelPopup" title="Cancel">Cancel</div>
+	<table class="rvs-table rvs-popup-table">
+		<tr>
+			<td class="rvs-cell-md"></td>
+			<td class="rvs-popup-celllg"></td>
+			<td class="rvs-cell-md"></td>
+			<td class="rvs-popup-celllg"></td>
+			<td class="rvs-cell-md"></td>
+			<td class="rvs-popup-celllg"></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>ITEM CATEGORY 1</td>
+			<td><select class="rvs-input-xlg" data-bind="options: $root.itemcat1Options, optionsText: 'name', value: selectedItemCat1, optionsCaption: 'Choose...'"></select></td>
+		</tr>
+		<tr>
+			<td></td>
+            <td>ITEM CATEGORY 2</td>
+			<td><select class="rvs-input-xlg" data-bind="options: filteredItemCat2, optionsText: 'name', value: selectedItemCat2, optionsCaption: 'Choose...'"></select></td>
+		</tr>
+		<tr>
+			<td></td>
+		    <td>ITEM</td>
+			<td><input id="popupitem_input" class="rvs-input-xlg rvs-cell-padding" placeholder="Start Typing..." data-bind="value: item().name"></td>
+		</tr>
+	</table>
+</div>		

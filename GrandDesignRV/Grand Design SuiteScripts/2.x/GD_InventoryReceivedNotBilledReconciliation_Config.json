@@ -1,0 +1,10 @@
+{
+  "paths": {
+    "jquery":                   "/SuiteScripts/Grand Design SuiteScripts/Libraries/jquery-3.3.1.min",
+    "datatables.net":           "/SuiteScripts/Grand Design SuiteScripts/Libraries/jquery.dataTables.min",
+    "fixedheader":              "/SuiteScripts/Grand Design SuiteScripts/Libraries/dataTables.fixedHeader.min",
+    "datatables.net-buttons":   "/SuiteScripts/Grand Design SuiteScripts/Libraries/dataTables.buttons.min",
+    "buttons":                  "/SuiteScripts/Grand Design SuiteScripts/Libraries/buttons.html5.min",
+    "lzstring":                 "/SuiteScripts/Grand Design SuiteScripts/Libraries/lz-string.min"
+  }
+}

@@ -1,0 +1,2353 @@
+/* Edited for Bridge Theme */
+
+$sc-color-icon: $sc-neutral-shade-0;
+
+$sc-color-star-filled: #f9b710;
+$sc-color-star-empty: $sc-color-theme-border-light;
+$sc-color-star-error: $sc-color-error;
+
+// Base icons
+//
+// Icons are a visual representation of an object, action, or idea that communicate meaning in a graphical way.
+//
+// Markup:
+// <i class="icon-home"></i>
+// <i class="icon-star"></i>
+// <i class="icon-like"></i>
+//
+// Styleguide 2.4.1
+
+.icon-container {
+	@include border-radius(50%);
+	background-color: $sc-color-theme-500;
+	display: inline-block;
+	text-align: center;
+	height: 20px;
+	width: 20px;
+	line-height: 18px;
+}
+
+.icon {
+	@extend .fa;
+	color: $sc-color-icon;
+	font-size: 13px;
+	vertical-align: middle;
+	display: inline;
+	font-style: normal;
+}
+
+.icon-base {
+	@extend .fa;
+	font-size:20px;
+	display:inline;
+}
+
+.icon-display-list {
+	@extend .fa;
+	@extend %fa-navicon;
+}
+
+.icon-display-table {
+	@extend .fa;
+	@extend %fa-th-large;
+}
+
+.icon-display-grid {
+	@extend .fa;
+	@extend %fa-th;
+}
+
+.icon-close {
+	@extend .icon;
+	@extend %fa-close;
+}
+
+.icon-remove {
+	@extend .icon;
+	@extend %fa-close;
+}
+
+.icon-container-info {
+	@extend .icon-container;
+	background-color: $sc-color-info;
+}
+
+.icon-info {
+	@extend .icon;
+	@extend %fa-info-circle;
+}
+.icon-question {
+	@extend .icon;
+	@extend %fa-question;
+}
+.icon-question-circle {
+	@extend .icon;
+	@extend %fa-question-circle;
+}
+.icon-container-success {
+	@extend .icon-container;
+	background-color: $sc-color-success;
+}
+
+.icon-success {
+	@extend .icon;
+	@extend %fa-check;
+	color: $sc-color-success-background;
+}
+
+.icon-container-warning {
+	@extend .icon-container;
+	background-color: $sc-color-warning;
+}
+
+.icon-warning {
+	@extend .icon;
+	@extend %fa-exclamation;
+}
+
+.icon-container-error {
+	@extend .icon-container;
+	background-color: $sc-color-error;
+}
+
+.icon-error {
+	@extend .icon;
+	@extend %fa-exclamation;
+}
+
+.icon-chevron {
+	@extend .icon-base;
+	color: $sc-color-theme-700;
+}
+
+.icon-chevron-up {
+	@extend .icon-chevron;
+	@extend %fa-chevron-up;
+}
+
+.icon-chevron-down {
+	@extend .icon-chevron;
+	@extend %fa-chevron-down;
+}
+
+.icon-chevron-right {
+	@extend .icon-chevron;
+	@extend %fa-chevron-right;
+}
+
+.icon-chevron-left {
+	@extend .icon-chevron;
+	@extend %fa-chevron-left;
+}
+
+.icon-angle-up {
+	@extend .icon-chevron;
+	@extend %fa-angle-up;
+}
+
+.icon-angle-down {
+	@extend .icon-chevron;
+	@extend %fa-angle-down;
+}
+
+.icon-angle-right {
+	@extend .icon-chevron;
+	@extend %fa-angle-right;
+}
+
+.icon-angle-left {
+	@extend .icon-chevron;
+	@extend %fa-angle-left;
+}
+
+.icon-caret {
+	@extend .icon;
+	color: $sc-color-theme-700;
+}
+
+.icon-caret-left {
+	@extend .icon-caret;
+	@extend %fa-caret-left;
+}
+
+.icon-caret-right {
+	@extend .icon-caret;
+	@extend %fa-caret-right;
+}
+
+.icon-caret-up {
+	@extend .icon-caret;
+	@extend %fa-caret-up;
+}
+
+.icon-caret-down {
+	@extend .icon-caret;
+	@extend %fa-caret-down;
+}
+
+.icon-star {
+	@extend .icon;
+	@extend %fa-star;
+	color: $sc-color-star-empty;
+}
+
+.icon-star-filled {
+	@extend .icon;
+	@extend %fa-star;
+	color: $sc-color-star-filled;
+}
+
+.icon-star-error {
+	@extend .icon;
+	@extend %fa-star;
+	color: $sc-color-star-error;
+}
+
+.credit-card-content-icon {
+	@extend .fa;
+	@extend %fa-cc-visa;
+}
+
+.icon-ok-sign {
+	@extend .fa;
+	@extend %fa-check-circle;
+	color: $sc-color-theme-500;
+}
+
+.icon-locked {
+	@extend .fa;
+	@extend %fa-lock;
+}
+
+.icon-flag {
+	@extend .fa;
+	@extend %fa-flag;
+}
+
+.icon-globe {
+	@extend .fa;
+	@extend %fa-globe;
+}
+
+.icon-message-atention {
+	@extend .fa;
+	@extend %fa-exclamation-circle;
+}
+
+.icon-map-marker {
+	@extend .fa;
+	@extend %fa-map-marker;
+}
+
+.icon-home {
+	@extend .fa;
+	@extend %fa-home;
+}
+
+.icon-truck {
+	@extend .fa;
+	@extend %fa-truck;
+}
+
+.icon-like {
+	@extend .fa;
+	@extend %fa-thumbs-up;
+}
+
+.icon-unlike {
+	@extend .fa;
+	@extend %fa-thumbs-down;
+}
+
+.free-badge {
+	color: white;
+	background-color: $sc-color-success;
+	padding: $sc-padding-lv1 $sc-padding-lv2;
+}
+
+/* new for theme */
+/* icon-<icon name> from http://fontawesome.io/icons/ 'Web Application Icons' NOT aliases */
+
+.icon-adjust {
+	@extend .fa;
+	@extend %fa-adjust !optional;
+}
+.icon-american-sign-language-interpreting {
+	@extend .fa;
+	@extend %fa-american-sign-language-interpreting !optional;
+}
+.icon-anchor {
+	@extend .fa;
+	@extend %fa-anchor !optional;
+}
+.icon-archive {
+	@extend .fa;
+	@extend %fa-archive !optional;
+}
+.icon-area-chart {
+	@extend .fa;
+	@extend %fa-area-chart !optional;
+}
+.icon-arrows {
+	@extend .fa;
+	@extend %fa-arrows !optional;
+}
+.icon-arrows-h {
+	@extend .fa;
+	@extend %fa-arrows-h !optional;
+}
+.icon-arrows-v {
+	@extend .fa;
+	@extend %fa-arrows-v !optional;
+}
+.icon-assistive-listening-systems {
+	@extend .fa;
+	@extend %fa-assistive-listening-systems !optional;
+}
+.icon-asterisk {
+	@extend .fa;
+	@extend %fa-asterisk !optional;
+}
+.icon-at {
+	@extend .fa;
+	@extend %fa-at !optional;
+}
+.icon-audio-description {
+	@extend .fa;
+	@extend %fa-audio-description !optional;
+}
+.icon-balance-scale {
+	@extend .fa;
+	@extend %fa-balance-scale !optional;
+}
+.icon-ban {
+	@extend .fa;
+	@extend %fa-ban !optional;
+}
+.icon-bar-chart {
+	@extend .fa;
+	@extend %fa-bar-chart !optional;
+}
+.icon-barcode {
+	@extend .fa;
+	@extend %fa-barcode !optional;
+}
+.icon-bars {
+	@extend .fa;
+	@extend %fa-bars !optional;
+}
+.icon-battery-empty {
+	@extend .fa;
+	@extend %fa-battery-empty !optional;
+}
+.icon-battery-full {
+	@extend .fa;
+	@extend %fa-battery-full !optional;
+}
+.icon-battery-half {
+	@extend .fa;
+	@extend %fa-battery-half !optional;
+}
+.icon-battery-quarter {
+	@extend .fa;
+	@extend %fa-battery-quarter !optional;
+}
+.icon-battery-three-quarters {
+	@extend .fa;
+	@extend %fa-battery-three-quarters !optional;
+}
+.icon-bed {
+	@extend .fa;
+	@extend %fa-bed !optional;
+}
+.icon-beer {
+	@extend .fa;
+	@extend %fa-beer !optional;
+}
+.icon-bell {
+	@extend .fa;
+	@extend %fa-bell !optional;
+}
+.icon-bell-o {
+	@extend .fa;
+	@extend %fa-bell-o !optional;
+}
+.icon-bell-slash {
+	@extend .fa;
+	@extend %fa-bell-slash !optional;
+}
+.icon-bell-slash-o {
+	@extend .fa;
+	@extend %fa-bell-slash-o !optional;
+}
+.icon-bicycle {
+	@extend .fa;
+	@extend %fa-bicycle !optional;
+}
+.icon-binoculars {
+	@extend .fa;
+	@extend %fa-binoculars !optional;
+}
+.icon-birthday-cake {
+	@extend .fa;
+	@extend %fa-birthday-cake !optional;
+}
+.icon-blind {
+	@extend .fa;
+	@extend %fa-blind !optional;
+}
+.icon-bluetooth {
+	@extend .fa;
+	@extend %fa-bluetooth !optional;
+}
+.icon-bluetooth-b {
+	@extend .fa;
+	@extend %fa-bluetooth-b !optional;
+}
+.icon-bolt {
+	@extend .fa;
+	@extend %fa-bolt !optional;
+}
+.icon-bomb {
+	@extend .fa;
+	@extend %fa-bomb !optional;
+}
+.icon-book {
+	@extend .fa;
+	@extend %fa-book !optional;
+}
+.icon-bookmark {
+	@extend .fa;
+	@extend %fa-bookmark !optional;
+}
+.icon-bookmark-o {
+	@extend .fa;
+	@extend %fa-bookmark-o !optional;
+}
+.icon-braille {
+	@extend .fa;
+	@extend %fa-braille !optional;
+}
+.icon-briefcase {
+	@extend .fa;
+	@extend %fa-briefcase !optional;
+}
+.icon-bug {
+	@extend .fa;
+	@extend %fa-bug !optional;
+}
+.icon-building {
+	@extend .fa;
+	@extend %fa-building !optional;
+}
+.icon-building-o {
+	@extend .fa;
+	@extend %fa-building-o !optional;
+}
+.icon-bullhorn {
+	@extend .fa;
+	@extend %fa-bullhorn !optional;
+}
+.icon-bullseye {
+	@extend .fa;
+	@extend %fa-bullseye !optional;
+}
+.icon-bus {
+	@extend .fa;
+	@extend %fa-bus !optional;
+}
+.icon-calculator {
+	@extend .fa;
+	@extend %fa-calculator !optional;
+}
+.icon-calendar {
+	@extend .fa;
+	@extend %fa-calendar !optional;
+}
+.icon-calendar-check-o {
+	@extend .fa;
+	@extend %fa-calendar-check-o !optional;
+}
+.icon-calendar-minus-o {
+	@extend .fa;
+	@extend %fa-calendar-minus-o !optional;
+}
+.icon-calendar-o {
+	@extend .fa;
+	@extend %fa-calendar-o !optional;
+}
+.icon-calendar-plus-o {
+	@extend .fa;
+	@extend %fa-calendar-plus-o !optional;
+}
+.icon-calendar-times-o {
+	@extend .fa;
+	@extend %fa-calendar-times-o !optional;
+}
+.icon-camera {
+	@extend .fa;
+	@extend %fa-camera !optional;
+}
+.icon-camera-retro {
+	@extend .fa;
+	@extend %fa-camera-retro !optional;
+}
+.icon-car {
+	@extend .fa;
+	@extend %fa-car !optional;
+}
+.icon-caret-square-o-down {
+	@extend .fa;
+	@extend %fa-caret-square-o-down !optional;
+}
+.icon-caret-square-o-left {
+	@extend .fa;
+	@extend %fa-caret-square-o-left !optional;
+}
+.icon-caret-square-o-right {
+	@extend .fa;
+	@extend %fa-caret-square-o-right !optional;
+}
+.icon-caret-square-o-up {
+	@extend .fa;
+	@extend %fa-caret-square-o-up !optional;
+}
+.icon-cart-arrow-down {
+	@extend .fa;
+	@extend %fa-cart-arrow-down !optional;
+}
+.icon-cart-plus {
+	@extend .fa;
+	@extend %fa-cart-plus !optional;
+}
+.icon-cc {
+	@extend .fa;
+	@extend %fa-cc !optional;
+}
+.icon-certificate {
+	@extend .fa;
+	@extend %fa-certificate !optional;
+}
+.icon-check {
+	@extend .fa;
+	@extend %fa-check !optional;
+}
+.icon-check-circle {
+	@extend .fa;
+	@extend %fa-check-circle !optional;
+}
+.icon-check-circle-o {
+	@extend .fa;
+	@extend %fa-check-circle-o !optional;
+}
+.icon-check-square {
+	@extend .fa;
+	@extend %fa-check-square !optional;
+}
+.icon-check-square-o {
+	@extend .fa;
+	@extend %fa-check-square-o !optional;
+}
+.icon-child {
+	@extend .fa;
+	@extend %fa-child !optional;
+}
+.icon-circle {
+	@extend .fa;
+	@extend %fa-circle !optional;
+}
+.icon-circle-o {
+	@extend .fa;
+	@extend %fa-circle-o !optional;
+}
+.icon-circle-o-notch {
+	@extend .fa;
+	@extend %fa-circle-o-notch !optional;
+}
+.icon-circle-thin {
+	@extend .fa;
+	@extend %fa-circle-thin !optional;
+}
+.icon-clock-o {
+	@extend .fa;
+	@extend %fa-clock-o !optional;
+}
+.icon-clone {
+	@extend .fa;
+	@extend %fa-clone !optional;
+}
+.icon-cloud {
+	@extend .fa;
+	@extend %fa-cloud !optional;
+}
+.icon-cloud-download {
+	@extend .fa;
+	@extend %fa-cloud-download !optional;
+}
+.icon-cloud-upload {
+	@extend .fa;
+	@extend %fa-cloud-upload !optional;
+}
+.icon-code {
+	@extend .fa;
+	@extend %fa-code !optional;
+}
+.icon-code-fork {
+	@extend .fa;
+	@extend %fa-code-fork !optional;
+}
+.icon-coffee {
+	@extend .fa;
+	@extend %fa-coffee !optional;
+}
+.icon-cog {
+	@extend .fa;
+	@extend %fa-cog !optional;
+}
+.icon-cogs {
+	@extend .fa;
+	@extend %fa-cogs !optional;
+}
+.icon-comment {
+	@extend .fa;
+	@extend %fa-comment !optional;
+}
+.icon-comment-o {
+	@extend .fa;
+	@extend %fa-comment-o !optional;
+}
+.icon-commenting {
+	@extend .fa;
+	@extend %fa-commenting !optional;
+}
+.icon-commenting-o {
+	@extend .fa;
+	@extend %fa-commenting-o !optional;
+}
+.icon-comments {
+	@extend .fa;
+	@extend %fa-comments !optional;
+}
+.icon-comments-o {
+	@extend .fa;
+	@extend %fa-comments-o !optional;
+}
+.icon-compass {
+	@extend .fa;
+	@extend %fa-compass !optional;
+}
+.icon-copyright {
+	@extend .fa;
+	@extend %fa-copyright !optional;
+}
+.icon-creative-commons {
+	@extend .fa;
+	@extend %fa-creative-commons !optional;
+}
+.icon-credit-card {
+	@extend .fa;
+	@extend %fa-credit-card !optional;
+}
+.icon-credit-card-alt {
+	@extend .fa;
+	@extend %fa-credit-card-alt !optional;
+}
+.icon-crop {
+	@extend .fa;
+	@extend %fa-crop !optional;
+}
+.icon-crosshairs {
+	@extend .fa;
+	@extend %fa-crosshairs !optional;
+}
+.icon-cube {
+	@extend .fa;
+	@extend %fa-cube !optional;
+}
+.icon-cubes {
+	@extend .fa;
+	@extend %fa-cubes !optional;
+}
+.icon-cutlery {
+	@extend .fa;
+	@extend %fa-cutlery !optional;
+}
+.icon-database {
+	@extend .fa;
+	@extend %fa-database !optional;
+}
+.icon-deaf {
+	@extend .fa;
+	@extend %fa-deaf !optional;
+}
+.icon-desktop {
+	@extend .fa;
+	@extend %fa-desktop !optional;
+}
+.icon-diamond {
+	@extend .fa;
+	@extend %fa-diamond !optional;
+}
+.icon-dot-circle-o {
+	@extend .fa;
+	@extend %fa-dot-circle-o !optional;
+}
+.icon-download {
+	@extend .fa;
+	@extend %fa-download !optional;
+}
+.icon-ellipsis-h {
+	@extend .fa;
+	@extend %fa-ellipsis-h !optional;
+}
+.icon-ellipsis-v {
+	@extend .fa;
+	@extend %fa-ellipsis-v !optional;
+}
+.icon-envelope {
+	@extend .fa;
+	@extend %fa-envelope !optional;
+}
+.icon-envelope-o {
+	@extend .fa;
+	@extend %fa-envelope-o !optional;
+}
+.icon-envelope-square {
+	@extend .fa;
+	@extend %fa-envelope-square !optional;
+}
+.icon-eraser {
+	@extend .fa;
+	@extend %fa-eraser !optional;
+}
+.icon-exchange {
+	@extend .fa;
+	@extend %fa-exchange !optional;
+}
+.icon-exclamation {
+	@extend .fa;
+	@extend %fa-exclamation !optional;
+}
+.icon-exclamation-circle {
+	@extend .fa;
+	@extend %fa-exclamation-circle !optional;
+}
+.icon-exclamation-triangle {
+	@extend .fa;
+	@extend %fa-exclamation-triangle !optional;
+}
+.icon-external-link {
+	@extend .fa;
+	@extend %fa-external-link !optional;
+}
+.icon-external-link-square {
+	@extend .fa;
+	@extend %fa-external-link-square !optional;
+}
+.icon-eye {
+	@extend .fa;
+	@extend %fa-eye !optional;
+}
+.icon-eye-slash {
+	@extend .fa;
+	@extend %fa-eye-slash !optional;
+}
+.icon-eyedropper {
+	@extend .fa;
+	@extend %fa-eyedropper !optional;
+}
+.icon-fax {
+	@extend .fa;
+	@extend %fa-fax !optional;
+}
+.icon-female {
+	@extend .fa;
+	@extend %fa-female !optional;
+}
+.icon-fighter-jet {
+	@extend .fa;
+	@extend %fa-fighter-jet !optional;
+}
+.icon-file-archive-o {
+	@extend .fa;
+	@extend %fa-file-archive-o !optional;
+}
+.icon-file-audio-o {
+	@extend .fa;
+	@extend %fa-file-audio-o !optional;
+}
+.icon-file-code-o {
+	@extend .fa;
+	@extend %fa-file-code-o !optional;
+}
+.icon-file-excel-o {
+	@extend .fa;
+	@extend %fa-file-excel-o !optional;
+}
+.icon-file-image-o {
+	@extend .fa;
+	@extend %fa-file-image-o !optional;
+}
+.icon-file-pdf-o {
+	@extend .fa;
+	@extend %fa-file-pdf-o !optional;
+}
+.icon-file-powerpoint-o {
+	@extend .fa;
+	@extend %fa-file-powerpoint-o !optional;
+}
+.icon-file-video-o {
+	@extend .fa;
+	@extend %fa-file-video-o !optional;
+}
+.icon-file-word-o {
+	@extend .fa;
+	@extend %fa-file-word-o !optional;
+}
+.icon-film {
+	@extend .fa;
+	@extend %fa-film !optional;
+}
+.icon-filter {
+	@extend .fa;
+	@extend %fa-filter !optional;
+}
+.icon-fire {
+	@extend .fa;
+	@extend %fa-fire !optional;
+}
+.icon-fire-extinguisher {
+	@extend .fa;
+	@extend %fa-fire-extinguisher !optional;
+}
+.icon-flag-checkered {
+	@extend .fa;
+	@extend %fa-flag-checkered !optional;
+}
+.icon-flag-o {
+	@extend .fa;
+	@extend %fa-flag-o !optional;
+}
+.icon-flask {
+	@extend .fa;
+	@extend %fa-flask !optional;
+}
+.icon-folder {
+	@extend .fa;
+	@extend %fa-folder !optional;
+}
+.icon-folder-o {
+	@extend .fa;
+	@extend %fa-folder-o !optional;
+}
+.icon-folder-open {
+	@extend .fa;
+	@extend %fa-folder-open !optional;
+}
+.icon-folder-open-o {
+	@extend .fa;
+	@extend %fa-folder-open-o !optional;
+}
+.icon-frown-o {
+	@extend .fa;
+	@extend %fa-frown-o !optional;
+}
+.icon-futbol-o {
+	@extend .fa;
+	@extend %fa-futbol-o !optional;
+}
+.icon-gamepad {
+	@extend .fa;
+	@extend %fa-gamepad !optional;
+}
+.icon-gavel {
+	@extend .fa;
+	@extend %fa-gavel !optional;
+}
+.icon-gift {
+	@extend .fa;
+	@extend %fa-gift !optional;
+}
+.icon-glass {
+	@extend .fa;
+	@extend %fa-glass !optional;
+}
+.icon-graduation-cap {
+	@extend .fa;
+	@extend %fa-graduation-cap !optional;
+}
+.icon-hand-lizard-o {
+	@extend .fa;
+	@extend %fa-hand-lizard-o !optional;
+}
+.icon-hand-paper-o {
+	@extend .fa;
+	@extend %fa-hand-paper-o !optional;
+}
+.icon-hand-peace-o {
+	@extend .fa;
+	@extend %fa-hand-peace-o !optional;
+}
+.icon-hand-pointer-o {
+	@extend .fa;
+	@extend %fa-hand-pointer-o !optional;
+}
+.icon-hand-rock-o {
+	@extend .fa;
+	@extend %fa-hand-rock-o !optional;
+}
+.icon-hand-scissors-o {
+	@extend .fa;
+	@extend %fa-hand-scissors-o !optional;
+}
+.icon-hand-spock-o {
+	@extend .fa;
+	@extend %fa-hand-spock-o !optional;
+}
+.icon-hashtag {
+	@extend .fa;
+	@extend %fa-hashtag !optional;
+}
+.icon-hdd-o {
+	@extend .fa;
+	@extend %fa-hdd-o !optional;
+}
+.icon-headphones {
+	@extend .fa;
+	@extend %fa-headphones !optional;
+}
+.icon-heart {
+	@extend .fa;
+	@extend %fa-heart !optional;
+}
+.icon-heart-o {
+	@extend .fa;
+	@extend %fa-heart-o !optional;
+}
+.icon-heartbeat {
+	@extend .fa;
+	@extend %fa-heartbeat !optional;
+}
+.icon-history {
+	@extend .fa;
+	@extend %fa-history !optional;
+}
+.icon-home {
+	@extend .fa;
+	@extend %fa-home !optional;
+}
+.icon-hourglass {
+	@extend .fa;
+	@extend %fa-hourglass !optional;
+}
+.icon-hourglass-end {
+	@extend .fa;
+	@extend %fa-hourglass-end !optional;
+}
+.icon-hourglass-half {
+	@extend .fa;
+	@extend %fa-hourglass-half !optional;
+}
+.icon-hourglass-o {
+	@extend .fa;
+	@extend %fa-hourglass-o !optional;
+}
+.icon-hourglass-start {
+	@extend .fa;
+	@extend %fa-hourglass-start !optional;
+}
+.icon-i-cursor {
+	@extend .fa;
+	@extend %fa-i-cursor !optional;
+}
+.icon-inbox {
+	@extend .fa;
+	@extend %fa-inbox !optional;
+}
+.icon-industry {
+	@extend .fa;
+	@extend %fa-industry !optional;
+}
+.icon-info {
+	@extend .fa;
+	@extend %fa-info !optional;
+}
+.icon-info-circle {
+	@extend .fa;
+	@extend %fa-info-circle !optional;
+}
+.icon-key {
+	@extend .fa;
+	@extend %fa-key !optional;
+}
+.icon-keyboard-o {
+	@extend .fa;
+	@extend %fa-keyboard-o !optional;
+}
+.icon-language {
+	@extend .fa;
+	@extend %fa-language !optional;
+}
+.icon-laptop {
+	@extend .fa;
+	@extend %fa-laptop !optional;
+}
+.icon-leaf {
+	@extend .fa;
+	@extend %fa-leaf !optional;
+}
+.icon-lemon-o {
+	@extend .fa;
+	@extend %fa-lemon-o !optional;
+}
+.icon-level-down {
+	@extend .fa;
+	@extend %fa-level-down !optional;
+}
+.icon-level-up {
+	@extend .fa;
+	@extend %fa-level-up !optional;
+}
+.icon-life-ring {
+	@extend .fa;
+	@extend %fa-life-ring !optional;
+}
+.icon-lightbulb-o {
+	@extend .fa;
+	@extend %fa-lightbulb-o !optional;
+}
+.icon-line-chart {
+	@extend .fa;
+	@extend %fa-line-chart !optional;
+}
+.icon-location-arrow {
+	@extend .fa;
+	@extend %fa-location-arrow !optional;
+}
+.icon-lock {
+	@extend .fa;
+	@extend %fa-lock !optional;
+}
+.icon-low-vision {
+	@extend .fa;
+	@extend %fa-low-vision !optional;
+}
+.icon-magic {
+	@extend .fa;
+	@extend %fa-magic !optional;
+}
+.icon-magnet {
+	@extend .fa;
+	@extend %fa-magnet !optional;
+}
+.icon-male {
+	@extend .fa;
+	@extend %fa-male !optional;
+}
+.icon-map {
+	@extend .fa;
+	@extend %fa-map !optional;
+}
+.icon-map-o {
+	@extend .fa;
+	@extend %fa-map-o !optional;
+}
+.icon-map-pin {
+	@extend .fa;
+	@extend %fa-map-pin !optional;
+}
+.icon-map-signs {
+	@extend .fa;
+	@extend %fa-map-signs !optional;
+}
+.icon-meh-o {
+	@extend .fa;
+	@extend %fa-meh-o !optional;
+}
+.icon-microphone {
+	@extend .fa;
+	@extend %fa-microphone !optional;
+}
+.icon-microphone-slash {
+	@extend .fa;
+	@extend %fa-microphone-slash !optional;
+}
+.icon-minus {
+	@extend .fa;
+	@extend %fa-minus !optional;
+}
+.icon-minus-circle {
+	@extend .fa;
+	@extend %fa-minus-circle !optional;
+}
+.icon-minus-square {
+	@extend .fa;
+	@extend %fa-minus-square !optional;
+}
+.icon-minus-square-o {
+	@extend .fa;
+	@extend %fa-minus-square-o !optional;
+}
+.icon-mobile {
+	@extend .fa;
+	@extend %fa-mobile !optional;
+}
+.icon-money {
+	@extend .fa;
+	@extend %fa-money !optional;
+}
+.icon-moon-o {
+	@extend .fa;
+	@extend %fa-moon-o !optional;
+}
+.icon-motorcycle {
+	@extend .fa;
+	@extend %fa-motorcycle !optional;
+}
+.icon-mouse-pointer {
+	@extend .fa;
+	@extend %fa-mouse-pointer !optional;
+}
+.icon-music {
+	@extend .fa;
+	@extend %fa-music !optional;
+}
+.icon-newspaper-o {
+	@extend .fa;
+	@extend %fa-newspaper-o !optional;
+}
+.icon-object-group {
+	@extend .fa;
+	@extend %fa-object-group !optional;
+}
+.icon-object-ungroup {
+	@extend .fa;
+	@extend %fa-object-ungroup !optional;
+}
+.icon-paint-brush {
+	@extend .fa;
+	@extend %fa-paint-brush !optional;
+}
+.icon-paper-plane {
+	@extend .fa;
+	@extend %fa-paper-plane !optional;
+}
+.icon-paper-plane-o {
+	@extend .fa;
+	@extend %fa-paper-plane-o !optional;
+}
+.icon-paw {
+	@extend .fa;
+	@extend %fa-paw !optional;
+}
+.icon-pencil {
+	@extend .fa;
+	@extend %fa-pencil !optional;
+}
+.icon-pencil-square {
+	@extend .fa;
+	@extend %fa-pencil-square !optional;
+}
+.icon-pencil-square-o {
+	@extend .fa;
+	@extend %fa-pencil-square-o !optional;
+}
+.icon-percent {
+	@extend .fa;
+	@extend %fa-percent !optional;
+}
+.icon-phone {
+	@extend .fa;
+	@extend %fa-phone !optional;
+}
+.icon-phone-square {
+	@extend .fa;
+	@extend %fa-phone-square !optional;
+}
+.icon-picture-o {
+	@extend .fa;
+	@extend %fa-picture-o !optional;
+}
+.icon-pie-chart {
+	@extend .fa;
+	@extend %fa-pie-chart !optional;
+}
+.icon-plane {
+	@extend .fa;
+	@extend %fa-plane !optional;
+}
+.icon-plug {
+	@extend .fa;
+	@extend %fa-plug !optional;
+}
+.icon-plus {
+	@extend .fa;
+	@extend %fa-plus !optional;
+}
+.icon-plus-circle {
+	@extend .fa;
+	@extend %fa-plus-circle !optional;
+}
+.icon-plus-square {
+	@extend .fa;
+	@extend %fa-plus-square !optional;
+}
+.icon-plus-square-o {
+	@extend .fa;
+	@extend %fa-plus-square-o !optional;
+}
+.icon-power-off {
+	@extend .fa;
+	@extend %fa-power-off !optional;
+}
+.icon-print {
+	@extend .fa;
+	@extend %fa-print !optional;
+}
+.icon-puzzle-piece {
+	@extend .fa;
+	@extend %fa-puzzle-piece !optional;
+}
+.icon-qrcode {
+	@extend .fa;
+	@extend %fa-qrcode !optional;
+}
+.icon-question-circle {
+	@extend .fa;
+	@extend %fa-question-circle !optional;
+}
+.icon-question-circle-o {
+	@extend .fa;
+	@extend %fa-question-circle-o !optional;
+}
+.icon-quote-left {
+	@extend .fa;
+	@extend %fa-quote-left !optional;
+}
+.icon-quote-right {
+	@extend .fa;
+	@extend %fa-quote-right !optional;
+}
+.icon-random {
+	@extend .fa;
+	@extend %fa-random !optional;
+}
+.icon-recycle {
+	@extend .fa;
+	@extend %fa-recycle !optional;
+}
+.icon-refresh {
+	@extend .fa;
+	@extend %fa-refresh !optional;
+}
+.icon-registered {
+	@extend .fa;
+	@extend %fa-registered !optional;
+}
+.icon-reply {
+	@extend .fa;
+	@extend %fa-reply !optional;
+}
+.icon-reply-all {
+	@extend .fa;
+	@extend %fa-reply-all !optional;
+}
+.icon-retweet {
+	@extend .fa;
+	@extend %fa-retweet !optional;
+}
+.icon-road {
+	@extend .fa;
+	@extend %fa-road !optional;
+}
+.icon-rocket {
+	@extend .fa;
+	@extend %fa-rocket !optional;
+}
+.icon-rss {
+	@extend .fa;
+	@extend %fa-rss !optional;
+}
+.icon-rss-square {
+	@extend .fa;
+	@extend %fa-rss-square !optional;
+}
+.icon-search {
+	@extend .fa;
+	@extend %fa-search !optional;
+}
+.icon-search-minus {
+	@extend .fa;
+	@extend %fa-search-minus !optional;
+}
+.icon-search-plus {
+	@extend .fa;
+	@extend %fa-search-plus !optional;
+}
+.icon-server {
+	@extend .fa;
+	@extend %fa-server !optional;
+}
+.icon-share {
+	@extend .fa;
+	@extend %fa-share !optional;
+}
+.icon-share-alt {
+	@extend .fa;
+	@extend %fa-share-alt !optional;
+}
+.icon-share-alt-square {
+	@extend .fa;
+	@extend %fa-share-alt-square !optional;
+}
+.icon-share-square {
+	@extend .fa;
+	@extend %fa-share-square !optional;
+}
+.icon-share-square-o {
+	@extend .fa;
+	@extend %fa-share-square-o !optional;
+}
+.icon-shield {
+	@extend .fa;
+	@extend %fa-shield !optional;
+}
+.icon-ship {
+	@extend .fa;
+	@extend %fa-ship !optional;
+}
+.icon-shopping-bag {
+	@extend .fa;
+	@extend %fa-shopping-bag !optional;
+}
+.icon-shopping-basket {
+	@extend .fa;
+	@extend %fa-shopping-basket !optional;
+}
+.icon-shopping-cart {
+	@extend .fa;
+	@extend %fa-shopping-cart;
+}
+.icon-sign-in {
+	@extend .fa;
+	@extend %fa-sign-in !optional;
+}
+.icon-sign-language {
+	@extend .fa;
+	@extend %fa-sign-language !optional;
+}
+.icon-sign-out {
+	@extend .fa;
+	@extend %fa-sign-out !optional;
+}
+.icon-signal {
+	@extend .fa;
+	@extend %fa-signal !optional;
+}
+.icon-sitemap {
+	@extend .fa;
+	@extend %fa-sitemap !optional;
+}
+.icon-sliders {
+	@extend .fa;
+	@extend %fa-sliders !optional;
+}
+.icon-smile-o {
+	@extend .fa;
+	@extend %fa-smile-o !optional;
+}
+.icon-sort {
+	@extend .fa;
+	@extend %fa-sort !optional;
+}
+.icon-sort-alpha-asc {
+	@extend .fa;
+	@extend %fa-sort-alpha-asc !optional;
+}
+.icon-sort-alpha-desc {
+	@extend .fa;
+	@extend %fa-sort-alpha-desc !optional;
+}
+.icon-sort-amount-asc {
+	@extend .fa;
+	@extend %fa-sort-amount-asc !optional;
+}
+.icon-sort-amount-desc {
+	@extend .fa;
+	@extend %fa-sort-amount-desc !optional;
+}
+.icon-sort-asc {
+	@extend .fa;
+	@extend %fa-sort-asc !optional;
+}
+.icon-sort-desc {
+	@extend .fa;
+	@extend %fa-sort-desc !optional;
+}
+.icon-sort-numeric-asc {
+	@extend .fa;
+	@extend %fa-sort-numeric-asc !optional;
+}
+.icon-sort-numeric-desc {
+	@extend .fa;
+	@extend %fa-sort-numeric-desc !optional;
+}
+.icon-space-shuttle {
+	@extend .fa;
+	@extend %fa-space-shuttle !optional;
+}
+.icon-spinner {
+	@extend .fa;
+	@extend %fa-spinner !optional;
+}
+.icon-spoon {
+	@extend .fa;
+	@extend %fa-spoon !optional;
+}
+.icon-square {
+	@extend .fa;
+	@extend %fa-square !optional;
+}
+.icon-square-o {
+	@extend .fa;
+	@extend %fa-square-o !optional;
+}
+.icon-star {
+	@extend .fa;
+	@extend %fa-star !optional;
+}
+.icon-star-half {
+	@extend .fa;
+	@extend %fa-star-half !optional;
+}
+.icon-star-half-o {
+	@extend .fa;
+	@extend %fa-star-half-o !optional;
+}
+.icon-star-o {
+	@extend .fa;
+	@extend %fa-star-o !optional;
+}
+.icon-sticky-note {
+	@extend .fa;
+	@extend %fa-sticky-note !optional;
+}
+.icon-sticky-note-o {
+	@extend .fa;
+	@extend %fa-sticky-note-o !optional;
+}
+.icon-street-view {
+	@extend .fa;
+	@extend %fa-street-view !optional;
+}
+.icon-suitcase {
+	@extend .fa;
+	@extend %fa-suitcase !optional;
+}
+.icon-sun-o {
+	@extend .fa;
+	@extend %fa-sun-o !optional;
+}
+.icon-tablet {
+	@extend .fa;
+	@extend %fa-tablet !optional;
+}
+.icon-tachometer {
+	@extend .fa;
+	@extend %fa-tachometer !optional;
+}
+.icon-tag {
+	@extend .fa;
+	@extend %fa-tag !optional;
+}
+.icon-tags {
+	@extend .fa;
+	@extend %fa-tags !optional;
+}
+.icon-tasks {
+	@extend .fa;
+	@extend %fa-tasks !optional;
+}
+.icon-taxi {
+	@extend .fa;
+	@extend %fa-taxi !optional;
+}
+.icon-television {
+	@extend .fa;
+	@extend %fa-television !optional;
+}
+.icon-terminal {
+	@extend .fa;
+	@extend %fa-terminal !optional;
+}
+.icon-thumb-tack {
+	@extend .fa;
+	@extend %fa-thumb-tack !optional;
+}
+.icon-thumbs-down {
+	@extend .fa;
+	@extend %fa-thumbs-down !optional;
+}
+.icon-thumbs-o-down {
+	@extend .fa;
+	@extend %fa-thumbs-o-down !optional;
+}
+.icon-thumbs-o-up {
+	@extend .fa;
+	@extend %fa-thumbs-o-up !optional;
+}
+.icon-thumbs-up {
+	@extend .fa;
+	@extend %fa-thumbs-up !optional;
+}
+.icon-ticket {
+	@extend .fa;
+	@extend %fa-ticket !optional;
+}
+.icon-times {
+	@extend .fa;
+	@extend %fa-times !optional;
+}
+.icon-times-circle {
+	@extend .fa;
+	@extend %fa-times-circle !optional;
+}
+.icon-times-circle-o {
+	@extend .fa;
+	@extend %fa-times-circle-o !optional;
+}
+.icon-tint {
+	@extend .fa;
+	@extend %fa-tint !optional;
+}
+.icon-toggle-off {
+	@extend .fa;
+	@extend %fa-toggle-off !optional;
+}
+.icon-toggle-on {
+	@extend .fa;
+	@extend %fa-toggle-on !optional;
+}
+.icon-trademark {
+	@extend .fa;
+	@extend %fa-trademark !optional;
+}
+.icon-trash {
+	@extend .fa;
+	@extend %fa-trash !optional;
+}
+.icon-trash-o {
+	@extend .fa;
+	@extend %fa-trash-o !optional;
+}
+.icon-tree {
+	@extend .fa;
+	@extend %fa-tree !optional;
+}
+.icon-trophy {
+	@extend .fa;
+	@extend %fa-trophy !optional;
+}
+.icon-truck {
+	@extend .fa;
+	@extend %fa-truck !optional;
+}
+.icon-tty {
+	@extend .fa;
+	@extend %fa-tty !optional;
+}
+.icon-umbrella {
+	@extend .fa;
+	@extend %fa-umbrella !optional;
+}
+.icon-universal-access {
+	@extend .fa;
+	@extend %fa-universal-access !optional;
+}
+.icon-university {
+	@extend .fa;
+	@extend %fa-university !optional;
+}
+.icon-unlock {
+	@extend .fa;
+	@extend %fa-unlock !optional;
+}
+.icon-unlock-alt {
+	@extend .fa;
+	@extend %fa-unlock-alt !optional;
+}
+.icon-upload {
+	@extend .fa;
+	@extend %fa-upload !optional;
+}
+.icon-user {
+	@extend  .fa;
+	@extend %fa-user !optional;
+}
+.icon-user-plus {
+	@extend .fa;
+	@extend %fa-user-plus !optional;
+}
+.icon-user-secret {
+	@extend .fa;
+	@extend %fa-user-secret !optional;
+}
+.icon-user-times {
+	@extend .fa;
+	@extend %fa-user-times !optional;
+}
+.icon-users {
+	@extend .fa;
+	@extend %fa-users !optional;
+}
+.icon-video-camera {
+	@extend .fa;
+	@extend %fa-video-camera !optional;
+}
+.icon-volume-control-phone {
+	@extend .fa;
+	@extend %fa-volume-control-phone !optional;
+}
+.icon-volume-down {
+	@extend .fa;
+	@extend %fa-volume-down !optional;
+}
+.icon-volume-off {
+	@extend .fa;
+	@extend %fa-volume-off !optional;
+}
+.icon-volume-up {
+	@extend .fa;
+	@extend %fa-volume-up !optional;
+}
+.icon-wheelchair {
+	@extend .fa;
+	@extend %fa-wheelchair !optional;
+}
+.icon-wheelchair-alt {
+	@extend .fa;
+	@extend %fa-wheelchair-alt !optional;
+}
+.icon-wifi {
+	@extend .fa;
+	@extend %fa-wifi !optional;
+}
+.icon-wrench {
+	@extend .fa;
+	@extend %fa-wrench !optional;
+}
+.icon-file-text-o {
+	@extend .fa;
+	@extend %fa-file-text-o !optional;
+}
+
+/* new for theme */
+/* icon-<icon name> from http://fontawesome.io/icons/ 'Brand Icons' NOT aliases */
+.icon-500px {
+	@extend .fa;
+	@extend %fa-500px !optional;
+}
+.icon-adn {
+	@extend .fa;
+	@extend %fa-adn !optional;
+}
+.icon-amazon {
+	@extend .fa;
+	@extend %fa-amazon !optional;
+}
+.icon-android {
+	@extend .fa;
+	@extend %fa-android !optional;
+}
+.icon-angellist {
+	@extend .fa;
+	@extend %fa-angellist !optional;
+}
+.icon-apple {
+	@extend .fa;
+	@extend %fa-apple !optional;
+}
+.icon-bandcamp {
+	@extend .fa;
+	@extend %fa-bandcamp !optional;
+}
+.icon-behance {
+	@extend .fa;
+	@extend %fa-behance !optional;
+}
+.icon-behance-square {
+	@extend .fa;
+	@extend %fa-behance-square !optional;
+}
+.icon-bitbucket {
+	@extend .fa;
+	@extend %fa-bitbucket !optional;
+}
+.icon-bitbucket-square {
+	@extend .fa;
+	@extend %fa-bitbucket-square !optional;
+}
+.icon-black-tie {
+	@extend .fa;
+	@extend %fa-black-tie !optional;
+}
+.icon-bluetooth {
+	@extend .fa;
+	@extend %fa-bluetooth !optional;
+}
+.icon-bluetooth-b {
+	@extend .fa;
+	@extend %fa-bluetooth-b !optional;
+}
+.icon-btc {
+	@extend .fa;
+	@extend %fa-btc !optional;
+}
+.icon-buysellads {
+	@extend .fa;
+	@extend %fa-buysellads !optional;
+}
+.icon-cc-amex {
+	@extend .fa;
+	@extend %fa-cc-amex !optional;
+}
+.icon-cc-diners-club {
+	@extend .fa;
+	@extend %fa-cc-diners-club !optional;
+}
+.icon-cc-discover {
+	@extend .fa;
+	@extend %fa-cc-discover !optional;
+}
+.icon-cc-jcb {
+	@extend .fa;
+	@extend %fa-cc-jcb !optional;
+}
+.icon-cc-mastercard {
+	@extend .fa;
+	@extend %fa-cc-mastercard !optional;
+}
+.icon-cc-paypal {
+	@extend .fa;
+	@extend %fa-cc-paypal !optional;
+}
+.icon-cc-stripe {
+	@extend .fa;
+	@extend %fa-cc-stripe !optional;
+}
+.icon-cc-visa {
+	@extend .fa;
+	@extend %fa-cc-visa !optional;
+}
+.icon-chrome {
+	@extend .fa;
+	@extend %fa-chrome !optional;
+}
+.icon-codepen {
+	@extend .fa;
+	@extend %fa-codepen !optional;
+}
+.icon-codiepie {
+	@extend .fa;
+	@extend %fa-codiepie !optional;
+}
+.icon-connectdevelop {
+	@extend .fa;
+	@extend %fa-connectdevelop !optional;
+}
+.icon-contao {
+	@extend .fa;
+	@extend %fa-contao !optional;
+}
+.icon-css3 {
+	@extend .fa;
+	@extend %fa-css3 !optional;
+}
+.icon-dashcube {
+	@extend .fa;
+	@extend %fa-dashcube !optional;
+}
+.icon-delicious {
+	@extend .fa;
+	@extend %fa-delicious !optional;
+}
+.icon-deviantart {
+	@extend .fa;
+	@extend %fa-deviantart !optional;
+}
+.icon-digg {
+	@extend .fa;
+	@extend %fa-digg !optional;
+}
+.icon-dribbble {
+	@extend .fa;
+	@extend %fa-dribbble !optional;
+}
+.icon-dropbox {
+	@extend .fa;
+	@extend %fa-dropbox !optional;
+}
+.icon-drupal {
+	@extend .fa;
+	@extend %fa-drupal !optional;
+}
+.icon-edge {
+	@extend .fa;
+	@extend %fa-edge !optional;
+}
+.icon-eercast {
+	@extend .fa;
+	@extend %fa-eercast !optional;
+}
+.icon-empire {
+	@extend .fa;
+	@extend %fa-empire !optional;
+}
+.icon-envira {
+	@extend .fa;
+	@extend %fa-envira !optional;
+}
+.icon-etsy {
+	@extend .fa;
+	@extend %fa-etsy !optional;
+}
+.icon-expeditedssl {
+	@extend .fa;
+	@extend %fa-expeditedssl !optional;
+}
+.icon-facebook {
+	@extend .fa;
+	@extend %fa-facebook;
+}
+.icon-facebook-official {
+	@extend .fa;
+	@extend %fa-facebook-official !optional;
+}
+.icon-facebook-square {
+	@extend .fa;
+	@extend %fa-facebook-square !optional;
+}
+.icon-firefox {
+	@extend .fa;
+	@extend %fa-firefox !optional;
+}
+.icon-first-order {
+	@extend .fa;
+	@extend %fa-first-order !optional;
+}
+.icon-flickr {
+	@extend .fa;
+	@extend %fa-flickr !optional;
+}
+.icon-font-awesome {
+	@extend .fa;
+	@extend %fa-font-awesome !optional;
+}
+.icon-fonticons {
+	@extend .fa;
+	@extend %fa-fonticons !optional;
+}
+.icon-fort-awesome {
+	@extend .fa;
+	@extend %fa-fort-awesome !optional;
+}
+.icon-forumbee {
+	@extend .fa;
+	@extend %fa-forumbee !optional;
+}
+.icon-foursquare {
+	@extend .fa;
+	@extend %fa-foursquare !optional;
+}
+.icon-free-code-camp {
+	@extend .fa;
+	@extend %fa-free-code-camp !optional;
+}
+.icon-get-pocket {
+	@extend .fa;
+	@extend %fa-get-pocket !optional;
+}
+.icon-gg {
+	@extend .fa;
+	@extend %fa-gg !optional;
+}
+.icon-gg-circle {
+	@extend .fa;
+	@extend %fa-gg-circle !optional;
+}
+.icon-git {
+	@extend .fa;
+	@extend %fa-git !optional;
+}
+.icon-git-square {
+	@extend .fa;
+	@extend %fa-git-square !optional;
+}
+.icon-github {
+	@extend .fa;
+	@extend %fa-github !optional;
+}
+.icon-github-alt {
+	@extend .fa;
+	@extend %fa-github-alt !optional;
+}
+.icon-github-square {
+	@extend .fa;
+	@extend %fa-github-square !optional;
+}
+.icon-gitlab {
+	@extend .fa;
+	@extend %fa-gitlab !optional;
+}
+.icon-glide {
+	@extend .fa;
+	@extend %fa-glide !optional;
+}
+.icon-glide-g {
+	@extend .fa;
+	@extend %fa-glide-g !optional;
+}
+.icon-google {
+	@extend .fa;
+	@extend %fa-google !optional;
+}
+.icon-google-plus {
+	@extend .fa;
+	@extend %fa-google-plus !optional;
+}
+.icon-google-plus-official {
+	@extend .fa;
+	@extend %fa-google-plus-official !optional;
+}
+.icon-google-plus-square {
+	@extend .fa;
+	@extend %fa-google-plus-square !optional;
+}
+.icon-google-wallet {
+	@extend .fa;
+	@extend %fa-google-wallet !optional;
+}
+.icon-gratipay {
+	@extend .fa;
+	@extend %fa-gratipay !optional;
+}
+.icon-grav {
+	@extend .fa;
+	@extend %fa-grav !optional;
+}
+.icon-hacker-news {
+	@extend .fa;
+	@extend %fa-hacker-news !optional;
+}
+.icon-houzz {
+	@extend .fa;
+	@extend %fa-houzz !optional;
+}
+.icon-html5 {
+	@extend .fa;
+	@extend %fa-html5 !optional;
+}
+.icon-imdb {
+	@extend .fa;
+	@extend %fa-imdb !optional;
+}
+.icon-instagram {
+	@extend .fa;
+	@extend %fa-instagram !optional;
+}
+.icon-internet-explorer {
+	@extend .fa;
+	@extend %fa-internet-explorer !optional;
+}
+.icon-ioxhost {
+	@extend .fa;
+	@extend %fa-ioxhost !optional;
+}
+.icon-joomla {
+	@extend .fa;
+	@extend %fa-joomla !optional;
+}
+.icon-jsfiddle {
+	@extend .fa;
+	@extend %fa-jsfiddle !optional;
+}
+.icon-lastfm {
+	@extend .fa;
+	@extend %fa-lastfm !optional;
+}
+.icon-lastfm-square {
+	@extend .fa;
+	@extend %fa-lastfm-square !optional;
+}
+.icon-leanpub {
+	@extend .fa;
+	@extend %fa-leanpub !optional;
+}
+.icon-linkedin {
+	@extend .fa;
+	@extend %fa-linkedin !optional;
+}
+.icon-linkedin-square {
+	@extend .fa;
+	@extend %fa-linkedin-square !optional;
+}
+.icon-linode {
+	@extend .fa;
+	@extend %fa-linode !optional;
+}
+.icon-linux {
+	@extend .fa;
+	@extend %fa-linux !optional;
+}
+.icon-maxcdn {
+	@extend .fa;
+	@extend %fa-maxcdn !optional;
+}
+.icon-meanpath {
+	@extend .fa;
+	@extend %fa-meanpath !optional;
+}
+.icon-medium {
+	@extend .fa;
+	@extend %fa-medium !optional;
+}
+.icon-meetup {
+	@extend .fa;
+	@extend %fa-meetup !optional;
+}
+.icon-mixcloud {
+	@extend .fa;
+	@extend %fa-mixcloud !optional;
+}
+.icon-modx {
+	@extend .fa;
+	@extend %fa-modx !optional;
+}
+.icon-odnoklassniki {
+	@extend .fa;
+	@extend %fa-odnoklassniki !optional;
+}
+.icon-odnoklassniki-square {
+	@extend .fa;
+	@extend %fa-odnoklassniki-square !optional;
+}
+.icon-opencart {
+	@extend .fa;
+	@extend %fa-opencart !optional;
+}
+.icon-openid {
+	@extend .fa;
+	@extend %fa-openid !optional;
+}
+.icon-opera {
+	@extend .fa;
+	@extend %fa-opera !optional;
+}
+.icon-optin-monster {
+	@extend .fa;
+	@extend %fa-optin-monster !optional;
+}
+.icon-pagelines {
+	@extend .fa;
+	@extend %fa-pagelines !optional;
+}
+.icon-paypal {
+	@extend .fa;
+	@extend %fa-paypal !optional;
+}
+.icon-pied-piper {
+	@extend .fa;
+	@extend %fa-pied-piper !optional;
+}
+.icon-pied-piper-alt {
+	@extend .fa;
+	@extend %fa-pied-piper-alt !optional;
+}
+.icon-pied-piper-pp {
+	@extend .fa;
+	@extend %fa-pied-piper-pp !optional;
+}
+.icon-pinterest {
+	@extend .fa;
+	@extend %fa-pinterest !optional;
+}
+.icon-pinterest-p {
+	@extend .fa;
+	@extend %fa-pinterest-p !optional;
+}
+.icon-pinterest-square {
+	@extend .fa;
+	@extend %fa-pinterest-square !optional;
+}
+.icon-product-hunt {
+	@extend .fa;
+	@extend %fa-product-hunt !optional;
+}
+.icon-qq {
+	@extend .fa;
+	@extend %fa-qq !optional;
+}
+.icon-quora {
+	@extend .fa;
+	@extend %fa-quora !optional;
+}
+.icon-ravelry {
+	@extend .fa;
+	@extend %fa-ravelry !optional;
+}
+.icon-rebel {
+	@extend .fa;
+	@extend %fa-rebel !optional;
+}
+.icon-reddit {
+	@extend .fa;
+	@extend %fa-reddit !optional;
+}
+.icon-reddit-alien {
+	@extend .fa;
+	@extend %fa-reddit-alien !optional;
+}
+.icon-reddit-square {
+	@extend .fa;
+	@extend %fa-reddit-square !optional;
+}
+.icon-renren {
+	@extend .fa;
+	@extend %fa-renren !optional;
+}
+.icon-safari {
+	@extend .fa;
+	@extend %fa-safari !optional;
+}
+.icon-scribd {
+	@extend .fa;
+	@extend %fa-scribd !optional;
+}
+.icon-sellsy {
+	@extend .fa;
+	@extend %fa-sellsy !optional;
+}
+.icon-share-alt {
+	@extend .fa;
+	@extend %fa-share-alt !optional;
+}
+.icon-share-alt-square {
+	@extend .fa;
+	@extend %fa-share-alt-square !optional;
+}
+.icon-shirtsinbulk {
+	@extend .fa;
+	@extend %fa-shirtsinbulk !optional;
+}
+.icon-simplybuilt {
+	@extend .fa;
+	@extend %fa-simplybuilt !optional;
+}
+.icon-skyatlas {
+	@extend .fa;
+	@extend %fa-skyatlas !optional;
+}
+.icon-skype {
+	@extend .fa;
+	@extend %fa-skype !optional;
+}
+.icon-slack {
+	@extend .fa;
+	@extend %fa-slack !optional;
+}
+.icon-slideshare {
+	@extend .fa;
+	@extend %fa-slideshare !optional;
+}
+.icon-snapchat {
+	@extend .fa;
+	@extend %fa-snapchat !optional;
+}
+.icon-snapchat-ghost {
+	@extend .fa;
+	@extend %fa-snapchat-ghost !optional;
+}
+.icon-snapchat-square {
+	@extend .fa;
+	@extend %fa-snapchat-square !optional;
+}
+.icon-soundcloud {
+	@extend .fa;
+	@extend %fa-soundcloud !optional;
+}
+.icon-spotify {
+	@extend .fa;
+	@extend %fa-spotify !optional;
+}
+.icon-stack-exchange {
+	@extend .fa;
+	@extend %fa-stack-exchange !optional;
+}
+.icon-stack-overflow {
+	@extend .fa;
+	@extend %fa-stack-overflow !optional;
+}
+.icon-steam {
+	@extend .fa;
+	@extend %fa-steam !optional;
+}
+.icon-steam-square {
+	@extend .fa;
+	@extend %fa-steam-square !optional;
+}
+.icon-stumbleupon {
+	@extend .fa;
+	@extend %fa-stumbleupon !optional;
+}
+.icon-stumbleupon-circle {
+	@extend .fa;
+	@extend %fa-stumbleupon-circle !optional;
+}
+.icon-superpowers {
+	@extend .fa;
+	@extend %fa-superpowers !optional;
+}
+.icon-telegram {
+	@extend .fa;
+	@extend %fa-telegram !optional;
+}
+.icon-tencent-weibo {
+	@extend .fa;
+	@extend %fa-tencent-weibo !optional;
+}
+.icon-themeisle {
+	@extend .fa;
+	@extend %fa-themeisle !optional;
+}
+.icon-trello {
+	@extend .fa;
+	@extend %fa-trello !optional;
+}
+.icon-tripadvisor {
+	@extend .fa;
+	@extend %fa-tripadvisor !optional;
+}
+.icon-tumblr {
+	@extend .fa;
+	@extend %fa-tumblr !optional;
+}
+.icon-tumblr-square {
+	@extend .fa;
+	@extend %fa-tumblr-square !optional;
+}
+.icon-twitch {
+	@extend .fa;
+	@extend %fa-twitch !optional;
+}
+.icon-twitter {
+	@extend .fa;
+	@extend %fa-twitter;
+}
+.icon-twitter-square {
+	@extend .fa;
+	@extend %fa-twitter-square;
+}
+.icon-usb {
+	@extend .fa;
+	@extend %fa-usb !optional;
+}
+.icon-viacoin {
+	@extend .fa;
+	@extend %fa-viacoin !optional;
+}
+.icon-viadeo {
+	@extend .fa;
+	@extend %fa-viadeo !optional;
+}
+.icon-viadeo-square {
+	@extend .fa;
+	@extend %fa-viadeo-square !optional;
+}
+.icon-vimeo {
+	@extend .fa;
+	@extend %fa-vimeo !optional;
+}
+.icon-vimeo-square {
+	@extend .fa;
+	@extend %fa-vimeo-square !optional;
+}
+.icon-vine {
+	@extend .fa;
+	@extend %fa-vine !optional;
+}
+.icon-vk {
+	@extend .fa;
+	@extend %fa-vk !optional;
+}
+.icon-weibo {
+	@extend .fa;
+	@extend %fa-weibo !optional;
+}
+.icon-weixin {
+	@extend .fa;
+	@extend %fa-weixin !optional;
+}
+.icon-whatsapp {
+	@extend .fa;
+	@extend %fa-whatsapp !optional;
+}
+.icon-wikipedia-w {
+	@extend .fa;
+	@extend %fa-wikipedia-w !optional;
+}
+.icon-windows {
+	@extend .fa;
+	@extend %fa-windows !optional;
+}
+.icon-wordpress {
+	@extend .fa;
+	@extend %fa-wordpress !optional;
+}
+.icon-wpbeginner {
+	@extend .fa;
+	@extend %fa-wpbeginner !optional;
+}
+.icon-wpexplorer {
+	@extend .fa;
+	@extend %fa-wpexplorer !optional;
+}
+.icon-wpforms {
+	@extend .fa;
+	@extend %fa-wpforms !optional;
+}
+.icon-xing {
+	@extend .fa;
+	@extend %fa-xing !optional;
+}
+.icon-xing-square {
+	@extend .fa;
+	@extend %fa-xing-square !optional;
+}
+.icon-y-combinator {
+	@extend .fa;
+	@extend %fa-y-combinator !optional;
+}
+.icon-yahoo {
+	@extend .fa;
+	@extend %fa-yahoo !optional;
+}
+.icon-yelp {
+	@extend .fa;
+	@extend %fa-yelp !optional;
+}
+.icon-yoast {
+	@extend .fa;
+	@extend %fa-yoast !optional;
+}
+.icon-youtube {
+	@extend .fa;
+	@extend %fa-youtube !optional;
+}
+.icon-youtube-play {
+	@extend .fa;
+	@extend %fa-youtube-play !optional;
+}
+.icon-youtube-square {
+	@extend .fa;
+	@extend %fa-youtube-square !optional;
+}

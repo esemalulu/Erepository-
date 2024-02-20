@@ -1,0 +1,80 @@
+{
+	"name": "BridgeThemeExtension"
+	, "fantasyName": "Bridge Theme Extension"
+	, "vendor": "SC"
+	, "version": "3.0.3"
+	, "type": "extension"
+	, "target": "SCA,SCS"
+	, "target_version":
+	{
+		"SCS": ">=18.1.0"
+		, "SCA": ">=18.1.0"
+	}
+	, "description": "The SuiteCommerce Bridge theme provides a bold custom theme designed with the tech industry in mind."
+	, "configuration":
+	{
+		"files": [
+			"Modules/Main/Configuration/Configuration.json"
+			, "Modules/Header/Configuration/Header.Configuration.json"
+			, "Modules/Footer/Configuration/Footer.Configuration.json"
+			, "Modules/ErrorManagement/Configuration/ErrorManagementPageNotFound.Configuration.json"
+			, "Modules/Home/Configuration/Home.Configuration.json"
+			, "Modules/WebFont/Configuration/Configuration.json"
+			, "Modules/LoginRegister/Configuration/LoginRegister.Configuration.json"
+		]
+	}
+	, "javascript":
+	{
+		"entry_points":
+		{
+			"shopping": "Modules/Main/JavaScript/SC.BridgeThemeExtension.Shopping.js"
+			, "checkout": "Modules/Main/JavaScript/SC.BridgeThemeExtension.Checkout.js"
+			, "myaccount": "Modules/Main/JavaScript/SC.BridgeThemeExtension.MyAccount.js"
+		}
+		, "application":
+		{
+			"shopping":
+			{
+				"files": [
+					"Modules/Main/JavaScript/SC.BridgeThemeExtension.Shopping.js"
+          ,"Modules/Common/JavaScript/SC.BridgeThemeExtension.Common.Configuration.js"
+          ,"Modules/Common/JavaScript/SC.BridgeThemeExtension.Common.LayoutHelper.js"
+					, "Modules/ApplicationSkeleton/JavaScript/SC.BridgeThemeExtension.ApplicationSkeleton.Layout.js"
+					, "Modules/Footer/JavaScript/SC.BridgeThemeExtension.Footer.js"
+					, "Modules/Home/JavaScript/SC.BridgeThemeExtension.Home.js"
+					, "Modules/ErrorManagement/JavaScript/SC.BridgeThemeExtension.ErrorManagement.PageNotFound.View.js"
+					, "Modules/ItemRelations/JavaScript/SC.BridgeThemeExtension.ItemRelations.SC.Configuration.js"
+					, "Modules/WebFont/JavaScript/SC.BridgeThemeExtension.LoadWebFont.js"
+				]
+			}
+			, "checkout":
+			{
+				"files": [
+					"Modules/Main/JavaScript/SC.BridgeThemeExtension.Checkout.js"
+          ,"Modules/Common/JavaScript/SC.BridgeThemeExtension.Common.Configuration.js"
+          ,"Modules/Common/JavaScript/SC.BridgeThemeExtension.Common.LayoutHelper.js"
+					, "Modules/Footer/JavaScript/SC.BridgeThemeExtension.Footer.js"
+					, "Modules/Footer/JavaScript/SC.BridgeThemeExtension.Footer.Simplified.js"
+					, "Modules/ErrorManagement/JavaScript/SC.BridgeThemeExtension.ErrorManagement.PageNotFound.View.js"
+					, "Modules/ItemRelations/JavaScript/SC.BridgeThemeExtension.ItemRelations.SC.Configuration.js"
+					, "Modules/WebFont/JavaScript/SC.BridgeThemeExtension.LoadWebFont.js"
+					, "Modules/LoginRegister/JavaScript/SC.BridgeThemeExtension.LoginRegister.Login.View.js"
+				]
+			}
+			, "myaccount":
+			{
+				"files": [
+					"Modules/Main/JavaScript/SC.BridgeThemeExtension.MyAccount.js"
+          ,"Modules/Common/JavaScript/SC.BridgeThemeExtension.Common.Configuration.js"
+          ,"Modules/Common/JavaScript/SC.BridgeThemeExtension.Common.LayoutHelper.js"
+					, "Modules/ApplicationSkeleton/JavaScript/SC.BridgeThemeExtension.ApplicationSkeleton.Layout.js"
+					, "Modules/Footer/JavaScript/SC.BridgeThemeExtension.Footer.js"
+					, "Modules/ErrorManagement/JavaScript/SC.BridgeThemeExtension.ErrorManagement.PageNotFound.View.js"
+					, "Modules/ItemRelations/JavaScript/SC.BridgeThemeExtension.ItemRelations.SC.Configuration.js"
+					, "Modules/WebFont/JavaScript/SC.BridgeThemeExtension.LoadWebFont.js"
+				]
+			}
+		}
+	}
+	, "local_folder": "Workspace/BridgeThemeExtension"
+}

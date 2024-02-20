@@ -1,0 +1,289 @@
+{
+    "type": "object",
+    "subtab": {
+        "id": "bridgeHome",
+        "title": "Home",
+        "group": "bridgeConfig"
+    },
+    "properties": {
+        "home.autoPlayCarousel": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeHome",
+            "type": "boolean",
+		        "title": "Autoplay Carousel",
+            "description": "Autoplay carousel",
+            "default": false
+        },
+        "home.carouselSpeed": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeHome",
+            "type": "integer",
+            "title": "Carousel Speed (milliseconds)",
+            "description": "Carousel speed between each slide in milliseconds. Ex. 5000 is 5 seconds",
+            "default": 5000
+        },
+        "home.themeCarouselImages": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeHome",
+            "type": "array",
+            "docRef": "bridgehead_4666978268",
+            "title": "Carousel images",
+            "description": "Carousel image Urls, plus overlaid text and link to click through to.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
+                    },
+                    "text": {
+                        "type": "string",
+                        "title": "Text"
+                    },
+                    "image": {
+                        "type": "string",
+                        "title": "Image Url"
+                    },
+                    "imageMobile": {
+                        "type": "string",
+                        "title": "Image Url (Mobile)"
+                    },
+                    "linktext": {
+                        "type": "string",
+                        "title": "Link Text"
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "Link Location"
+                    },
+                    "imageBehaviour": {
+                      "type": "string",
+                      "title": "Image as background",
+                      "enum": ["", "disabled"]
+                    },
+                    "backgroundCrop": {
+                      "type": "string",
+                      "title": "Background crop side",
+                      "enum": ["left", "right", "centered"]
+                    },
+                    "captionSide": {
+                      "type": "string",
+                      "title": "Caption position",
+                      "enum": ["left", "right", "centered"]
+                    },
+                    "captionTextAlign": {
+                      "type": "string",
+                      "title": "Caption text align",
+                      "enum": ["left", "right", "centered"]
+                    },
+                    "captionColor": {
+                        "type": "string",
+                        "title": "Text Color"
+                    }
+                }
+            },
+            "default": [{
+                    "title": "New Tablets",
+                    "text": "",
+                    "image": "img/bridge-carousel-home-1.jpg",
+                    "imageMobile": "",
+                    "linktext": "Shop Now",
+                    "href": "#",
+                    "imageBehaviour": "",
+                    "backgroundCrop": "right",
+                    "captionSide": "",
+                    "captionTextAlign": "",
+                    "captionColor": ""
+                },
+                {
+                    "title": "Learn",
+                    "text": "Basics of audio setup",
+                    "image": "img/bridge-carousel-home-2.jpg",
+                    "imageMobile": "",
+                    "linktext": "Find Out How",
+                    "href": "#",
+                    "imageBehaviour": "",
+                    "backgroundCrop": "right",
+                    "captionSide": "",
+                    "captionTextAlign": "",
+                    "captionColor": ""
+                },
+                {
+                    "title": "Support",
+                    "text": "Setup without the upset",
+                    "image": "img/bridge-carousel-home-3.jpg",
+                    "imageMobile": "",
+                    "linktext": "More",
+                    "href": "#",
+                    "imageBehaviour": "",
+                    "backgroundCrop": "right",
+                    "captionSide": "",
+                    "captionTextAlign": "",
+                    "captionColor": ""
+                }
+            ]
+        },
+		"home.topPromo": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeHome",
+            "type": "array",
+            "title": "Top Promo",
+            "description": "Top promotional banner used to display any information you enter in this area.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "title": "Text"
+                    },
+                    "image": {
+                        "type": "string",
+                        "title": "Background Image URL"
+                    },
+                    "color": {
+                        "type": "string",
+                        "title": "Background Color"
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "Link Location"
+                    }
+                }
+            },
+            "default": [
+				{
+                    "text": "Use promo code SCADEMO for 40% off your purchase",
+                    "image": "",
+                    "color": "",
+                    "href": "#"
+                }
+            ]
+        },
+        "home.infoblock": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeHome",
+            "type": "array",
+            "title": "Infoblocks",
+            "description": "Infoblock banners that link through to specified areas. Will accept any number of lines but the section was designed for 5 blocks with the fifth being a larger size.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "title": "Title"
+                    },
+                    "text": {
+                        "type": "string",
+                        "title": "Text"
+                    },
+                    "image": {
+                        "type": "string",
+                        "title": "Background Image URL"
+                    },
+                    "color": {
+                        "type": "string",
+                        "title": "Background Color"
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "Link Location"
+                    }
+                }
+            },
+            "default": [{
+                    "title": "Support",
+                    "text": "Set up without the upset",
+                    "image": "img/bridge-infoblock1.png",
+                    "color": "#a3b9ce",
+                    "href": "#"
+                },
+                {
+                    "title": "Learn",
+                    "text": "Basics of audio setup",
+                    "image": "img/bridge-infoblock2.png",
+                    "color": "#789bb0",
+                    "href": "#"
+                },
+                {
+                    "title": "Tablets",
+                    "text": "Tablets that fit you",
+                    "image": "img/bridge-infoblock3.png",
+                    "color": "#789bb0",
+                    "href": "#"
+                },
+                {
+                    "title": "Opinions",
+                    "text": "Our staff picks favorites",
+                    "image": "img/bridge-infoblock4.png",
+                    "color": "#b4bcc2",
+                    "href": "#"
+                },
+                {
+                    "title": "Ending Tomorrow",
+                    "text": "50% off close outs",
+                    "image": "img/bridge-infoblock5.png",
+                    "color": "#b6d6ef",
+                    "href": "#"
+                }
+            ]
+        },
+        "home.freeTextTitle": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeHome",
+            "type": "string",
+            "translate": true,
+            "title": "Free Text Title",
+            "description": "Title for free text section.",
+            "default": "Why buy from ACME"
+        },
+        "home.freeText": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeHome",
+            "type": "string",
+            "translate": true,
+            "nsType": "textarea",
+            "title": "Free Text",
+            "description": "Can accept HTML tags.",
+            "default": "<p>Our goal is for you to become a life long customer for life by providing you with the most hassle-free shopping, purchasing, and support experience possible. We are very fortunate to represent a brand we believe in; Acme is the industry standard for quality, durability, and low cost of ownership. A product this good deserves to be backed up by a world-class customer service experience and that's what we will provide you when you choose to do business with Acme Tronics</p>"
+        },
+        "home.freeTextImages": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeHome",
+            "type": "array",
+            "title": "Free Text Images",
+            "description": "Images to display with the free text.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "type": "string",
+                        "title": "Image",
+                        "description": ""
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "URL",
+                        "description": ""
+                    }
+                }
+            },
+            "default": [{
+                    "image": "img/bridge-logo-samsung.png",
+                    "href": "#"
+                },
+                {
+                    "image": "img/bridge-logo-sennheiser.png",
+                    "href": "#"
+                },
+                {
+                    "image": "img/bridge-logo-jumbo.png",
+                    "href": "#"
+                },
+                {
+                    "image": "img/bridge-logo-kindle.png",
+                    "href": "#"
+                }
+            ]
+        }
+    }
+}

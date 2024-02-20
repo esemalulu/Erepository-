@@ -1,0 +1,117 @@
+<html>
+    <head>
+        <link type="text/css"
+              href="https://cdn.datatables.net/v/dt/dt-1.13.6/b-2.4.2/fc-4.3.0/fh-3.4.0/r-2.5.0/sc-2.2.0/sl-1.7.0/datatables.min.css" 
+              rel="stylesheet">
+    </head>
+
+    <body>
+        <div v-cloak id="chassisched-app">
+            <!-- Show a loading screen initially -->
+            <div class="loadingMsg" v-show="currentstate=='loading'">
+                Loading...
+            </div>
+
+            <!-- Display message when processing is happening -->
+            <div class="processingMsg" v-show="currentstate=='updating'">
+                <br/> <br/>Data is being updated in the system. When processing is complete the Chassis Scheduling page will display again.
+                <br/> <br/>This may take a while -- feel free to go grab a cup of coffee or tea & refresh the page in a couple minutes.
+                <br/> <br/>
+                <br/> <br/>This page doesn't need to remain open for processing to happen.
+            </div>
+
+            <!-- Display Filtering page -->
+            <div v-show="currentstate=='filtering'">
+                <div class="tab">
+                    <button type="button" @click="getUnitDataAndBuildTables()" class="actionbtns submitbtn">Get Units</button> 
+                </div>
+                <br/>
+                <div class="field-spacing">
+                    <div class="field-label">
+                        <label >Location</label><span style="color: red;">*</span><br/>
+                        <div class="field-value">
+                            <select style="width: 200px" v-model="selectedLocation">
+                                <option v-for="location in locations" :value="location.id">{{location.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-label">
+                      <label>Series</label><br/>
+                        <div class="field-value">
+                            <select style="width: 200px" v-model="selectedSeries" v-bind:id="selectedSeries.id" @change="setModelListFromSelectedSeries()">
+                                <option v-for="s in series" :value="s.id">{{s.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-label">
+                      <label>Model</label><br/>
+                        <div class="field-value">
+                            <select style="width: 200px" v-model="selectedModel">
+                                <option v-for="model in models" :value="model.id">{{model.model}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- Show the Tables -->
+            <div class="tab" v-show="currentstate=='editing'">
+                <button type="button" @click="submitAllData()" class="actionbtns submitbtn">Submit</button>
+                <button type="button" @click="reloadPage()" class="actionbtns">Reset</button>
+            </div>
+
+            <div v-show="currentstate=='editing'" style="margin: 0px 0px 0px 0px; width:85%;">
+                <div class="scheduledUnitsTable tables"  style="width:75%; float: left;">
+                    <table id="scheduledUnitsTable" class="display" style="width:100%; float:left;">
+                        <thead>
+                            <tr>
+                                <th>Unit</th>
+                                <th>Dealer</th>
+                                <th>Series</th>
+                                <th>Model</th>
+                                <th>Decor</th>
+                                <th>Online Date</th>
+                                <th>Offline Date</th>
+                                <th>Chassis Item</th>
+                                <th>Chasssis Inv Num</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="unit in units" :id="unit.unit_id">
+                                <td>{{unit.unit_name}}</td>
+                                <td>{{unit.transaction_dealer}}</td>
+                                <td>{{unit.unit_series}}</td>
+                                <td>{{unit.unit_model}}</td>
+                                <td>{{unit.unit_decor}}</td>
+                                <td>{{unit.unit_onlinedate}}</td>
+                                <td>{{unit.unit_offlinedate}}</td>
+                                <td>{{unit.chassis_itemname}}</td>
+                                <td>{{unit.unit_chassisinvnum}}</td>
+                                <td ><button type="button" v-show="unit.unit_chassisinvnum!=null" v-bind:id="unit.unit_chassisinvnum"  @click="releaseInventoryNumber($event)">Release</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="inventoryNumberTable tables" style="width:20%; float: right;">
+                    <table id="inventoryNumberTable" class="display" style="width:100%; float:left;">
+                        <thead>
+                            <tr>
+                                <th>Inventory Number</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="number in filteredInventoryNumbers">
+                                <td>{{number.inventorynumber}}</td>
+                                <td><button type="button" v-bind:id="number.inventorynumber"  @click="assignInventoryNumber($event)">Assign</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

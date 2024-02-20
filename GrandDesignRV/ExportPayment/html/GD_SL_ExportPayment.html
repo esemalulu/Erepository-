@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Warranty Claim</title>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/a0b195976c.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.core.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/22.2.4/css/dx.common.css" />
+    <link rel="dx-theme" data-theme="generic.light.compact" href="https://cdn3.devexpress.com/jslib/22.2.4/css/dx.light.compact.css" data-active="true"/> 
+<!--    <link rel="dx-theme" data-theme="generic.light" href="https://cdn3.devexpress.com/jslib/22.2.4/css/dx.light.css"
+          data-active="generic.light">-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.2.2/jszip.min.js"></script>
+    <script src="https://cdn3.devexpress.com/jslib/22.2.4/js/dx.web.js"></script>
+    {gd_css}
+    {sourceJSFiles}
+</head>
+<body class="dx-viewport">
+<input id="restleturl" type="hidden" value="{restleturl}"/>
+<input id="suiteleturl" type="hidden" value="{suiteleturl}"/>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="box" id="box-canvas">
+                <div id="popup"></div>
+                <div id="mainLoadPanel"></div>
+                <div id="tabPanel"></div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+<script type="text/javascript">
+    let mainApp
+    window.addEventListener('load', (event) => {
+        console.log('LOAD')
+        mainApp = new exportPayments();
+        mainApp.initalize();
+    });
+</script>
+</body>
+</html>

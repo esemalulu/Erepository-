@@ -1,0 +1,352 @@
+{
+    "type": "object",
+    "subtab": {
+        "id": "bridgeFooter",
+        "title": "Footer",
+        "group": "bridgeConfig"
+    },
+    "properties": {
+        "footer.showLegacyNewsletter": {
+          "group": "bridgeConfig",
+          "subtab": "bridgeFooter",
+          "type": "boolean",
+          "title": "Show Legacy Newsletter",
+          "description": "Show Legacy Newsletter in Footer",
+          "default": true
+        },
+        "footer.copyright.hide": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "boolean",
+            "title": "Hide",
+            "description": "Hide copyright notice from the footer",
+            "default": false
+        },
+        "footer.copyright.companyName": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "string",
+            "title": "Company Name",
+            "description": "Company Name to show in the footer copyright notice",
+            "default": "Company Name"
+        },
+        "footer.copyright.initialYear": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "string",
+            "title": "Initial Year",
+            "description": "Initial Year to show in the footer copyright notice (empty will show current year)",
+            "default": null
+        },
+        "footer.backgroundImg": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "string",
+            "title": "Upper section background url",
+            "description": "Enter the URL location of the background image file to display in the background of the upper level footer. Use img/<file-name> and upload via the File Cabinet.",
+            "default": "img/footer_background.png"
+        },
+        "footer.icon": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "string",
+            "title": "Upper section icon (font awesome icon name)",
+            "description": "Enter the icon name as listed under 'Web Application Icons' at http://fontawesome.io/icons/ Does not require prefix 'fa-'",
+            "default": "map-marker"
+        },
+        "footer.title": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "string",
+            "translate": true,
+            "title": "Upper section title",
+            "description": "Title for the content area in the upper section",
+            "default": "New York, NY"
+        },
+        "footer.primaryText": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "string",
+            "title": "Upper section text area 1",
+            "nsType": "textarea",
+            "translate": true,
+            "description": "First text area for the content in the upper section",
+            "default": "620 Eight Avenue, New York, NY 10037"
+        },
+        "footer.secondaryText": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "string",
+            "nsType": "textarea",
+            "translate": true,
+            "title": "Upper section text area 2",
+            "description": "Second text area for the content in the upper section",
+            "default": "Monday - Friday: Noon - 1am  Saturday: 2pm - 3am"
+        },
+        "footer.multiColLinks": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "array",
+            "title": "Multi-column Links",
+            "description": "Multiple column footer displaying up to four columns of links",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "title": "Text",
+                        "description": ""
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "URL",
+                        "description": ""
+                    },
+                    "datatouchpoint": {
+                        "type": "string",
+                        "title": "data-touchpoint",
+                        "description": ""
+                    },
+                    "datahashtag": {
+                        "type": "string",
+                        "title": "data-hashtag",
+                        "description": ""
+                    },
+                    "datatarget": {
+                        "type": "string",
+                        "title": "data-target",
+                        "description": ""
+                    },
+                    "column": {
+                        "type": "string",
+                        "title": "Column",
+                        "description": "",
+                        "enum": ["Column 1", "Column 2", "Column 3", "Column 4"]
+                    }
+                }
+            },
+            "default": [{
+                    "text": "Here to Help",
+                    "href": "",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 1"
+                },
+                {
+                    "text": "FAQs",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 1"
+                },
+                {
+                    "text": "Delivery & Collection",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 1"
+                },
+                {
+                    "text": "Returns & Refunds",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 1"
+                },
+                {
+                    "text": "Shopping With Us",
+                    "href": "",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 2"
+                },
+                {
+                    "text": "International Delivery",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 2"
+                },
+                {
+                    "text": "Our Stores",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 2"
+                },
+                {
+                    "text": "Size Guides",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 2"
+                },
+                {
+                    "text": "About Us",
+                    "href": "",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 3"
+                },
+                {
+                    "text": "Corporate Site",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 3"
+                },
+                {
+                    "text": "Jobs",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 3"
+                },
+                {
+                    "text": "Contact Us",
+                    "href": "/contact-us",
+                    "datatouchpoint": "home",
+                    "datahashtag": "#contact-us",
+                    "datatarget": "",
+                    "column": "Column 3"
+                },
+                {
+                    "text": "Legal",
+                    "href": "",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 4"
+                },
+                {
+                    "text": "Privacy & Cookies",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 4"
+                },
+                {
+                    "text": "Accessibility",
+                    "href": "#",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": "",
+                    "column": "Column 4"
+                }
+            ]
+        },
+        "footer.socialMediaLinksTitle": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "string",
+            "translate": true,
+            "title": "Social media links title",
+            "description": "Title for the social media links section",
+            "default": "Follow us on"
+        },
+        "footer.socialMediaLinks": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeFooter",
+            "type": "array",
+            "title": "Social media links",
+            "description": "Simple links to various social media locations, using FontAwesome icons from the 'Brand Icons' or 'Web Applications' sections of http://fontawesome.io/icons/",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "icon": {
+                        "type": "string",
+                        "title": "Icon Name",
+                        "description": ""
+                    },
+                    "text": {
+                        "type": "string",
+                        "title": "Text",
+                        "description": ""
+                    },
+                    "href": {
+                        "type": "string",
+                        "title": "URL",
+                        "description": ""
+                    },
+                    "datatouchpoint": {
+                    "type": "string"
+                    , "title": "data-touchpoint"
+                    , "description": ""
+                    },
+                    "datahashtag": {
+                    "type": "string"
+                    , "title": "data-hashtag"
+                    , "description": ""
+                    },
+                    "datatarget": {
+                        "type": "string",
+                        "title": "data-target",
+                        "description": ""
+                    }
+                }
+            },
+            "default": [
+                {
+                    "icon": "facebook",
+                    "text": "facebook",
+                    "href": "http://www.facebook.com",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": ""
+                },
+                {
+                    "icon": "twitter",
+                    "text": "twitter",
+                    "href": "http://www.twitter.com",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": ""
+                },
+                {
+                    "icon": "pinterest",
+                    "text": "pinterest",
+                    "href": "http://www.pinterest.com",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": ""
+                },
+                {
+                    "icon": "youtube",
+                    "text": "youtube",
+                    "href": "http://www.youtube.com",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": ""
+                },
+                {
+                    "icon": "instagram",
+                    "text": "instagram",
+                    "href": "http://www.instagram.com",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": ""
+                },
+                {
+                    "icon": "google-plus",
+                    "text": "google+",
+                    "href": "http://plus.google.com",
+                    "datatouchpoint": "",
+                    "datahashtag": "",
+                    "datatarget": ""
+                }
+            ]
+        }
+    }
+}

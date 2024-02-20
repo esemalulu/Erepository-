@@ -1,0 +1,8 @@
+{
+    "type": "object",
+    "group": {
+        "id": "bridgeConfig",
+        "title": "Bridge Theme",
+        "description": "Bridge Theme Configuration"
+    }
+}

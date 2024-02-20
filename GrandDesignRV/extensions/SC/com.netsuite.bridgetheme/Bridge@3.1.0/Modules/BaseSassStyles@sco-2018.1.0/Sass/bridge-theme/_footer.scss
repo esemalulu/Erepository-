@@ -1,0 +1,52 @@
+$sc-footer-text-color: $sc-color-theme-dark; /* editable({"type": "color", "label": "Text color"}) */
+$sc-footer-font-size: 14px; /* editable({"type": "string", "label": "Text size"}) */
+
+// Headings color
+$sc-footer-headings-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Column headings color"}) */
+
+// Link variables
+$sc-footer-link-color: $sc-color-theme-dark; /* editable({"type": "color", "label": "Link color"}) */
+$sc-footer-link-color-hover: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Link hover color"}) */
+$sc-footer-link-color-active: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Link active color"}) */
+$sc-footer-link-text-decoration: none; /* editable({
+	"type": "string",
+	"label": "Link text transform",
+	"options": [
+		{"value": "none", "text": "none"},
+		{"value": "uppercase", "text": "uppercase"},
+		{"value": "lowercase", "text": "lowercase"},
+		{"value": "capitalize", "text": "capitalize"}
+	]
+}) */
+
+// Upper - Footer variables
+$sc-footer-upper-background-color: $sc-color-theme-dark; /* editable({"type": "color", "label": "Upper section background color"}) */
+$sc-footer-upper-border-color: $sc-color-theme-border-light; /* editable({"type": "color", "label": "Upper section border color"}) */
+$sc-footer-upper-text-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Upper section text color"}) */
+
+// Lower - Footer variables
+$sc-footer-lower-background-color: $sc-color-copy; /* editable({"type": "color", "label": "Lower section background color"}) */
+$sc-footer-lower-border-color: $sc-color-theme-border-light; /* editable({"type": "color", "label": "Lower section border color"}) */
+$sc-footer-lower-text-color: $sc-footer-text-color; /* editable({"type": "color", "label": "Lower section text color"}) */
+$sc-footer-lower-link-color: $sc-footer-link-color; /* editable({"type": "color", "label": "Lower section link color"}) */
+$sc-footer-lower-link-color-hover: $sc-footer-link-color-hover; /* editable({"type": "color", "label": "Lower section link hover color"}) */
+$sc-footer-lower-link-color-active: $sc-footer-link-color-active; /* editable({"type": "color", "label": "Lower section link active color"}) */
+
+// Input fields variables
+$sc-footer-fields-background-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Input background color"}) */
+$sc-footer-fields-border-color: $sc-color-theme-border; /* editable({"type": "color", "label": "Input border color"}) */
+$sc-footer-fields-text-color: $sc-color-copy; /* editable({"type": "color", "label": "Input text color"}) */
+
+// Buttons variables
+$sc-footer-buttons-background-color: $sc-color-copy; /* editable({"type": "color", "label": "Buttons background color"}) */
+$sc-footer-buttons-text-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Buttons text color"}) */
+$sc-footer-buttons-border-color: $sc-button-secondary-background-color; /* editable({"type": "color", "label": "Buttons border color"}) */
+$sc-footer-buttons-border-radius: $sc-border-radius; /* editable({"type": "string", "label": "Buttons border radius"}) */
+
+// Copyright color
+$sc-footer-copyright-text-color: $sc-footer-text-color; /* editable({"type": "color", "label": "Copyright text color"}) */
+
+// Social Media variables
+$sc-footer-social-icon-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Social icons color"}) */
+$sc-footer-social-icon-color-hover: $sc-color-copy; /* editable({"type": "color", "label": "Social icons hover color"}) */
+$sc-footer-social-icon-size: 26px; /* editable({"type": "string", "label": "Social icons size"}) */

@@ -1,0 +1,45 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+// Edited for Bridge
+
+.product-detail-to-quote-add-to-quote {}
+
+.product-detail-to-quote-add-to-quote-button {
+	@extend .button-tertiary;
+	@extend .button-large;
+	margin: $sc-margin-lv3 auto 0;
+	font-weight: $sc-font-weight-semibold;
+	width: 80%;
+	text-align:center;
+	cursor:pointer;
+	cursor:hand;
+	display: block;
+	font-size: 14px;
+	padding: 0 15px;
+	border: 2px solid $sc-color-link;
+	line-height: $sc-target-size-mobile - 4px; //to account for border
+	@media(min-width: $screen-sm-min){
+		display: inline-block;
+		margin-left: 0;
+		margin-top: $sc-margin-lv3;
+		width: 100%;
+		padding: 17px 25px;
+		font-size: 1.067rem;
+	}
+}
+
+.product-detail-to-quote-loading {
+	@extend .product-detail-to-quote-add-to-quote-button;
+	@extend .product-detail-to-quote-add-to-quote-button:disabled;
+	cursor: auto;
+}
+
+.quick-view-confirmation-modal .product-detail-to-quote-add-to-quote {
+	padding-left: 0;
+	padding-right: $sc-padding-lv3;
+}

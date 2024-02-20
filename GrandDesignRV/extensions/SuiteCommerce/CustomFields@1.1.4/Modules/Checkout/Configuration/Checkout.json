@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "subtab": {
+    "id": "customFieldsCheckout",
+    "group": "extensions",
+    "title": "Custom Fields",
+    "docRef": "section_1531905521"
+  },
+  "properties": {
+    "customFields.checkout.requiredError": {
+      "group": "extensions",
+      "subtab": "customFieldsCheckout",
+      "type": "string",
+      "title": "Required Field Warning Message",
+      "description": "Enter the error message you want to display if the user leaves a required field blank. {{field}} - is replaced by the field name.",
+      "default": "Field {{field}} is required."
+    },
+    "customFields.checkout.requiredGeneralError": {
+      "group": "extensions",
+      "subtab": "customFieldsCheckout",
+      "type": "string",
+      "title": "Required Fields General Warning",
+      "description": "Displays as a generic error when there are required fields in the page.",
+      "default": "Please fill required fields below before continuing."
+    },
+    "customFields.checkout.loadingMessage": {
+      "group": "extensions",
+      "subtab": "customFieldsCheckout",
+      "type": "string",
+      "title": "Loading Text",
+      "description": "",
+      "default": "Loading additional information..."
+    },
+    "customFields.checkout.loadingError": {
+      "group": "extensions",
+      "subtab": "customFieldsCheckout",
+      "type": "string",
+      "title": "Loading Error Text",
+      "description": "",
+      "default": "There was a problem loading the section. Please reload the page."
+    },
+    "customFields.checkout.savingError": {
+      "group": "extensions",
+      "subtab": "customFieldsCheckout",
+      "type": "string",
+      "title": "Saving Error Text",
+      "description": "",
+      "default": "There was a problem saving. Please reload the page."
+    },
+    "customFields.checkout.fields": {
+      "group": "extensions",
+      "subtab": "customFieldsCheckout",
+      "type": "array",
+      "title": "Checkout Custom Fields",
+      "description": "Custom Fields to display in the Checkout flow",
+      "items": {
+        "type": "object",
+        "properties": {
+          "internalid": {
+            "title": "ID",
+            "mandatory": true,
+            "type": "string",
+            "default": ""
+          },
+          "position": {
+            "title": "Position",
+            "mandatory": true,
+            "type": "string",
+            "enum": ["Before", "After"],
+            "default": ""
+          },
+          "module": {
+            "title": "Module",
+            "mandatory": true,
+            "type": "string",
+            "enum": [
+              "Shipping Address",
+              "Shipping Method",
+              "Gift Certificate",
+              "Payment Method",
+              "Billing Address",
+              "Review Shipping",
+              "Review Payment"
+            ],
+            "default": ""
+          },
+          "type": {
+            "title": "Field Type",
+            "mandatory": true,
+            "type": "string",
+            "enum": [
+              "Header",
+              "Free-Form Text",
+              "Text Area",
+              "Check Box",
+              "Date"
+            ]
+          },
+          "label": {
+            "title": "Field Label",
+            "mandatory": false,
+            "type": "string",
+            "default": ""
+          },
+          "placeholder": {
+            "title": "Placeholder",
+            "mandatory": false,
+            "type": "string",
+            "default": ""
+          },
+          "mandatory": {
+            "title": "Required",
+            "mandatory": false,
+            "type": "boolean",
+            "default": false
+          },
+          "maxfieldlength": {
+            "title": "Max field length",
+            "mandatory": false,
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

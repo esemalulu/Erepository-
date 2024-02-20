@@ -1,0 +1,78 @@
+<div class="rvs-modal" id="modal-configunitorder" title="Configure Unit">
+	<div class="rvs-loader-overlay" id="rvs-spinner">
+		<div class="rvs-loader"></div>
+		<span>Working...</span>
+	</div>
+	<div class="rvs-primary-button row-button" id="savePopup" data-bind="click: savePopup, visible:showButtons" title="OK">OK</div>
+	<div class="rvs-secondary-button row-button" id="cancelPopup" data-bind="click: cancelPopup, visible:showButtons" title="Cancel">Cancel</div>
+	<table class="rvs-table rvs-popup-table">
+		<tr>
+			<td class="cell-md"></td>
+			<td class="cell-xxxxl"></td>
+			<td class="cell-xl"></td>
+		</tr>
+		<tr data-bind="visible: showDealers">
+            <td>DEALER*</td>
+			<td>
+				<input id="rvsdealerauto" class="input-lg-withbtn rvs-popup-input" data-bind="jqAuto: { autoFocus: true }, jqAutoSource: allDealers, jqAutoValue: selectedDealer, jqAutoSourceLabel: 'name', jqAutoSourceInputValue: 'name'" />
+				<button class="input-btn" data-bind="jqAutoCombo: 'rvsdealerauto'">...</button>
+			</td>
+		</tr>
+		<tr data-bind="visible: showSeries">
+            <td>SERIES*</td>
+            <td><select id="rvsseriesselect" class="input-lg rvs-popup-input" data-bind="options: allSeries, optionsText: 'name', value: selectedSeries, optionsCaption: 'Choose...', enable: !isDisabled() && (!showDealers || selectedSeries() || selectedDealer())"></select></td>
+		</tr>
+		<tr data-bind="visible: showDecors">
+            <td>DECOR*</td>
+			<td><select id="rvsdecorselect" class="input-lg rvs-popup-input" data-bind="options: filteredDecors, optionsText: 'displayText', value: selectedDecor, optionsCaption: 'Choose...', enable: !isDisabled() && selectedSeries()"></select></td>
+		</tr>
+		<tr data-bind="visible: showModels">
+            <td>MODEL*</td>
+            <td><select id="rvsmodelselect" class="input-lg rvs-popup-input" data-bind="options: filteredModels, optionsText: 'name', value: selectedModel, optionsCaption: 'Choose...', enable: !isDisabled() && selectedSeries()"></select></td>
+		</tr>
+	</table>
+	
+	<table class="rvs-table-stripe rvs-table">  
+	   <thead class="rvs-table-header">
+	        <tr>
+	        	<th class="cell-mdlg">SELECT</th>
+	            <th class="cell-md">ITEM</th>
+	            <th class="cell-xxxmdl">DESCRIPTION</th>
+				<th class="cell-md">HIDDEN OPTION</th>
+	            <th class="cell-md cell-right">QUANTITY</th>
+	            <th class="cell-md cell-right" data-bind="visible: showRate" style="padding-right: 5px;">RATE</th>
+	        </tr>
+	   </thead>
+	   <tbody data-bind=" template:{name:optionTemplateToUse, foreach: modelOptions}"></tbody>
+	</table>
+	
+	<div class="rvs-primary-button row-button margin-top-sm" id="savePopupBtm" data-bind="click: savePopup, visible:showButtons" title="OK">OK</div>
+	<div class="rvs-secondary-button row-button margin-top-sm" id="cancelPopupBtm" data-bind="click: cancelPopup, visible:showButtons" title="Cancel">Cancel</div>
+</div>
+
+<!-- Normal Option Template -->
+<script id="rvsOptionTemplate" type="text/html">
+<tr class="item">
+	<td><input type="checkbox" data-bind="checked: isSelected, enable: !isDisabled"/></td>
+    <td data-bind="text: itemName"></td>
+    <td data-bind="text: itemDescription"></td>
+	<td data-bind="text: hiddenOption"></td>
+    <td class="cell-right" data-bind="text: quantity"></td>
+	<td class="cell-right" data-bind="visible: $root.showRate, text: basePriceCurrencyFormat"></td>
+</tr>
+</script>
+
+<!-- Option Group Template -->
+<script id="rvsOptionGroupTemplate" type="text/html">
+<tr class="item item-lg">
+	<td>
+		<span class="rvs-option-header" data-bind="text: itemOptionHeaderDisplay"></span>
+		<select class="rvs-option-select" data-bind="options: components, optionsText: 'dropdownText', value: selectedComponent, optionsCaption: '- None -', enable: !isDisabled"</select>
+	</td>
+    <td class="rvs-cell-paddingtop" data-bind="text: selectedComponent() ? selectedComponent().itemName : null"></td>
+    <td class="rvs-cell-paddingtop" data-bind="text: selectedComponent() ? selectedComponent().itemDescription : null"></td>
+	<td class="rvs-cell-paddingtop" data-bind="text: selectedComponent() ? selectedComponent().hiddenOption : null"></td>
+	<td class="cell-right rvs-cell-paddingtop" data-bind="text: selectedComponent() ? selectedComponent().quantity : null"></td>
+	<td class="cell-right rvs-cell-paddingtop" data-bind="visible: $root.showRate, text: selectedComponent() ? selectedComponent().basePriceCurrencyFormat : null"></td>
+</tr>
+</script>

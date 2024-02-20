@@ -1,0 +1,137 @@
+{
+    "name": "AdvancedSignUp",
+    "fantasyName": "Advanced Sign Up",
+    "vendor": "SuiteCommerce",
+    "version": "1.0.5",
+    "type": "extension",
+    "target": "SCA,SCS",
+    "target_version": {
+        "SCS": ">=19.1.0",
+        "SCA": ">=19.1.0"
+    },
+    "description": "Advanced Sign Up lets wholesalers use an alternate sign up form on their website, in addition to or instead of the existing standard customer registration form. You can decide which fields to include on the form and whether the form creates a lead or customer record in NetSuite. Once a user signs up, you can approve users to shop on your site.",
+    "page": {
+        "types": [
+            {
+                "name": "ext-advsu-page",
+                "displayName": "Advanced Sign Up Page",
+                "description": "Advanced Sign Up Page Type",
+                "cmsCreatable": "F"
+            }
+        ]
+    },
+    "skins": [],
+    "assets": {
+        "img": {
+            "files": []
+        },
+        "fonts": {
+            "files": []
+        },
+        "services": {
+            "files": []
+        }
+    },
+    "configuration": {
+        "files": [
+            "Modules/Common/Configuration/Main.json"
+        ]
+    },
+    "sass": {
+        "entry_points": {
+            "shopping": "Modules/Main/Sass/_sc_advancedsignup_shopping.scss",
+            "checkout": "Modules/Main/Sass/_sc_advancedsignup_checkout.scss"
+        },
+        "files": [
+            "Modules/RegistrationForm/Sass/_sc_advancedsignup_registrationform.scss",
+            "Modules/AccessPoints/Sass/_sc_advancedsignup_register.scss",
+            "Modules/Main/Sass/_sc_advancedsignup_checkout.scss",
+            "Modules/Main/Sass/_sc_advancedsignup_shopping.scss",
+            "Modules/AccessPoints/Sass/_sc_advancedsignup_login.scss",
+            "Modules/Main/Sass/variables.scss"
+        ]
+    },
+    "templates": {
+        "application": {
+            "shopping": {
+                "files": [
+                    "Modules/RegistrationForm/Templates/sc_advancedsignup_registrationform.tpl",
+                    "Modules/RegistrationForm/Templates/sc_advancedsignup_registrationform_field.tpl",
+                    "Modules/AccessPoints/Templates/sc_advancedsignup_header.tpl",
+                    "Modules/AccessPoints/Templates/sc_advancedsignup_login.tpl",
+                    "Modules/AccessPoints/Templates/sc_advancedsignup_register.tpl"
+                ]
+            },
+            "checkout": {
+                "files": [
+                    "Modules/RegistrationForm/Templates/sc_advancedsignup_registrationform.tpl",
+                    "Modules/RegistrationForm/Templates/sc_advancedsignup_registrationform_field.tpl",
+                    "Modules/AccessPoints/Templates/sc_advancedsignup_header.tpl",
+                    "Modules/AccessPoints/Templates/sc_advancedsignup_login.tpl",
+                    "Modules/AccessPoints/Templates/sc_advancedsignup_register.tpl"
+                ]
+            }
+        }
+    },
+    "javascript": {
+        "entry_points": {
+            "shopping": "Modules/Main/JavaScript/SuiteCommerce.AdvancedSignUp.Shopping.js",
+            "checkout": "Modules/Main/JavaScript/SuiteCommerce.AdvancedSignUp.Checkout.js"
+        },
+        "application": {
+            "shopping": {
+                "files": [
+                    "Modules/Main/JavaScript/SuiteCommerce.AdvancedSignUp.Shopping.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.View.js",
+                    "Modules/Common/JavaScript/Configuration.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Configuration.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Field.Collection.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Field.Model.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Field.View.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Configuration.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Header.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Header.View.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Login.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Login.View.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Register.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Register.View.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Model.js",
+                    "Modules/Common/JavaScript/Utils.js",
+                    "Modules/Common/JavaScript/InstrumentationHelper.js",
+                    "Modules/Instrumentation/JavaScript/Instrumentation.js",
+                    "Modules/Instrumentation/JavaScript/Instrumentation.Log.js",
+                    "Modules/Instrumentation/JavaScript/Instrumentation.Logger.js",
+                    "Modules/Instrumentation/JavaScript/Instrumentation.MockAppender.js"
+                ]
+            },
+            "checkout": {
+                "files": [
+                    "Modules/Main/JavaScript/SuiteCommerce.AdvancedSignUp.Checkout.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.View.js",
+                    "Modules/Common/JavaScript/Configuration.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Configuration.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Field.Collection.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Field.Model.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Field.View.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Configuration.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Header.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Header.View.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Login.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Login.View.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Register.js",
+                    "Modules/AccessPoints/JavaScript/AccessPoints.Register.View.js",
+                    "Modules/RegistrationForm/JavaScript/RegistrationForm.Model.js",
+                    "Modules/Common/JavaScript/Utils.js",
+                    "Modules/Common/JavaScript/InstrumentationHelper.js",
+                    "Modules/Instrumentation/JavaScript/Instrumentation.js",
+                    "Modules/Instrumentation/JavaScript/Instrumentation.Log.js",
+                    "Modules/Instrumentation/JavaScript/Instrumentation.Logger.js",
+                    "Modules/Instrumentation/JavaScript/Instrumentation.MockAppender.js"
+                ]
+            }
+        }
+    },
+    "local_folder": "Workspace/AdvancedSignUp"
+}

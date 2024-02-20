@@ -1,0 +1,110 @@
+.pdi_body {
+	width: 100%;
+	background-color: #ccc;
+	margin: 0px;
+	overflow: hidden;
+}
+.ui-page {
+	background-color: #ccc !important;
+}
+.pdi_header {
+	width: 100%;
+	min-height: 3em;
+	background-color: #333;
+	overflow: hidden;
+}
+.pdi_header .header-td {
+	color: #FFF;
+	font-family: 'Arial', sans-serif;
+	font-size: 2em;
+	line-height: 1.25;
+	letter-spacing: 1;
+	width: 33%;
+	padding: .25vh 1vw;
+	white-space: nowrap;
+}
+#popupSettings label {
+	padding-right: 10px;
+}
+.pdi_content {
+	width: 100%;
+	bottom: 0;
+}
+.pdi_template_wrapper {
+	width: 100%;
+	border-spacing: 0;
+	height: 100%;
+}
+.pdi_columnheader td {
+	font-family: 'Arial', sans-serif;
+	font-size: 1.25em;
+	font-weight: 600;
+	line-height: 1.25;
+	letter-spacing: 1.25;
+	color: #FFF;
+	text-align: center;
+	text-shadow: none !important;
+}
+.pdi_columnheader.fail td {
+	background-color: red;
+}
+.pdi_columnheader.pass td {
+	background-color: green;
+}
+.pdi_columnsubheader td {
+	font-family: 'Arial', sans-serif;
+	font-size: 1em;
+	line-height: 1.25;
+	letter-spacing: 1;
+	padding-left: 5px;
+	background-color: #888;
+	color: #eee;
+	width: 33%;
+	text-shadow: none !important;
+}
+ul.test-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+.pdi_content .test-list li {
+	height: 50px;
+	background-color: #FFF;
+	width: 100%;
+	padding: 0;
+	border-bottom: 1px solid #999;
+}
+.pdi_content .test-list li td {
+	font-family: 'Arial', sans-serif;
+	font-size: 1.4em;
+	color: #333;
+	white-space: nowrap;
+	padding-left: 5px;
+}
+
+@media screen and (max-width:1000px) {
+  .pdi_header {
+  	min-height: 2em;
+  }
+  .pdi_header .header-td {
+    font-size: 1em;
+    text-shadow: none;
+  }
+  .pdi_content .test-list li td, .pdi_columnheader td, .pdi_columnsubheader td  {
+    font-size: 90%;
+    text-shadow: none;
+  }
+}
+@media screen and (max-width:800px) {
+  .pdi_header {
+  	min-height: 2em;
+  }
+  .pdi_header .header-td {
+    font-size: .9em;
+    text-shadow: none;
+  }
+  .pdi_content .test-list li td, .pdi_columnheader td, .pdi_columnsubheader td  {
+    font-size: 75%;
+    text-shadow: none;
+  }
+}

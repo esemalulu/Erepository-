@@ -1,0 +1,53 @@
+{
+    "type": "object",
+    "subtab": {
+        "id": "bridgeErrorManagementPageNotFound",
+        "title": "404 Page",
+        "group": "bridgeConfig"
+    },
+    "properties": {
+        "errorManagementPageNotFound.pageNotFoundBgrImg": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeErrorManagementPageNotFound",
+            "type": "string",
+            "title": "Background Image",
+            "description": "Enter the URL location of the background image that sits underneath the text and button but overlaid on top of the main page not found image (optional).",
+            "default": "img/bridge-page-not-found.jpg"
+        },
+        "errorManagementPageNotFound.bkgdColor": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeErrorManagementPageNotFound",
+            "type": "string",
+            "title": "Background Color",
+            "default": "#a3b9ce"
+        },
+        "errorManagementPageNotFound.title": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeErrorManagementPageNotFound",
+            "type": "string",
+            "title": "Title",
+            "default": "404 page<br><span>not found</span>"
+        },
+        "errorManagementPageNotFound.text": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeErrorManagementPageNotFound",
+            "type": "string",
+            "title": "Text",
+            "default": ""
+        },
+        "errorManagementPageNotFound.btnText": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeErrorManagementPageNotFound",
+            "type": "string",
+            "title": "Button Text",
+            "default": "Go Home"
+        },
+        "errorManagementPageNotFound.btnHref": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeErrorManagementPageNotFound",
+            "type": "string",
+            "title": "Href",
+            "default": "#"
+        }
+    }
+}

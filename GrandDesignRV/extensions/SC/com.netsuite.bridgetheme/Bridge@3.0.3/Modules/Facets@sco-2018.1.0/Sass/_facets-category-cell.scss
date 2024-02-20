@@ -1,0 +1,44 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+// Edited for Bridge Theme
+
+.facets-category-cell {
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-right: $sc-margin-lv2;
+	text-align: center;
+	margin-bottom: $sc-margin-lv6;
+	width: 50%;
+
+	@media (min-width: $screen-md-min) {
+		width: 25%;
+	}
+
+	&:nth-child(2n+1) { // clear after every 2nd cell
+		@media (max-width: $screen-md-max) {
+			clear: both;
+		}
+	}
+
+	&:nth-child(4n+1) { // clear after every 4th cell
+		@media (min-width: $screen-md-min) {
+			clear: both;
+		}
+	}
+}
+
+.facets-category-cell-thumbnail {}
+
+.facets-category-cell-image {}
+
+.facets-category-cell-title {
+	padding: $sc-padding-lv2 $sc-padding-base * 0;
+}
+
+.facets-category-cell-anchor {}

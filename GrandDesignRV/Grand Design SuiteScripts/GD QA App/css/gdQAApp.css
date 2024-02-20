@@ -1,0 +1,141 @@
+html, body {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+h1.uir-record-type {
+    display: none !important;
+}
+#custpage_bodyareafield_fs {
+/*    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0 !important;*/
+}
+#custpage_bodyareafield_val {
+/*    display: block;
+    height: 100%;*/
+}
+#pageContainer {
+    height: 98%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0 !important;
+}
+#tabPanel {
+    flex: 1;
+overflow-y: scroll;
+}
+#tabPanel::-webkit-scrollbar {
+    display: none;
+}
+#tabPanel {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#toolbar {
+    margin: 10px 0;
+    height: 30px;
+    flex: 0;
+}
+div#qatest {
+    display: block;
+    height: 100%;
+}
+#header-wrapper {
+padding: 10px;
+}
+.header {
+   /* background-color: rgba(243, 158, 108, 0.8);*/
+    text-align: center;
+}
+
+.content {
+   /* background-color: rgba(245, 229, 166, 0.8);*/
+}
+.left-side-bar {
+    background-color: rgba(148, 215, 199, 0.8);
+}
+.right-side-bar {
+    background-color: rgba(119, 199, 231, 0.8);
+}
+.footer {
+    background-color: rgba(123, 155, 207, 0.8);
+}
+.content {
+    min-height: 250px;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.content-wrapper, .right-side {
+    min-height: 100%;
+    /*    background-color: #ecf0f5;
+        z-index: 800;*/
+}
+
+.content-header {
+    position: relative;
+    padding: 15px 15px 0 15px;
+}
+i.fa-solid {
+    margin-right: 5px;
+}
+section.content {
+    height: 99%;
+    position: absolute;
+    margin: 0 20px 10px 0;
+    left: 0;
+    right: 0;
+}
+.box {
+    border-top: 0;
+    height: 99%;
+}
+
+.box.box-primary {
+    width: 98%;
+    margin: auto;
+    background: #323c48;
+    border-top: 0;
+    font-size: 13px;
+}
+
+.box.box-primary {
+    background: #323c48;
+}
+.dx-texteditor-input-container input {
+    color: inherit;
+}
+input[type="text"], input[type="password"], select, textarea {
+    border: none !important;
+}
+.master-detail-caption {
+    padding: 0 0 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.retryButton {
+    margin-left: 10px;
+    height: 80%;
+    margin-top: 4px;
+}
+.cell-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+}
+div.dx-fileuploader.content-wrapper {
+    margin-top: 5px;
+}

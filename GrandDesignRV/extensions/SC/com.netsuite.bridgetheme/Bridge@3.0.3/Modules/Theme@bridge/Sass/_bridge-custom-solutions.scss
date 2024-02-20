@@ -1,0 +1,45 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+/* MISC SOLUTION MODULES STYLES */
+/* Back In Stock Module Styles */
+.back-in-stock-notification-placeholder {
+    .back-in-stock-notification-show-form-button {
+        @extend .button-secondary;
+        width: 100%;
+    }
+}
+
+/* Blog */
+.blog-details-divider-desktop {
+    display: block;
+    margin: 25px 0;
+    clear: both;
+    height: 1px;
+}
+
+/* Size Chart */
+.item-details-size-chart-link {
+    display: inline-block;
+    margin: $sc-margin-lv2 0 $sc-margin-lv1;
+}
+
+/* Infinite Scroll */
+.infinite-scroll-top-icon {
+    color: $sc-neutral-shade-0;
+    top: 12px;
+}
+
+/* Product Compare */
+.facets-facet-browse-added-for-comparison {
+    .compare-items-hide-container {
+        padding-top: $sc-padding-lv1;
+    }
+    .compare-items-container {
+        background-color: transparent;
+    }
+}

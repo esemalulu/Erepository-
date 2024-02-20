@@ -1,0 +1,47 @@
+// Edited for Bridge Theme
+
+.sc-margin-bottom-medium {
+	margin-bottom: $sc-margin-lv4;
+	@media (min-width: $screen-sm-min){
+		margin-bottom: $sc-margin-lv8;
+	}
+}
+
+.full-width-column{
+	margin-left: - ($grid-gutter-width / 2);
+	margin-right: - ($grid-gutter-width / 2);
+	padding-left: ($grid-gutter-width / 2);
+	padding-right: ($grid-gutter-width / 2);
+
+	@media(min-width: $screen-sm-min){
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.box-column {
+	padding: $sc-padding-lv5 $sc-padding-lv3;
+	margin-left: - ($grid-gutter-width / 2);
+	margin-right: - ($grid-gutter-width / 2);
+	margin-bottom: $sc-margin-lv4;
+	border: 1px solid $sc-color-theme-border;
+
+	@media (min-width: $screen-sm-min) {
+		padding: $sc-padding-lv6;
+		//border-top:0;
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: $sc-margin-lv6;
+	}
+}
+
+.box-column-bordered {
+	@extend .box-column;
+    //border-top: 1px solid $sc-color-theme;
+
+	@media (min-width: $screen-sm-min){
+		//border-top: 0;
+	}
+}

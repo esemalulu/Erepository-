@@ -1,0 +1,233 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+// Edited for Bridge Theme
+
+.footer-content {
+    @extend .container;
+}
+
+.footer-content-upper {
+    @extend .col-sm-6;
+}
+
+.footer-content-upper-section {
+    @extend .row;
+    position: relative;
+    margin-top: $sc-padding-lv8;
+    padding-top: $sc-padding-lv8;
+    padding-bottom: $sc-padding-lv8;
+    color: $sc-footer-upper-text-color;
+
+    // can be overridden in the config with either an image or a color
+    background-color: $sc-footer-upper-background-color;
+
+    // handles the background graphic if set in the config
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+.footer-content-upper-icon-text {
+    @extend .row;
+}
+
+.footer-content-upper-icon {
+    @extend .col-xs-3;
+    @extend .col-md-5;
+    text-align: right;
+}
+
+.footer-content-upper-primarytext,
+.footer-content-upper-secondarytext {
+    @extend .col-xs-9;
+    @extend .col-md-7;
+    padding-left: 0;
+    & h3 {
+        color: $sc-footer-upper-text-color;
+    }
+    & p {
+        color: $sc-footer-upper-text-color;
+    }
+    & span {
+        font-weight: $sc-font-weight-bold;
+    }
+}
+
+.footer-content-upper-secondarytext {
+    @extend .col-xs-push-3;
+    @extend .col-md-push-5;
+}
+
+.footer-content-newsletter {
+    @extend .col-sm-5;
+    margin-top: $sc-margin-lv4;
+    text-align: center;
+    & h5 {
+        font-size: $sc-font-size-xl;
+        color: $sc-footer-upper-text-color;
+        text-align: center;
+    }
+    & .newsletter-suscription-form-input {
+        border: none;
+    }
+    & .newsletter-subscription-form-button-subscribe {
+        background-color: $sc-footer-buttons-background-color;
+        border: none;
+    }
+    @media (min-width: $screen-sm-min) {
+        margin-top: 0;
+    }
+}
+
+.footer-content-nav-section {
+    @extend .row;
+    padding: $sc-padding-lv4;
+    color: $sc-footer-text-color;
+    font-size: $sc-footer-font-size;
+    line-height: 1;
+    background-color: $sc-footer-lower-background-color;
+}
+
+.footer-content-nav-list {
+    line-height: 20px;
+    margin-top: $sc-margin-lv2;
+    @media (min-width: $screen-md-min) {
+        line-height: 1;
+        margin-top: 0;
+        text-align: right;
+    }
+    & li {
+        display: inline-block;
+        margin-right: $sc-margin-lv5;
+    }
+    & li:last-child {
+        margin-right: 0;
+    }
+}
+
+.footer-content-copyright {
+    @extend .col-md-5;
+    color: $sc-footer-copyright-text-color;
+}
+
+.footer-content-nav {
+    @extend .col-md-7;
+    & a {
+        color: $sc-footer-lower-link-color;
+    }
+    & a:hover, & a:focus {
+        color: $sc-footer-lower-link-color-hover;
+        text-decoration: $sc-footer-link-text-decoration;
+    }
+}
+
+.footer-location-icon {
+    font-size: 100px;
+}
+
+// Footer Social Media Icons
+.footer-content-social {
+    @extend .col-md-12;
+    @media (min-width: $screen-md-min) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.footer-content-social-list {
+    list-style: none;
+    margin: 0;
+    text-align: center;
+
+    @media (min-width: $screen-sm-min) {
+        padding-top: $sc-padding-lv2;
+    }
+
+    @media (min-width: $screen-md-min) {
+        text-align: center;
+    }
+
+    @media (max-width: $screen-xs-min) {
+        li:first-child {
+            display: block;
+        }
+    }
+}
+.footer-content-social-list > li {
+    display: inline-block;
+    margin-right: $sc-margin-lv3;
+    & a {
+        color: $sc-footer-social-icon-color;
+    }
+    & a:hover {
+        color: $sc-footer-social-icon-color-hover;
+    }
+    @media (min-width: $screen-md-min) {
+        margin-left: $sc-margin-lv3;
+        margin-right: 0;
+    }
+}
+
+.footer-content-social-media-links-title {
+    font-size: 16px;
+    text-transform: uppercase;
+    line-height: 26px;
+    margin-left: 0 !important;
+
+    @media (max-width: $screen-md-min) {
+        width: 100%;
+    }
+}
+
+.footer-content-social-icon {
+    font-size: $sc-footer-social-icon-size;
+}
+
+// Footer Multi-Links
+// for large format footer with up to four columns of links
+.footer-columns {
+    @extend .row;
+    padding: $sc-padding-lv7 $sc-padding-lv3;
+    @media (min-width: $screen-md-min) {
+        margin-top: $sc-margin-lv7;
+    }
+}
+
+.footer-column-links {
+    @extend .col-md-3;
+    @extend .col-xs-6;
+    &:nth-child(2n+1) {
+        @media (max-width: $screen-md-min) {
+            clear: both;
+        }
+    }
+}
+
+.footer-column-link {
+    font-weight: $sc-font-weight-normal;
+    color: $sc-footer-lower-link-color;
+    &:hover {
+        color: $sc-footer-lower-link-color-hover;
+        text-decoration: $sc-footer-link-text-decoration;
+    }
+}
+
+.footer-column-link-listitem {
+    margin: $sc-margin-base * 2 0;
+}
+
+.footer-column-heading {
+    color: $sc-footer-headings-color;
+    padding-bottom: $sc-padding-base;
+    padding-top: $sc-padding-lv3;
+    font-size: $sc-font-size-xl * 0.8;
+    font-weight: $sc-font-weight-normal;
+    @media (min-width: $screen-md-min) {
+        padding-top: 0;
+    }
+}

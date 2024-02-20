@@ -1,0 +1,241 @@
+// Issue 650946: Fixes Sass Compilier Failure during Extension Activation 
+$sc-h3-text-transform: none !default;
+
+$sc-button-small-padding-v: 5px !default;
+$sc-button-small-padding-h: 10px !default;
+
+/*
+group({
+	"id": "merchzone-cct",
+	"label": "CMS Merchzone+",
+	"description": "Styles for new CMS Merchzone",
+	"children": [
+        "merchzone-heading-styles",
+        "merchzone-image-styles",
+        "merchzone-button-styles"
+	]
+})
+*/
+
+/*
+group({
+	"id": "merchzone-heading-styles",
+	"label": "Section Heading",
+	"description": "Styles for the optional heading above the merchandising zone",
+	"children": [
+        "$heading-color",
+        "$heading-font-family",
+        "$heading-font-size",
+        "$heading-desktop-font-size",
+        "$heading-margin-top",
+        "$heading-margin-bottom",
+        "$heading-text-transform"
+	]
+})
+*/
+
+/*
+group({
+	"id": "merchzone-image-styles",
+	"label": "Images",
+	"description": "Styles for merchandising zone product images",
+	"children": [
+        "$image-padding"
+	]
+})
+*/
+
+/*
+group({
+	"id": "merchzone-button-styles",
+	"label": "Buttons",
+	"description": "Styles for the buttons that appear below each product item",
+	"children": [
+        "$button-text-color",
+        "$button-background-color",
+        "$button-border-color",
+        "$button-border-radius",
+        "$button-text-transform",
+        "$button-hover-background-color",
+        "$button-hover-text-color",
+        "$button-hover-border-color",
+        "$button-active-background-color",
+        "$button-active-text-color",
+        "$button-active-border-color",
+        "$button-padding-v",
+        "$button-padding-h",
+        "$button-font-size",
+        "$button-line-height",
+        "$button-letter-spacing",
+        "$button-mobile-width",
+        "$button-desktop-width"
+	]
+})
+*/
+
+$heading-color: $sc-color-h3; /* editable({"type": "color", "label": "Text"}) */
+$heading-font-family: $sc-h3-font-family; /* editable({"type": "string", "label": "Font family"}) */
+$heading-font-size: $sc-h3-font-size; /* editable({"type": "string", "label": "Mobile size"}) */
+$heading-desktop-font-size: $sc-h3-desktop-font-size; /* editable({"type": "string", "label": "Desktop size"}) */
+$heading-font-style: $sc-h3-font-style;
+$heading-text-decoration: $sc-h3-text-decoration;
+$heading-margin-top: $sc-h3-margin-top; /* editable({"type": "string", "label": "Margin top"}) */
+$heading-margin-bottom: 5px; /* editable({"type": "string", "label": "Margin bottom"}) */
+$heading-text-transform: $sc-h3-text-transform; /* editable({
+	"type": "string",
+	"label": "Text transform",
+	"options": [
+		{"value": "none", "text": "none"},
+		{"value": "uppercase", "text": "uppercase"},
+		{"value": "lowercase", "text": "lowercase"},
+		{"value": "capitalize", "text": "capitalize"}
+	]
+}) */
+
+$image-padding: 2px; /* editable({"type": "string", "label": "Padding"}) */
+
+$button-text-color: $sc-button-primary-text-color; /* editable({"type": "color", "label": "Text"}) */
+$button-background-color: $sc-button-primary-background-color; /* editable({"type": "color", "label": "Background"}) */
+$button-border-color: $sc-button-primary-border-color; /* editable({"type": "color", "label": "Border"}) */
+$button-border-radius: $sc-button-primary-border-radius; /* editable({"type": "string", "label": "Border radius"}) */
+$button-text-transform: $sc-button-primary-text-transform; /* editable({
+	"type": "string",
+	"label": "Text transform",
+	"options": [
+		{"value": "none", "text": "none"},
+		{"value": "uppercase", "text": "uppercase"},
+		{"value": "lowercase", "text": "lowercase"},
+		{"value": "capitalize", "text": "capitalize"}
+	]
+}) */
+
+$button-hover-background-color: $sc-button-primary-hover-background-color; /* editable({"type": "color", "label": "Hover background"}) */
+$button-hover-text-color: $sc-button-primary-hover-text-color; /* editable({"type": "color", "label": "Hover text"}) */
+$button-hover-border-color: $sc-button-primary-hover-border-color; /* editable({"type": "color", "label": "Hover border"}) */
+
+$button-active-background-color: $sc-button-primary-active-background-color; /* editable({"type": "color", "label": "Active background"}) */
+$button-active-text-color: $sc-button-primary-active-text-color; /* editable({"type": "color", "label": "Active text"}) */
+$button-active-border-color: $sc-button-primary-active-border-color; /* editable({"type": "color", "label": "Active border"}) */
+
+$button-padding-v: $sc-button-small-padding-v; /* editable({"type": "string", "label": "Vertical padding"}) */
+$button-padding-h: $sc-button-small-padding-h; /* editable({"type": "string", "label": "Horizontal padding"}) */
+$button-font-size: $sc-button-small-font-size; /* editable({"type": "string", "label": "Font size"}) */
+$button-line-height: $sc-button-small-line-height; /* editable({"type": "string", "label": "Line height"}) */
+$button-letter-spacing: $sc-button-small-letter-spacing; /* editable({"type": "string", "label": "Letter spacing"}) */
+$button-mobile-width: $sc-button-small-mobile-width; /* editable({"type": "string", "label": "Mobile width"}) */
+$button-desktop-width: $sc-button-small-desktop-width; /* editable({"type": "string", "label": "Desktop width"}) */
+
+.vertical-control {
+    -webkit-transform: rotate(90deg) translateX(-50%);
+    transform: rotate(90deg) translateX(-50%);
+    right: initial;
+    left: 50%;
+}
+
+#cms_merchzonetwo .cms-merchzone {
+    position: relative;
+    padding-bottom: 25px;
+
+    .cms-merchzone-heading {
+        color: $heading-color;
+        font-family: $heading-font-family;
+        font-size: $heading-font-size;
+        font-style: $heading-font-style;
+        text-decoration: $heading-text-decoration;
+        margin-top: $heading-margin-top;
+        margin-bottom: $heading-margin-bottom;
+        text-transform: $heading-text-transform;
+        padding-bottom: 40px;
+
+        @media (min-width: $screen-md-min) {
+            font-size: $heading-desktop-font-size;
+        }
+    }
+
+    .cms-merchzone-item {
+        text-align: center;
+        cursor: pointer;
+
+        .item-image-wrapper {
+            padding: $image-padding;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    .cms-merchzone-grid {
+        margin-left: 0;
+
+        & > li {
+            list-style: none;
+            display: inline-block;
+
+            .item-image {
+                width: 100%;
+            }
+        }
+    }
+
+    .cms-merchzone-slider {
+        margin-left: 0;
+
+        &-next {
+            font-size: 30px;
+            position: absolute;
+            right: 0;
+            top: 40%;
+
+            &.cms-merchzone-vertical-control {
+                @extend .vertical-control;
+                top: initial;
+                bottom: -10px;
+                left: 48.5%;
+            }
+        }
+
+        &-prev {
+            font-size: 30px;
+            position: absolute;
+            top: 40%;
+            left: 0;
+
+            &.cms-merchzone-vertical-control {
+                @extend .vertical-control;
+                top: 22px;
+                bottom: initial;
+                left: 48.5%;
+            }
+        }
+    }
+
+    &-see-more {
+        display: inline-block;
+        color: $button-text-color;
+        background-color: $button-background-color;
+        border-radius: $button-border-radius;
+        border: 1px solid $button-border-color;
+        text-transform: $button-text-transform;
+        padding: $button-padding-v $button-padding-h;
+        font-size: $button-font-size;
+        line-height: $button-line-height;
+        letter-spacing: $button-letter-spacing;
+        width: $button-mobile-width;
+
+        @media (min-width: $screen-sm-min) {
+            width: $button-desktop-width;
+        }
+
+        &:hover {
+            color: $button-hover-text-color;
+            background-color: $button-hover-background-color;
+            border-color: $button-hover-border-color;
+        }
+
+        &:active {
+            color: $button-active-text-color;
+            background-color: $button-active-background-color;
+            border-color: $button-active-border-color;
+        }
+    }
+}

@@ -1,0 +1,99 @@
+/* Item Views */
+.item-views-cell-navigable-item-amount-value {
+    font-size: 14px;
+}
+
+.product-line-sku-container {
+    margin: 10px 0;
+}
+
+/* Product Views Option Tile */
+.product-views-option-tile {
+    margin: $sc-margin-lv4 0;
+}
+
+.product-views-option-tile-label {
+    @extend h4;
+    font-weight: $sc-font-weight-light;
+    margin-bottom: $sc-margin-base;
+
+    span {
+        font-weight: $sc-font-weight-light;
+    }
+}
+
+.product-views-option-tile-picker {
+    margin-bottom: $sc-margin-lv2;
+}
+
+/* RELATED ITEMS */
+/* RECENTLY VIEWED */
+.item-relations-related,
+.recently-viewed-items {
+    & h3 {
+        @extend h1;
+        margin-bottom: $sc-margin-lv4;
+        // margin-left: 53px; Indent to coincide with Staff Picks position in design
+    }
+}
+
+.merchandising-zone-cell-template,
+.item-relations-cell,
+.recently-viewed-cell-item {
+    /* slideWidth: 228 in SC.Configuration.js
+    has been altered to 242 in the JS file QS.ItemRelations.SC.Configuration.js */
+    &:hover .item-relations-related-item-thumbnail {
+        background-color: $sc-color-theme-background;
+    }
+    &:hover .item-relations-related-item-text {
+        background-color: $sc-color-theme-background;
+        border-bottom: 4px solid $sc-color-link;
+    }
+
+    .item-relations-related-item-text {
+        width: 210px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: $sc-padding-lv4 $sc-padding-base $sc-padding-lv2;
+        border-bottom: 4px solid transparent;
+    }
+    .product-views-price-lead {
+        text-align: left;
+        color: $sc-color-copy !important;
+        font-size: 16px !important;
+        font-family: $sc-theme-primary-font;
+        font-weight: $sc-font-weight-normal;
+    }
+    .product-views-price {
+        text-align: left !important;
+    }
+    .item-relations-related-item-rate {
+        width: 92px;
+        margin: 0 !important;
+        text-align: left !important;
+        display: flex !important;
+    }
+    .item-relations-related-item-thumbnail {
+        display: inline;
+        min-height: $sc-theme-cell-img-height !important;
+        & img {
+            height: $sc-theme-cell-img-height !important;
+            width: $sc-theme-cell-img-width !important;
+        }
+    }
+    .item-relations-related-item-title {
+        text-align: left !important;
+        color: $sc-color-link;
+        font-size: 16px;
+        &:hover {
+            color: $sc-color-link-hover;
+            text-decoration: underline;
+        }
+    }
+    .global-views-star-rating {
+        // remove center alignment
+        margin: 0 !important;
+        display: block !important;
+    }
+
+}

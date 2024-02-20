@@ -1,0 +1,31 @@
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+  .container{
+    width:auto;
+  }
+}
+
+@media (max-width:  $screen-sm-min) {
+  body.modal-open {
+    position: fixed;
+    margin: 0;
+    width: 100%;
+  }
+}
+
+//fix for "save for later" removing modal
+.modal-open .modal {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-backdrop {
+  position: fixed;
+  z-index: 10;
+}
+
+[data-dropdown-content] {
+  display:none;
+}
+
+.open [data-dropdown-content] {
+  display: block;
+}

@@ -1,0 +1,110 @@
+<div class="pdi_header">
+	<table style="width: 100%;">
+		<tr>
+			<td class="header-td" style="text-align: left;">
+				<table style="padding: 0px; width: 100%;"><tr>
+				<td><a href="#popupSettings" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-icon-bars ui-btn-icon-notext ui-btn-b" data-transition="pop"></a></td>
+				<td><a data-bind="visible: $root.errorCount() >= 5 ? 1 : 0" style="background-color: red; margin-left: 1vw;" href="tel:574-533-2659" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-alert ui-mini ui-btn-inline ui-btn-b">Update Failed</a></td>
+				</tr></table>
+			</td>
+			<td class="header-td" style="text-align: center;" data-bind="text: (selectedLocation() ? selectedLocation().name : 'No Location Selected')"></td>
+			<td class="header-td" style="text-align: right;" data-bind="text: (lastUpdateTime() ? 'As of ' + lastUpdateTime() : 'As of --:--')"></td>
+		</tr>
+	</table>
+</div>
+<div class="pdi_content" data-bind="template: {name: templateToUse}"></div>
+
+<!-- Popup where the user changes settings and logs in -->
+<div data-role="popup" id="popupSettings" data-theme="a" class="ui-corner-all">
+	<div data-role="header" data-theme="b" class="ui-corner-top ui-header ui-bar-a" role="banner">
+		<h1 class="ui-title" role="heading" aria-level="1">Settings</h1>
+	</div>
+	<div data-role="content" style="padding:10px 10px;">
+	<form method="post" id="loginForm">
+	<table style="width: 100%;">
+		<tr>
+			<td><label for="location">Location:</label></td>
+			<td><select id="location" data-bind="options: $root.locations, value: selectedLocation,  optionsText: 'name'"></select></td>
+		</tr>
+		<tr>
+			<td><label for="linesperpage">Lines per Page:</label></td>
+			<td><input id="linesperpage" data-bind="value: linesPerPage"/></td>
+		</tr>
+		<tr>
+			<td><label for="pageduration">Page Duration:</label></td>
+			<td><input id="pageduration" placeholder="in seconds" data-bind="value: pageDuration"/></td>
+		</tr>
+	</table>
+	<table style="width: 100%; padding-top: 15px">
+		<tr>
+			<td>Authentication:</td>
+			<td><span style="color: green;" data-bind="text: ($root.loggedInUser()) ? 'Logged in as ' + loggedInUser().name : 'Please Log In'"></span></td>
+			</tr>
+			<tr>
+				<td colspan="2"><label for="un" class="ui-hidden-accessible">Username:</label><input id="loginEmail" name="loginEmail" placeholder="username" value="" class="formElement"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><label for="pw" class="ui-hidden-accessible">Password:</label><input id="loginPassword" name="loginPassword" type="password" placeholder="password" value="" class="formElement"/></td>
+			</tr>
+		</table>
+		</form>
+		<button id="postBtn" data-bind="click: $root.postLogin" type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">Sign in</button>
+	</div>
+</div>
+<!-- End of Popup where the user changes settings and logs in -->
+
+<script id="template1" type="text/html">
+	<table class="pdi_template_wrapper">
+		<tr style="vertical-align: top;">
+			<td style="width: 50%;">
+				<table style="width: 100%; border-spacing: 0;">
+					<tr class="pdi_columnheader fail">
+						<td></td>
+						<td>Fail <span data-bind="text: '(' + $root.currentDataSet().testsFailed().length + ')'"></span></td>
+						<td style="text-align: right; padding-right: 1vw;"><span data-bind="text: $root.currentDataSet().currentFailPageIndex() + ' of ' + $root.currentDataSet().failPageCount()"></span></td>
+					</tr>
+					<tr class="pdi_columnsubheader"><td>VIN:</td><td>Model:</td><td style="text-align: right; padding-right: 1vw;">Failures:</td></tr>
+					<tr><td colspan="3"><ul class="test-list" data-bind="template: {name: 'test_template', foreach: filterFailedTests()}"></ul></td></tr>
+				</table>
+			</td>
+			<td style="width: 50%;">
+				<table style="width: 100%; border-spacing: 0;">
+					<tr class="pdi_columnheader pass">
+						<td></td>
+						<td>Pass <span data-bind="text: '(' + $root.currentDataSet().testsPassed().length + ')'"></span></td>
+						<td style="text-align: right; padding-right: 1vw;"><span data-bind="text: $root.currentDataSet().currentPassPageIndex() + ' of ' + $root.currentDataSet().passPageCount()"></span></td>
+					</tr>
+					<tr class="pdi_columnsubheader"><td>VIN:</td><td>Model:</td><td>&nbsp;</td></tr>
+					<tr><td colspan="3"><ul class="test-list" data-bind="template: {name: 'test_template', foreach: filterPassedTests()}"></ul></td></tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</script>
+
+<script id="template-nodata" type="text/html">
+	<table class="pdi_template_wrapper">
+		<tr style="vertical-align: top;">
+			<td style="width: 50%;">
+				<table style="width: 100%; border-spacing: 0;">
+					<tr class="pdi_columnheader fail"><td colspan="3">Fail <span data-bind="text: '(No Data)'"></span></td></tr>
+					<tr class="pdi_columnsubheader"><td>VIN:</td><td>Model:</td><td style="text-align: right; padding-right: 1vw;">Failures:</td></tr>
+				</table>
+			</td>
+			<td style="width: 50%;">
+				<table style="width: 100%; border-spacing: 0;">
+					<tr class="pdi_columnheader pass"><td colspan="3">Pass <span data-bind="text: '(No Data)'"></span></td></tr>
+					<tr class="pdi_columnsubheader"><td>VIN:</td><td>Model:</td><td>&nbsp;</td></tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</script>
+
+<script id="test_template" type="text/html">
+	<li class="test"><table style="width: 100%; border-spacing: 0; height: 100%;"><tr>
+		<td style="width: 33%" data-bind="text: vin"></td>
+		<td style="width: 33%" data-bind="text: model"></td>
+		<td style="width: 33%; text-align: right; padding-right: 1vw;" data-bind="text: failures > 0 ? failures : ''"></td>
+	</tr></table></li>
+</script>

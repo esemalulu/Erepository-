@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<div id='modalanchor'></div>
+<!-- Main Table -->
+<table style="table-layout: fixed;">
+	<tr>
+		<td>
+			<div style="height: 250px; width: 21.5vw; overflow-y: scroll; padding: 0px;" action="/file-upload" class="dropzone" id="returnauthdropzone">
+				<div class="fallback">
+					<input name="file" type="file" multiple />
+				</div>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div style="width: 100%; margin-left: auto; margin-right: auto;" class="rvs-primary-button rvs-row-button" id="save" data-bind="click: $root.attachFiles" title="Save">Attach</div>
+		</td>
+	</tr>
+</table>
+
+<!-- Spinner Overlay -->
+<div id="ss-spinner-overlay">
+	<i id="ss-spinner-icon" class="fas fa-3x fa-circle-notch fa-spin"></i>
+	<span id="ss-spinner-maintext">Working...</span>
+</div>

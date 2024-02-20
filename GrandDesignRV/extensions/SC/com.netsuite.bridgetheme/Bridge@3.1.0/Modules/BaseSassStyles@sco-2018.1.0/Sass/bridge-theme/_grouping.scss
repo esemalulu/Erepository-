@@ -1,0 +1,519 @@
+/*
+group({
+	"id": "palette-color",
+	"label": "Palette",
+	"description": "",
+	"children": [
+		"theme-palette",
+		"neutral-shades",
+		"text-colors",
+		"container-colors"
+	]
+})
+*/
+
+/*
+group({
+	"id": "theme-palette",
+	"label": "Theme palette",
+	"description": "",
+	"children": [
+		"$sc-color-theme",
+		"$sc-color-theme-900",
+        "$sc-color-theme-dark",
+		"$sc-color-theme-700",
+        "$sc-color-theme-background",
+		"$sc-color-theme-500",
+		"$sc-color-theme-300",
+		"$sc-color-theme-100",
+		"$sc-color-primary",
+		"$sc-color-secondary",
+        "$sc-color-tertiary"
+	]
+})
+*/
+
+/*
+group({
+	"id": "neutral-shades",
+	"label": "Neutral palette",
+	"description": "",
+	"children": [
+		"$sc-neutral-shade",
+		"$sc-neutral-shade-700",
+		"$sc-neutral-shade-500",
+		"$sc-neutral-shade-300",
+		"$sc-neutral-shade-0"
+	]
+})
+*/
+
+/*
+group({
+	"id": "text-colors",
+	"label": "Text",
+	"description": "",
+	"children": [
+		"$sc-color-copy",
+		"$sc-color-copy-dark",
+		"$sc-color-copy-light",
+		"$sc-color-link",
+		"$sc-color-link-hover",
+		"$sc-color-link-active"
+	]
+})
+*/
+
+/*
+group({
+	"id": "container-colors",
+	"label": "Containers",
+	"description": "",
+	"children": [
+        "$sc-color-theme-content-background",
+		"$sc-color-theme-border",
+		"$sc-color-theme-border-light",
+        "$sc-color-overlay"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography",
+	"label": "Typography",
+	"description": "",
+	"children": [
+		"typography-body",
+		"typography-h1",
+		"typography-h2",
+		"typography-h3",
+		"typography-h4",
+		"typography-h5",
+		"typography-h6",
+		"typography-blockquote",
+        "typography-paragraph",
+        "typography-secondaryfont"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-body",
+	"label": "Normal",
+	"description": "",
+	"children": [
+		"$sc-body-font-family",
+		"$sc-body-font-size",
+		"$sc-body-font-size-desktop",
+		"$sc-body-line-height",
+        "$sc-body-background",
+        "$sc-color-theme-header"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-h1",
+	"label": "Heading 1",
+	"description": "",
+	"children": [
+		"$sc-color-h1",
+		"$sc-h1-font-family",
+		"$sc-h1-font-size",
+		"$sc-h1-desktop-font-size",
+		"$sc-h1-line-height"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-h2",
+	"label": "Heading 2",
+	"description": "",
+	"children": [
+		"$sc-color-h2",
+		"$sc-h2-font-family",
+		"$sc-h2-font-size",
+		"$sc-h2-desktop-font-size",
+        "$sc-h2-line-height"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-h3",
+	"label": "Heading 3",
+	"description": "",
+	"children": [
+		"$sc-color-h3",
+		"$sc-h3-font-family",
+		"$sc-h3-font-size",
+		"$sc-h3-desktop-font-size",
+		"$sc-h3-line-height"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-h4",
+	"label": "Heading 4",
+	"description": "",
+	"children": [
+		"$sc-color-h4",
+		"$sc-h4-font-family",
+		"$sc-h4-font-size",
+		"$sc-h4-desktop-font-size",
+		"$sc-h4-line-height"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-h5",
+	"label": "Heading 5",
+	"description": "",
+	"children": [
+		"$sc-color-h5",
+		"$sc-h5-font-family",
+		"$sc-h5-font-size",
+		"$sc-h5-desktop-font-size",
+		"$sc-h5-line-height"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-h6",
+	"label": "Heading 6",
+	"description": "",
+	"children": [
+		"$sc-color-h6",
+		"$sc-h6-font-family",
+		"$sc-h6-font-size",
+		"$sc-h6-desktop-font-size",
+		"$sc-h6-line-height"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-paragraph",
+	"label": "Paragraph",
+	"description": "",
+	"children": [
+		"$sc-color-paragraph",
+        "$sc-color-small"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-secondaryfont",
+	"label": "Secondary Font",
+	"description": "",
+	"children": [
+		"$sc-theme-secondary-font"
+	]
+})
+*/
+
+/*
+group({
+	"id": "typography-blockquote",
+	"label": "Blockquote",
+	"description": "",
+	"children": [
+		"$sc-blockquote-font-family",
+		"$sc-blockquote-font-size",
+		"$sc-blockquote-line-height"
+	]
+})
+*/
+
+/*
+group({
+	"id": "buttons",
+	"label": "Buttons",
+	"description": "",
+	"children": [
+		"primary-button",
+		"secondary-button",
+		"tertiary-button",
+		"small-button",
+		"medium-button",
+		"large-button"
+	]
+})
+*/
+
+/*
+group({
+	"id": "primary-button",
+	"label": "Primary",
+	"description": "",
+	"children": [
+		"$sc-button-primary-background-color",
+		"$sc-button-primary-text-color",
+		"$sc-button-primary-border-color",
+		"$sc-button-primary-border-radius",
+		"$sc-button-primary-hover-background-color",
+		"$sc-button-primary-hover-text-color",
+		"$sc-button-primary-hover-border-color",
+		"$sc-button-primary-active-background-color",
+		"$sc-button-primary-active-text-color",
+		"$sc-button-primary-active-border-color",
+		"$sc-button-primary-text-transform"
+	]
+})
+*/
+
+/*
+group({
+	"id": "secondary-button",
+	"label": "Secondary",
+	"description": "",
+	"children": [
+		"$sc-button-secondary-background-color",
+		"$sc-button-secondary-text-color",
+		"$sc-button-secondary-border-color",
+		"$sc-button-secondary-border-radius",
+		"$sc-button-secondary-hover-background-color",
+		"$sc-button-secondary-hover-text-color",
+		"$sc-button-secondary-hover-border-color",
+		"$sc-button-secondary-active-background-color",
+		"$sc-button-secondary-active-text-color",
+		"$sc-button-secondary-active-border-color",
+		"$sc-button-secondary-text-transform"
+	]
+})
+*/
+
+/*
+group({
+	"id": "tertiary-button",
+	"label": "Tertiary",
+	"description": "",
+	"children": [
+		"$sc-button-tertiary-background-color",
+		"$sc-button-tertiary-text-color",
+		"$sc-button-tertiary-border-color",
+		"$sc-button-tertiary-border-radius",
+		"$sc-button-tertiary-hover-background-color",
+		"$sc-button-tertiary-hover-text-color",
+		"$sc-button-tertiary-hover-border-color",
+		"$sc-button-tertiary-active-background-color",
+		"$sc-button-tertiary-active-text-color",
+		"$sc-button-tertiary-active-border-color",
+		"$sc-button-tertiary-text-transform"
+	]
+})
+*/
+
+/*
+group({
+	"id": "large-button",
+	"label": "Large",
+	"description": "",
+	"children": [
+		"$sc-button-large-padding",
+		"$sc-button-large-font-size",
+		"$sc-button-large-line-height",
+		"$sc-button-large-letter-spacing",
+		"$sc-button-large-mobile-width",
+		"$sc-button-large-desktop-width"
+	]
+})
+*/
+
+/*
+group({
+	"id": "medium-button",
+	"label": "Medium",
+	"description": "",
+	"children": [
+		"$sc-button-medium-padding",
+		"$sc-button-medium-font-size",
+		"$sc-button-medium-line-height",
+		"$sc-button-medium-letter-spacing",
+		"$sc-button-medium-mobile-width",
+		"$sc-button-medium-desktop-width"
+	]
+})
+*/
+
+/*
+group({
+	"id": "small-button",
+	"label": "Small",
+	"description": "",
+	"children": [
+		"$sc-button-small-padding",
+		"$sc-button-small-font-size",
+		"$sc-button-small-line-height",
+		"$sc-button-small-letter-spacing",
+		"$sc-button-small-mobile-width",
+		"$sc-button-small-desktop-width"
+	]
+})
+*/
+
+/*
+group({
+	"id": "element-layout",
+	"label": "Element layout",
+	"description": "",
+	"children": [
+		"header",
+		"main-navigation",
+        "home",
+		"footer"
+	]
+})
+*/
+
+/*
+group({
+	"id": "header",
+	"label": "Header",
+	"description": "",
+	"children": [
+		"$sc-color-theme-top-header-background-color",
+		"$sc-mobile-header-logo-width",
+        "$sc-desktop-header-logo-width",
+        "$sc-header-link-text-color",
+        "$sc-header-link-hover-text-color",
+        "$sc-header-link-active-text-color",
+        "$sc-header-link-text-transform",
+        "$sc-header-cart-link-text-color",
+        "$sc-header-cart-link-text-color-hover",
+        "$sc-header-cart-link-text-color-active",
+        "$sc-header-cart-link-background-color",
+        "$sc-header-cart-link-background-color-hover",
+        "$sc-mobile-header-icon-color",
+        "$sc-mobile-header-icon-active-color",
+        "$sc-mobile-header-cart-icon-color",
+        "$sc-mobile-header-cart-icon-active-color",
+        "$sc-theme-icon-color",
+        "$sc-theme-icon-bgr-color",
+        "$sc-theme-icon-bgr-hover-color",
+        "$sc-theme-cart-icon-color"
+	]
+})
+*/
+
+/*
+group({
+	"id": "home",
+	"label": "Home",
+	"description": "",
+	"children": [
+        "$sc-color-slide-background",
+        "$sc-theme-carousel-title-size",
+        "$sc-theme-carousel-text-size",
+        "$sc-theme-carousel-text-color",
+        "$sc-theme-carousel-button-font-size",
+        "$sc-theme-carousel-button-text-color",
+        "$sc-theme-carousel-button-bgr-color",
+        "$sc-theme-carousel-button-bgr-hover-color",
+        "$sc-theme-carousel-content-width",
+        "$sc-home-carousel-icons-display",
+        "$sc-home-carousel-icons-color-desktop",
+        "$sc-home-carousel-icons-color-mobile",
+        "$sc-theme-home-top-promo-background-color",
+        "$sc-theme-home-top-promo-text-color",
+        "$sc-theme-infoblock-height-mobile",
+        "$sc-theme-infoblock-height-desktop",
+        "$sc-theme-infoblock-content-width",
+        "$sc-theme-infoblock-large-content-width",
+        "$sc-theme-infoblock-title-underline-color",
+        "$sc-theme-infoblock-title-underline-hover-color",
+        "$sc-theme-infoblock-background-image-zoom",
+        "$sc-theme-infoblock-highlight-color",
+        "$sc-theme-infoblock-title-size",
+        "$sc-theme-infoblock-text-size",
+        "$sc-theme-infoblock-large-title-size",
+        "$sc-theme-infoblock-large-text-size",
+        "$sc-theme-infoblock-link-color"
+	]
+})
+*/
+
+/*
+group({
+	"id": "footer",
+	"label": "Footer",
+	"description": "",
+	"children": [
+		"$sc-footer-text-color",
+		"$sc-footer-font-size",
+        "$sc-footer-headings-color",
+        "$sc-footer-link-color",
+        "$sc-footer-link-color-hover",
+        "$sc-footer-link-color-active",
+        "$sc-footer-link-text-decoration",
+        "$sc-footer-upper-background-color",
+        "$sc-footer-upper-border-color",
+        "$sc-footer-upper-text-color",
+        "$sc-footer-lower-background-color",
+        "$sc-footer-lower-border-color",
+        "$sc-footer-lower-text-color",
+        "$sc-footer-lower-link-color",
+        "$sc-footer-lower-link-color-hover",
+        "$sc-footer-lower-link-color-active",
+        "$sc-footer-fields-background-color",
+        "$sc-footer-fields-border-color",
+        "$sc-footer-fields-text-color",
+        "$sc-footer-buttons-background-color",
+        "$sc-footer-buttons-text-color",
+        "$sc-footer-buttons-border-color",
+        "$sc-footer-buttons-border-radius",
+        "$sc-footer-copyright-text-color",
+        "$sc-footer-social-icon-color",
+        "$sc-footer-social-icon-color-hover",
+        "$sc-footer-social-icon-size"
+	]
+})
+*/
+
+/*
+group({
+	"id": "main-navigation",
+	"label": "Navigation",
+	"description": "",
+	"children": [
+        "$sc-main-navigation-background-color",
+        "$sc-main-navigation-link-background-color",
+        "$sc-main-navigation-link-color",
+        "$sc-main-navigation-link-text-transform",
+        "$sc-main-navigation-link-margin-right",
+        "$sc-main-navigation-link-hover-background-color",
+        "$sc-main-navigation-link-hover-color",
+        "$sc-main-navigation-link-active-background-color",
+        "$sc-main-navigation-link-active-color",
+        "$sc-main-navigation-submenu-background-color",
+        "$sc-main-navigation-submenu-heading-color",
+        "$sc-main-navigation-submenu-heading-text-transform",
+        "$sc-main-navigation-submenu-heading-border-color",
+        "$sc-main-navigation-submenu-link-color",
+        "$sc-main-navigation-submenu-link-hover-color",
+        "$sc-main-navigation-submenu-link-active-color",
+        "$sc-mobile-navigation-background-color",
+        "$sc-mobile-navigation-link-background-color",
+        "$sc-mobile-navigation-link-color",
+        "$sc-mobile-navigation-link-hover-color",
+        "$sc-mobile-navigation-link-text-transform",
+        "$sc-search-icon-color",
+        "$sc-search-icon-color-hover"
+	]
+})
+*/

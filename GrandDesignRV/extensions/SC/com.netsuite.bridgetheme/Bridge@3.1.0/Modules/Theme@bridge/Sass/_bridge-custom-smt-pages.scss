@@ -1,0 +1,276 @@
+/*
+    Custom Styles for SMT (Site Management Tools) Pages
+*/
+
+/* STARTS - Generic Styles for SMT Pages */
+.cms-landing-page p {
+    margin-bottom: $sc-margin-lv4;
+}
+
+.cms-landing-page ul,
+.cms-landing-page li {
+    list-style: disc;
+    list-style-position: outside;
+}
+
+.cms-landing-page ul {
+    margin-top: $sc-margin-lv2;
+    margin-left: $sc-margin-lv2 * 3;
+}
+
+.cms-landing-page li {
+    margin-bottom: $sc-margin-lv4;
+}
+
+.cms-landing-page blockquote {
+    margin-left: $sc-margin-lv2 * 3;
+    margin-bottom: $sc-margin-lv4;
+}
+/* ENDS - Generic Styles for SMT Pages */
+
+/* STARTS - About Us SMT Page */
+.about-us-container {
+    padding-left: $sc-theme-mobile-padding;
+    padding-right: $sc-theme-mobile-padding;
+
+    @media (min-width: $screen-md-min) {
+        padding-left: $sc-theme-desktop-padding !important;
+        padding-right: $sc-theme-desktop-padding !important;
+    }
+}
+
+.cms-landing-page-about-us p {
+    margin-bottom: $sc-margin-lv4;
+}
+
+.cms-landing-page-about-us .about-staff-title {
+    @extend h1;
+    text-align: left;
+    margin-top: $sc-margin-lv2 * 3;
+
+    @media (max-width: $screen-xs-min) {
+        text-align: center;
+    }
+}
+
+.about-us-staff-container {
+    @media (max-width: $screen-xs-min) {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    @media (min-width: $screen-xs-min) and (max-width: $screen-md-min) {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+
+.about-us-staff-container .row {
+    margin-top: $sc-margin-lv4;
+    margin-bottom: $sc-margin-lv4;
+}
+.about-us-staff-container .staff-employee-cell {
+    @extend .col-xs-6;
+    @extend .col-sm-6;
+    @extend .col-md-3;
+
+    @media (max-width: $screen-xs-min) {
+        width: 100%;
+    }
+
+    @media (max-width: $screen-md-min) {
+        margin-bottom: $sc-margin-lv4;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+.about-us-staff-container .staff-employee-container {
+    padding-top: $sc-padding-lv4;
+    padding-bottom: $sc-padding-lv2;
+    text-align: center;
+    @include box-shadow(none !important);
+}
+.about-us-staff-container .staff-employee-container .staff-employee-details {
+    margin-bottom: $sc-margin-base;
+    padding-top: $sc-padding-lv3;
+
+    h5 {
+        color: $sc-color-theme-dark;
+    }
+    p {
+        color: $sc-color-primary;
+    }
+}
+
+.about-us-bottom-content {
+    margin-top: $sc-margin-lv4 * 2;
+    margin-bottom: $sc-margin-lv4 * 2;
+}
+
+.about-us-bottom-content .about-us-bottom-content-link{
+    @media (min-width: $screen-xs-min) {
+        &:nth-child(odd) .about-us-bottom-content-col {
+            margin-right: 10px;
+        }
+
+        &:nth-child(even) .about-us-bottom-content-col {
+            margin-left: 10px;
+        }
+    }
+}
+
+.about-us-bottom-content .about-us-bottom-content-col {
+    position: relative;
+    float: left;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+    width: calc(50% - 10px);
+    -webkit-transition: all 0.325s ease;
+    -moz-transition: all 0.325s ease;
+    -o-transition: all 0.325s ease;
+    transition: all 0.325s ease;
+
+    &:hover {
+        background-size: auto $sc-theme-infoblock-background-image-zoom;
+    }
+
+    @media (max-width: $screen-xs-min) {
+        width: 100%;
+        margin-bottom: $sc-margin-lv4;
+    }
+
+    .about-us-bottom-content-text-cell {
+        position: absolute;
+        left: 30px;
+        bottom: 30px;
+        width: 200px;
+    }
+
+    .about-us-bottom-content-text-info {
+        text-align: center;
+    }
+
+    .about-us-bottom-content-text {
+        font-family: $sc-theme-secondary-font;
+        text-transform: uppercase;
+        color: $sc-theme-infoblock-link-color;
+        letter-spacing: 1px;
+        font-size: 24px;
+        line-height: 1;
+
+        @media (max-width: $screen-sm-min) {
+            font-size: 22px;
+        }
+    }
+}
+/* ENDS - About Us SMT Page */
+
+/* STARTS - Shop By Brand SMT Page */
+.cms-landing-page-shop-by-brand {}
+
+.cms-landing-page-shop-by-brand ul,
+.cms-landing-page-shop-by-brand li {
+    list-style: none !important;
+}
+
+.cms-landing-page-shop-by-brand ul {
+    margin-left: 0 !important;
+}
+
+.cms-landing-page-shop-by-brand li {
+    margin-bottom: 0 !important;
+}
+
+.cms-landing-page-shop-by-brand > div {
+    margin-bottom: $sc-margin-lv4 * 2;
+}
+
+.cms-landing-page-shop-by-brand .featured-brands-container {
+    margin-bottom: $sc-margin-lv4;
+}
+.cms-landing-page-shop-by-brand .featured-brands-col {
+    @extend .col-xs-6;
+    @extend .col-sm-3;
+    @extend .col-md-3;
+}
+
+.cms-landing-page-shop-by-brand .brands-by-category {}
+
+.cms-landing-page-shop-by-brand h2 {
+    text-align: left !important;
+    font-size: $sc-font-size-xxxl !important;
+}
+
+.cms-landing-page-shop-by-brand .brands-by-category-col {
+    @extend .col-xs-6;
+    @extend .col-sm-6;
+    @extend .col-md-3;
+
+    @media (max-width: $screen-xs-min) {
+        width: 100%;
+    }
+
+    @media (min-width: $screen-xs-min) and (max-width: $screen-sm-max) {
+        &:nth-child(odd) {
+            clear: both;
+        }
+    }
+}
+
+.cms-landing-page-shop-by-brand .brands-by-category-list-title a {
+    color: $sc-color-theme-header;
+    font-size: 18px;
+}
+
+.cms-landing-page-shop-by-brand .all-brands-col {
+    @extend .col-xs-6;
+    @extend .col-sm-6;
+    @extend .col-md-3;
+
+    @media (max-width: $screen-xs-min) {
+        width: 100%;
+    }
+
+    @media (min-width: $screen-xs-min) and (max-width: $screen-sm-max) {
+        &:nth-child(odd) {
+            clear: both;
+        }
+    }
+}
+/* ENDS - Shop By Brand SMT Page */
+
+/* STARTS - Shop By Category SMT Page */
+.cms-landing-page-shop-by-category {}
+
+.cms-landing-page-shop-by-category h1 {
+    margin-bottom: $sc-margin-lv4;
+}
+
+.cms-landing-page-shop-by-category > .row {
+    @media (min-width: $screen-xs-min) {
+        margin-bottom: $sc-margin-lv2 * 3;
+    }
+}
+
+.cms-landing-page-shop-by-category .shop-by-category-col {
+    @extend .col-xs-6;
+    @extend .col-sm-6;
+    @extend .col-md-6;
+
+    @media (max-width: $screen-xs-min) {
+        width: 100%;
+    }
+}
+
+.cms-landing-page-shop-by-category img {
+    width: 100%;
+
+    @media (max-width: $screen-xs-min) {
+        margin-bottom: $sc-margin-lv4;
+    }
+}
+/* ENDS - Shop By Category SMT Page */

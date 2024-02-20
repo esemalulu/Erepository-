@@ -1,0 +1,39 @@
+{
+    "type": "object",
+    "subtab": {
+        "id": "bridgeWebFonts",
+        "title": "Web Fonts",
+        "group": "bridgeConfig"
+    },
+    "properties": {
+        "bridge.webFonts.isWebFontEnabled": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeWebFonts",
+            "type": "boolean",
+            "title": "Enable Web Fonts",
+            "default": true
+        },
+        "bridge.webFonts.isWebFontAsync": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeWebFonts",
+            "type": "boolean",
+            "title": "Load Web Fonts Script Asynchronously",
+            "default": true
+        },
+        "bridge.webFonts.webFontConfig.google.families": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeWebFonts",
+            "type": "array",
+            "title": "Web Fonts Config Google Families",
+            "items": {
+                "type": "string",
+                "title": "Google Families",
+                "description": ""
+            },
+            "default": [
+                "Rubik:300,300i,400,400i,500,500i",
+                "Roboto:400,700,300"
+            ]
+        }
+    }
+}

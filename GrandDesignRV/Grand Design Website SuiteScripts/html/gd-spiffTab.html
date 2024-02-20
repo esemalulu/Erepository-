@@ -1,0 +1,36 @@
+<div class="rvs-listpage">
+    <div class="rvs-pageload-wrapper">
+      <div class="rvs-pageload-spinner">
+        <svg viewBox="0 0 64 64" width="64" height="64">
+          <circle id="spinner" cx="32" cy="32" r="14" fill="none"></circle>
+        </svg>
+        <h3>Loading...</h3>
+      </div>
+    </div>
+    <div class="portlet-wrapper">
+        <div class="portlet-header portlet-open" onclick="toggleElementById(this, 'rvs-createspiff-iframe')">
+            <table style="width: 100%;">
+                <tr>
+                    <td class="portlet-icon"><span class="fa fa-chevron-down"></span><span class="fa fa-chevron-right"></span></td>
+                    <td><h3>Units Available to Claim</h3></td>
+                </tr>
+            </table>
+        </div>
+        <iframe id="rvs-createspiff-iframe" src="/app/site/hosting/scriptlet.nl?script=customscriptgd_website2_spiff_suitelet&deploy=customdeploygd_website2_spiff_suitelet" onload="resizeIframe(this)"
+                border="0" seamless="seamless" frameBorder="0">
+        </iframe>
+    </div>
+    <div class="portlet-wrapper">
+        <div class="portlet-header portlet-open" onclick="toggleElementById(this, 'rvs-viewspiff-iframe')">
+            <table style="width: 100%;">
+                <tr>
+                    <td class="portlet-icon"><span class="fa fa-chevron-down"></span><span class="fa fa-chevron-right"></span></td>
+                    <td><h3>Spiffs</h3></td>
+                </tr>
+            </table>
+        </div>
+        <iframe id="rvs-viewspiff-iframe" src="/app/site/hosting/scriptlet.nl?script=customscriptgd_website2_spiffview_suite&deploy=customdeploygd_website2_spiffview_suite" onload="resizeIframe(this)"
+                border="0" seamless="seamless" frameBorder="0">
+        </iframe>
+    </div>
+</div>

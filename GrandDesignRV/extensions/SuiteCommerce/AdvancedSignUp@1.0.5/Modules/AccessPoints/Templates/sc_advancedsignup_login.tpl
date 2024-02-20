@@ -1,0 +1,1 @@
+<div class="advancedsignup-login-container">{{{registrationTextAndLink}}}</div>

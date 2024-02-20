@@ -1,0 +1,52 @@
+<script src="https://use.fontawesome.com/a1c3e04e1f.js"></script>
+<table class="rvs-table-options">
+    <tr>
+        <td>
+            <div class="filters" data-bind="foreach: filterOptions">
+                <div class="filterItem"><table><tr><td><input type="checkbox" data-bind="checked:selected, attr: {id: 'checkBox' + id}"></td><td><label data-bind="text: name + ' (' + count + ')', attr:{for: 'checkBox'+id, style: count > 0 ? 'font-weight: 600' : 'font-weight: 500'}"></label></td></tr></table></div>
+            </div>
+        </td>
+        <td class="col-sm">
+            <table>
+                <tr><td><select style="width: 100%;" data-bind="value: searchType, options: searchOptions,
+                        optionsText: 'name',
+                        optionsValue: 'property',
+                        optionsCaption: 'Filter by...'"></select></td></tr>
+                <tr><td><input type="text" data-bind="textInput: searchTerm"></td></tr>
+                <tr><td><div class="rvs-secondary-button exterior-button" id="clearFiltersBtn" data-bind="click: clearFilters" title="Clear Filters">Clear Filters</div></td></tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <div data-bind="click: $root.hasPrevious() ? previous : '', attr: {class: $root.hasPrevious() ? 'rvs-pagenumber' : 'rvs-pagenumber-disabled'}" ><span class="fa fa-step-backward"></span></div>
+            <div class="rvs-pagecount"><span data-bind="text: $root.currentPage() + 1 + ' of ' + $root.pageCount()"></span></div>
+            <div data-bind="click: $root.hasNext() ? next : '', attr: {class: $root.hasNext() ? 'rvs-pagenumber' : 'rvs-pagenumber-disabled'}" ><span class="fa fa-step-forward"></span></div>
+        </td>
+    </tr>
+</table>
+<table class="rvs-table rvs-table-stripe">
+    <thead class="rvs-table-header rvs-bgcolor1">
+        <tr data-bind="foreach: columns">
+            <th data-bind="css: width" style="white-space: nowrap;"><div class="sortable" data-bind="click: property != 'links' ? $root.sortClick.bind(property) : ''">
+            <span data-bind="html: header"></span><i data-bind="css: state"></i>
+            </div></th>
+        </tr>
+    </thead>
+    <tbody class="rvs-list" data-bind="foreach: filterList()">
+        <tr class="">
+            <td id="links"><a target="_parent" data-bind="attr: { href: $root.urlString.replace(/amp;/gi,'') + '&id=' + id }">View</a></td>
+            <td id="code" data-bind="text: code"></td>
+            <td id="displayName" data-bind="text: displayName"></td>
+            <td id="mainCategory" data-bind="text: mainCategoryText"></td>
+            <td id="subCategory" data-bind="text: subCategoryText"></td>
+            <td id="timeAllowed" data-bind="text: timeAllowed" class="align-right"></td>
+            <td id="straightTime" data-bind="text: straightTime" class="align-right"></td>
+            <td id="preAuthRequired" data-bind="text: preAuthRequired" class="align-right"></td>
+        </tr>
+    </tbody>
+</table>
+<table id="rvs-list-noresults" class="rvs-table" data-bind="visible: filterList().length == 0" style="display: none;">
+    <tr><td style="font-size: 1.2em; text-align: center; padding-top: 50px;">No Results found. Try changing your search filters.</td></tr>
+</table>
+<div class="rvs-table-cover"></div>

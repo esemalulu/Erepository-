@@ -1,0 +1,87 @@
+/* Edited for Bridge Theme */
+
+// Summary box
+//
+// The Summary Box is currently used across the platform in several contexts to display key information
+// in a succinct manner facilitating the decision making process before performing an action.
+//
+// Markup:
+// <div class="summary-container" style="width: 260px;">
+//   <h3 class="summary-title">Order summary</h3>
+//   <div class="summary-subtotal">
+//     <p class="summary-grid-float">
+//       <span>
+//         Subtotal <span>1 item</span>
+//       </span>
+//       <span class="summary-grid-right">$100.00</span>
+//     </p>
+//   </div>
+//   <div>
+//     <p class="summary-grid-float">
+//       Shipping <span class="summary-grid-right">$10.00</span>
+//     </p>
+//     <p class="summary-grid-float">
+//       Tax <span class="summary-grid-right">$15.00</span>
+//     </p>
+//   </div>
+//   <div class="summary-total">
+//     <p class="summary-grid-float">
+//       Estimated total <span class="summary-grid-right">$125.00</span>
+//     </p>
+//   </div>
+// </div>
+//
+// Styleguide 3.7
+
+// Edited for Bridge Theme
+.summary-title{
+	padding-left: $sc-padding-lv3;
+	margin-bottom:$sc-margin-lv4;
+}
+
+.summary-container{
+	@extend .box-column;
+	@media (min-width: $screen-sm-min) {
+		padding: $sc-padding-lv4 0 0;
+	}
+}
+
+.summary-subtotal {
+	font-weight: $sc-font-weight-bold;
+	text-transform: uppercase;
+}
+
+.summary-total{
+	font-size:$sc-font-size-l;
+	font-weight:$sc-font-weight-bold;
+	text-transform:uppercase;
+}
+
+.summary-grid-right {
+	float: right;
+	padding-right: $sc-padding-lv3;
+}
+
+.summary-grid-float {
+	@extend .row;
+	clear: both;
+	margin: 0;
+	margin-bottom: $sc-margin-lv2;
+	padding-left: $sc-padding-lv3;
+}
+
+.summary-button-container {
+	text-align: center;
+	background: $sc-color-theme-background;
+	padding: $sc-padding-lv4 0;
+}
+
+.button-proceed-to-checkout {
+	@extend .button-primary;
+	@extend .button-large;
+}
+
+.button-apply {
+	@extend .button-secondary;
+	@extend .button-small;
+}

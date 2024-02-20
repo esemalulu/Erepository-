@@ -1,0 +1,98 @@
+/* Edited for Bridge Theme */
+
+// Accordion
+//
+// Expanders are used to show users a snippet of a larger body of text in order to keep the user interface lightweight and easy to scan.
+// Content is revealed when requested by the user.
+//
+// Markup:
+// <div class="accordion-head">
+//   <a class="accordion-head-toggle" data-toggle="collapse" data-target="#accordion-id" aria-expanded="false" aria-controls="accordion-id">
+//     this is the primary accordion
+//     <i class="acordion-head-toggle-icon"></i>
+//   </a>
+// </div>
+// <div class="accordion-body in" id="accordion-id">
+//   <div class="accordion-container">
+//     <p>some content</p>
+//     <p>more content</p>
+//   </div>
+// </div>
+//
+// Styleguide 3.1
+
+// Edited for Bridge Theme
+.accordion-head {
+	@extend .small-title;
+	text-transform: inherit;
+}
+
+.accordion-head-toggle,
+.accordion-head-toggle-secondary {
+	display: block;
+	cursor: pointer;
+	height: 100%;
+	line-height: $sc-target-size;
+	padding: 0 $sc-padding-lv3;
+	font-size: $sc-font-size-base;
+    border-top: 1px solid $sc-color-theme-border;
+    border-bottom: 1px solid $sc-color-theme-border;
+}
+
+.accordion-head-toggle,
+.accordion-head-toggle-secondary {
+    font-family: $sc-theme-secondary-font;
+    text-transform: uppercase;
+    font-weight: $sc-font-weight-light;
+}
+
+.accordion-head-toggle:hover,
+.accordion-head-toggle-secondary:hover {
+	text-decoration: none;
+}
+
+.acordion-head-toggle-icon,
+.accordion-toggle-icon,
+.accordion-toggle-icon-secondary {
+	@extend .fa;
+	@extend %fa-angle-up;
+	float: right;
+	height: $sc-target-size;
+	line-height: $sc-target-size;
+	font-size: $sc-font-size-xl;
+	color: $sc-color-theme-dark;
+	@include transition (transform $sc-animation-base-duration ease)
+}
+
+.accordion-toggle-icon-secondary {}
+
+.collapsed .acordion-head-toggle-icon,
+.collapsed .accordion-toggle-icon,
+.collapsed .accordion-toggle-icon-secondary {
+	@include rotate(180deg);
+}
+
+.accordion-body,
+.accordion-body-secondary,
+.accordion-body-alt {
+	overflow: hidden;
+    width: 100%;
+    padding-left: $sc-padding-lv3;
+    padding-right: $sc-padding-lv3;
+}
+
+.accordion-body-alt {
+	// background-color: $sc-color-theme-background;
+}
+
+.accordion-container {
+	margin: $sc-margin-lv4;
+}
+
+.accordion-container-table {
+	margin: 0;
+}
+
+.accordion-divider {
+	margin-bottom: $sc-margin-lv4;
+}

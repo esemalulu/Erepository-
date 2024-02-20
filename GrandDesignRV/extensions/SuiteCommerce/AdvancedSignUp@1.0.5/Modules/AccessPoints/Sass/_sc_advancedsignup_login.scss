@@ -1,0 +1,10 @@
+.advancedsignup {
+	&-login {
+		&-container {
+			@extend p;
+
+			margin-top: $sc-margin-lv4;
+			margin-bottom: $sc-margin-lv4;
+		}
+	}
+}

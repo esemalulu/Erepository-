@@ -1,0 +1,16 @@
+.payment-wizard-invoice-action-row {
+  @media (max-width: $screen-md-min){
+    margin-left: 0;
+  }
+  @extend .row;
+}
+
+.payment-wizard-invoice-action-button{
+  @extend .button-tertiary;
+  @extend .button-small;
+}
+
+.payment-wizard-invoice-action{
+  @extend .button-link;
+  @extend .button-small;
+}

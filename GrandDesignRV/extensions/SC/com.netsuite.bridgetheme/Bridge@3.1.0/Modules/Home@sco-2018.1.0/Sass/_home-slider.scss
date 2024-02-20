@@ -1,0 +1,399 @@
+.home-slider-container {
+  margin-bottom: $sc-margin-lv4;
+
+  @extend .row;
+
+  // This block is only added if the slide have captions
+  .caption-on {
+    //making the sliders visible/hidden individually
+    .home-slide-caption {
+      &.caption-display {
+        display: block;
+        @media (min-width: $screen-sm-min) {
+          display: flex;
+          display: -ms-flexbox;
+        }
+      }
+    }
+  }
+
+  .home-image-slider {
+    position: relative;
+    .bx-wrapper {
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: $sc-margin-lv4;
+      }
+      .bx-viewport {
+        height: auto !important;
+      }
+      .home-slide-main-container {
+        //background: $sc-color-slide-background;
+        overflow: hidden;
+        height: auto;
+        text-align: center;
+
+        background-size: 0%;
+        @media (min-width: $screen-sm-min) {
+          background-size: cover;
+          background-position: center center;
+        }
+
+        //slider image
+        img {
+          margin: auto 0;
+          height: 100%;
+          min-width: auto;
+          max-width: 100%;
+
+          float: none;
+          width: 100% !important;
+          margin: 0 auto -6px !important;
+          //min-width: 100% !important;
+          min-height: 50px;
+          opacity: 1;
+
+          @media (min-width: $screen-sm-min) {
+              max-width: none;
+              min-width: 1200px;
+          }
+
+          @media (min-width: $screen-md-min) {
+              opacity: 0;
+          }
+
+          //class for emulate the background behaviour, controlling crop sides
+          &.backgrounded-left {
+             min-width: 1200px !important;
+             float: left;
+          }
+          &.backgrounded-right {
+            min-width: 1200px !important;
+            float: right;
+          }
+
+
+        }
+
+        &.use-image {
+          img {
+            min-width: auto;
+          }
+          @media (max-width: $screen-sm-min) {
+            background-image: none !important;
+          }
+          @media (min-width: $screen-md-min) {
+            img {
+              opacity: 0;
+            }
+          }
+        }
+
+        &.left {
+          @media (min-width: $screen-sm-min) {
+            background-image: none !important;
+            img {
+              min-width: 1200px !important;
+              float: right;
+              opacity: 1;
+            }
+          }
+        }
+        &.right {
+          @media (min-width: $screen-sm-min) {
+            background-image: none !important;
+            img {
+              min-width: 1200px !important;
+              float: left;
+              opacity: 1;
+            }
+          }
+        }
+        &.centered {
+          @media (min-width: $screen-sm-min) {
+            img {
+              min-width: 1200px !important;
+              float: left;
+              opacity: 0; //important for mantain the right height in the slider
+            }
+          }
+        }
+
+        //added for mobile image
+        .home-slide-image-mobile {display: none;}
+        .hide-small {display: block;}
+
+         @media (max-width: $screen-xs-max) {
+             .hide-small {
+               display: none;
+             }
+             .home-slide-image-mobile {
+               display: block;
+             }
+         }
+      }
+
+    }
+  }
+
+
+  // pager and controls -------
+
+  .home-image-slider {
+    .bx-controls {
+      .bx-pager {
+
+        @media (min-width: $screen-md-min) {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .bx-pager-item {
+            vertical-align: middle;
+        }
+      }
+    }
+
+  }
+
+  .home-image-slider .bx-controls,
+  .home-image-slider .bx-controls .bx-pager {
+      margin-top: 0;
+      @media (min-width: $screen-sm-min) {
+        margin-top: $sc-margin-lv2;
+      }
+  }
+
+  // Prev and Next arrows
+  .home-gallery-prev-icon,
+  .home-gallery-next-icon {
+      display: $sc-home-carousel-icons-display;
+      position: absolute;
+      top: 50%;
+      width: $sc-target-size-mobile;
+      height: $sc-target-size-mobile;
+      font-size: 30px;
+      text-align: center;
+      color: $sc-home-carousel-icons-color-desktop;
+      margin-top: -20px;
+      line-height: 40px;
+      @media (max-width: $screen-md-min) {
+          color: $sc-home-carousel-icons-color-mobile;
+          margin-top: -38.5px;
+          background: rgba(0,0,0,0.3);
+          padding: 0 10px 5px;
+      }
+  }
+  .home-gallery-prev-icon {
+      left: 10px;
+      @extend .icon-angle-left;
+  }
+
+  .home-gallery-next-icon {
+      right: 10px;
+      @extend .icon-angle-right;
+  }
+
+  // Pager specifics --------
+
+  .bx-pager-link {
+      color: $sc-home-carousel-icons-color-mobile !important;
+      background-color: $sc-home-carousel-icons-color-mobile !important;
+      width: 10px !important;
+      height: 10px !important;
+      border-radius: 100% !important;
+      font-size:0;
+      text-indent:-9999px;
+
+      @media (min-width: $screen-md-min) {
+          color: $sc-home-carousel-icons-color-desktop !important;
+          background-color: $sc-home-carousel-icons-color-desktop !important;
+      }
+
+      &.active {
+        background-color: $sc-home-carousel-icons-color-mobile;
+
+        @media (min-width: $screen-md-min) {
+            background-color: $sc-home-carousel-icons-color-desktop !important;
+        }
+      }
+
+  }
+
+
+  // captions
+  .home-slide-caption {
+    width: 100%;
+    padding: $sc-margin-lv4 $sc-margin-lv2;
+    text-align: center;
+    background: #FFF;
+    pointer-events: none;
+    display: none;
+
+    @media (min-width: $screen-sm-min) {
+        padding: $sc-margin-lv2 $sc-margin-lv2;
+        background-position-x: inherit;
+        position: absolute;
+        background: none;
+        //width: 450px;
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+
+        //Automatic vergical alignment
+        flex-grow: 1;
+        flex-wrap: wrap;
+        align-items: center;
+
+        &.left {
+          .home-slide-caption-content {
+            margin-left: 0;
+          }
+        }
+        &.right {
+          .home-slide-caption-content {
+            margin-right: 0;
+          }
+        }
+        &.centered {
+          width: 100%;
+        }
+        &.carousel-center-box { //defaut for Customer Segments
+          .home-slide-caption-content {
+            background-color: rgba(0,0,0,0.4) !important;
+            padding: 20px;
+            text-align: center;
+            max-width: 50%;
+            margin: auto;
+          }
+        }
+    }
+
+    .home-slide-caption-content {
+      //title and description
+      @extend .container;
+      @media (min-width: $screen-sm-min) {
+          background: none;
+          background-color: transparent !important;
+
+          margin: 0;
+          padding: 0 50px;
+          margin: auto;
+          max-width: 600px;
+
+          &.left {
+            text-align: left;
+          }
+          &.right {
+            text-align: right;
+          }
+          &.centered {
+            text-align: center;
+            width: 100%;
+          }
+      }
+
+      @media (max-width: $screen-md-min) {
+         width: 100% !important;
+      }
+
+      .home-slide-caption-title {
+          text-transform: uppercase;
+          margin-bottom: $sc-margin-lv2;
+          font-size: $sc-theme-carousel-title-size;
+          color: $sc-theme-carousel-text-color;
+          @media (min-width: $screen-sm-min){
+              margin-left: 0;
+          }
+
+          @media (min-width: $screen-md-min){
+              margin-bottom: 0;
+              margin-right: 0;
+              padding-bottom: 0;
+
+          }
+
+          //piece for override the configurable text color in mobile only.
+          @media (max-width: $screen-sm-min){
+            color: #000 !important;
+          }
+      }
+      p {
+
+        margin: 0 0 $sc-margin-lv4 0;
+
+        @media (min-width: $screen-sm-min){
+            display:block;
+
+            color: $sc-theme-carousel-text-color;
+            font-size: $sc-theme-carousel-text-size;
+        }
+
+        //piece for override the configurable text color in mobile only.
+        @media (max-width: $screen-sm-min){
+          color: #000 !important;
+
+        }
+
+      }
+
+      // button -- This is may vary depending on the theme
+
+      .home-slide-caption-button-container {
+          padding-left: $sc-padding-lv4;
+          padding-right: $sc-padding-lv4;
+          //position: absolute;
+          //margin-left: -$sc-padding-lv2;
+          //bottom: -60px; //width: 100%;
+          @media (min-width: $screen-sm-min) {
+              padding:0;
+              margin-left: 0;
+              margin-right: 0;
+              position: relative;
+              bottom: 0;
+          }
+      }
+
+      .home-slide-caption-button {
+          color: $sc-theme-carousel-button-text-color;
+          background-color: $sc-theme-carousel-button-bgr-color;
+          display: inline-block;
+          @extend .button-large;
+          font-size: 18px;
+          padding: 15px;
+          @include skew-before($sc-theme-carousel-button-bgr-color, -$sc-theme-skew-distance, $sc-target-size, $sc-theme-skew-distance);
+          @include skew-after($sc-theme-carousel-button-bgr-color, -$sc-theme-skew-distance, $sc-target-size, $sc-theme-skew-distance, 1);
+          pointer-events: all;
+          &:hover,
+          &:active,
+          &:focus {
+              background-color: $sc-theme-carousel-button-bgr-hover-color;
+              color: $sc-theme-carousel-button-text-color;
+              @include skew-before($sc-theme-carousel-button-bgr-hover-color, -$sc-theme-skew-distance, $sc-target-size, $sc-theme-skew-distance);
+              @include skew-after($sc-theme-carousel-button-bgr-hover-color, -$sc-theme-skew-distance, $sc-target-size, $sc-theme-skew-distance, 1);
+              outline: none;
+          }
+          &:disabled {
+              opacity: 0.6;
+              cursor: default;
+              pointer-events: none;
+          }
+          @media (min-width: $screen-xs-min) {
+              width: auto;
+              position: relative;
+          }
+      }
+
+      .home-slide-button-icon {
+          @extend .icon-angle-right;
+          color: $sc-color-icon;
+          font-size: 20px;
+          font-weight: bold;
+      }
+
+    }
+
+  }
+
+}

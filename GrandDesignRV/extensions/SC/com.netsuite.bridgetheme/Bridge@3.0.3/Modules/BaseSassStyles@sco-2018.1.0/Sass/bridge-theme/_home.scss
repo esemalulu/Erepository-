@@ -1,0 +1,43 @@
+//Home Slide Theme
+$sc-color-slide-background: $sc-color-theme-background-light; /* // edition disabled ({"type": "color", "label": "Carousel caption background color"}) // */
+
+// Carousel
+$sc-theme-carousel-title-size: 36px; /* editable({"type": "string", "label": "Carousel title size"}) */
+$sc-theme-carousel-text-size: 18px; /* editable({"type": "string", "label": "Carousel subtitle size"}) */
+$sc-theme-carousel-text-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Carousel text color"}) */
+$sc-theme-carousel-button-font-size: 18px; /* editable({"type": "string", "label": "Carousel button size"}) */
+$sc-theme-carousel-button-text-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Carousel button text color"}) */
+$sc-theme-carousel-button-bgr-color: $sc-color-secondary; /* editable({"type": "color", "label": "Carousel button background color"}) */
+$sc-theme-carousel-button-bgr-hover-color: $sc-color-link; /* editable({"type": "color", "label": "Carousel button background hover color"}) */
+$sc-theme-carousel-content-width: 560px; /* editable({"type": "string", "label": "Carousel content width"}) */
+
+/* Carousel Icons */
+$sc-home-carousel-icons-display: block; /* editable({
+	"type": "string",
+	"label": "Display Carousel Icons",
+	"options": [
+		{"value": "none", "text": "Hide"},
+		{"value": "block", "text": "Show"}
+	]
+}) */
+$sc-home-carousel-icons-color-desktop: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Desktop Carousel Icons Color"}) */
+$sc-home-carousel-icons-color-mobile: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Mobile Carousel Icons Color"}) */
+
+// Top Promo
+$sc-theme-home-top-promo-background-color: $sc-color-theme-top-header-background-color; /* editable({"type": "color", "label": "Promo background color"}) */
+$sc-theme-home-top-promo-text-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Promo text color"}) */
+
+// Infoblocks
+$sc-theme-infoblock-height-mobile: 200px; /* editable({"type": "string", "label": "Infoblock height - mobile"}) */
+$sc-theme-infoblock-height-desktop: 250px; /* editable({"type": "string", "label": "Infoblock height - desktop"}) */
+$sc-theme-infoblock-content-width: 200px; /* editable({"type": "string", "label": "Infoblock content width"}) */
+$sc-theme-infoblock-large-content-width: 250px; /* editable({"type": "string", "label": "Infoblock large content width", "description": "Used only on the 5th infoblock when 5 infoblocks total"}) */
+$sc-theme-infoblock-title-underline-color: $sc-color-link;/* editable({"type": "color", "label": "Infoblock title underline color"}) */
+$sc-theme-infoblock-title-underline-hover-color: $sc-color-copy;/* editable({"type": "color", "label": "Infoblock title underline hover color"}) */
+$sc-theme-infoblock-background-image-zoom: 120%; /* editable({"type": "string", "label": "Infoblock image zoom percentage", "description": "User hovers over infoblock and background size increases by this amount"}) */
+$sc-theme-infoblock-highlight-color: $sc-color-primary; /* editable({"type": "string", "label": "Infoblock highlight color", "description": "User hovers over infoblock and coloured overlay applied"}) */
+$sc-theme-infoblock-title-size: 16px; /* editable({"type": "string", "label": "Infoblock title size"}) */
+$sc-theme-infoblock-text-size: 24px; /* editable({"type": "string", "label": "Infoblock text size"}) */
+$sc-theme-infoblock-large-title-size: $sc-theme-infoblock-text-size; /* editable({"type": "string", "label": "Infoblock large content title size"}) */
+$sc-theme-infoblock-large-text-size: 36px; /* editable({"type": "string", "label": "Infoblock large content text size"}) */
+$sc-theme-infoblock-link-color: $sc-neutral-shade-0;/* editable({"type": "color", "label": "Infoblock link color"}) */

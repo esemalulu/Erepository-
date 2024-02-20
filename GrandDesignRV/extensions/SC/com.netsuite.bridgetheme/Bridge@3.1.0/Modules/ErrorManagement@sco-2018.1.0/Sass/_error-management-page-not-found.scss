@@ -1,0 +1,115 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+// Edited for Bridge Theme
+
+.error-management-page-not-found {
+	@extend .container;
+	padding: 0 !important;
+	margin-top: -50px;
+	background-color: transparent !important;
+}
+
+.error-management-page-not-found-main-banner {}
+
+.error-management-page-not-found-content {}
+
+.error-management-page-not-found-header {
+	position: relative;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	height: 400px;
+	text-align: center;
+}
+
+.error-management-page-not-found-caption {
+	position: absolute;
+	top: 0;
+	height: 400px;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position-x: center;
+	text-align: center;
+	padding: $sc-margin-lv2;
+
+	@media (min-width: $screen-xs-min) {
+		right: 10%;
+		width: 450px;
+		background-position-x: inherit;
+	}
+
+	.error-management-page-not-found-caption-content {
+		position: absolute;
+		top: 30%;
+		left: 20%;
+
+		@media (min-width: $screen-xs-min) {
+			left: 25%;
+		}
+	}
+
+	.error-management-page-not-found-title {
+		width: 200px;
+
+		h1 {
+			margin-bottom: $sc-margin-lv4;
+			padding-bottom: $sc-padding-base;
+			font-size: $sc-theme-carousel-title-size;
+			color: $sc-theme-carousel-text-color;
+			font-weight: $sc-font-weight-light;
+		}
+	}
+
+	.error-management-page-not-found-text {
+		display: none;
+		@media (min-width: $screen-xs-min) {
+			display: block;
+			margin-bottom: $sc-margin-lv4;
+			color: $sc-theme-carousel-text-color;
+			font-size: 16px;
+			text-transform: lowercase;
+			font-weight: $sc-font-weight-bold;
+		}
+	}
+
+	.error-management-page-not-found-button-container {}
+
+	.error-management-page-not-found-button {
+		color: $sc-theme-carousel-button-text-color;
+	    background-color: $sc-theme-carousel-button-bgr-color;
+		@extend .button-large;
+		display: inline-block;
+		font-size: 18px;
+	    padding: 15px;
+
+	    @include skew-before($sc-theme-carousel-button-bgr-color,-$sc-theme-skew-distance,$sc-target-size,$sc-theme-skew-distance);
+	    @include skew-after($sc-theme-carousel-button-bgr-color,-$sc-theme-skew-distance,$sc-target-size,$sc-theme-skew-distance,1);
+		&:before {
+			border-top: 48px solid transparent;
+		}
+
+		&:hover,
+	    &:active,
+	    &:focus {
+			background-color: $sc-theme-carousel-button-bgr-hover-color;
+			color: $sc-theme-carousel-button-text-color;
+			@include skew-before($sc-theme-carousel-button-bgr-hover-color,-$sc-theme-skew-distance,$sc-target-size,$sc-theme-skew-distance);
+			@include skew-after($sc-theme-carousel-button-bgr-hover-color,-$sc-theme-skew-distance,$sc-target-size,$sc-theme-skew-distance,1);
+			outline: none;
+			&:before {
+				border-top: 48px solid transparent;
+			}
+	    }
+
+		@media (min-width: $screen-xs-min) {
+			width: auto;
+			position: relative;
+		}
+	}
+}

@@ -1,0 +1,90 @@
+{
+    "name": "CoreContent",
+    "fantasyName": "Core Content Extension",
+    "vendor": "CXExtensibility",
+    "version": "1.0.5",
+    "type": "extension",
+    "target": "SCA,SCS",
+    "target_version": {
+        "SCA": ">=19.1.0",
+        "SCS": ">=19.1.0"
+    },
+    "description": "An extension for installing SMT core content types",
+    "cct": [
+        {
+            "icon": "img/cct_cxextensibility_cmsmerchzonecct_icon.svg",
+            "settings_record": "customrecordcms_merchzonetwo",
+            "registercct_id": "CMS_MERCHZONETWO",
+            "label": "CMS Merchzone",
+            "description": "A CCT to display items from a merchandising rule"
+        }
+    ],
+    "skins": [],
+    "assets": {
+        "img": {
+            "files": ["img/cct_cxextensibility_cmsmerchzonecct_icon.svg"]
+        },
+        "fonts": {
+            "files": []
+        }
+    },
+    "sass": {
+        "entry_points": {
+            "shopping": "Modules/CoreContentModule/Sass/_corecontent-corecontentmodule.scss",
+            "myaccount": "Modules/CoreContentModule/Sass/_corecontent-corecontentmodule.scss",
+            "checkout": "Modules/CoreContentModule/Sass/_corecontent-corecontentmodule.scss"
+        },
+        "files": [
+            "Modules/CoreContentModule/Sass/_corecontent-corecontentmodule.scss",
+            "Modules/CMSMerchzoneCCT/Sass/_corecontent-cmsmerchzonecct.scss"
+        ]
+    },
+    "templates": {
+        "application": {
+            "shopping": {
+                "files": ["Modules/CMSMerchzoneCCT/Templates/cxextensibility_corecontent_cmsmerchzonecct.tpl"]
+            },
+            "myaccount": {
+                "files": ["Modules/CMSMerchzoneCCT/Templates/cxextensibility_corecontent_cmsmerchzonecct.tpl"]
+            },
+            "checkout": {
+                "files": ["Modules/CMSMerchzoneCCT/Templates/cxextensibility_corecontent_cmsmerchzonecct.tpl"]
+            }
+        }
+    },
+    "javascript": {
+        "entry_points": {
+            "shopping": "Modules/CoreContentModule/JavaScript/CXExtensibility.CoreContent.CoreContentModule.js",
+            "myaccount": "Modules/CoreContentModule/JavaScript/CXExtensibility.CoreContent.CoreContentModule.js",
+            "checkout": "Modules/CoreContentModule/JavaScript/CXExtensibility.CoreContent.CoreContentModule.js"
+        },
+        "application": {
+            "shopping": {
+                "files": [
+                    "Modules/CoreContentModule/JavaScript/CXExtensibility.CoreContent.CoreContentModule.js",
+                    "Modules/CMSMerchzoneCCT/JavaScript/CXExtensibility.CoreContent.CMSMerchzoneCCT.js",
+                    "Modules/CMSMerchzoneCCT/JavaScript/CMSMerchzoneCCT.View.js"
+                ]
+            },
+            "myaccount": {
+                "files": [
+                    "Modules/CoreContentModule/JavaScript/CXExtensibility.CoreContent.CoreContentModule.js",
+                    "Modules/CMSMerchzoneCCT/JavaScript/CXExtensibility.CoreContent.CMSMerchzoneCCT.js",
+                    "Modules/CMSMerchzoneCCT/JavaScript/CMSMerchzoneCCT.View.js"
+                ]
+            },
+            "checkout": {
+                "files": [
+                    "Modules/CoreContentModule/JavaScript/CXExtensibility.CoreContent.CoreContentModule.js",
+                    "Modules/CMSMerchzoneCCT/JavaScript/CXExtensibility.CoreContent.CMSMerchzoneCCT.js",
+                    "Modules/CMSMerchzoneCCT/JavaScript/CMSMerchzoneCCT.View.js"
+                ]
+            }
+        }
+    },
+    "ssp-libraries": {
+        "entry_point": "Modules/CoreContentModule/SuiteScript/CXExtensibility.CoreContent.CoreContentModule.js",
+        "files": ["Modules/CoreContentModule/SuiteScript/CXExtensibility.CoreContent.CoreContentModule.js"]
+    },
+    "local_folder": "Workspace/CoreContent"
+}

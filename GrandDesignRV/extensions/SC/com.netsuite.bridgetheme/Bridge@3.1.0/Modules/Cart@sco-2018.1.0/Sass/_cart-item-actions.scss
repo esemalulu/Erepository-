@@ -1,0 +1,75 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+// Edited for Bridge Theme
+
+.cart-item-actions-links {
+	margin-top: $sc-margin-lv4;
+
+	a {
+        @extend .button-tertiary;
+        @extend .button-medium;
+        margin-bottom: $sc-margin-lv2;
+        width: 100%;
+	}
+
+	@media (max-width: $screen-md-max) {
+		margin-top: 0;
+	}
+}
+
+.cart-item-actions-item-list-actionable-edit-button-edit {
+	margin-right: $sc-margin-lv2;
+}
+
+.cart-item-actions-item-list-actionable-edit-content-saveforlater {
+	margin-right: $sc-margin-lv2;
+}
+
+.cart-item-actions-item-list-actionable-edit-content-remove {}
+
+// .cart-item-actions-item-list-actionable-edit-button{
+// 	@extend .transaction-line-views-cell-actionable-edit-button;
+// }
+
+// .cart-item-actions-item-list-actionable-edit-button-edit,
+// .cart-item-actions-item-list-actionable-edit-content-saveforlater,
+// .cart-item-actions-item-list-actionable-edit-content-remove {
+// 	@extend .button-tertiary;
+//     @extend .button-medium;
+//     margin-bottom: 10px;
+//     width: 100%;
+// 	//padding: 13px 16px;
+// 	@media (min-width: $screen-md-min) {
+//         //padding: 13px 13px;
+//     }
+// }
+
+// .cart-item-actions-item-list-actionable-edit-button-drop{
+// 	@extend .transaction-line-views-cell-actionable-edit-button-drop;
+// 	padding: 13px 16px;
+// 	@media (min-width: $screen-md-min) {
+//         padding: 13px 13px;
+//     }
+// }
+
+// .cart-item-actions-item-list-actionable-edit-content{
+// 	@extend .split-button-dropdown;
+//     @extend .dropdown-menu;
+// 	padding: $sc-padding-base * 2 0;
+
+// 	li>a{
+// 		padding: $sc-padding-lv2 $sc-padding-lv3;
+// 	}
+// }
+
+// .cart-item-actions-item-list-actionable-edit-content-saveforlater {}
+
+// .cart-item-actions-item-list-actionable-edit-content-remove-sb{
+// 	@extend .button-tertiary;
+// 	@extend .button-small;
+// }

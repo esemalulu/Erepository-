@@ -1,0 +1,409 @@
+/*
+	Sitewide styles, to override existing styles or add new ones
+    Put CSS in here to make small tweaks instead of overriding whole files
+ */
+
+ // Old merchzone with no slider
+ .cms-content aside {
+     .row-fluid {
+         display: flex;
+         flex-wrap: wrap;
+
+         & div {
+             flex: 0 0 50%;
+             @media (min-width: $screen-sm-min) {
+         		flex: 0 0 25%;
+         	}
+         }
+
+         & .item-cell {
+             padding: 10px;
+         }
+
+         & h5,
+         & .btn {
+             display: none;
+         }
+     }
+ }
+ //end
+
+.container {
+    background-color: $sc-neutral-shade-0;
+}
+.content-banner .container {
+    background-color: transparent; // fix issue caused by above color
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+}
+
+input:hover,
+input:focus,
+input:active,
+button:hover,
+button:focus,
+button:active {
+    outline: none;
+}
+
+
+/* LAYOUT */
+/* Spacing */
+.content-background {
+    padding-left: $sc-theme-mobile-padding;
+    padding-right: $sc-theme-mobile-padding;
+
+    @media (min-width: $screen-md-min) {
+        padding-left: $sc-theme-desktop-padding;
+        padding-right: $sc-theme-desktop-padding;
+    }
+}
+
+.shopping-layout-breadcrumb,
+.checkout-layout-breadcrumb,
+.myaccount-layout-container,
+.cart,
+.cart-detailed,
+.error-management-forbidden-error, //required?
+.error-management-internal-error,
+.error-management-page-not-found,
+.facets-facet-browse,
+.product-details-full,
+.productcompare-dashboard,
+.product-reviews-form,
+.product-reviews-form-preview,
+.product-reviews-form-confirmation,
+.cms-landing-page,
+.contact-us-container,
+.guest-order-status-layout-container,
+.look-layout-container,
+.lookbook-layout-container,
+.login-register,
+#wizard {
+    @extend .content-background;
+}
+
+.shopping-layout-breadcrumb,
+.checkout-layout-breadcrumb,
+.myaccount-layout-breadcrumb {
+    padding-top: 50px;
+}
+
+.error-management-forbidden-error,
+.error-management-internal-error,
+.error-management-page-not-found {
+    padding-bottom: 50px;
+}
+
+.shopping-layout-header,
+.checkout-layout-header,
+.myaccount-layout-header {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin-bottom: 0;
+    background-color: transparent;
+
+    @media (min-width: $screen-sm-min) {
+        margin-bottom: $sc-margin-lv5;
+    }
+}
+
+.shopping-layout-header {
+    @media (min-width: $screen-sm-min) {
+        margin-bottom: $sc-margin-lv5;
+    }
+}
+
+.checkout-layout-breadcrumb {
+    @extend .container;
+}
+
+.checkout-layout-content{
+    & .error-management-internal-error, .error-management-forbidden-error {
+        padding-right: 0px;
+        padding-left: 0px;
+        width:auto;
+    }
+    & .contact-us-container {
+        padding-right: 45px;
+        padding-left: 45px;
+        width: 100%;
+    }
+}
+
+/* MISC */
+/* Not worth adding an extra file for */
+.cms-content {
+    //default to some basic padding for all
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+}
+.cms-content-text {
+    @media (min-width: $screen-md-min) {
+        padding-left: 85px;
+        padding-right: 85px;
+    }
+}
+
+/*
+MERCHANDISING ZONE ITEM
+Default merchandising template styling merchzone_default.txt
+*/
+.cms-content-merchzone {
+    aside {
+        @extend .container-fluid;
+        padding-top: $sc-padding-lv2;
+        padding-bottom: $sc-padding-lv4;
+        @media (min-width: $screen-md-min) {
+            padding-bottom: $sc-padding-lv8;
+            padding-left: 85px;
+            padding-right: 85px;
+        }
+    }
+    .row-fluid {
+        @extend .row;
+    }
+    %col {
+        position: relative;
+        min-height: 1px;
+        float: left;
+        margin: 0 15px 20px 15px;
+
+        width: calc(50% - 30px); //width minus side margins
+    }
+    .span4 {
+        @extend %col;
+        @media (min-width: $screen-md-min) {
+            width: calc(33% - 30px); //width minus side margins
+        }
+    }
+    .span3 {
+        @extend %col;
+        @media (min-width: $screen-md-min) {
+            width: calc(25% - 30px); //width minus side margins
+        }
+    }
+    .item-cell {
+        padding-top: 10px;
+    }
+    .thumbnail {
+        margin-bottom: 10px;
+    }
+    h5 {
+        font-weight: normal;
+        font-size: 16px;
+        padding: 15px 0 0;
+        text-transform: capitalize;
+    }
+    .item-cell-price { // use this class if adding price to template
+        font-size: 16px;
+        padding-top: $sc-padding-lv4;
+        padding-bottom: $sc-padding-lv2;
+        color: $sc-color-copy;
+    }
+    .btn {
+        @extend .button-secondary;
+        @extend .button-small;
+    }
+}
+
+/* Global Views */
+/* Modal */
+.global-views-modal-content {
+    border-radius: 0;
+}
+
+/* My Account */
+.overview-profile-email {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+.info-card{
+    padding: $sc-padding-lv3;
+    border: 1px solid $sc-color-theme;
+}
+.list-header-view-accordion-body-button-sort{
+  height: $sc-target-size;
+  width: $sc-target-size;
+}
+
+/* Checkout */
+/* Also see CustomStyles > _qs-custom-order-wizard-cartitems-module.scss */
+.wizard-step-navigation-divider {
+    color: $sc-color-theme-border;
+}
+.order-wizard-shipmethod-module-option {
+    background-color: $sc-neutral-shade-0;
+}
+.order-wizard-address-module-form-placeholder .address-edit {
+    border: none;
+}
+.order-wizard-paymentmethod-selector-module-header {
+    color: $sc-color-theme-dark;
+}
+.order-wizard-paymentmethod-creditcard-module-learn-more {
+    color: $sc-color-theme-dark;
+}
+.order-wizard-cart-summary-container {
+    margin-bottom: 0;
+}
+.order-wizard-promocodeform-expander-head-toggle {
+    border: none;
+}
+.order-wizard-promocodeform {
+    @extend .summary-container;
+    border-top: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+.order-wizard-cartitems-module-ship-accordion-head {
+    background-color: transparent;
+}
+.item-views-cell-navigable-item-image {
+    padding-left: 0;
+}
+.order-wizard-paymentmethod-creditcard-module .creditcard-edit {
+    border: 0;
+}
+.order-wizard-address-module-address-container {
+    background: transparent;
+}
+.global-views-modal-content {
+    .address-edit {
+        border: 0;
+    }
+}
+
+/* Shopcart Quick Order */
+.quick-order {
+    padding: 15px 0;
+}
+.quick-order-expander-head-toggle {
+    border: 1px solid $sc-color-theme-border;
+}
+.quick-add-box {
+    border-top: 0;
+}
+.quick-order-expander-body {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sticky-button-container-clone.sticked {
+    @media (max-width: $screen-sm) and (orientation: portrait) {
+        padding-right: 35px;
+    }
+}
+
+/* Buttons Border Fix back to Default Tertiary */
+.product-detail-to-quote-loading,
+.product-list-control-single-button-wishlist {
+    border: 2px solid $sc-color-link;
+}
+
+/* PDP */
+/* Add to Quote Button */
+.product-detail-to-quote-add-to-quote {
+    // @extend .col-sm-6;
+    // padding-left: $sc-padding-lv2;
+    // padding-right: $sc-padding-lv2;
+    @media (min-width: $screen-sm-min) and (max-width: $screen-lg-min) {
+        float: left;
+        width: 100%;
+    }
+    position: static;
+}
+
+/* Product Reviews on PDP */
+.product-reviews-center-more-info-content-container{
+    background: $sc-color-theme-background-light;
+
+    @media (min-width: $screen-sm-min) {
+        background: transparent;
+    }
+}
+
+.product-reviews-center {
+    margin: 0;
+}
+
+.product-reviews-center-container,
+.product-reviews-center-container-header {
+    padding: 0;
+    border: none;
+}
+
+.product-reviews-review-comment-footer-button:hover, .product-reviews-review-comment-footer-button:focus:hover {
+    color: $sc-neutral-shade-0 !important;
+    background: $sc-color-link !important;
+    text-decoration: none;
+}
+
+.product-reviews-review-voted,
+.product-reviews-review-voted:focus,
+.product-reviews-review-voted:hover,
+.product-reviews-review-voted:focus:hover {
+    border-color: $sc-color-secondary;
+    background: $sc-color-secondary !important;
+}
+
+.product-details-options-selector {
+    @media (min-width: $screen-md-min) {
+        padding-top: 20px;
+    }
+}
+
+h3.product-reviews-center-container-header-title { // targetting a specific element
+    @extend h2;
+}
+
+.product-reviews-center-container{
+    background: none;
+}
+
+/* Product Reviews - Write a Review */
+.product-reviews-form-content {
+    background-color: $sc-color-theme-background-light;
+}
+
+.product-reviews-form-actions-button-back {
+    @extend .button-medium;
+    @extend .button-tertiary;
+}
+
+/* STORE LOCATOR */
+.store-locator-list-all-main,
+.store-locator-main,
+.store-locator-details-main,
+.store-locator-upgrade-container {
+    @extend .row;
+}
+
+.storelocator-accesspoints-headerlink-link {
+    color: $sc-header-link-text-color;
+}
+
+/* My Account Misc. */
+.recordviews-row:hover,
+.recordviews-actionable:hover,
+.product-list-list-details-wrapper:hover{
+	background-color: $sc-color-theme-background-light;
+}
+
+/* Balance */
+.balance-indicator-bar,
+.balance-indicator-summary,
+.balance-indicator-details-available-credit-reference {
+    background-color: $sc-color-theme-background-light;
+}
+
+/* Date Picker */
+.datepicker {
+    .day:hover, .month:hover, .year:hover {
+		background-color: $sc-color-theme-background-light;
+	}
+}

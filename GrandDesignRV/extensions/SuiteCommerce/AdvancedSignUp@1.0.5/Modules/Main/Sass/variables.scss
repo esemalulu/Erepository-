@@ -1,0 +1,43 @@
+/*
+group({
+ "id": "sc-advanced-sign-up-form",
+ "label": "Registration Form",
+ "description": "",
+ "children": [
+  "$sc-advanced-sign-up-header-font-family",
+  "$sc-advanced-sign-up-header-font-size",
+  "$sc-advanced-sign-up-header-font-color",
+  "$sc-advanced-sign-up-title-font-family",
+  "$sc-advanced-sign-up-title-font-size",
+  "$sc-advanced-sign-up-title-font-color",
+  "$sc-advanced-sign-up-subtitle-font-family",
+  "$sc-advanced-sign-up-subtitle-font-size",
+  "$sc-advanced-sign-up-subtitle-font-color",
+  "$sc-advanced-sign-up-background-color"
+ ]
+})
+*/
+$sc-advanced-sign-up-header-font-family: $sc-h1-font-family; // editable({"type": "string", "label": "Header font family"})
+$sc-advanced-sign-up-header-font-size: $sc-h1-desktop-font-size; // editable({"type": "string", "label": "Header font size"})
+$sc-advanced-sign-up-header-font-color: $sc-color-h1; // editable({"type": "color", "label": "Header font color"})
+
+$sc-advanced-sign-up-title-font-family: $sc-h2-font-family; // editable({"type": "string", "label": "Title font family"})
+$sc-advanced-sign-up-title-font-size: $sc-h2-desktop-font-size; // editable({"type": "string", "label": "Title font size"})
+$sc-advanced-sign-up-title-font-color: $sc-color-h2; // editable({"type": "color", "label": "Title font color"})
+
+$sc-advanced-sign-up-subtitle-font-family: $sc-body-font-family; // editable({"type": "string", "label": "Subtitle font family"})
+$sc-advanced-sign-up-subtitle-font-size: $sc-body-font-size; // editable({"type": "string", "label": "Subtitle font size"})
+$sc-advanced-sign-up-subtitle-font-color: $sc-color-paragraph; // editable({"type": "color", "label": "Subtitle font color"})
+
+$sc-advanced-sign-up-background-color: $sc-color-theme-background; // editable({"type": "color", "label": "Background"})
+
+/*
+group({
+ "id": "sc-advanced-sign-up",
+ "label": "Advanced Sign Up",
+ "description": "",
+ "children": [
+  "sc-advanced-sign-up-form"
+ ]
+})
+*/

@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "subtab": {
+    "id": "customFieldsProductDetailPage",
+    "group": "extensions",
+    "title": "Custom Fields",
+    "docRef": "section_1531905521"
+  },
+  "properties": {
+    "customFields.pdp.fields": {
+      "group": "extensions",
+      "subtab": "customFieldsCheckout",
+      "type": "array",
+      "title": "Product Detail Page Fields",
+      "description": "Custom Fields to display in the Checkout flow",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fieldid": {
+            "title": "Label and Field ID",
+            "mandatory": true,
+            "type": "string",
+            "default": ""
+          },
+          "show": {
+            "title": "Show",
+            "type": "boolean",
+            "default": false
+          },
+          "hideFromQuickView": {
+            "title": "Hide from Quick View",
+            "type": "boolean",
+            "default": false
+          },
+          "schema": {
+            "title": "Schema.org Property",
+            "type": "string",
+            "default": ""
+          }
+        }
+      },
+      "default": [
+        {
+          "fieldid": "UPC CODE: [[upccode]]",
+          "show": false,
+          "schema": ""
+        },
+        {
+          "fieldid": "MANUFACTURER: [[manufacturer]]",
+          "show": false,
+          "schema": "manufacturer"
+        },
+        {
+          "fieldid": "MPN: [[mpn]]",
+          "show": false,
+          "schema": "mpn"
+        },
+        {
+          "fieldid": "MANUFACTURER COUNTRY: [[countryofmanufacture]]",
+          "show": false,
+          "schema": ""
+        },
+        {
+          "fieldid": "ITEM WEIGHT: [[weight]] [[weightunit]]",
+          "show": false,
+          "schema": "weight"
+        }
+      ]
+    }
+  }
+}

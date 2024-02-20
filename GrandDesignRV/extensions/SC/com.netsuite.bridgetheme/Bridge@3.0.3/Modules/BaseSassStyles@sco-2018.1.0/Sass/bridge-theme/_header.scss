@@ -1,0 +1,53 @@
+// Header variables
+$sc-color-theme-top-header-background-color: #2274a5; /* editable({"type": "color", "label": "Background color"}) */
+
+// Header Logo variables
+$sc-mobile-header-logo-width: 95px; /* editable({"type": "string", "label": "Logo width - mobile"}) */
+$sc-desktop-header-logo-width: 180px; /* editable({"type": "string", "label": "Logo width - desktop"}) */
+
+// Header links variables
+$sc-header-link-text-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Link color"}) */
+$sc-header-link-hover-text-color: $sc-color-copy; /* editable({"type": "color", "label": "Link hover color"}) */
+$sc-header-link-active-text-color: $sc-color-copy-dark; /* editable({"type": "color", "label": "Link active color"}) */
+$sc-header-link-text-transform: uppercase; /* editable({
+	"type": "string",
+	"label": "Link text transform",
+	"options": [
+		{"value": "none", "text": "none"},
+		{"value": "uppercase", "text": "uppercase"},
+		{"value": "lowercase", "text": "lowercase"},
+		{"value": "capitalize", "text": "capitalize"}
+	]
+}) */
+
+// Header cart link variables
+$sc-header-cart-link-text-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Cart link color"}) */
+$sc-header-cart-link-text-color-hover: $sc-color-copy; /* editable({"type": "color", "label": "Cart link hover color"}) */
+$sc-header-cart-link-text-color-active: $sc-color-copy; /* editable({"type": "color", "label": "Cart link active color"}) */
+$sc-header-cart-link-background-color: transparent; /* editable({"type": "color", "label": "Cart link background color"}) */
+$sc-header-cart-link-background-color-hover: $sc-color-copy; /* editable({"type": "color", "label": "Cart link background hover color"}) */
+
+// Mini Cart
+$sc-header-mini-cart-item-cell-title-text-color: $sc-color-link;
+$sc-header-mini-cart-item-cell-title-text-color-hover: $sc-color-link-hover;
+
+// Mobile header icons
+$sc-mobile-header-icon-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Icon color - mobile"}) */
+$sc-mobile-header-icon-active-color: $sc-color-secondary; /* editable({"type": "color", "label": "Icon active color - mobile"}) */
+$sc-mobile-header-cart-icon-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Cart icon color - mobile"}) */
+$sc-mobile-header-cart-icon-active-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Cart icon active color - mobile"}) */
+
+$sc-mobile-header-border-color: transparent;
+$sc-mobile-header-border-width: 0;
+
+// LEGACY VARIABLES - used for the Bridge Theme
+$sc-theme-header-height: 147px;
+$sc-theme-header-simplified-height: 72px;
+
+// NAVIGATION
+// Navigation Tools (Icons)
+$sc-theme-icon-size: 20px;
+$sc-theme-icon-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Icon color"}) */
+$sc-theme-icon-bgr-color: $sc-color-theme-top-header-background-color; /* editable({"type": "color", "label": "Icon background color"}) */
+$sc-theme-icon-bgr-hover-color: $sc-color-link; /* editable({"type": "color", "label": "Icon background hover color"}) */
+$sc-theme-cart-icon-color: $sc-neutral-shade-0; /* editable({"type": "color", "label": "Cart link color"}) */ /* editable({"type": "color", "label": "Cart icon color"}) */

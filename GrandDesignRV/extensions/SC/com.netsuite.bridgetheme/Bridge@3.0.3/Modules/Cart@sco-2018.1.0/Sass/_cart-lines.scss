@@ -1,0 +1,134 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+// Edited for Bridge Theme
+
+.cart-lines-name{
+	margin-bottom:$sc-margin-lv2;
+}
+
+.cart-lines-name-link{
+	@extend .large-title-navigable;
+    font-size: 16px;
+    font-weight: $sc-font-weight-light;
+}
+
+.cart-lines-name-viewonly{
+	@extend .medium-title-viewonly;
+}
+
+.cart-lines-thumbnail{
+	img{
+        width:$img-large;
+    }
+}
+
+.cart-lines-price{
+	margin-bottom:$sc-margin-lv4;
+}
+
+.cart-lines-price .transaction-line-views-price-lead{
+	@extend .middle-price;
+    font-size: 16px;
+    font-weight: $sc-font-weight-light;
+}
+
+.cart-lines-options{
+	.cart-option{
+		font-size:$sc-font-size-base;
+	}
+}
+
+.cart-lines-row {
+	@media (max-width: $screen-md-max) {
+		display: table-cell;
+		width: 100%;
+		float: left;
+		clear: both;
+
+		td {
+			display: block;
+			float: left;
+		}
+
+		td.cart-lines-table-first {
+			padding-left: 0;
+			width: 30%;
+			max-width: 150px;
+		}
+
+		td.cart-lines-table-middle {
+			padding-left: 0;
+			padding-right: 0;
+			width: 70%;
+		}
+
+		td.cart-lines-table-summary {
+			padding-left: 0;
+			padding-right: 0;
+			width: 100%;
+		}
+
+		td.cart-lines-table-last {
+			width: 100%;
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}
+
+.cart-lines-table-first {
+	@extend .table-flex-tdfirst;
+	width:25%;
+    @media (min-width: $screen-sm-min){
+        padding-left: 0 !important; // force align left
+    }
+}
+
+.cart-lines-table-middle {
+	@extend .table-flex-middle;
+}
+
+.cart-items-table-summary {
+    @extend .table-flex-middle;
+    @media (min-width: $screen-md-min){
+       width: 110px;
+       padding-right: 0 !important;
+    }
+}
+
+.cart-lines-table-last {
+	@extend .table-flex-tdlast;
+	vertical-align:top;
+    padding-right: 0;
+	@media (min-width: $screen-sm-min){
+       width: 120px; //25%;
+    }
+}
+
+.cart-lines-alert-placeholder {
+	margin:$sc-margin-lv2 0;
+}
+
+.cart-lines-shipping-method {
+	margin-top: $sc-margin-lv3;
+}
+
+.cart-lines-item-actions-desktop {
+	@media (max-width: $screen-md-max) {
+		display: none;
+	}
+}
+
+.cart-lines-item-actions-mobile {
+	@media (min-width: $screen-lg-min) {
+		display: none;
+	}
+}
+
+.cart-lines-stock{}
+.cart-lines-summary{}

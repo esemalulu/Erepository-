@@ -1,0 +1,87 @@
+/*
+    © 2017 NetSuite Inc.
+    User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+    provided, however, if you are an authorized user with a NetSuite account or log-in, you
+    may use this code subject to the terms that govern your access and use.
+*/
+
+/* PRODUCT LIST */
+
+/* Later */
+.product-list-details-later-list-header-title {
+    @extend h1;
+}
+.product-list-details-later {
+    text-align: center;
+    border: none;
+    h3 {
+        width: 100%;
+    }
+    @media (min-width: $screen-sm-min){
+        text-align: left;
+    }
+}
+.products-detail-later-cell{
+    float: none;
+    margin: auto auto;
+    display: inline-block;
+    @media (min-width: $screen-sm-min){
+        float: left;
+        padding-left: 0;
+        padding-right: 15px;
+    }
+}
+
+/* Later Macro */
+.product-list-details-later-macro-name-link {
+    color: $sc-color-link;
+    text-transform: capitalize;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.product-list-details-later-macro-price {
+    margin-bottom: 10px;
+}
+.product-list-details-later-macro-info {
+    @media (min-width: $screen-md-min){
+        padding-top: 20px;
+    }
+}
+.product-list-details-later-macro-qty {
+    display: inline-block;
+    clear: both;
+    // line-height: 3.5;
+}
+.product-list-details-later-macro-input-qty {
+    display: inline-block;
+}
+.product-list-details-later-macro-button-remove{
+    display: inline-block;
+    width: auto;
+    margin-left: 5px;
+    padding: 11px;
+    outline: none;
+}
+.product-list-details-later-macro-label-qty{
+    display: inline-block;
+    line-height: 3.5;
+}
+.product-list-details-later-macro-qty input[type=number]{
+    width:60px;
+    @media (min-width: $screen-md-min){
+        width:90px;
+    }
+}
+
+.saveforlater-quantity-add, .saveforlater-quantity-minus {
+    line-height: 39px;
+}
+
+.product-list-details-later-macro-thumbnail,
+.product-list-details-later-macro-details {
+    padding-right: 0;
+    @media (min-width: $screen-sm-min){
+        padding-right: 15px;
+    }
+}

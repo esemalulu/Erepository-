@@ -1,0 +1,159 @@
+.advancedsignup {
+	&-registrationform {
+		&-header {
+			margin-top: $sc-margin-lv4;
+			margin-bottom: $sc-margin-lv4;
+
+			color: $sc-advanced-sign-up-header-font-color;
+			font-family: $sc-advanced-sign-up-header-font-family;
+			font-size: $sc-advanced-sign-up-header-font-size;
+		}
+
+		&-title {
+			color: $sc-advanced-sign-up-title-font-color;
+			font-family: $sc-advanced-sign-up-title-font-family;
+			font-size: $sc-advanced-sign-up-title-font-size;
+		}
+
+		&-subtitle {
+			@extend p;
+
+			margin-top: $sc-margin-lv4;
+			margin-bottom: $sc-margin-lv4;
+
+			color: $sc-advanced-sign-up-subtitle-font-color;
+			font-family: $sc-advanced-sign-up-subtitle-font-family;
+			font-size: $sc-advanced-sign-up-subtitle-font-size;
+		}
+
+		&-container {
+			@extend .container;
+		}
+
+		&-body {
+			@extend .box-column;
+
+			padding: 0;
+			background-color: initial;
+		}
+
+		&-wrapper {
+			@media(min-width: $screen-sm-min){
+				width: 50%;
+				float: left;
+				padding: $sc-padding-lv3;
+			}
+
+			position: relative;
+			min-height: 1px;
+		}
+
+		&-form {
+			padding: $sc-padding-lv3;
+			@media(min-width: $screen-sm-min){
+				padding: $sc-padding-lv6;
+			}
+			border-top: 0;
+			margin-left: 0;
+			margin-right: 0;
+
+			background-color: $sc-advanced-sign-up-background-color;
+		}
+
+		&-button {
+			@extend .button-primary;
+			@extend .button-large;
+			margin-top: $sc-margin-lv4;
+			margin-bottom: $sc-margin-lv2;
+		}
+
+		&-field {
+			margin-bottom: $sc-margin-lv2;
+			margin-top: $sc-margin-lv4;
+
+			&-label-required {
+				color: $sc-color-primary;
+			}
+
+			&-input {
+				&-text,
+				&-date,
+				&-country,
+				&-state {
+					width: 100%;
+					@media(min-width: $screen-sm-min){
+						width: auto;
+						min-width: 300px;
+					}
+				}
+
+				&-file {
+					width: 100%;
+					@media(min-width: $screen-sm-min){
+						width: 300px;
+					}
+				}
+			}
+
+			&-file {
+				&-container {
+					position: relative;
+				}
+
+				&-empty {
+					@extend .fa;
+					@extend %fa-times;
+
+					color: $sc-color-secondary;
+					padding: $sc-padding-lv3;
+					width: 40px;
+					text-align: right;
+					top: 0;
+					bottom: 0;
+					position: absolute;
+					line-height: 16px;
+					display: inline-block;
+					left: calc(100% - 40px);
+
+					@media(min-width: $screen-sm-min){
+						left: calc(300px - 40px);
+					}
+				}
+			}
+		}
+
+		&-message {
+			&-success {
+				@extend .message-success;
+			}
+
+			&-error {
+				@extend .message-error;
+			}
+
+			&-text {
+				color: $sc-color-success;
+			}
+		}
+	}
+
+	&-cmsarea {
+		&-wrapper {
+			padding: $sc-padding-lv3;
+			@media(min-width: $screen-sm-min){
+				width: 50%;
+				float: right;
+			}
+		}
+	}
+}
+
+/* This makes the form background to be displayed dinamically behind all the area, we need to do this since the elements are floating */
+.advancedsignup-registrationform-body:before,
+.advancedsignup-registrationform-body:after {
+	content: " ";
+	display: table;
+}
+.advancedsignup-registrationform-body:after {
+	clear: both;
+}

@@ -1,0 +1,69 @@
+/*
+	© 2017 NetSuite Inc.
+	User may not copy, modify, distribute, or re-bundle or otherwise make available this code;
+	provided, however, if you are an authorized user with a NetSuite account or log-in, you
+	may use this code subject to the terms that govern your access and use.
+*/
+
+// Edited for Bridge Theme
+
+.header-site-search {
+    display: none;
+    position: relative;
+    z-index: 5;
+}
+
+.site-search {
+    @extend .nav-search;
+    
+    @media (min-width: $screen-md-min) {
+        border-top: 1px solid $sc-color-theme-border;
+    }
+}
+
+.site-search-content {
+	@extend .nav-search-content;
+}
+
+.site-search-content-form {
+}
+
+.site-search-content-input {
+	@extend .nav-search-content-input;
+	.itemssearcher-input {
+        padding: $sc-padding-lv3;
+        height: 16px;
+        @media (min-width: $screen-md-min) {
+            width: calc(100% - 80px);
+            width: expression(100% - 80px); /* IE-OLD */
+        }
+    }
+	.itemssearcher-input:focus{
+		outline:none;
+		outline-style:none;
+		box-shadow:none;
+	}
+}
+
+.site-search-input-icon {
+	@extend .nav-search-input-icon;
+	font-size: $sc-font-size-xxl;
+}
+
+.site-search-input-reset {
+	@extend .nav-search-input-reset;
+	right: 0;
+}
+
+.site-search-button-submit {
+	@extend .nav-search-button-submit;
+	border-radius: $sc-border-radius;
+}
+
+.site-search-button-close {
+	@extend .nav-search-button-close !optional;
+}
+
+.site-search-input-reset-icon {
+	@extend .nav-search-input-reset-icon;
+}

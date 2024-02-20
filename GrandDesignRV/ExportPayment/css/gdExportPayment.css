@@ -1,0 +1,83 @@
+#custpage_bodyareafield_fs {
+    display: block;
+    position: absolute;
+    top: 95px;
+    left: 0;
+    right: 0;
+    bottom: 50px !important;
+}
+#custpage_bodyareafield_val {
+    display: block;
+    height: 100%;
+}
+.content {
+    min-height: 250px;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.content-wrapper, .right-side {
+    min-height: 100%;
+    /*    background-color: #ecf0f5;
+        z-index: 800;*/
+}
+
+.content-header {
+    position: relative;
+    padding: 15px 15px 0 15px;
+}
+section.content {
+    height: 99%;
+    position: absolute;
+    margin: 0 20px 10px 0;
+    left: 0;
+    right: 0;
+}
+.box {
+    border-top: 0;
+    height: 99%;
+}
+
+.box.box-primary {
+    width: 98%;
+    margin: auto;
+    background: #323c48;
+    border-top: 0;
+    font-size: 13px;
+}
+
+.box.box-primary {
+    background: #323c48;
+}
+.dx-texteditor-input-container input {
+    color: inherit;
+}
+
+#claimsGrid, #dealerRefundsGrid, #historyGrid {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#showPaidButton, #createDealerRefundFileButton, #restoreHistoryButton {
+   /* margin-left: 10px;*/
+}
+#claimsGrid .dx-datagrid-header-panel .dx-toolbar, 
+#dealerRefundsGrid .dx-datagrid-header-panel .dx-toolbar, 
+#historyGrid .dx-datagrid-header-panel .dx-toolbar {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+#claimsGrid .dx-datagrid-header-panel .dx-toolbar-items-container,
+#dealerRefundsGrid .dx-datagrid-header-panel .dx-toolbar-items-container,
+#historyGrid .dx-datagrid-header-panel .dx-toolbar-items-container
+{
+    height: 40px;
+}
+input[type="text"], input[type="password"], select, textarea {
+    border: none !important;
+}
+.master-detail-caption {
+    padding: 0 0 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+}

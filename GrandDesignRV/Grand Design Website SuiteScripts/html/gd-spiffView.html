@@ -1,0 +1,61 @@
+<script src="https://use.fontawesome.com/a1c3e04e1f.js"></script>
+<table class="rvs-table-options">
+    <tr>
+        <!--<td colspan="2">
+            <p style="font-size:1.3em; font-family:'Open Sans', sans-serif; font-weight: 600; padding-left: 10px;">If you have issues or questions regarding a spiff, please <b>email</b> Grand Design.</p>
+        </td>-->
+        <td>
+            <div class="filters" data-bind="foreach: filterOptions">
+                <div class="filterItem"><table><tr><td><input type="checkbox" data-bind="checked:selected, attr: {id: 'checkBox' + id}"></td><td><label data-bind="text: name + ' (' + count + ')', attr:{for: 'checkBox'+id, style: count > 0 ? 'font-weight: 600' : 'font-weight: 500'}"></label></td></tr></table></div>
+            </div>
+        </td>
+        <td class="col-sm">
+            <table>
+                <tr><td><select style="width: 100%;" data-bind="value: searchType, options: searchOptions,
+                        optionsText: 'name',
+                        optionsValue: 'property',
+                        optionsCaption: 'Filter by...'"></select></td></tr>
+                <tr><td><input type="text" data-bind="textInput: searchTerm"></td></tr>
+                <tr><td><div class="rvs-secondary-button exterior-button" id="clearFiltersBtn" data-bind="click: clearFilters" title="Clear Filters">Clear Filters</div></td></tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">
+            <div data-bind="click: $root.hasPrevious() ? previous : '', attr: {class: $root.hasPrevious() ? 'rvs-pagenumber' : 'rvs-pagenumber-disabled'}" ><span class="fa fa-step-backward"></span></div>
+            <div class="rvs-pagecount"><span data-bind="text: $root.currentPage() + 1 + ' of ' + $root.pageCount()"></span></div>
+            <div data-bind="click: $root.hasNext() ? next : '', attr: {class: $root.hasNext() ? 'rvs-pagenumber' : 'rvs-pagenumber-disabled'}" ><span class="fa fa-step-forward"></span></div>
+            <!--<p style="padding-top: 8px; float: right;">
+                This list shows spiffs for <span style="font-weight: 600;" data-bind="text: $root.contact.name"></span>.
+            </p>-->
+            <div style="width: 225px; float: right; padding-top: 5px;"><span style="float: left; font-size: 1.4em;">Total Amount Paid:&nbsp;</span><span style="float: right; font-size: 1.4em; font-weight:600;" data-bind="text: grandTotal"></span></div>
+        </td>
+    </tr>
+</table>
+<table class="rvs-table rvs-table-stripe">
+    <thead class="rvs-table-header rvs-bgcolor1">
+        <tr data-bind="foreach: columns">
+            <th data-bind="css: width" style="white-space: nowrap;"><div class="sortable" data-bind="click: property != 'links' ? $root.sortClick.bind(property) : ''">
+            <span data-bind="html: header"></span><i data-bind="css: state"></i>
+            </div></th>
+        </tr>
+    </thead>
+    <tbody class="rvs-list" data-bind="foreach: {data: filterList()}">
+        <tr class="">
+            <td id="links"><a target="_parent" data-bind="attr: { href: $root.urlString.replace(/amp;/gi,'') + '&id=' + id + '&custparamcn=' + checkNo}">View</a></td>
+            <td id="unit" data-bind="text: unit, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td>
+            <td id="series" data-bind="text: series, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td>
+            <td id="model" data-bind="text: model, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td>
+            <td id="status" data-bind="text: statusText, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td> 
+            <td id="program" data-bind="text: program, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td>
+            <td id="retailSoldDate" data-bind="text: retailSoldDate, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td>
+            <td id="registrationDate" data-bind="text: registrationDate, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td>
+            <td id="amount" data-bind="text: amount, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td>
+            <td id="checkNo" data-bind="text: checkNo, style: {fontWeight: statusText == 'Paid' ? '600' : '500'} "></td>
+        </tr>
+    </tbody>
+</table>
+<table id="rvs-list-noresults" class="rvs-table" data-bind="visible: filterList().length == 0" style="display: none;">
+    <tr><td style="font-size: 1.2em; text-align: center; padding-top: 50px;">No Results found. Try changing your search filters.</td></tr>
+</table>
+<div class="rvs-table-cover"></div>

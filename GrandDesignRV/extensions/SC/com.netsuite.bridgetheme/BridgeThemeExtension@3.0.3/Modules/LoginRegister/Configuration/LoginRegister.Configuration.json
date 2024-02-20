@@ -1,0 +1,24 @@
+{
+    "type": "object",
+    "subtab": {
+        "id": "bridgeloginRegister",
+        "title": "Login",
+        "group": "bridgeConfig"
+    },
+    "properties": {
+        "loginRegister.loginSubtitle": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeloginRegister",
+            "type": "string",
+            "title": "Login Subtitle",
+            "default": "Returning customer"
+        },
+        "loginRegister.loginText": {
+            "group": "bridgeConfig",
+            "subtab": "bridgeloginRegister",
+            "type": "string",
+            "title": "Login Text",
+            "default": "Login below to checkout with an existing account"
+        }
+    }
+}

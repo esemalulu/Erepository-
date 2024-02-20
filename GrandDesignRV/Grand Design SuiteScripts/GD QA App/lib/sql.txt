@@ -1,0 +1,18 @@
+SELECT 
+  Unit.ID, 
+  Unit.name, 
+  Unit.custrecordunit_serialnumber AS serialnumber, 
+  Unit.custrecordunit_model AS model, 
+  Unit.custrecordunit_dealer AS dealer, 
+  Unit.custrecordunit_location AS location, 
+  --BUILTIN_RESULT.TYPE_STRING(BUILTIN.DF(CUSTOMRECORDRVSQATEST.custrecordqatest_testtype)) AS custrecordqatest_testtype, 
+  --BUILTIN_RESULT.TYPE_STRING(BUILTIN.DF(CUSTOMRECORDRVSQATEST.custrecordqatest_status)) AS custrecordqatest_status
+FROM 
+  CUSTOMRECORDRVSUNIT as Unit
+  --CUSTOMRECORDRVSQATEST
+WHERE 
+  --CUSTOMRECORDRVSUNIT.ID = CUSTOMRECORDRVSQATEST.custrecordqatest_unit
+  Unit.custrecordunit_shipdate IS NULL
+  AND NOT Unit.custrecordunit_shippingstatus IN ('3')
+  AND NVL(Unit.isinactive, 'F') = 'F'
+  AND Unit.custrecordunit_onlinedate <= BUILTIN.RELATIVE_RANGES('TODAY', 'END', 'DATETIME_AS_DATE')
