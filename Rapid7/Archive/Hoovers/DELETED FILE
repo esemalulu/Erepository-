@@ -1,0 +1,26 @@
+/**
+ * @author suvarshi
+ */
+function updateData(){
+	
+	var dunsNo = nlapiGetFieldValue('custentityr7dunsnumber');
+	var id = nlapiGetRecordId();
+	var name = nlapiGetFieldValue('companyname');
+	var recordType = nlapiGetRecordType();
+	
+	nlapiSetFieldValue('custentityr7hooversdatelastupdateattempt', '');
+	//nlapiSubmitField(recordType,id,'custentityr7hooversdatelastupdateattempt',nlapiDateToString(new Date()));
+	
+	if(dunsNo!=null && dunsNo.length>=1){	
+		nlapiSetFieldValue('custentityr7hooversupdateflag','T');
+		alert("Upon saving this record, the latest company information will be updated from Hoovers.")
+	}
+	else{
+		nlapiSubmitField(recordType,id,'custentityr7hooversdatelastupdateattempt',nlapiDateToString(new Date()));
+		var url = nlapiResolveURL('SUITELET', 'customscriptr7hooverscompanyresolve','customdeployhooverscompanyresolve', null)
+		 + '&custparaminternalid='+id + '&custparamcustomername=' + name 
+		 + '&custparamresultsperpage=50'+ '&custparamhitoffset=0' 
+		 + '&custparamrecordtype='+recordType;
+		window.open(url,null,"location=0,status=0,titlebar=0,menubar=0,toolbar=0,scrollbars=1,resizable=1");
+	}
+}

@@ -1,0 +1,318 @@
+<style type="text/css"> 
+	
+	#tr_fg_resultsgroup > td:first-child {
+	    padding-left: 0px !important;
+	}
+	table.zc_table.dataTable.fixedHeader-floating{
+		top: 90px !important;
+		color: #333333;
+	    font-size: 11px;
+		font-weight:400;
+	}
+
+	div.zc_table_container {
+		display: none;
+	    margin-top: 10px;
+	    max-hei min-width: 1200px;
+	    width: 97vh;
+	    width: calc(100vw - 50px);
+	    width: -o-calc(100vw - 50px);
+	    width: -webkit-calc(100vw - 50px);
+	    width: -moz-calc(100vw - 50px);
+		color: #333333;
+	    font-size: 11px;
+	}
+	
+	.zc_label {
+	    font-size: 12px;
+	    font-family: Open Sans, Helvetica, sans-serif;
+	    margin: 6px 0 0 0;
+	    display: inline-block;
+	    text-transform: uppercase;
+	}
+	
+	#srp_reporting_table {
+		overflow:auto;
+	    width: 100%;
+	    border: 1px solid #DDDDDD;
+	    color: #333333;
+	    font-size: 11px;
+	    font-family: Open Sans, Helvetica, sans-serif;
+		margin-bottom: 5px;
+	}
+	
+	#srp_reporting_table thead,
+	table.zc_table.dataTable.fixedHeader-floating thead {
+	    background-color: #f2f2f2;
+	}
+	
+	#srp_reporting_table tbody,
+	table.zc_table.dataTable.fixedHeader-floating tbody {
+	    border: 0px;
+	}
+	
+	#srp_reporting_table th,
+	table.zc_table.dataTable.fixedHeader-floating th {
+	    border-left: 0px;
+	    border-bottom: 0px;
+	    padding: 4px 5px;
+	    background: #f2f2f2;
+	}
+	
+	#srp_reporting_table tfoot th {
+	    border-left: 0px;
+	    border-bottom: 0px;
+	    padding: 4px 5px;
+	    background: #f2f2f2;
+	}
+	
+	#srp_reporting_table tfoot th div.currenttotal {
+	    min-height:20px;
+		display:inline-block;
+		clear:both;
+		width: 100%;
+	    float: right;
+	    text-align: right;
+		font-weight:400;
+	}
+	
+	#srp_reporting_table tfoot th div.total {
+	    min-height:20px;
+		display:inline-block;
+		clear:both;
+		width: 100%;
+	    float: right;
+	    text-align: right;
+	}
+	
+	#srp_reporting_table tbody tr:hover {
+	    background: #fbfbfb;
+	}
+	
+	#srp_reporting_table_length {
+	    margin-bottom: 5px;
+	}
+	
+	#srp_reporting_table td {
+	    padding: 4px 5px;
+	    color: #333333;
+	    border-top: 1px #DDDDDD solid;
+	    border-left: 0px;
+	    border-right: 0px;
+	    border-bottom: 0px;
+	}
+
+	#srp_reporting_table .zcurrency, 
+	#srp_reporting_table .znumber {
+	    text-align: right;
+	}
+	
+	.zc_link {
+	    text-decoration: none;
+	}
+	
+	.zc_dtcontainer {
+	    display: block;
+	    padding: 5px 0px;
+	}
+	
+	#srp_reporting_table_filter input {
+	    height: 28px;
+	}
+	
+	#srp_reporting_table_wrapper div.dataTables_paginate a.paginate_button:hover,
+	#srp_reporting_table_wrapper div.dataTables_paginate a.paginate_button:focus,
+	#srp_reporting_table_wrapper div.dataTables_paginate a.paginate_button:active,
+	#srp_reporting_table_wrapper a.dt-button:hover,
+	#srp_reporting_table_wrapper a.dt-button:active,
+	#srp_reporting_table_wrapper a.dt-button:focus {
+	    color: #FFF !important;
+	    background-color: #c5c5c5;
+	    background: #c5c5c5;
+		background-image: none;
+		box-shadow: none;
+	    border: 0px;
+		font-size: 11px;
+		padding: 7px 13px;
+	}
+	#srp_reporting_table_wrapper div.dataTables_paginate a.paginate_button,
+	#srp_reporting_table_wrapper a.dt-button {
+	    color: #333333 !important;
+	    background-color: #f2f2f2;
+	    background: #f2f2f2;
+	    border: 0px;
+	    padding: 7px 13px;
+		font-size: 11px;
+		font-weight: 600;
+	}
+	
+	#srp_reporting_table_wrapper div.dataTables_paginate a.paginate_button.current:hover {
+	    cursor: default;
+	}
+	
+	#srp_reporting_table_wrapper div.dataTables_paginate a.paginate_button.current {
+	    color: #FFF !important;
+	    background-color: #585858;
+	    background: #585858;
+	    border: 0px;
+	}
+	
+	#srp_reporting_table_wrapper .dt-buttons {
+	    margin-left: 10px;
+	}
+	
+	div#srp_reporting_table_filter label,
+	div#srp_reporting_table_length label {
+	    font-size: 13px;
+	}
+	#srp_reporting_table_wrapper div.dataTables_paginate {
+	    display: block;
+	    float: right;
+	    margin-bottom: 5px;
+	    padding: 0px;
+	}
+	div#srp_reporting_table_filter {
+	    display: inline-block;
+	    float: right;
+	    margin-right: 20px;
+	}
+
+</style>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="/c.663271/SRP/datatables.min.css">
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="/c.663271/SRP/datatables.min.js"></script>
+
+<div class="zc_table_container">
+    <table id="srp_reporting_table" class="zc_table">
+        <thead>
+            <tr>
+				{{#each rows.[0]}}
+					<th class="flt {{classList this}}">
+						<div>{{@key}}</div>
+               	 	</th>
+                {{/each}}
+            </tr>
+        </thead>
+		<tfoot>
+			<tr>
+                {{#each rows.[0]}}
+					<th class="flt">
+						<div class="currenttotal"></div>
+						<div class="total"></div>
+               	 	</th>
+                {{/each}}
+            </tr>
+		</tfoot>
+        <tbody>
+            {{#each rows}}
+            <tr>
+                {{#each this}}
+					{{#if this.isCurrency}}
+						<td class="zcurrency">{{{this.value}}}</td>
+					{{else if this.isNumber}}
+						<td class="znumber">{{{this.value}}}</td>
+					{{else}}
+						<td>{{{this.value}}}</td>
+					{{/if}}
+                
+                {{/each}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+        var table = $('#srp_reporting_table').DataTable({
+			dom: 'lBpfrtip',
+			fixedHeader: true,
+			buttons: ['csv', 'excel'],
+			lengthMenu: [[10, 25, 50, 100, 500, -1], [10, 25, 50, 100, 500, 'All']],
+			pageLength: 25,
+			language: {
+				searchPlaceholder: ''
+			},
+			drawCallback: function () {
+				var api = this.api();
+		    	api.columns('.zcurrency', {page:'current'}).every(function (){
+					var data = this.data();
+					var sum = '';
+					if (data && data.length > 0){
+					sum = data.reduce( function (a,b) {
+					        a = parseFloat(((a || '') + '').replace(/[^0-9\.]/g,'') || 0);
+							b = parseFloat(((b || '') + '').replace(/[^0-9\.]/g,'') || 0);
+					        return Math.round((a + b)*100)/100;
+					    });
+					}
+					$(this.footer()).find('div.currenttotal').html(zc_addCommas(sum, true));
+				});
+				api.columns('.znumber', {page:'current'}).every(function (){
+					var data = this.data();
+					var sum = '';
+					if (data && data.length > 0){
+					sum = data.reduce( function (a,b) {
+							a = parseFloat(((a || '') + '').replace(/[^0-9\.]/g,'') || 0);
+							b = parseFloat(((b || '') + '').replace(/[^0-9\.]/g,'') || 0);
+					        return Math.round((a + b)*100)/100;
+					    });
+					}
+					$(this.footer()).find('div.currenttotal').html(zc_addCommas(sum, false));
+				});
+			}
+        });
+		
+		table.columns('.zcurrency').every(function (){
+			var data = this.data();
+			var sum = '';
+			if (data && data.length > 0){
+			sum = data.reduce( function (a,b) {
+			        a = parseFloat(((a || '') + '').replace(/[^0-9\.]/g,'') || 0);
+					b = parseFloat(((b || '') + '').replace(/[^0-9\.]/g,'') || 0);
+					return Math.round((a + b)*100)/100;
+			    });
+			}
+			$(this.footer()).find('div.total').html(zc_addCommas(sum, true));
+		});
+		table.columns('.znumber').every(function (){
+			var data = this.data();
+			var sum = '';
+			if (data && data.length > 0){
+			sum = data.reduce( function (a,b) {
+			       	a = parseFloat(((a || '') + '').replace(/[^0-9\.]/g,'') || 0);
+					b = parseFloat(((b || '') + '').replace(/[^0-9\.]/g,'') || 0);
+					return Math.round((a + b)*100)/100;
+			    });
+			}
+			$(this.footer()).find('div.total').html(zc_addCommas(sum, false));
+		});
+		
+		table.columns('.zhidden').every(function (){
+			this.visible(false);
+		});
+				
+		table.fixedHeader.headerOffset(90);
+        
+    });
+	
+	function zc_addCommas(nStr, isCurrency){
+		if (!nStr){
+			return nStr;
+		}
+		if (isCurrency && !isNaN(parseFloat(nStr))) {
+			nStr = parseFloat((nStr + '').replace(/[^0-9\.]/g,'')).toFixed(2);
+		}
+		nStr += '';
+		x = nStr.split('.');
+		x1 = x[0];
+		x2 = x.length > 1 ? '.' + x[1] : '';
+		var rgx = /(\d+)(\d{3})/;
+		while (rgx.test(x1)) {
+			x1 = x1.replace(rgx, '$1' + ',' + '$2');
+		}
+		return x1 + x2;
+	}
+</script>

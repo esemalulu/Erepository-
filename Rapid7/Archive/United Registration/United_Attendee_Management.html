@@ -1,0 +1,410 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css" media="screen">
+		a:link { color:#0197b8; text-decoration: underline; }
+		a:visited {color:#0197b8; text-decoration: underline;}
+		a:hover { color:#90d552; text-decoration: none; }
+		a:active { color:#ea5709; text-decoration: none; }
+	</style>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" type="text/css" href="/c.663271/DataTables-1.10.2/media/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="/c.663271/DataTables-1.10.2/extensions/Editor-1.3.2/css/dataTables.editor.min.css">
+<link rel="stylesheet" type="text/css" href="/c.663271/DataTables-1.10.2/extensions/TableTools/css/dataTables.tableTools.css">
+	
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8" src="/c.663271/DataTables-1.10.2/external/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="/c.663271/DataTables-1.10.2/media/js/jquery.dataTables.min.js "></script>
+<script type="text/javascript" charset="utf8" src="/c.663271/DataTables-1.10.2/extensions/TableTools/js/dataTables.tableTools.js"></script>
+<script type="text/javascript" charset="utf8" src="/c.663271/DataTables-1.10.2/extensions/Editor-1.3.2/js/dataTables.editor.js"></script>
+
+<style type="text/css">
+
+a:link { color:#0197b8; text-decoration: underline; }
+		a:visited {color:#0197b8; text-decoration: underline;}
+		a:hover { color:#90d552; text-decoration: none; }
+		a:active { color:#ea5709; text-decoration: none; }
+
+
+#zc_table a:link {
+	color: #666;
+	font-weight: bold;
+	text-decoration:none;
+}
+#zc_table a:visited {
+	color: #999999;
+	font-weight:bold;
+	text-decoration:none;
+}
+#zc_table a:active,
+#zc_table a:hover {
+	color: #bd5a35;
+	text-decoration:underline;
+}
+.DTED_Lightbox_Content {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-size:12px;
+}
+
+.DTE_Header_Content {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-size:16px;
+}
+
+#zc_table {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#666;
+	font-size:12px;
+	background:#eaebec;
+	margin:20px;
+	border:#ccc 1px solid;
+
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+
+	-moz-box-shadow: 0 1px 2px #d1d1d1;
+	-webkit-box-shadow: 0 1px 2px #d1d1d1;
+	box-shadow: 0 1px 2px #d1d1d1;
+}
+#zc_table th {
+	padding:21px 25px 22px 25px;
+	border-top:1px solid #fafafa;
+	border-bottom:1px solid #e0e0e0;
+
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#ebebeb));
+	background: -moz-linear-gradient(top,  #ededed,  #ebebeb);
+}
+#zc_table th:first-child{
+	text-align: left;
+	padding-left:20px;
+}
+#zc_table tr:first-child th:first-child{
+	-moz-border-radius-topleft:3px;
+	-webkit-border-top-left-radius:3px;
+	border-top-left-radius:3px;
+}
+#zc_table tr:first-child th:last-child{
+	-moz-border-radius-topright:3px;
+	-webkit-border-top-right-radius:3px;
+	border-top-right-radius:3px;
+}
+#zc_table tr{
+	text-align: center;
+	padding-left:20px;
+}
+#zc_table tr td:first-child{
+	text-align: left;
+	padding-left:20px;
+	border-left: 0;
+}
+#zc_table tr td {
+	padding:18px;
+	border-top: 1px solid #ffffff;
+	border-bottom:1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	text-align:left;
+	
+	background: #fafafa;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
+}
+#zc_table tr.even td{
+	background: #f6f6f6;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+	background: -moz-linear-gradient(top,  #f8f8f8,  #f6f6f6);
+}
+#zc_table tr:last-child td{
+	border-bottom:0;
+}
+#zc_table tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	border-bottom-left-radius:3px;
+}
+#zc_table tr:last-child td:last-child{
+	-moz-border-radius-bottomright:3px;
+	-webkit-border-bottom-right-radius:3px;
+	border-bottom-right-radius:3px;
+}
+#zc_table tr:hover td{
+	background: #f2f2f2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+	background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);	
+}
+
+</style>
+
+</head>
+
+
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+	<center>
+		<table border="0" cellpadding="0" cellspacing="0" width="65%" id="templateContainer" >
+			<tr>
+				<td align="center" valign="top">
+					<!-- Begin Template Header -->
+					<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader">
+						 <tr>
+							<td style="padding-left:20px;" class="headerContent">
+								<!-- Rapid7 Header Logo -->
+								<hr width="100%" size="7" color="#ea5709" />
+								<!-- End Rapid7 Header Logo -->
+							</td>
+						</tr>
+						<tr>
+							<td style="padding-left:20px;" class="headerContent" height="60">
+								<!-- Rapid7 Header Logo -->
+								<img src="https://system.netsuite.com/core/media/media.nl?id=18768&c=663271&h=a1757359c8db48e09ad2" width="160px" id="r7logoimg" />
+								<!-- End Rapid7 Header Logo -->
+							</td>
+						</tr>
+					</table>
+					<!-- End Template Header -->
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top">
+					<!-- Begin Template Body -->
+					<table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody">
+						<tr>
+							<td valign="top">
+								<table border="0" cellpadding="0" cellspacing="0">
+									<tr>
+										<td valign="top" class="bodyContent">
+											<!-- Begin Content -->
+											<table border="0" cellpadding="20" cellspacing="0" width="100%">
+												<tr>
+													<td valign="top">
+														<div class="mainContent" style="font-family:arial; font-size:14px;">Below are your current registrations for <span id="r7_event_title"></span>. You may update your registration information or transfer your registration to another contact within your organization. Once a registration has been transferred you will no longer have access to it and it will be sent to the new contact.</div>
+													</td>
+												</tr>
+											</table>
+											<!-- End Content -->
+											
+										</td>
+									</tr>
+								</table>
+							</td>	
+						</tr>
+					</table>
+					
+					<table id="zc_table" class="display" cellspacing="0" width="100%">
+					    <thead>
+					        <tr>
+					        	<th height="100%" style="width=10px;"></th>
+								<th height="100%">Registration ID</th>
+					        	<th height="100%">Name</th>
+								<th height="100%">Job Title</th>
+								<th height="100%">Email</th>
+					            <th height="100%">Phone</th>
+								<th height="100%">Mobile Phone</th>
+					        </tr>
+					    </thead>
+					</table>
+					<!-- End Template Body -->
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="top">
+
+				</td>
+			</tr>
+		</table>
+    </center>
+		
+<script>
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var editor; // use a global for the submit and return data rendering in the examples
+
+//$.noConflict();
+jQuery(document).ready(function($){
+	
+	$.fn.dataTable.Editor.display.lightbox.conf.windowPadding = 90;
+	
+	editor = new $.fn.dataTable.Editor({
+		ajax: {
+			url: "/app/site/hosting/scriptlet.nl?script=1019&deploy=1&compid=663271&h=b76023367dafcdb7c40b&cmd=transfer",
+			jsonp: "callback",
+			dataType: "json",
+			data: function(d){
+				return JSON.stringify(d);
+			},
+			contentType: 'application/json'
+		},
+		table: "#zc_table",
+		idSrc: "nsid",
+		fields: [{
+			name: "nsid",
+			type: "hidden"
+		}, {
+			name: "contact_id",
+			type: "hidden"
+		}, {
+			name: "customer_id",
+			type: "hidden"
+		}, {
+			label: "Registration ID",
+			id: "registration_id",
+			name: "registration_id",
+			type: "text"
+		}, {
+			name: "event_sid",
+			type: "hidden"
+		}, {
+			name: "attendee_sid",
+			type: "hidden"
+		}, {
+			label: "First Name",
+			name: "firstname",
+			type: "text"
+		}, {
+			label: "Last Name",
+			name: "lastname",
+			type: "text"
+		}, {
+			label: "Job Title",
+			type: "text",
+			name: "title"
+		}, {
+			label: "Email",
+			type: "text",
+			name: "email"
+		}, {
+			label: "Phone",
+			type: "text",
+			name: "phone"
+		}, {
+			label: "Mobile",
+			type: "text",
+			name: "mobile"
+		}, {
+			label: "Comments",
+			name: "comments",
+			type: "textarea"
+		}]
+	
+	});
+	
+	editor.on('onOpen', function(e){
+		
+		editor.disable('registration_id');		
+		editor.field('firstname').val('');	
+		editor.field('lastname').val('');	
+		editor.field('title').val('');	
+		editor.field('email').val('');	
+		editor.field('phone').val('');	
+		editor.field('mobile').val('');	
+		
+	});
+
+	editor.on('preSubmit', function(e, o){
+		if (o.action == 'edit' || o.action == 'create') {
+			if (o.data.firstname === '') {
+				this.error('firstname', 'Please specify a first name.');
+				return false;
+			}
+			if (o.data.lastname === '') {
+				this.error('lastname', 'Please specify a last name.');
+				return false;
+			}
+			if (o.data.email === '') {
+				this.error('email', 'Please specify an email address.');
+				return false;
+			}
+			if (o.data.title === '') {
+				this.error('title', 'Please specify a job title.');
+				return false;
+			}
+			if (o.data.phone === '' && o.data.mobile === '') {
+				this.error('phone', 'Please specify a phone number.');
+				return false;
+			}
+		}
+	});
+	 
+	var table = $('#zc_table').DataTable({
+		order: [[1, "asc"]],
+		ordering: false,
+		dom: 'rt',
+		oLanguage: {
+			sEmptyTable: "No registrations found."
+		},
+		ajax: {
+			url: "/app/site/hosting/scriptlet.nl?script=1019&deploy=1&compid=663271&h=b76023367dafcdb7c40b&cmd=getAttendees&co_id=" + getParameterByName('co_id') + "&attendee_sid=" + getParameterByName('attendee_sid') + "&event_sid=" + getParameterByName('event_sid'),
+			type: 'GET',
+			dataType: 'json'
+		},
+		columns: [{
+			data: null,
+			defaultContent: '<a href="#" class="editor">Update</a>'
+		}, {
+			data: "registration_id"
+		}, {
+			data: null,
+			render: function(data, type, row){
+				return data.firstname + ' ' + data.lastname;
+			}
+		}, {
+			data: "title"
+		}, {
+			data: "email"
+		}, {
+			data: "phone"
+		}, {
+			data: "mobile"
+		}],
+		tableTools: {
+			sRowSelect: "os",
+			sRowSelector: 'td',
+			aButtons: [{
+				sExtends: "editor_edit",
+				editor: editor
+			}]
+		},
+		initComplete: function(settings, json){
+			$("#r7_event_title").html(json.event.name);
+		}
+	});
+	
+	// Update record
+	$('#zc_table').on('click', 'a.editor', function(e){
+		e.preventDefault();
+		editor.title('Update Registration').buttons({
+			"label": "Update",
+			"fn": function(){
+				if (confirm('Are you sure you would like to update this registration to the specified contact information?')) {
+					editor.submit();
+				}
+				else {
+					return false;
+				}
+			}
+		}).edit($(this).closest('tr'));
+	});
+	
+	editor.on('submitSuccess', function (e, json, data){
+		if (json.removeRow) {
+			table.row('#row_' + data.nsid).remove().draw(false);
+		}
+	});
+		
+});
+
+
+</script>
+</body>
+</html>

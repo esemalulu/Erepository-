@@ -1,0 +1,20 @@
+
+select o.id,
+o.tranid as OPPTY, 
+BUILTIN.DF(o.entitystatus) as OPP_STAT,
+o.custbodyr7_sf_oppnumber as OSFN, 
+BUILTIN.DF(ol.department) as dept, 
+substr(o.custbody_r7_sf_renewal_url, instr(o.custbody_r7_sf_renewal_url, '/',1,6)+1,18) as O_OP_ID,
+o.custbody_r7_total_arr as Total_ARR,
+o.memo,
+o.createddate
+from 
+transaction o
+inner join transactionline ol on o.id = ol.transaction
+---and createddate >= '1/1/2023'
+and o.custbody_r7_sf_renewal_url is not null
+and( o.custbodyr7_sf_oppnumber is null or (length(o.custbodyr7_sf_oppnumber) <> 9 and  substr(o.custbodyr7_sf_oppnumber,0,2) <> 'OP'))
+and coalesce(upper(o.custbodyr7_sf_oppnumber) ,'Z') not like 'CON%'
+and coalesce(upper(o.custbodyr7_sf_oppnumber) ,'Z') not like 'MSS%'
+where BUILTIN.DF(o.entitystatus) <>'Closed - Transitioned 1P'
+group by  o.id, o.tranid,  BUILTIN.DF(o.entitystatus) , o.custbodyr7_sf_oppnumber,  BUILTIN.DF(ol.department),  substr(o.custbody_r7_sf_renewal_url, instr(o.custbody_r7_sf_renewal_url, '/',1,6)+1,18), o.custbody_r7_total_arr, o.memo, o.createddate

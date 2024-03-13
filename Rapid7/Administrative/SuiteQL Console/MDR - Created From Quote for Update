@@ -1,0 +1,29 @@
+select t.tranid, tl.createdfrom, cf.type
+from transaction t
+inner join transactionline tl on tl.transaction = t.id
+left join transaction cf on tl.createdfrom = cf.id
+where 1 = 1
+and t.tranid in (
+'S-INT24613',
+'S812719',
+'S812630',
+'S812295',
+'S812386',
+'S812211',
+'S-INT24465',
+'S812494',
+'S-INT24769',
+'S812036',
+'S-INT24815',
+'S812393',
+'S812762',
+'S812466',
+'S812518',
+'S812757',
+'S812749',
+'S-INT24786',
+'S-INT24717',
+'S812480',
+'S812378'
+)
+group by t.tranid, tl.createdfrom, cf.type

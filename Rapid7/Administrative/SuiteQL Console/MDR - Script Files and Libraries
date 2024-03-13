@@ -1,0 +1,35 @@
+select 
+	s.id as scriptId, 
+	s.name as scriptName, 
+	f.name as fileName, 
+	lf.name as libraryName
+from script s
+left join file f on s.scriptfile = f.id
+left join (
+    select * from librariesUserEvent
+    union
+    select * from librariesSuitelet
+    union
+    select * from librariesScheduled
+    union
+    select * from librariesRestlet
+    union
+    select * from librariesportlet
+    union
+    select * from librariesplugintypeimpl
+    union
+    select * from librariesplugintype
+    union
+    select * from librariesmassupdate
+    union
+    select * from librariesemailcapture
+    union
+    select * from librariescustomgllines
+    union
+    select * from librariesclient
+    union
+    select * from librariesaction
+) l on s.id = l.owner
+left join file lf on l.scriptfile = lf.id
+--where s.id = 455
+order by s.name, lf.name

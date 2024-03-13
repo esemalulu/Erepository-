@@ -1,0 +1,26 @@
+select so.id,
+ so.trandate, 
+so.tranid as so, 
+so.custbodyr7_sf_oppnumber as SSFN, 
+BUILTIN.DF(sol.department) as dept, 
+q.tranid as quote, 
+q.custbodyr7_sf_oppnumber as QSFN, 
+o.tranid opp,
+o.custbodyr7_sf_oppnumber as OSFN,
+substr(o.custbody_r7_sf_renewal_url, instr(o.custbody_r7_sf_renewal_url, '/',1,6)+1,18) as SF_OP_ID,
+so.custbody_r7_total_arr as Total_ARR,
+so.memo 
+from transaction so
+inner join transactionline sol on so.id = sol.transaction
+	and so.type = 'SalesOrd'
+left join transactionline ql on sol.createdfrom = ql.transaction
+left join transaction q on ql.transaction = q.id
+left join transactionline ol on ql.createdfrom = ol.transaction
+left join transaction o on ol.transaction = o.id
+
+where so.trandate >= '4/26/2023'
+and BUILTIN.DF(so.status) not in ('Sales Order : Closed')
+and ( so.custbodyr7_sf_oppnumber is null or (length(so.custbodyr7_sf_oppnumber) <> 9 and  substr(so.custbodyr7_sf_oppnumber,0,2) <> 'OP'))
+and coalesce(upper(so.custbodyr7_sf_oppnumber) ,'Z') not like 'CON%'
+and coalesce(upper(so.custbodyr7_sf_oppnumber) ,'Z') not like 'MSS%'
+group by so.id, so.trandate, so.tranid,  so.custbodyr7_sf_oppnumber, BUILTIN.DF(sol.department), q.tranid, q.custbodyr7_sf_oppnumber, o.tranid, o.custbodyr7_sf_oppnumber,substr(o.custbody_r7_sf_renewal_url, instr(o.custbody_r7_sf_renewal_url, '/',1,6)+1,18), so.custbody_r7_total_arr, so.memo

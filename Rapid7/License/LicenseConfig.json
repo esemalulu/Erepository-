@@ -1,0 +1,11 @@
+{
+	"paths": {
+		"settings": "SuiteScripts/License/LicenseSettings.js",
+		"LicenseFulfillmentLibrary" : "SuiteScripts/License/License Fulfillment/License Fulfillment Sched.js"
+	},
+	"shim" : {
+		"settings" : {
+			"exports": "licenseFulfillmentSettings"
+		}
+	}
+}

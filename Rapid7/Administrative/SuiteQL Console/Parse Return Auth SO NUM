@@ -1,0 +1,25 @@
+select so.id as appliedToOrder, BUILTIN.DF(so.entity) as soCustomer, a.* from (
+
+select t.id as returnauthid, 
+t.entity as returnauthcustomerid, 
+BUILTIN.DF(t.entity) as returnauthcustomer,
+t.tranid as returnauthnumber, 
+t.memo, 
+-- instr(memo, ' S'),
+-- instr(memo, ' ', instr(memo, ' S') + 1),  
+
+trim(case 
+when instr(memo, ' ', instr(memo, ' S') + 1) = 0 then substr(memo, instr(memo, ' S') + 1)
+when instr(memo, ' ', instr(memo, ' S') + 1) > 0 then substr(memo, instr(memo, ' S') + 1,  instr(memo, ' ', instr(memo, ' S') + 1) - instr(memo, ' S') ) 
+else null
+end) as soNum
+
+from transaction t
+
+where
+	t.type = 'RtnAuth'
+	and t.trandate > '1/1/2023'
+	and t.custbody_ns_acs_return_type = 9
+) a
+
+left join transaction so on trim(a.sonum) = so.tranid

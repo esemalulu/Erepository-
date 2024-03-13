@@ -1,0 +1,18 @@
+SELECT t.tranid                                AS documentNumber,
+                       t.id                                    AS transactionId,
+                       t.foreigntotal                          AS transactionAmount,
+                       ar.custrecordr7approvaldaterequested    AS dateRequested,
+                       c.companyname                           AS companyName,
+                       e.id                                    AS approverId,
+                       e.email                                 AS approverEmail,
+                       BUILTIN.DF(ar.custrecordr7approvalrule) AS approvalRule,
+                       t.custbodyr7sid                         AS SID,
+                       BUILTIN.DF(t.custbodyr7quoteorderapprovalstatus) as quoteStatus,
+                       t.custbodyr7quoteorderapprovalstatus as quoteStatusID
+                FROM customrecordr7approvalrecord ar
+                         INNER JOIN transaction t ON ar.custrecordr7approvalquote = t.id
+                         INNER JOIN customer c ON t.entity = c.id
+                         INNER JOIN employee e ON ar.custrecordr7approvalapprover = e.id
+                WHERE BUILTIN.DF(ar.custrecordr7approvalstatus) = 'Pending Approval'
+                  AND t.type = 'Estimate'
+                  AND ar.custrecordr7approvaldaterequested > '10/01/2022'

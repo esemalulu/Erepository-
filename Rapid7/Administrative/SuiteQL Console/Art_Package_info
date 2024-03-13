@@ -1,0 +1,27 @@
+select 
+	tl.item as itemid,
+	tl.custcol_r7_cash_arr, 
+	tl.custcol_r7_services_cash, 
+	tl.custcolr7_cash_excess_term_line,
+	i.displayname,
+	i.itemtype,
+	t.tranid,
+	t.type,
+	t.createddate,
+	t.opportunity,
+	st.fullName,
+	BUILTIN.DF(tl.custcol_r7_pck_package_level) as PackageLevel,
+	BUILTIN.DF(tl.custcol_r7_pck_package_item) as PackageItem,
+	BUILTIN.DF(tl.custcol_r7_pck_package_license) as PackageLicense
+from transactionline tl
+inner join transaction t on tl.transaction = t.id
+inner join item i on tl.item = i.id
+inner join TransactionStatus st on st.trantype = t.type
+where 1 = 1
+	and rownum < 100
+	and t.type = 'SalesOrd'
+	and i.displayname is not null
+	and i.itemtype = 'Service'
+        and t.opportunity IS NOT null
+	and t.createddate >= '01-01-2023'
+	and tl.custcol_r7_services_cash is not null

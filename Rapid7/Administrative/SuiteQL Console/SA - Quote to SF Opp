@@ -1,0 +1,25 @@
+
+select q.id,
+q.tranid as qote, 
+q.entitystatus,
+q.custbodyr7_sf_oppnumber as QSFN, 
+BUILTIN.DF(ql.department) as dept, 
+o.tranid as opp,
+o.custbodyr7_sf_oppnumber as OSFN,
+substr(o.custbody_r7_sf_renewal_url, instr(o.custbody_r7_sf_renewal_url, '/',1,6)+1,18) as Q_OP_ID,
+q.custbody_r7_total_arr as Total_ARR,
+q.memo,
+q.createddate
+from 
+transaction q 
+inner join transactionline ql on q.id = ql.transaction
+---and q.tranid  = 'Q309980'
+and createddate >= '1/1/2023'
+inner join transactionline ol on ql.createdfrom = ol.transaction
+inner join transaction o on ol.transaction = o.id
+and o.custbody_r7_sf_renewal_url is not null
+and
+( q.custbodyr7_sf_oppnumber is null or (length(q.custbodyr7_sf_oppnumber) <> 9 and  substr(q.custbodyr7_sf_oppnumber,0,2) <> 'OP'))
+and coalesce(upper(q.custbodyr7_sf_oppnumber) ,'Z') not like 'CON%'
+and coalesce(upper(q.custbodyr7_sf_oppnumber) ,'Z') not like 'MSS%'
+group by q.id, q.tranid, q.entitystatus, q.custbodyr7_sf_oppnumber, BUILTIN.DF(ql.department), o.tranid, o.custbodyr7_sf_oppnumber, substr(o.custbody_r7_sf_renewal_url, instr(o.custbody_r7_sf_renewal_url, '/',1,6)+1,18), q.custbody_r7_total_arr, q.memo, q.createddate
