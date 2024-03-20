@@ -1,0 +1,57 @@
+{
+  "LabelDataSearch": [
+    {
+      "SearchRecordType": "customrecord_wmsse_trn_opentask",
+      "SavedSearch": "customsearch_wmsts_rcvlabeldata",
+      "SearchFilters": ""
+    }
+  ],
+  "LabelDataSource": [
+    {
+      "SourceRecordType": "",
+      "SourceFilters": ""
+    }
+  ],
+  "LabelDataTarget": [
+    {
+      "TargetRecordType": "customrecord_wmsse_ext_labelprinting",
+      "TargetPrinterField": "custrecord_wmsse_label_printer_name"
+    }
+  ],
+  "PrinterDetails": [
+    {
+      "PrinterRecordType": "customrecord_wmsts_printerdetails",
+      "PrinterSearch": "",
+      "PrinterField": "custrecord_wmsts_printer_printqueue",
+      "PrinterUserField": "custrecord_wmsts_printer_user",
+      "PrinterFilter": [
+        [
+          "custrecord_wmsts_printer_labeltemplate",
+          "is",
+          "IFD Receiving Pallet Label"
+        ],
+        "AND",
+        [
+          "custrecord_wmsts_printer_tasktype",
+          "is",
+          "2"
+        ]
+      ],
+      "DefaultPrinter": "SKPHOMEPRINT"
+    }
+  ],
+  "LabelFieldMap": [
+    "name=Internal ID",
+    "custrecord_wmsse_ext_template=Label Template",
+    "custrecord_wmsse_label_labeltype=Label Type",
+    "custrecord_wmsse_label_order=Order Number",
+    "custrecord_wmsse_external_item=Item",
+    "custrecord_wmsse_label_lotnumber=Lot Number",
+    "custrecord_wmsse_label_qty=Quantity",
+    "custrecord_wmsse_label_custom1=Stage Bin Location",
+    "custrecord_wmsse_label_custom2=Preferred Bin",
+    "custrecord_wmsse_label_custom3=Expiry Date",
+    "custrecord_wmsse_label_custom4=Location Name",
+    "custrecord_wmsse_label_receivedate=Date Received"
+  ]
+}
