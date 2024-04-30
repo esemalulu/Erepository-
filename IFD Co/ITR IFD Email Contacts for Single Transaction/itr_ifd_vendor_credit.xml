@@ -1,0 +1,339 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd"><pdf><head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+
+
+
+   <macrolist>
+        <macro id="nlheader">
+            <table class="header" style="width:100%; table-layout:fixed;"><tr>
+	<td align="left" style="white-space: nowrap; width: 150px;"><#if companyInformation.logoUrl?length != 0><img src="${companyInformation.logoUrl}" style="float: left; width: 80px; height: 80px" /> </#if> 
+	<!--<td align="left" class="nameandaddress" style="width: 150px; white-space: nowrap; margin-top:10px;">-->
+	<br /><br /><br /><br /><br /><br /><span class="nameandaddress" style="font-size:10pt"><b>${companyInformation.companyName}</b></span>
+	<br /><span class="nameandaddress" style="font-size:10pt"><b>${companyInformation.addressText}</b></span></td>
+	
+	
+				<td align="right" style="width:100px"><span class="title">Bill Credit</span>				
+					<table>
+					
+						<tr>
+							<th  align="center">Account No.</th>
+							<th  align="center">Date</th>
+							<th  align="center">Bill Credit #</th>
+						</tr>
+					
+					<tr>
+						<td  class="toptable" align="center">${record.externalid}</td>
+						<td  class="toptable" align="center">${record.trandate}</td>
+						<td  class="toptable"  align="center">${record.transactionnumber}</td>
+					</tr>
+					
+					</table>
+				</td>
+	</tr>
+	
+	</table>
+        </macro> 
+		<macro id="nlfooter">
+			
+				<table class="footer" style="width: 100%;">
+		<tr>
+		<td align="right" style="width:15%">Page <pagenumber/> of <totalpages/></td></tr>
+		</table>
+			</macro>		
+    </macrolist>
+<style type="text/css">
+            table {
+				font-family: sans-serif;
+				/*For Chinese, Japanese and Korean font, use this line instead:
+				font-family: hygothic, sans-serif;*/
+				font-size: 9pt;
+				margin-top: 10px;
+				table-layout: fixed;
+				width: 100%;
+                border-collapse:collapse;
+			}
+			th {
+				font-weight: bold;
+				font-size: 10pt;
+				vertical-align: middle;
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 3px;
+				padding-top: 3px;
+				background-color: #e3e3e3;
+				color: #333333;
+				
+			}
+			
+			td.billto{
+				font-weight: bold;
+				font-size: 10pt;
+				vertical-align: middle;
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 3px;
+				padding-top: 3px;
+				background-color: #e3e3e3;
+				color: #333333;
+				border:0;
+			}
+            td.header{
+				font-weight: bold;
+				font-size: 10pt;
+				vertical-align: middle;
+                text-align: left;
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 3px;
+				padding-top: 3px;				
+				color: #0c547b;            
+            }
+			td {
+				padding-right: 6px;
+				padding-left: 6px;
+				padding-bottom: 4px;
+				padding-top: 4px;
+			}
+			table.header td {
+				padding: 0px;
+				font-size: 10pt;
+			}
+			table.footer td {
+				padding: 0px;
+				font-size: 8pt;
+			}
+            table.total{
+				
+			}
+			table.itemtable th {
+				padding-bottom: 2px;
+				padding-top: 2px;
+			}
+			table.itemtable td {
+				padding-bottom: 10px;
+				padding-top: 10px;
+			}
+			table.body td {
+				padding-top: 2px;
+                padding-bottom: 2px;
+			}
+			td.toptable{
+				padding-top: 2px;
+                padding-bottom: 2px;
+			}
+			td.totalcell {
+                font-size: 10pt;
+                font-weight: bold;
+                color: #0c547b;
+				background-color: #cfdde7;
+                text-align: right;
+			}
+			td.totalboxtop {
+				font-weight: bold;
+				color: #0c547b;
+				font-size: 12pt;
+				background-color: #cfdde7;
+			}           
+			td.totalboxmid {
+				font-size: 28pt;
+				padding-top: 3px;
+				padding-bottom: 3px;
+				background-color: #cfdde7;
+                text-align: right;
+			}
+			td.totalboxbot {
+				background-color: #cfdde7;
+				font-weight: bold;
+			}
+			span.title {
+				font-size: 28pt;
+			}
+			span.number {
+				font-size: 18pt;
+			}
+			 tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+			span.nameandaddress{
+			font-size: 8pt;
+		}
+			span.itemname {
+				font-weight: bold;				
+			}</style>
+</head><body header="nlheader" header-height="20%" footer="nlfooter" footer-height="10pt">
+<table style = "width:200px">
+
+	<tr>
+		<td class="billto" style="width:200px">Bill To</td>
+		<!--<td class="billto" style="width:200px">Memo</td> -->
+	</tr>
+	<tr>
+	<td style="vertical-align: top;font-size:10pt">${record.billaddress}</td>	
+	<!--<td style="vertical-align: top;font-size:10pt">${record.memo1}</td>	-->
+	</tr>
+
+</table>
+<table class="memo" style="width:200px">
+
+	<tr >
+		<th style="text-align: center; ">Memo</th>
+		
+	</tr>
+	<tr>
+		<td>${record.memo}</td>	
+	</tr>
+</table>
+<!--
+		<table class="itemtable" style="width: 100%; table-layout:relative;">			
+			<thead>
+					<tr>
+						<th align="left">Item</th>
+						<th align="left">Description</th>
+						<th align="right">Quantity</th>
+						<th align="right">Rate</th>
+						<th align="right">Amount</th>
+					</tr>
+					</thead>				
+					<tr>
+						<td align="left">${item.item0}</td>
+						<td align="left">${item.description0}</td>
+						<td align="right">${item.quantity0}</td>
+						<td align="right">${item.rate0}</td>
+						<td align="right">${item.amount0}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item1}</td>
+						<td align="left">${item.description1}</td>
+						<td align="right">${item.quantity1}</td>
+						<td align="right">${item.rate1}</td>
+						<td align="right">${item.amount1}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item2}</td>
+						<td align="left">${item.description2}</td>
+						<td align="right">${item.quantity2}</td>
+						<td align="right">${item.rate2}</td>
+						<td align="right">${item.amount2}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item3}</td>
+						<td align="left">${item.description3}</td>
+						<td align="right">${item.quantity3}</td>
+						<td align="right">${item.rate3}</td>
+						<td align="right">${item.amount3}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item4}</td>
+						<td align="left">${item.description4}</td>
+						<td align="right">${item.quantity4}</td>
+						<td align="right">${item.rate4}</td>
+						<td align="right">${item.amount4}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item5}</td>
+						<td align="left">${item.description5}</td>
+						<td align="right">${item.quantity5}</td>
+						<td align="right">${item.rate5}</td>
+						<td align="right">${item.amount5}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item6}</td>
+						<td align="left">${item.description6}</td>
+						<td align="right">${item.quantity6}</td>
+						<td align="right">${item.rate6}</td>
+						<td align="right">${item.amount6}</td>
+					</tr>					
+					<tr>
+						<td align="left">${item.item7}</td>
+						<td align="left">${item.description7}</td>
+						<td align="right">${item.quantity7}</td>
+						<td align="right">${item.rate7}</td>
+						<td align="right">${item.amount7}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item8}</td>
+						<td align="left">${item.description8}</td>
+						<td align="right">${item.quantity8}</td>
+						<td align="right">${item.rate8}</td>
+						<td align="right">${item.amount8}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item9}</td>
+						<td align="left">${item.description9}</td>
+						<td align="right">${item.quantity9}</td>
+						<td align="right">${item.rate9}</td>
+						<td align="right">${item.amount9}</td>
+					</tr>
+					<tr>
+						<td align="left">${item.item10}</td>
+						<td align="left">${item.description10}</td>
+						<td align="right">${item.quantity10}</td>
+						<td align="right">${item.rate10}</td>
+						<td align="right">${item.amount10}</td>
+					</tr>					
+				
+			</table>
+			<table class="total" style="width: 100%; margin-top:20px; font-size:12pt"><tr>
+				<td colspan="4">&nbsp;</td>
+				<td align="right"><b>Subtotal</b></td>
+				<td align="right">${record.subtotal}</td>
+				</tr>			
+				<tr class="totalrow">
+				<td background-color="#ffffff" colspan="4">&nbsp;</td>
+				<td align="right"><b>Total</b></td>
+				<td align="right">${record.total}</td>
+				</tr>
+			</table>
+	-->
+<#if record.item?has_content>
+<table class="itemtable" style="width: 100%; table-layout:relative;">	<!-- start items --><#list record.item as item><#if item_index==0>
+<thead>
+	<tr>
+	<th align="left">Item</th>
+	<th align="left">Description</th>
+	<th align="right">Quantity</th>
+	<th align="right">Rate</th>
+	<th align="right">Amount</th>
+	</tr>
+</thead>
+</#if>
+ 
+	<tr>
+		<td align="left">${item.item}</td>
+		<td align="left">${item.description}</td>
+		<td align="right">${item.quantity}</td>
+		<td align="right">${item.rate}</td>
+		<td align="right">${item.amount}</td>
+	</tr>
+    
+	</#list>
+
+	
+</table>
+<table class="total" style="width: 100%; margin-top:20px; font-size:12pt"><tr>
+				<td colspan="4">&nbsp;</td>
+				<td align="right"><b>Subtotal</b></td>
+				<td align="right">${record.total}</td>
+				</tr>			
+				<tr class="totalrow">
+				<td background-color="#ffffff" colspan="4">&nbsp;</td>
+				<td align="right"><b>Total</b></td>
+				<td align="right">${record.total}</td>
+				</tr>
+			</table>
+</#if><br />
+<br />
+
+</body></pdf>
