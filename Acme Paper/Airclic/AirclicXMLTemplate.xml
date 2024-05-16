@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addOrderAndCustomerRequest xmlns="http://www.airversent.com/integration" transactionId=${order.internalid} timestamp=${order.timestamp}>
+    <systemName>acmepaper</systemName>
+    <customer mailConfirmationRequired="false">
+        <customerNumber>${order.customerNumber}</customerNumber>
+        <customerName>${order.customerName}</customerName> 
+        <printReceipt>true</printReceipt>
+    </customer>
+    <customerAddress>
+        <addressLine1>${order.addressLine1}</addressLine1>
+        <addressLine2>${order.addressLine2}</addressLine2>
+        <city>${order.city}</city>
+        <state>${order.state}</state>
+        <zipCode>${order.zipCode}</zipCode>
+        <country>${order.country}</country>
+    </customerAddress>
+    <contact>
+        <firstName>Authorized</firstName>
+        <lastName>Signor</lastName>
+        <location>At Customer</location>
+        <active>true</active>
+    </contact>
+    <centerNumber>${order.centerNumber}</centerNumber>
+    <routeNumber>${order.routeNumber}</routeNumber>
+    <tripDate>${order.shipmentDate}</tripDate>
+    <orders>
+        <order typeName="goods" typeDescription="an order that consists of goods" canceled="false">
+            <orderNumber>${order.orderNumber}</orderNumber>
+            <orderDate>${order.orderDate}</orderDate>
+            <poNumber>${order.poNumber}</poNumber>
+            <referenceNumber>${order.invoiceNumber}</referenceNumber>
+            <serviceWindowStart>${order.invoiceDate}</serviceWindowStart>
+            <expectedServiceSequence>${order.stopNumber}</expectedServiceSequence>
+            <expectedPayment>${order.amountDue}</expectedPayment>
+            <expectedPaymentCode>USD</expectedPaymentCode>
+            <signatureRequired>false</signatureRequired>
+            <signatureCapture>optional</signatureCapture>
+            <backOrder>false</backOrder>
+            <acceptAll>false</acceptAll>
+            <sendWireless>false</sendWireless>
+            <scheduledEmpty>false</scheduledEmpty>
+            <expectedItemQuantity>0</expectedItemQuantity>
+            <authorizedSignerRequired>true</authorizedSignerRequired>
+            <totalWeight>${order.totalWeight}</totalWeight>
+            <totalCube>${order.totalCube}</totalCube>
+            <property name="InvoiceNumber" description="description" dataType="string">${order.invoiceNumber}</property>
+            <property name="OperatingUnit" description="OperatingUnit" dataType="string">Acme Paper + Supply Co.</property>
+            <#list order.items as item>
+            <orderItem typeName="item" typeDescription="item" purposeNumber="deliver">
+                <lineNumber>${item.itemId}</lineNumber>
+                <identification>
+                    <identificationNumber typeName="SKU" typeDescription="SKU Description">${item.itemId}</identificationNumber>
+                    <name>${item.displayName}</name>
+                    <description>${item.description}</description>
+                    <unitOfMeasure>
+                        <abbreviation>${item.UOM}</abbreviation>
+                        <description>${item.UOM}</description>
+                    </unitOfMeasure>
+                </identification>
+                <description>${item.description}</description>
+                <orderedQuantity>${item.quantity}</orderedQuantity>
+                <fulfilledQuantity>0</fulfilledQuantity>
+                <serviceQuantity>${item.quantity}</serviceQuantity>
+                <barcode typeName="UPC" typeDescription="Universal Product Code">${item.UPC}</barcode>
+                <property name="Haz" description="Haz" dataType="string">${item.hazardous}</property>
+                <property name="MSDSNumber" description="MSDSNumber" dataType="string">0</property>
+                <expectedPayment>${item.amount}</expectedPayment>
+                <taxRate>${item.taxRate}</taxRate>
+                <manualPromptOnMeasure>false</manualPromptOnMeasure>
+                <measureLabel>Measure</measureLabel>
+            </orderItem>
+            </#list>
+             <paymentAdjustment>
+                <paymentAdjustmentType>charge</paymentAdjustmentType>
+                <description>MiscFees</description>
+                <amount>3.90</amount>
+                <amountCode>USD</amountCode>
+                <method>flat</method>
+            </paymentAdjustment>
+            <paymentProcessingRequired>false</paymentProcessingRequired>
+            <purposeMatchRequired>false</purposeMatchRequired>
+        </order>
+    </orders>
+</addOrderAndCustomerRequest>
