@@ -2,7 +2,7 @@
  *@NApiVersion 2.1
  *@NScriptType WorkflowActionScript
  */
- define(["N/search", "N/log", "N/record", "N/runtime"], function (search, log, record, runtime) {
+define(["N/search", "N/log", "N/record", "N/runtime"], function (search, log, record, runtime) {
     function onAction(context) {
 
         try {
@@ -16,12 +16,12 @@
             log.debug('USER INFO: ', user);
             log.debug('objRecord type : ', objRecord.type);
             var SPS_NETWORK = "84216";
-             //if(user.id != 84418){ //Eduardo Pinero 85394    Fabian 84418
-                var enteredById = objRecord.getValue("custbody_aps_entered_by");
-                if (String(enteredById) == SPS_NETWORK && context.type == 'create') return;
-                if (String(enteredById) != SPS_NETWORK && context.type == 'edit') return;
-           //  }
-             
+            //if(user.id != 84418){ //Eduardo Pinero 85394    Fabian 84418
+            var enteredById = objRecord.getValue("custbody_aps_entered_by");
+            if (String(enteredById) == SPS_NETWORK && context.type == 'create') return;
+            //if (String(enteredById) != SPS_NETWORK && context.type == 'edit') return;
+            //  }
+
             let arrayItems = [];
             var recordType = objRecord.type;
             for (var i = 0; i < countItems; i++) {
@@ -66,12 +66,8 @@
                 var lineNumber = x;
                 var currentObject = objectItems[itemId];
 
-                if (spsPurchasePrice) {
-                    currentObject.price = spsPurchasePrice;
-                }
-
                 if (String(enteredById) == SPS_NETWORK && currentObject.rate && spsPurchasePrice) currentObject.rate = spsPurchasePrice //Add when has spsPurchasePrice 22/4
-                if (String(enteredById) == SPS_NETWORK && currentObject.price && spsPurchasePrice) currentObject.price = spsPurchasePrice //Add when has spsPurchasePrice 22/4
+                if (String(enteredById) == SPS_NETWORK && spsPurchasePrice) currentObject.price = spsPurchasePrice //Add when has spsPurchasePrice 22/4
                 if ((recordType != record.Type.PURCHASE_ORDER) && (currentObject?.rate)) {
                     objRecord.setCurrentSublistValue({
                         sublistId: "item",
@@ -96,6 +92,8 @@
                                 fieldId: "price",
                                 line: x
                             });
+                            log.audit("price level before", pricelevel)
+                            log.audit("context", context.type)
                             if (blockPriceOverride == false || blockPriceOverride == "F") {
                                 if (pricelevel == -1 && context.type == 'create') continue;
                                 var itemLookup = search.lookupFields({
@@ -142,11 +140,19 @@
                             fieldId: "units",
                             value: currentObject.unit
                         });
-                    objRecord.setCurrentSublistValue({
+
+                    var rebateSellPrice = objRecord.getCurrentSublistValue({
                         sublistId: "item",
-                        fieldId: "rate",
-                        value: currentObject.price
+                        fieldId: "custcol_rebate_sale_price"
                     });
+                    log.debug('rebate sale price', rebateSellPrice);
+                    if (!rebateSellPrice) {
+                        objRecord.setCurrentSublistValue({
+                            sublistId: "item",
+                            fieldId: "rate",
+                            value: currentObject.price
+                        });
+                    }
                     objRecord.setCurrentSublistValue({
                         sublistId: "item",
                         fieldId: "custcol_sdb_contract_number",
@@ -315,18 +321,22 @@
                     search.createColumn({ name: "entity", label: "Name" })
                 ]
         });
-        invoiceSearchObj.run().each(function (result) {
-            var index = newItems.indexOf(result.getValue("item"));
-            if (index != -1) {
-                var rate1 = result.getValue({ name: "formulanumeric", label: "Formula (Numeric)" })
-                objectReturn[result.getValue("item")] = { rate: rate1 }
-                newItems.splice(index, 1)
-            }
-
-            if (newItems.length == 0) return false;
-            // rate1 = rate1.toFixed(2).toString();
-            return true;
+        const pagedData = invoiceSearchObj.runPaged({
+            pageSize: 1000
         });
+
+        pagedData.pageRanges.forEach(function (pageRange) {
+            const page = pagedData.fetch({ index: pageRange.index });
+            page.data.forEach(function (result) {
+                var index = newItems.indexOf(result.getValue("item"));
+                if (index != -1) {
+                    var rate1 = result.getValue({ name: "formulanumeric", label: "Formula (Numeric)" })
+                    objectReturn[result.getValue("item")] = { rate: rate1 }
+                    newItems.splice(index, 1)
+                }
+            });
+        });
+
         return objectReturn;
     }
 

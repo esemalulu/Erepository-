@@ -71,7 +71,8 @@ define(['N/runtime', 'N/https', 'N/record', 'N/search' ],
 			log.debug('recordType is '+recordType, 'recId is '+recId);
 			if( scriptType == 'create' || scriptType == 'edit' ){
 				var curCustObj = record.load({type: recordType, id: recId, isDynamic: true});
-				var syncPriceFlag = curCustObj.getValue({fieldId:'custentity_customer_price_updated'});
+				// var syncPriceFlag = curCustObj.getValue({fieldId:'custentity_customer_price_updated'});
+				var syncPriceFlag = curCustObj.getValue({fieldId:'custentity_sdb_item_pricing_updated'});
 				var priceChangedFlag = '', uploadToEvoXChangedFlag = '';
 				if(syncPriceFlag == false){
 					var oldUploadToEvoXFlag = customerOldRecord.getValue({fieldId:'custentity_acc_upld_evox'});
@@ -86,8 +87,8 @@ define(['N/runtime', 'N/https', 'N/record', 'N/search' ],
 						log.debug('priceChangedFlag is ', priceChangedFlag);
 					}
 					if(priceChangedFlag == 'T' || uploadToEvoXChangedFlag == 'T'){
-						curCustObj.setValue({fieldId:'custentity_customer_price_updated', value: true});
-
+						// curCustObj.setValue({fieldId:'custentity_customer_price_updated', value: true});
+                        curCustObj.setValue({fieldId:'custentity_sdb_item_pricing_updated', value: true});
 						var savedCustomerId = curCustObj.save({ enableSourcing: false, ignoreMandatoryFields: true });
 						log.debug('savedCustomerId is ', savedCustomerId);
 					}

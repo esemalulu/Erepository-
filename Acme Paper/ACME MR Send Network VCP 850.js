@@ -899,6 +899,7 @@ define(['N/search', 'N/record', 'N/log' ,'N/runtime', 'N/format', 'N/email', 'N/
 						notesList = notesList.filter( Boolean );
 						var notesListLength = notesList ? notesList.length: -1;
 						for(var i = 0; i < notesListLength; i++){
+							notesList[i] = notesList[i].replace(/[^ -~]/gm, "-"); // Replace non-ASCII characters with dash
 							poString += 'MSG' + curElementDelimeter + notesList[i] + curSegmentDelimeter; // N9 Segment
 						}
 						log.debug("createPOLines() poString after N9 Segment is: ", poString);

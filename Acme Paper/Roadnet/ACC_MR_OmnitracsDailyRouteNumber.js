@@ -20,7 +20,7 @@ define([
         const idFolder = 3393;
         const fileName = "roadnet_orders_received";
         try {
-            createFile(idFolder, fileName, JSON.stringify({ ordersReceived: 0, errorOrders: 0 }));
+            // createFile(idFolder, fileName, JSON.stringify({ ordersReceived: 0, errorOrders: 0 }));
             var loginURL = scriptObj.getParameter({
                 name: "custscript_acc_odri_login_url",
             });
@@ -33,6 +33,10 @@ define([
             var password = scriptObj.getParameter({
                 name: "custscript_acc_odri_password",
             });
+            var receiveStatus = scriptObj.getParameter({
+                name: "custscript_sdb_route_status_to_receive",
+            });
+
             if (
                 isEmpty(loginURL) ||
                 isEmpty(routeURL) ||
@@ -43,7 +47,7 @@ define([
                 return;
             }
             var token = getToken(loginURL, username, password);
-            log.debug('token',token)
+            log.debug('INITIAL INFO: ', { token, receiveStatus })
             var routeInformationArr = [];
             var hasMore = true;
             var pageIndex = 0;
@@ -53,34 +57,36 @@ define([
                     token,
                     routeURL,
                     PAGE_SIZE,
-                    pageIndex
+                    pageIndex,
+                    receiveStatus
                 );
                 if (isEmpty(routeInformation)) {
                     hasMore = false;
                 } else {
                     routeInformationArr = routeInformationArr.concat(routeInformation);
-                    const content = JSON.stringify({ ordersReceived: routeInformationArr?.length || 0, errorOrders: 0 });
-                    var fileId = createFile(idFolder, fileName, content);
+                    // const content = JSON.stringify({ ordersReceived: routeInformationArr?.length || 0, errorOrders: 0 });
+                    // var fileId = createFile(idFolder, fileName, content);
                     pageIndex = pageIndex + 1;
                 }
                 i++;
             }
             // Function increment 1 record
-         //   let numberCase = numerationCasesOrders();
+            //   let numberCase = numerationCasesOrders();
             // optimization, multiple orders and we match orders
+
             if (routeInformationArr.length > 0) {
                 var arrayOrdersId = getOrderIds(routeInformationArr)
                 let orderObj = getNSDocumentId(arrayOrdersId);
                 for (let i = 0; i < routeInformationArr.length; i++) {
                     if (orderObj[routeInformationArr[i].orderId]) {
-                        if(orderObj[routeInformationArr[i].orderId]["stop"] != routeInformationArr[i].stop 
-                           && orderObj[routeInformationArr[i].orderId]["routeNo"] != routeInformationArr[i].routeNo){
-                          routeInformationArr[i].type = orderObj[routeInformationArr[i].orderId].type;
-                          routeInformationArr[i].internalId = orderObj[routeInformationArr[i].orderId].internalId;
-                       //   routeInformationArr[i].case = numberCase;
-                          routeInformationArr[i].dateOfTheRoute = routeInformationArr[i].routeStartTime 
+                        if (orderObj[routeInformationArr[i].orderId]["stop"] != routeInformationArr[i].stop
+                            && orderObj[routeInformationArr[i].orderId]["routeNo"] != routeInformationArr[i].routeNo) {
+                            routeInformationArr[i].type = orderObj[routeInformationArr[i].orderId].type;
+                            routeInformationArr[i].internalId = orderObj[routeInformationArr[i].orderId].internalId;
+                            //   routeInformationArr[i].case = numberCase;
+                            routeInformationArr[i].dateOfTheRoute = routeInformationArr[i].routeStartTime
                         }
-                        
+
                     }
                 }
                 return routeInformationArr;
@@ -107,11 +113,7 @@ define([
             var numCounter = summaryParse.case;
             var dateOfTheRoute = new Date(summaryParse.routeStartTime);
 
-            log.debug('summaryParse', summaryParse)
-          
-            if (!type) {
-                type = orderId.indexOf("SO") < 0 ? 'RtnAuth' : 'SalesOrd';
-            } 
+            if (!type) type = orderId.indexOf("SO") < 0 ? 'RtnAuth' : 'SalesOrd';
 
             if (!isEmpty(summaryParse)) {
                 // record.submitFields.promise({
@@ -120,7 +122,7 @@ define([
                 //     values: Object*,
                 //     options: {
                 //         enablesourcing: boolean,
-                    
+
                 // }).then(function(response){
                 // // DO SOMETHING WITH RESPONSE HERE
                 // }, function(error){
@@ -135,10 +137,10 @@ define([
                         "custbody_sdb_case_number_recib": numCounter,
                         "startdate": dateOfTheRoute
                     },
-                  options: {
-                    ignoreMandatoryFields: true,
-                    enablesourcing: true
-                  }
+                    options: {
+                        ignoreMandatoryFields: true,
+                        enablesourcing: true
+                    }
                 });
                 log.debug("Record updated with ID", internalId);
 
@@ -159,28 +161,27 @@ define([
 
     function summarize(summary) {
         try {
-            const reduceErrors = summary.reduceSummary.errors;
-            log.debug('reduceErrors', reduceErrors)
-    
-            let array = [];
-            const idFolder = 3393;
-            const fileName = "roadnet_orders_received";
-            const fileId = getFileId(idFolder, fileName);
-    
-            reduceErrors.iterator().each(function (key, value) {
-                array.push(value);
-                return true;
-            });
-    
-            addErrorsToFile(fileId, idFolder, fileName, Number(array.length))
-    
-            handleErrorIfAny(summary);
-            createSummaryRecord(summary);
-        }catch(error) {
-            log.debug('error en el summarize',error)
+            // const reduceErrors = summary.reduceSummary.errors;
+
+            // let array = [];
+            // const idFolder = 3393;
+            // const fileName = "roadnet_orders_received";
+            // const fileId = getFileId(idFolder, fileName);
+
+            // reduceErrors.iterator().each(function (key, value) {
+            //     array.push(value);
+            //     return true;
+            // });
+
+            // addErrorsToFile(fileId, idFolder, fileName, Number(array.length))
+
+            // handleErrorIfAny(summary);
+            // createSummaryRecord(summary);
+        } catch (error) {
+            log.error('error en el summarize', error)
         }
 
-        
+
     }
 
     function getNSDocumentId(ordersId) {
@@ -205,7 +206,6 @@ define([
 
             var results = {};
             // aca hay que agregar lo de future date.
-            log.debug('documentSearchResult.run()', documentSearchResult.runPaged().count)
             documentSearchResult.run().each(function (result) {
                 var internalId = result.getValue({ name: "internalid" });
                 var type = result.getValue({ name: "type" });
@@ -222,24 +222,23 @@ define([
                 results[orderId] = result[orderId];
                 return true;
             });
-            log.debug('results', results);
+            log.debug('getNSDocumentId', results);
             return results;
         } catch (error) {
             log.error("Error in getNSDocumentId", error.toString());
         }
     }
 
-    function getRoutesList(token, routeURL, pageSize, pageIndex) {
+    function getRoutesList(token, routeURL, pageSize, pageIndex, receiveStatus) {
         try {
             var headerObj = {
                 name: "Accept-Language",
                 value: "en-us",
             };
 
-            var routeDate = getSessionDate();
+            //  var routeDate = getSessionDate();
+            var routeDate = getNextBusinessDayNew(new Date());
             // var routeDate = '2023-09-08';
-            log.debug("routeDate", routeDate);
-
             var routingURL =
                 routeURL +
                 "?pageSize=" +
@@ -250,7 +249,7 @@ define([
                 routeDate +
                 "&expand=all";
 
-            log.debug('routingURL',routingURL);
+            log.debug('routingURL', routingURL);
             var response = https.get({
                 url: routingURL,
                 headers: {
@@ -261,10 +260,25 @@ define([
 
             if (response.code != 200) return;
 
-            // log.debug("response body: ", response.body);
+            // try {
+            //     function generarNumeroAleatorio() {
+            //         return Math.floor(Math.random() * 100) + 1;
+            //     }
+            //     var fileObj = file.create({
+            //         name: 'testRoadnet' + generarNumeroAleatorio() + '.txt',
+            //         fileType: file.Type.PLAINTEXT,
+            //         contents: JSON.stringify(response.body)
+            //     });
+            //     fileObj.folder = 2323;
+            //     // Save the file
+            //     var idFile = fileObj.save();
+            // } catch (error) {
+            //     log.error('error creating file')
+            // }
+
             var body = JSON.parse(response.body);
-            log.debug('body', body);
-            var routeInformation = getRouteInformation(body);
+            log.debug('RESPONSE BODY: ', body);
+            var routeInformation = getRouteInformation(body, receiveStatus);
 
             return routeInformation;
         } catch (error) {
@@ -272,7 +286,7 @@ define([
         }
     }
 
-    function getRouteInformation(body) {
+    function getRouteInformation(body, receiveStatus) {
         try {
             var routeInformationArr = [];
             if (!body.hasOwnProperty("items") || body?.items.length == 0) {
@@ -284,6 +298,9 @@ define([
                 var routeNo = itemsArr[i].identity.identifier;
                 var stopsArr = itemsArr[i].stops;
                 var stopCount = 1;
+                var status = itemsArr[i].status;
+                log.debug('ROUTE STATUS: ', { receiveStatus, status })
+                if (receiveStatus != status) continue;
                 for (var j = 0; j < stopsArr.length; j++) {
                     var stopType = stopsArr[j].stopType;
                     if (stopType != "ServiceableStop") {
@@ -411,14 +428,52 @@ define([
             var seconds = summary.seconds;
             var usage = summary.usage;
             var yields = summary.yields;
-            log.audit(" Usage Consumed", usage);
-            log.audit(" Concurrency Number ", summary.concurrency);
-            log.audit(" Number of Yields", yields);
-            log.audit(" Seconds", seconds);
         } catch (e) {
             handleErrorAndSendNotification(e, "summarize");
         }
     }
+
+    function loadHolidaysPageInit() {
+        var aHolidays = [];
+        var holidays = search.create({
+            type: "customrecord_acme_official_holidays",
+            filters:
+                [],
+            columns:
+                ['custrecord_aoh_holiday_date']
+        });
+        holidays.run().each(function (result) {
+            aHolidays.push(result.getValue('custrecord_aoh_holiday_date'));
+            return true;
+        });
+        return aHolidays;
+    }
+
+    function getNextBusinessDayNew(sDate) {
+        var aHolidays = loadHolidaysPageInit();
+        var dDate = new Date(sDate);
+        var sReturn;
+        do {
+            dDate.setDate(dDate.getDate() + 1);
+            sReturn = dDate;
+            sReturn = getFormatDate(sReturn)
+        } while (aHolidays.indexOf(sReturn) >= 0 || dDate.getDay() == 6 || dDate.getDay() == 0);
+
+        return getFormatDate2(new Date(sReturn));
+    }
+
+    function getFormatDate(d) {
+        return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+        d.getDate() < 10 ? "0" + d.getDate() : d.getDate(),
+        d.getFullYear()].join('/')
+    }
+
+    function getFormatDate2(d) {
+        return [d.getFullYear(),
+        d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+        d.getDate() < 10 ? "0" + d.getDate() : d.getDate()].join('-')
+    }
+
 
     function getSessionDate() {
         try {
@@ -445,7 +500,6 @@ define([
     }
 
     function isEmpty(stValue) {
-        log.audit('stValue', stValue);
         if (stValue == "" || stValue == null || stValue == undefined) {
             return true;
         } else {
@@ -497,8 +551,7 @@ define([
         const content = JSON.parse(fileLoaded.getContents());
         if (Number(content.ordersReceived) > 0) content.ordersReceived = Number(content.ordersReceived) - errors;
         content.errorOrders = Number(content.errorOrders) + errors;
-        log.audit('content when remove', content);
-        const newFileId = createFile(idFolder, fileName, JSON.stringify(content));
+        //const newFileId = createFile(idFolder, fileName, JSON.stringify(content));
     }
     function numerationCasesOrders() {
         // get number
@@ -507,7 +560,6 @@ define([
             id: '1',
             columns: 'custrecord_sdb_counter_received'
         });
-        log.audit('numCounter', numCounter);
         //  Counter plus 1 for set at record, incremtental number
         numCounter = Number(numCounter.custrecord_sdb_counter_received) + 1;
         record.submitFields({

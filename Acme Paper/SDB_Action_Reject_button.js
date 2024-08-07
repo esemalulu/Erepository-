@@ -8,7 +8,7 @@ define(['N/record', 'N/error', 'N/ui/message', 'N/runtime', 'N/search','N/redire
         try {
             var newRecord = context.newRecord;
             log.debug('newRecord.type: ', newRecord.type)
-            let baseUrl = url.resolveScript({
+            var baseUrl = url.resolveScript({
                 scriptId:  'customscript_sdb_so_reject_reason_su',//customscript_set_reject_reason
                 deploymentId:'customdeploy_sdb_so_reject_reason_su' //customdeploy_set_reject_reason
                // returnExternalURL: true
@@ -21,7 +21,7 @@ define(['N/record', 'N/error', 'N/ui/message', 'N/runtime', 'N/search','N/redire
             });
 
         } catch (e) {
-            log.debug('onAction: ', e)
+            log.error('onAction: ', e)
         }
 
     }

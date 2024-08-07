@@ -5,11 +5,15 @@
 define(['N/url',
     'N/https',
     'N/ui/dialog',
-], function (url, https, dialog) {
+    'N/record'
+], function (url, https, dialog, record) {
     function pageInit(ctx) {
         try {
             //var currentTotal = ctx.currentRecord.getValue("usertotal");
             //if (currentTotal) ctx.currentRecord.setValue("custbody_acme_billed_amt", currentTotal);
+            var currentRecord = ctx.currentRecord;
+            var billId = ctx.currentRecord.id;
+            if (!billId) currentRecord.setValue('trandate', '');
         } catch (e) {
             log.error('ERROR: ', e);
         }
@@ -143,7 +147,7 @@ define(['N/url',
             } else if (Number(currentRecord.getValue('usertotal')) < Number(currentRecord.getValue('custbody_acme_billed_amt'))) {
                 var qty = nlapiGetLineItemValue('item', 'quantity', 1)
                 var rate = nlapiGetLineItemValue('item', 'amount', 1)
-                rate = Number(rate) + (Number(amount_2.toFixed(2)))*-1;
+                rate = Number(rate) + (Number(amount_2.toFixed(2))) * -1;
                 currentRecord.selectLine({
                     sublistId: 'item',
                     line: 0
@@ -174,9 +178,28 @@ define(['N/url',
         }
     }
 
+    function approveBill(billId) {
+        try {
+            if (!billId) return;
+            record.submitFields({
+                type: 'vendorbill',
+                id: billId,
+                values: {
+                    approvalstatus: 2,
+                    custbody_sdb_approver_bill: true,
+                    custbody_sdb_3wm_cost_error: false,
+                    custbody_sdb_3wm_qty_error: false
+                }
+            });
+            location.reload();
+        } catch (error) {
+            log.error('ERROR: ', error);
+        }
+    }
 
     return {
         pageInit,
-        fieldChanged
+        fieldChanged,
+        approveBill: approveBill
     };
 });

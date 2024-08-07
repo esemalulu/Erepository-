@@ -8,13 +8,15 @@ define(['N/search', 'N/record'], function (search, record) {
     function onRequest(context) {
         try {
             if (context.request.method == 'GET') {
-                log.debug('param', context.request.parameters);
-
+              //  log.debug('param', context.request.parameters);
+                
                 if (context.request.parameters.hasOwnProperty('itemId')) {
+                    log.debug('item id', context.request.parameters?.itemId);
                     var result = pricesOfItem(context.request.parameters?.itemId);
                 } else {
                     var result = allPriceCategories();
                 }
+                log.debug('result', result);
                 context.response.write(JSON.stringify(result));
             }
         } catch (error) {
@@ -37,7 +39,7 @@ define(['N/search', 'N/record'], function (search, record) {
                 id: itemId,
                 columns: 'class'
             });
-
+            
             if (!productCategory.class[0]) {
                 var basePrice = search.lookupFields({
                     type: record.Type.INVENTORY_ITEM,

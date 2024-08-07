@@ -6,10 +6,9 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
     (record, search, log, config, format) => {
         const getInputData = () => {
             try {
-                // if (notRun()) return
                 log.audit("Entry: ", "Running");
                 return search.load({
-                    id: "customsearch5661"//"customsearch_sdb_wms_transactions"
+                    id: "customsearch5824"//"customsearch_sdb_wms_transactions"
                 });
             } catch (e) {
                 log.error({
@@ -23,33 +22,31 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
             try {
                 var json = JSON.parse(mapContext.value);
                 var internalId = json.values["GROUP(internalid)"].value;
-                // var lastmodifieddate = json.values["GROUP(lastmodifieddate)"];
-                // lastmodifieddate = new Date(lastmodifieddate);
-                // var currentDate = new Date();
-                // currentDate.setMinutes(currentDate.getMinutes() - 30);
-                // if (lastmodifieddate < currentDate || true) {
-                    // log.debug("Time Data: ", { internalId, lastmodifieddate, currentDate });
-                    var salesorder = record.load({
-                        type: record.Type.SALES_ORDER,
-                        id: internalId
-                    });
-                    // salesorder.setValue("custbody_a1wms_dnloadtimestmp", new Date());
-                    // salesorder.setValue("custbody_a1wms_orderlocked", false);
 
-                    // log.debug("Order Data: ", {
-                    //     internalId: salesorder.id,
-                    //     timeStamp: salesorder.getValue("custbody_a1wms_dnloadtimestmp"),
-                    //     status: salesorder.getValue("custbody_a1wms_orderstatus"),
-                    //     locked: salesorder.getValue("custbody_a1wms_orderlocked"),
-                    //     download: salesorder.getValue("custbody_a1wms_dnloadtowms")
-                    // });
-                    var idSaved = salesorder.save({
-                        ignoreMandatoryFields: true
-                    });
-                    log.audit("Order Saved: ", { idSaved })
-                // } else {
-                //     log.emergency("NO Time Condition: ", { internalId, lastmodifieddate, currentDate });
+                var rec = record.load({
+                    // type: record.Type.INVOICE,
+                    type: record.Type.SALES_ORDER,
+                    id: internalId,
+                    isDynamic: true
+                });
+                // var lineCount = rec.getLineCount({ sublistId: 'item' });
+                // for (var i = 0; i < lineCount; i++) {
+                //     rec.selectLine({ sublistId: 'item', line: i })
+                //     var unitCost = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acc_unitcost', line: i });
+                //     var estimateType = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'costestimatetype', line: i });
+                //     var item = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'item', line: i });
+                //     var hasRebate = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_rebate_item_id', line: i });
+                //     if (!unitCost && estimateType == "CUSTOM" && !hasRebate) {
+                //         log.debug("LINE DATA: ", { internalId, unitCost, estimateType, item, i })
+                //         rec.setCurrentSublistValue({ sublistId: 'item', fieldId: 'costestimatetype', line: i, value: "ITEMDEFINED" });
+                //         rec.commitLine({ sublistId: 'item' })
+                //     }
                 // }
+                var idSaved = rec.save({
+                    ignoreMandatoryFields: true
+                });
+                log.audit("Order Saved: ", { idSaved })
+
 
             } catch (e) {
                 log.error({
@@ -59,30 +56,5 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
             }
         }
 
-        // function validate hours for execution the script
-        function notRun() {
-            var companyInfo = config.load({
-                type: config.Type.COMPANY_INFORMATION
-            });
-            var timezone = companyInfo.getValue({
-                fieldId: 'timezone',
-            });
-            log.debug("timezone", timezone)
-            var date = new Date();
-            var dateTime = format.format({
-                value: date,
-                type: format.Type.DATETIME,
-                timezone: timezone
-            });
-            log.debug("dateTime", dateTime)
-            var hours = new Date(dateTime).getHours();
-            log.audit("hours", hours)
-            if (hours > 14 && dateTime.indexOf('pm') != -1) {
-                log.audit("hours > 2 pm", hours)
-                return true;
-            }
-            return false;
-        }
-        
         return { getInputData, map }
     });

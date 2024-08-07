@@ -22,10 +22,10 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
          */
 
         const getInputData = (inputContext) => {
-          
-         
+
+
             return search.load({
-                id: "customsearch5543",//customsearch5547 customsearch5543
+                id: "6559",//customsearch5547 customsearch5543
                 //   let mySearch = search.load({
                 //       id: "customsearch_sdb_delete_items"
             });
@@ -35,37 +35,36 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
 
         const map = (mapContext) => {
             try {
-                log.audit("mapContext: ", mapContext);
                 var json = JSON.parse(mapContext.value);
-                log.debug("json", json)
-                log.debug("json.values[GROUP(internalid)]", json.values["GROUP(internalid)"].value)
+                //log.debug("json", json)
 
-                //  var ss = search.create({
-                //    type: "transaction",
-                //    filters: [["createdfrom", "is", mapContext.key],"AND",["mainline", "is", "T"]]
-                //  }).run().each(function(res){
-                //    log.debug("res: ", res);
-                //    var poId = record.delete({
-                //      type: res.recordType,
-                //      id: res.id,
-                //  });
-                //     log.debug("poId: ", poId)
-                //    return true;
-                //  })
+                // var buyer = json.values["name.systemNotes"].value
+                // var recUpdate = record.submitFields({
+                //     type: record.Type.PURCHASE_ORDER,
+                //     id: json.id,
+                //     values: {
+                //         custbody_acc_buyer: buyer
+                //     },
+                //     options: {
+                //         ignoreMandatoryFields: true
+                //     }
+                // })
+               
+               // var type = json.values["GROUP(type)"].value == "SalesOrd" ? 'salesorder' : 'invoice';
                 var itemsDelete = record.load({
-                    type: "invoice",//json.values["GROUP(type)"].text,
+                    type: 'salesorder',//json.values["GROUP(type)"].text,
                     id: json.values["GROUP(internalid)"].value,
                 });
 
                 var recordId = itemsDelete.save({
-                    enableSourcing: true,
+                    enableSourcing: false,
                     ignoreMandatoryFields: true
                 });
 
                 log.debug("recordId", recordId)
             } catch (e) {
                 log.error({
-                    title: "error map",
+                    title: json.values["GROUP(internalid)"].value,
                     details: e,
                 })
             }
@@ -74,6 +73,6 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
         }
         const summarize = (summaryContext) => {
         }
-        
+
         return { getInputData, map }
     });

@@ -77,7 +77,7 @@ define(["N/search", 'N/record','N/log'], function(search, record,log) {
             var closeDays = getCloseDay(entity);
             var day = getDay(shipDate);
             if (closeDays.includes(day)) {
-                alert("The ship date is the customer's closing date");
+                alert("The customer is closed on this ship date");
             }
         }
     }

@@ -261,29 +261,33 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file'], function
         }
     }
     function getSaleTax(stateShortName) {
-        var taxCode = {
-            taxCode : -1,
-            taxText : null
+        try {
+            var taxCode = {
+                taxCode : -1,
+                taxText : null
+            }
+            search.create({
+                type: "customrecord_sdb_sale_tax",
+                filters:
+                    [
+                        ["custrecord_sdb_sale_tax_state.shortname", "startswith", stateShortName],
+                        "AND",
+                        ["isinactive", "is", "F"],
+                        "AND",
+                        ["custrecord_sdb_sale_tax_tax_code", "noneof", "@NONE@"]
+                    ],
+                columns:
+                    [
+                        search.createColumn({ name: "custrecord_sdb_sale_tax_tax_code", label: "Tax Code" })
+                    ]
+            }).run().each(function(res) {
+                taxCode.taxCode = res.getValue("custrecord_sdb_sale_tax_tax_code");
+                taxCode.taxText = res.getText("custrecord_sdb_sale_tax_tax_code");
+            });
+            return taxCode;
+        } catch (error) {
+            log.error("getSaleTaxError",error)
         }
-        search.create({
-            type: "customrecord_sdb_sale_tax",
-            filters:
-                [
-                    ["custrecord_sdb_sale_tax_state.shortname", "startswith", stateShortName],
-                    "AND",
-                    ["isinactive", "is", "F"],
-                    "AND",
-                    ["custrecord_sdb_sale_tax_tax_code", "noneof", "@NONE@"]
-                ],
-            columns:
-                [
-                    search.createColumn({ name: "custrecord_sdb_sale_tax_tax_code", label: "Tax Code" })
-                ]
-        }).run().each(function(res) {
-            taxCode.taxCode = res.getValue("custrecord_sdb_sale_tax_tax_code");
-            taxCode.taxText = res.getText("custrecord_sdb_sale_tax_tax_code");
-        });
-        return taxCode;
     }
 
     function getTaxTypeMappingOfCustomer(itemIds, customerTaxType) {
@@ -321,8 +325,9 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file'], function
   
 
     function searchFileByName() {
-        let idFolder;
-        let fileSearchObj = search.create({
+        try {
+            let idFolder;
+            let fileSearchObj = search.create({
             type: "file",
             filters:
                 [
@@ -345,6 +350,9 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file'], function
             return false;
         });
         return idFolder;
+        } catch (error) {
+            log.error("searchFile error",error);
+        }
     }
     function getCurrencyFile(id) {
         let fileLoaded = file.load({
@@ -354,7 +362,7 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file'], function
     }
    
     function createCsvFile(){
-        // try {
+        try {
             var alreadyExistsFile = searchFileByName();
             if(alreadyExistsFile) return alreadyExistsFile;
             let fileName = 'Last-Month-Orders-Tax-Report.csv'
@@ -367,13 +375,13 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file'], function
             objXlsFile.folder = -15;
             var newFileId = objXlsFile.save();
             return newFileId;
-        // } catch (error) {
-        //     log.error('createCsvFile error',error)
-        // }
+        } catch (error) {
+            log.error('createCsvFile error',error)
+        }
     }
 
     function createCsvString(csvFile,objJson) {
-        // try {
+        try {
             var fileLoaded = getCurrencyFile(csvFile);
             var newContent='\n';
             objJson.forEach(soObj => {
@@ -395,9 +403,9 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file'], function
                 value:newContent
             })
             fileLoaded.save()
-        // } catch (error) {
-        //     log.error('createCsvString error',error)
-        // }
+        } catch (error) {
+            log.error('createCsvString error',error)
+        }
     }
 
 

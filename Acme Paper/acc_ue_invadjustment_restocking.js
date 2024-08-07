@@ -125,7 +125,14 @@ define(['N/record', 'N/search'],
                             fieldId: 'quantity',
                             line: i
                         });
-                        if (itemName && itemName.indexOf("error") == -1) {
+                        var itemtype = invoiceObj.getSublistValue({
+                            sublistId: 'item',
+                            fieldId: 'itemtype',
+                            line: i
+                        });
+                        log.debug('itemName', itemName)
+                        log.debug('itemtype', itemtype)
+                        if (itemName && itemName.indexOf("error") == -1 && itemtype == "InvtPart") {
                             // set adjustment lines
                             adjustmentRec.setSublistValue({
                                 sublistId: 'inventory',

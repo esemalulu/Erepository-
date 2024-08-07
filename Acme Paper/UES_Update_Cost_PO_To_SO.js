@@ -1,5 +1,5 @@
 /**
- * @NApiVersion 2.x
+ * @NApiVersion 2.1
  * @NScriptType UserEventScript
  * @NModuleScope SameAccount
  */
@@ -174,6 +174,7 @@ define(['N/record'],
                             var salesOrder = record.load({ type: record.Type.SALES_ORDER, id: soId, isDynamic: true });
                             var dropship = salesOrder.getValue({ fieldId: 'custbody_dropship_order' });
                             log.debug('dropship=', dropship);
+
                             if (dropship == true) {
 
                                 var soLineCount = salesOrder.getLineCount({ sublistId: 'item' });
@@ -182,6 +183,7 @@ define(['N/record'],
                                 log.debug('poLineCount', poLineCount);
                                 var poItems = [];
                                 var soupdated = 'no';
+
                                 for (var plc = 0; plc < poLineCount; plc++) {
                                     var item = rec.getSublistValue({ sublistId: 'item', fieldId: 'item', line: plc });
                                     var rate = rec.getSublistValue({ sublistId: 'item', fieldId: 'rate', line: plc });
@@ -196,29 +198,32 @@ define(['N/record'],
                                     var rate = salesOrder.getSublistValue({ sublistId: 'item', fieldId: 'rate', line: ilc });
                                     var sorate = salesOrder.getSublistValue({ sublistId: 'item', fieldId: 'custcol_acc_unitcost', line: ilc });
                                     var soquantity = salesOrder.getSublistValue({ sublistId: 'item', fieldId: 'quantity', line: ilc });
-
+                                    var rebateCost = salesOrder.getSublistValue({ sublistId: 'item', fieldId: 'custcol_rebate_cost', line: ilc });
                                     log.debug('SO ITEM', item);
-                                    for (var i = 0; i < poItems.length; i++) {
-                                        if (item === poItems[i].itemid && poItems[i].cost != sorate) {
 
-                                            soupdated = 'yes';
-                                            salesOrder.selectLine({ sublistId: 'item', line: ilc });
-                                            salesOrder.setCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acc_unitcost', value: poItems[i].cost, ignoreFieldChange: false, forceSyncSourcing: true });
-                                            salesOrder.setCurrentSublistValue({ sublistId: 'item', fieldId: 'costestimaterate', value: poItems[i].cost, ignoreFieldChange: false, forceSyncSourcing: true });
-                                            var extendedCost = soquantity * poItems[i].cost;
-                                            extendedCost = extendedCost.toFixed(2);
+                                    if (!rebateCost) {
+                                        for (var i = 0; i < poItems.length; i++) {
+                                            if (item === poItems[i].itemid && poItems[i].cost != sorate) {
 
-                                            salesOrder.setCurrentSublistValue({ sublistId: 'item', fieldId: 'costestimate', value: extendedCost, ignoreFieldChange: false, forceSyncSourcing: true });
-                                            var markup = ((rate - poItems[i].cost) / rate) * 100;
+                                                soupdated = 'yes';
+                                                salesOrder.selectLine({ sublistId: 'item', line: ilc });
+                                                salesOrder.setCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acc_unitcost', value: poItems[i].cost, ignoreFieldChange: false, forceSyncSourcing: true });
+                                                salesOrder.setCurrentSublistValue({ sublistId: 'item', fieldId: 'costestimaterate', value: poItems[i].cost, ignoreFieldChange: false, forceSyncSourcing: true });
+                                                var extendedCost = soquantity * poItems[i].cost;
+                                                extendedCost = extendedCost.toFixed(2);
 
-                                            salesOrder.setCurrentSublistValue({
-                                                sublistId: 'item',
-                                                fieldId: 'custcol_acme_markup_percent',
-                                                value: markup.toFixed(2),
-                                                ignoreFieldChange: true
-                                            });
+                                                salesOrder.setCurrentSublistValue({ sublistId: 'item', fieldId: 'costestimate', value: extendedCost, ignoreFieldChange: false, forceSyncSourcing: true });
+                                                var markup = ((rate - poItems[i].cost) / rate) * 100;
 
-                                            salesOrder.commitLine({ sublistId: 'item' });
+                                                salesOrder.setCurrentSublistValue({
+                                                    sublistId: 'item',
+                                                    fieldId: 'custcol_acme_markup_percent',
+                                                    value: markup.toFixed(2),
+                                                    ignoreFieldChange: true
+                                                });
+
+                                                salesOrder.commitLine({ sublistId: 'item' });
+                                            }
                                         }
                                     }
                                 }// so lines

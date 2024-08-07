@@ -47,7 +47,14 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
             var enteredById = salesRecord.getValue("custbody_aps_entered_by");
             var copyOrder = salesRecord.getValue("custbody_sdb_original_sales_order");
             if (copyOrder) {
-                log.audit('copy order', copyOrder);
+                log.audit('copy order', copyOrder + " - " + json.id);
+                record.submitFields({
+                    type: 'customrecord_sdb_sps_orders_to_replace',
+                    id: json.id,
+                    values: {
+                        'custrecord_sdb_processed_order': true
+                    }
+                });
                 return;
             }
             if (String(enteredById) == SPS_NETWORK) convert_item_sps_Error(salesRecord);
@@ -117,7 +124,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
             var scriptObj = runtime.getCurrentScript();
             //var itemForReplace = scriptObj.getParameter({ name: 'custscript_sdb_item_for_not_supercede' })// Add 4/4/24
             if (!itemIds.length) return;
-            var dnrItems = getDnrItems(itemIds);
+            var dnrItems = getItemsToSupersede(itemIds);
             if (!dnrItems.length) return;
             // Update DNR Items
             var itemCount = salesRecord.getLineCount("item");
@@ -177,6 +184,59 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
             return true;
         });
         return arrToReturn;
+    }
+
+    function getItemsToSupersede(itemIds) {
+        var arrToReturn = [];
+        var itemSearchObj = search.create({
+            type: "item",
+            filters:
+                [
+                    ["internalid", "anyof", itemIds],
+                    // "AND",
+                    // ["custitem_acc_supercede_item", "noneof", "@NONE@"],
+                    "AND",
+                    ["custitem_acc_supercede_item.isinactive", "is", "F"]
+                ],
+            columns:
+                [
+                    "internalid",
+                    "custitem_acc_supercede_item"
+                ]
+        });
+        itemSearchObj.run().each(function (result) {
+           var item = findFinalItem(result.getValue("internalid")); //Add 31/7
+            arrToReturn.push({
+                item: result.getValue("internalid"),
+                supercedItem: item
+            });
+            return true;
+        });
+        return arrToReturn;
+    }
+
+   //Search until the last item suoersede is brought - Add 31/7
+    function findFinalItem(itemId) {
+        try {
+            var item = search.lookupFields({
+                type: record.Type.INVENTORY_ITEM,
+                id: itemId,
+                columns: ['custitem_acc_supercede_item']
+            })
+
+            if (item.custitem_acc_supercede_item.length) {
+                return findFinalItem(item.custitem_acc_supercede_item[0].value);
+            } else {
+                return itemId;
+            }
+
+        } catch (error) {
+            log.error({
+                title: 'Error findFinalItem',
+                details: error
+            });
+            return itemId;
+        }
     }
 
     function getItemIds(newRecord) {
@@ -766,6 +826,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                 if (locations.length) {
                     var locationFound = locations.find(element => (Number(element.location) == Number(actualLocation)) && (Number(element.quantity) - Number(item.qty) >= 0));
                     if (locationFound) {
+                    //  log.emergency("locationFound.quantity: ", locationFound.quantity)
                         salesRecord.selectLine({
                             sublistId: 'item',
                             line: item.line
@@ -802,12 +863,16 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
 
                 //If item in richmond has backordered qty then we are going to create a new line and set savage
                 //as location
+                // var savageLocation = locations.find(element => (Number(element.location) == Number(SAVAGE)));
+                var enteredBySPS = salesRecord.getValue("custbody_aps_entered_by");
+                enteredBySPS = enteredBySPS == 84216;
                 var locationFound = locations.find(element => (Number(element.location) == Number(actualLocation)));
-                var savageLocation = locations.find(element => (Number(element.location) == Number(SAVAGE)));
-
+                var hasRitchmondStock = locations.find(element => (Number(element.location) == Number(RICHMOND)) && (Number(element.quantity) - Number(item.qty) >= 0));
                 var isRitchmodCustomer = getIsRitchmodCustomer(salesRecord.getValue('entity'), RICHMOND);
-                log.debug("RITCHMOND CASE INFO: ", { isRitchmodCustomer, locationFound, locations });
-                if (isRitchmodCustomer && (!savageLocation || !locations.length)) {
+                var isOnlySavageStock = getOnlySavageStock(item.itemId);
+
+                log.debug("RITCHMOND CASE INFO: ", { locationFound, locations, isOnlySavageStock });
+                if (hasRitchmondStock) {//&& (!savageLocation || !locations.length)) {
                     salesRecord.selectLine({ sublistId: 'item', line: item.line });
                     salesRecord.setCurrentSublistValue({
                         sublistId: 'item',
@@ -818,7 +883,18 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                     return;
                 }
 
-                if (!isRitchmodCustomer && locationFound && (Number(item.qty) - (locationFound.quantity) > 0)) {
+                if (isOnlySavageStock) {
+                    salesRecord.selectLine({ sublistId: 'item', line: item.line });
+                    salesRecord.setCurrentSublistValue({
+                        sublistId: 'item',
+                        fieldId: 'location',
+                        value: SAVAGE,
+                    });
+                    salesRecord.commitLine("item");
+                    return;
+                }
+
+                if (!enteredBySPS && locationFound && (Number(item.qty) - (locationFound.quantity) > 0)) {
                     salesRecord.selectLine({
                         sublistId: 'item',
                         line: item.line
@@ -895,6 +971,23 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
             }//End if backorder
         } catch (error) {
             log.error('setLocationWarehouse', error)
+        }
+    }
+
+    function getOnlySavageStock(itemId) {
+        try {
+            if (!itemId) return false;
+            log.debug('FUNCTION getOnlySavageStock: ', { itemId })
+            var itemInfo = search.lookupFields({
+                type: search.Type.ITEM,
+                id: itemId,
+                columns: ['custitem_store_at_savage', 'custitem_store_at_richmond']
+            });
+            log.debug('itemInfo', itemInfo);
+            if (!itemInfo) return false;
+            return itemInfo.custitem_store_at_savage && !itemInfo.custitem_store_at_richmond;
+        } catch (error) {
+            log.error("ERROR getOnlySavageStock: ", error);
         }
     }
 

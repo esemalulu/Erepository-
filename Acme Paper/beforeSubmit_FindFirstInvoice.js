@@ -3,13 +3,11 @@
  * @NScriptType UserEventScript
  * @NModuleScope SameAccount
  */
-define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'], function (record, search, message, runtime, serverWidget)
-{
-    function beforeLoad(context)
-    {
-        try
-        {
+ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget', 'N/email'], function (record, search, message, runtime, serverWidget, email) {
+    function beforeLoad(context) {
+        try {
             var newRecord = context.newRecord;
+            if (context.newRecord.type == "invoice") return;
             /*
             var form = context.form;
             log.audit("form: ", form)
@@ -30,12 +28,12 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
             });*/
             var orderStatus = newRecord.getValue('orderstatus');
 
+
             //------------------ QUOTES ---------------------------------------
-            if (context.type == context.UserEventType.VIEW && context.newRecord.type == "estimate")
-            {
+            if (context.type == context.UserEventType.VIEW && context.newRecord.type == "estimate") {
                 var hasRestricted = checkRestrictedItems(context);
                 log.debug('hasRestricted?', hasRestricted);
-                if(hasRestricted == 0) return;
+                if (hasRestricted == 0) return;
 
                 //Showing pop-up
                 context.form.addPageInitMessage({ type: message.Type.WARNING, message: 'If a Sales Order is created has to be approved mannually because it has restricted items!', duration: 0 });
@@ -44,8 +42,7 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
             //------------------ SALES ORDER ----------------------------------
             if (context.newRecord.type != "salesorder") return;
 
-            if (context.type == context.UserEventType.VIEW && orderStatus == 'A')
-            {
+            if (context.type == context.UserEventType.VIEW && orderStatus == 'A') {
 
                 var currentRoleId = runtime.getCurrentUser().role;
                 var roleLabel = search.lookupFields({
@@ -58,8 +55,7 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
 
                 var hasPermissionToApprove = arrayRolesList.includes(roleLabel);
 
-                if (hasPermissionToApprove)
-                {
+                if (hasPermissionToApprove) {
                     log.error('hasPermissionToApprove', hasPermissionToApprove);
                     context.form.addPageInitMessage({ type: message.Type.WARNING, message: 'This sales order has restricted items and needs to be approved manually!', duration: 30000 });
                     return true;
@@ -70,56 +66,88 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
             }
 
         }
-        catch (e)
-        {
+        catch (e) {
             log.error('ERROR in before Load', e);
         }
     }//End before load
 
-    function beforeSubmit(context)
-    {
-        if (context.newRecord.type != "salesorder") return;
-
-        if (context.type == context.UserEventType.CREATE)
-        {
-            try
-            {
+    function beforeSubmit(context) {
+        if (context.type == context.UserEventType.CREATE || context.type == context.UserEventType.EDIT) {
+            try {
                 var soRecord = context.newRecord;
-
+                // log.debug(runtime.getCurrentUser().id)
+                // if(runtime.getCurrentUser().id == 84419 || runtime.getCurrentUser().id == 84733)setForRestockit(soRecord);
+                if (context.newRecord.type == "salesorder" || context.newRecord.type == "invoice")setForRestockit(soRecord);
+                if (context.newRecord.type != "salesorder") return;
+                var isdropShip = soRecord.getValue('custbody_dropship_order');
+                log.audit("isdropShip", isdropShip)
+                if (!isdropShip) {
+                    var approvedTrue = soRecord.getValue('custbody_sdb_approved_from_btn');
+                    var orderstatus = soRecord.getValue('orderstatus');
+                    log.audit("approvedTrue", approvedTrue)
+                    log.audit("orderstatus", orderstatus)
+                    var checkRittems = checkRestrictedItems(context)
+                    log.audit("checkRittems", checkRittems)
+                   if (checkRittems == 1 && !approvedTrue && orderstatus == 'B') {
+                        soRecord.setValue('orderstatus', 'A');//ADD 23/5
+                        log.audit("soRecord.orderstatus A", soRecord.getValue('orderstatus'))
+                    } else if (checkRittems == 0 && orderstatus == 'A') {
+                        soRecord.setValue('orderstatus', 'B');//ADD 31/5
+                        log.audit("soRecord.orderstatus B", soRecord.getValue('orderstatus'))
+                    }
+                }
                 var order = soRecord.getValue({ fieldId: 'tranid' });
                 soRecord.setValue('custbody_transaction_number', order);
-
+               
             }//try end
 
-            catch (e)
-            {
-                log.debug("Error", e);
+            catch (e) {
+                log.error("Error beforeSubmit", e);
             }//end of catch
         }
     }
-    function afterSubmit(context) 
-    {
-        if (context.newRecord.type != "salesorder") return;
 
-        var currentRecord = context.newRecord;
-        try
-        {
-            if (context.type == 'create' || context.type == 'edit') 
-            {
+    function afterSubmit(context) {
+        if (context.newRecord.type != "salesorder") return;
+        try {
+            var currentRecord = context.newRecord;
+            var oldRecord = context.oldRecord;
+            var orderStatus = currentRecord.getValue('orderstatus');
+            var oldStatus;
+            if (oldRecord) oldStatus = oldRecord.getValue('orderstatus');
+            var isdropShip = currentRecord.getValue('custbody_dropship_order');
+            log.audit("isdropShip", isdropShip)
+            if (context.type == 'create' || context.type == 'edit') {
+                 if ((context.type == 'create' && orderStatus == 'A') || (orderStatus == 'A' && oldStatus == 'B') && !isdropShip) validateApprove(context);
                 var recordId = context.newRecord.id;
                 var i_custId = currentRecord.getValue("entity");
-                var i_shipname = currentRecord.getText("shipaddresslist");
+                var i_shipname = '';
+                try {
+                    i_shipname = currentRecord.getText("shipaddresslist");
+                } catch (error) {
+                    log.error({
+                        title: 'Get text i_shipname',
+                        details: error
+                    })
+                }
+
                 log.debug("i_custId", i_custId);
                 log.debug("i_shipname", i_shipname);
+                var filter = [
+                    ["mainline", "is", "T"],
+                    "AND",
+                    ["entity", "anyof", i_custId]
+                ]
+                if (i_shipname) filter = [
+                    ["mainline", "is", "T"],
+                    "AND",
+                    ["entity", "anyof", i_custId],
+                    "AND",
+                    ["shipname", "is", i_shipname]
+                ]
                 var invoiceSearchObj = search.create({
                     type: "invoice",
-                    filters: [
-                        ["mainline", "is", "T"],
-                        "AND",
-                        ["entity", "anyof", i_custId],
-                        "AND",
-                        ["shipname", "is", i_shipname]
-                    ],
+                    filters: filter,
                     columns: [
                         search.createColumn({
                             name: "internalid",
@@ -129,8 +157,7 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
                 });
                 var searchResultCount = invoiceSearchObj.runPaged().count;
                 log.debug("invoiceSearchObj result count", searchResultCount);
-                if (searchResultCount === 0)
-                {
+                if (searchResultCount === 0) {
 
                     var soObj = record.load({
                         type: record.Type.SALES_ORDER,
@@ -139,13 +166,11 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
                     });
                     // Added on 28/07/21 - Add Extra condition for SDS sheet value should be available....
                     var lineCount = soObj.getLineCount({ sublistId: 'item' });
-                    for (var ilc = 0; ilc < lineCount; ilc++)
-                    {
+                    for (var ilc = 0; ilc < lineCount; ilc++) {
                         var item = soObj.getSublistValue({ sublistId: 'item', fieldId: 'item', line: ilc });
                         var itemType = soObj.getSublistValue({ sublistId: 'item', fieldId: 'itemtype', line: ilc });
                         // custitem_sds_fileid custitem_acc_sds_sheet  
-                        switch (itemType)
-                        {
+                        switch (itemType) {
                             case 'InvPart':
                                 itemType = search.Type.INVENTORY_ITEM;
                                 break;
@@ -181,8 +206,7 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
                             columns: ['custitem_sds_fileid', 'custitem_acc_sds_sheet']
                         });
 
-                        if (checkValidOrNot(itemInfo.custitem_sds_fileid) || checkValidOrNot(itemInfo.custitem_acc_sds_sheet))
-                        {
+                        if (checkValidOrNot(itemInfo.custitem_sds_fileid) || checkValidOrNot(itemInfo.custitem_acc_sds_sheet)) {
                             soObj.setValue("custbody3", true);
                             soObj.save();
                             log.debug("rec updated");
@@ -190,10 +214,11 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
                         }
                     }
                 }
+
             }
-        } catch (e)
-        {
-            log.debug(e);
+
+        } catch (e) {
+            log.error('ERROR AfterSubmit', e);
         }
         /// script moved to here:ACME UE Set Item LIne Price.js
         var Restockit_Orders_Employee = '72783';
@@ -204,24 +229,19 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
         var recordType = newSORec.type;
         var recordId = newSORec.id;
         log.debug('AS exContext is ' + exContext + ' AS recordType is ' + recordType, 'AS recordId is ' + recordId + ' scriptType is ' + scriptType);
-        try
-        {
-            if (scriptType == 'create' && exContext == 'MAPREDUCE')
-            {
+        try {
+              if (scriptType == 'create' && exContext == 'MAPREDUCE') {
                 var soObj = record.load({ type: recordType, id: recordId });
 
                 var enteredBy = soObj.getValue('custbody_aps_entered_by');
                 log.debug('AS enteredBy is ', enteredBy);
-                if (enteredBy == Restockit_Orders_Employee || enteredBy == Network_Orders_Employee)
-                {
+                if (enteredBy == Restockit_Orders_Employee || enteredBy == Network_Orders_Employee) {
                     var itemLineTotal = soObj.getLineCount({ sublistId: 'item' });
 
-                    for (var curLine = 0; curLine < itemLineTotal; curLine++)
-                    {
+                    for (var curLine = 0; curLine < itemLineTotal; curLine++) {
                         var ediLineUnitPrice = soObj.getSublistValue({ sublistId: 'item', fieldId: 'custcol_edi_unit_price', line: curLine });
                         log.debug('AS ediLineUnitPrice is ', ediLineUnitPrice);
-                        if (ediLineUnitPrice)
-                        {
+                        if (ediLineUnitPrice) {
                             soObj.setSublistValue({ sublistId: 'item', fieldId: 'rate', line: curLine, value: ediLineUnitPrice });
                         }
                     }
@@ -230,24 +250,19 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
                     log.audit('updatedSalesOrderId is ', updatedSalesOrderId);
                 }
             }
-        } catch (afterSubmitError)
-        {
+        } catch (afterSubmitError) {
             log.error('afterSubmit error is ', afterSubmitError.message);
         }
     }
 
-    function checkValidOrNot(value)
-    {
-        if ((value != null) && (value != '') && (value != undefined) && (value.toString() != 'NaN'))
-        {
+    function checkValidOrNot(value) {
+        if ((value != null) && (value != '') && (value != undefined) && (value.toString() != 'NaN')) {
             return true;
-        } else
-        {
+        } else {
             return false;
         }
     }
-    function getRolesListValues()
-    {
+    function getRolesListValues() {
         var arrayRoles = [];
         var rolesList = search.create({
             type: "customlist_sdb_approval_roles_so_restr",
@@ -263,8 +278,7 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
                     }),
                 ]
         });
-        rolesList.run().each(function (result)
-        {
+        rolesList.run().each(function (result) {
             arrayRoles.push(result.getValue("name"));
             return true;
         });
@@ -272,16 +286,14 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
         return arrayRoles;
     }//end getRolesListValues
 
-    function checkRestrictedItems(context)
-    {
+    function checkRestrictedItems(context) {
         var newRecord = context.newRecord;
         var customerId = newRecord.getValue("entity");
 
         var itemLineCount = newRecord.getLineCount("item");
         if (itemLineCount < 1) return 0;
 
-        for (var i = 0; i < itemLineCount; i++)
-        {
+        for (var i = 0; i < itemLineCount; i++) {
             var itemId = newRecord.getSublistValue({
                 sublistId: 'item',
                 fieldId: 'item',
@@ -312,8 +324,7 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
             if (customerLineCount < 1) return 1;
             var correctCustomer = 0;
 
-            for (let i = 0; i < customerLineCount && !correctCustomer; i++)
-            {
+            for (let i = 0; i < customerLineCount && !correctCustomer; i++) {
                 var itemCustomerId = itemRecord.getSublistValue({
                     sublistId: 'recmachcustrecord_acme_ri_item',
                     fieldId: 'custrecord_acme_ri_customer',
@@ -332,6 +343,93 @@ define(['N/record', 'N/search', 'N/ui/message', 'N/runtime', 'N/ui/serverWidget'
         }//end for
 
         return 0;
+    }
+
+    function validateApprove(context) {
+        try {
+
+            var currentRecord = context.newRecord;
+            var currentRoleId = runtime.getCurrentUser().role;
+            var roleLabel = search.lookupFields({
+                type: search.Type.ROLE,
+                id: currentRoleId,
+                columns: 'name'
+            })?.name;
+
+            var arrayRolesList = getRolesListValues();
+            var checkRestrict = checkRestrictedItems(context) == 1 ? true : false;
+            var hasPermissionToApprove = arrayRolesList.includes(roleLabel);
+            log.audit('validateApprove checkRestrict', checkRestrict);
+            log.audit('validateApprove hasPermissionToApprove', hasPermissionToApprove);
+
+            if (hasPermissionToApprove && checkRestrict) {
+                var docNumber = currentRecord.getValue('tranid')
+               if(context.type == 'create') sendApprovalEmail(docNumber, currentRecord.id)
+            }
+        } catch (error) {
+            log.error({
+                title: 'validateApprove',
+                details: error
+            })
+        }
+    }
+
+    function sendApprovalEmail(docNumber, soId) {
+
+        try {
+            var emailRecipients = runtime.getCurrentScript().getParameter({ name: 'custscript_sdb_receiptients' });
+            var emailSender = runtime.getCurrentScript().getParameter({ name: 'custscript_sdb_sender_noreply' })
+            var pathtransactions = runtime.getCurrentScript().getParameter({ name: 'custscript_sdb_path_so' })
+            pathtransactions += soId;
+            var emailSubject = 'A sales order with Restricted Item has been created that requires approval '
+            var emailBody = 'This sales order requires your approval.<br/>';
+            emailBody += '<a href=' + pathtransactions + '>Click here to go to the Sales order.</a><br/>';
+            emailBody += '</p><br/><br/>Thank you';
+
+            email.send({
+                author: emailSender,
+                recipients: emailRecipients,
+                subject: emailSubject,
+                body: emailBody,
+            });
+            log.audit('Sent email');
+
+        } catch (error) {
+            log.error('ERROR senEmail', error)
+        }
+
+    }
+
+    function setForRestockit(soObj) {
+        try {
+            log.audit('setForRestockit is ', 'enter');
+            var Restockit_Orders_Employee = '72783';
+            var Network_Orders_Employee = '72782';
+            var Restockit_Orders_Customer = '96580';
+            var enteredBy = soObj.getValue('custbody_aps_entered_by');
+            var customer = soObj.getValue('entity');
+            if (enteredBy == Restockit_Orders_Employee || enteredBy == Network_Orders_Employee || customer == Restockit_Orders_Customer) {
+                var itemLineTotal = soObj.getLineCount({ sublistId: 'item' });
+                log.audit('enteredBy is ', enteredBy);
+                for (var curLine = 0; curLine < itemLineTotal; curLine++) {
+                    soObj.setSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_markup_percent', line: curLine, value: 6 });
+                    var costestimaterate = soObj.getSublistValue({ sublistId: 'item', fieldId: 'custcol_acc_unitcost', line: curLine }) || "";
+                    var markup = soObj.getSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_markup_percent', line: curLine }) || 6;
+                    var temp = 1 - (Number(markup) / 100);
+                    var rate = costestimaterate ? (1 / Number(temp)) * Number(costestimaterate) : soObj.getSublistValue({ sublistId: 'item', fieldId: 'rate', line: curLine });
+                    log.debug('rate is ', rate);
+                    soObj.setSublistValue({ sublistId: 'item', fieldId: 'rate', line: curLine, value: rate.toFixed(2) });
+
+                    var ediLineUnitPrice = soObj.getSublistValue({ sublistId: 'item', fieldId: 'custcol_edi_unit_price', line: curLine });
+                    log.debug('AS ediLineUnitPrice is ', ediLineUnitPrice);
+                    if (ediLineUnitPrice) {
+                        soObj.setSublistValue({ sublistId: 'item', fieldId: 'rate', line: curLine, value: ediLineUnitPrice });
+                    }
+                }
+            }
+        } catch (error) {
+            log.error('setForRestockit', error)
+        }
     }
 
     return {

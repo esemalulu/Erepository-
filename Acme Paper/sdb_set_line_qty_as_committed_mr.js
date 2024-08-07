@@ -56,7 +56,12 @@ define([
                     fieldId: "commitinventory",
                     line: i
                 });
-                if (Number(quantityAvailable) > 0 && commitinventory != 1) {
+                var quantityOnLine = objRecord.getSublistValue({
+                    sublistId: "item",
+                    fieldId: "quantity",
+                    line: i
+                });
+                if (Number(quantityAvailable) >= Number(quantityOnLine) && commitinventory != 1) {
                     objRecord.setSublistValue({
                         sublistId: "item",
                         fieldId: "commitinventory",

@@ -17,6 +17,7 @@ define(["N/log", "N/record"], function (log, record) {
         }
     }
 
+
     // Auxiliar functions
 
     function setLineLevel(itemRecord, basePrice) {

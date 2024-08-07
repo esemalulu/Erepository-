@@ -125,7 +125,9 @@
                  type: "item",
                  filters:
                      [
-                         ["internalid", "anyof", itemId]
+                         ["internalid", "anyof", itemId],
+                         "AND",
+                         ["ispreferredvendor","is","T"]
                      ],
                  columns:
                      [

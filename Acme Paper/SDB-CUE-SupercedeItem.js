@@ -4,10 +4,18 @@
  * @NModuleScope Public
  * PROD
  */
-define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function (search, runtime, record, https, dialog) {
+define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'], function (search, runtime, record, https, dialog, url) {
     const RICHMOND = 103;
     const SAVAGE = 104;
     var thisMode;
+    const tds_orange_color = '#ffa420';
+    const tr_orange_color = '1px solid rgba(205, 205, 205, 0.1)';
+    const tds_yellow_color = '#f4f476';
+    const tr_yellow_color = '1px solid rgba(205, 205, 205, 0.1)';
+    const tds_red_color = '#f08080';
+    const tr_red_color = '1px solid rgba(205, 205, 205, 0.1)';
+    var aHolidays, nextBusinessDay, currentDate;
+
 
     // ------------------------ RECORD HAS BEEN CHANGE ------------------------ //
     function executePageInit(context) {
@@ -56,9 +64,13 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
 
     function pageInit(context) {
         try {
-          debugger;
+            aHolidays = loadHolidaysPageInit();
+            currentDate = new Date();
+            nextBusinessDay = getNextBusinessDayNew(currentDate, aHolidays);
             // executePageInit(context);
+
             sessionStorage.clear();
+
 
             let myCurrentRecord = context.currentRecord;
             var thisForm = myCurrentRecord.getValue('customform');
@@ -76,9 +88,8 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                 myCurrentRecord.setValue('custbody_warehouse_roadnet', Customerwarehouse);
             }
             thisMode = context.mode;
-
             if (entity && (thisMode == 'copy' || thisMode == 'create')) {
-                PopulateAdressFunction(context, false);
+                if (myCurrentRecord.type != 'invoice') PopulateAdressFunction(context, false);
             }
             if (myCurrentRecord.type == 'invoice' && thisForm != 308) {
                 myCurrentRecord.setValue({ fieldId: "customform", value: 308 });
@@ -160,13 +171,25 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
 
             if (context.currentRecord.type == "returnauthorization") intitReturnAuthorization(context.currentRecord);
 
+            //----------------Function for color item lines-----------------
+            try {
+                if (thisMode != 'create') setLineColours(context, aHolidays);
+            } catch (error) {
+                log.error("setLineColours PageInit", error);
+            }
+
+            //----------------Function for color item lines-----------------
+
         } catch (e) {
             log.error('error', e)
         }
 
         if (context.mode != "copy") return;
         if (context.currentRecord.type == "returnauthorization") return;
-        setAllLinesLocation(context);
+
+
+
+        // setAllLinesLocation(context);
     }
 
     function RemoveStockAlertDropshipOrders(context) {
@@ -191,7 +214,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
             var rec = context.currentRecord;
             var sublistId = context.sublistId;
             var fieldId = context.fieldId;
-
+            
             if (context.sublistId == 'item' && context.fieldId == 'item') {
                 var itemId = rec.getCurrentSublistValue({
                     sublistId: "item",
@@ -202,7 +225,6 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                 }
 
             }
-
             if (context.currentRecord.type == "invoice" || context.currentRecord.type == "estimate" || context.currentRecord.type == 'returnauthorization') return true;
 
             var savage_available_qty = 0;
@@ -237,7 +259,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                 }
 
                 //***Code is added for validation that is inventory to validate qty available and not service or charge 5/10
-               if(!item) return true;
+                if (!item) return true;
                 var itemType = search.lookupFields({
                     type: search.Type.ITEM,
                     id: item,
@@ -314,14 +336,24 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                     }
                 }
 
-                if (item && supercedeItem ) {
-                   // debugger;
+                if (item && supercedeItem) {
                     // var alreadyReplacedItem = supercedeItemLogic({ rec }, "get");
                     // if (!alreadyReplacedItem) supercedeItemLogic({ item, rec, supercedeItem, supercedeItemText, itemText }, "set");
                     supercedeItemLogic({ item, rec, supercedeItem, supercedeItemText, itemText }, "set");
                 }
 
+                //------------------Item Lines Colors Functionality 07/06/2024---------------- 
 
+                try {
+                    // if (sublistId == "item" && (fieldId == "item" || fieldId == 'custcol_sdb_dnr')) {
+                    if (fieldId == 'custcol_sdb_dnr' && rec.getCurrentSublistValue({ sublistId: "item", fieldId: "custcol_sdb_dnr" })) {//Add 16/7
+                        updateItemLineColor(context, aHolidays);
+                    }
+                } catch (error) {
+                    console.log("error color", error.toString());
+                }
+
+                //------------------Item Lines Colors Functionality 07/06/2024---------------- 
             }
         } catch (error) {
             console.log("Error in postSourcing", error.toString());
@@ -336,7 +368,6 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
             var sublistId = context.sublistId;
             var fieldId = context.fieldId;
             var scriptObj = runtime.getCurrentScript();
-           // debugger;
             if (sublistId == "item") {
                 var itemText = rec.getCurrentSublistText({
                     sublistId: "item",
@@ -387,7 +418,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                     window.alert(
                         "Item " +
                         itemText +
-                        " is superceded by " +
+                        " is superseded by " +
                         supercedeItemText +
                         ". Please replace the item."
                     );
@@ -407,8 +438,9 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
     function fieldChanged(context) {
         try {
             var field = context.fieldId;
-          
-            PopulateAdressFunction(context, true, context.currentRecord.type);
+
+
+            if (context.currentRecord.type != 'invoice') PopulateAdressFunction(context, true, context.currentRecord.type);
             // if (context.currentRecord.type != 'returnauthorization') PopulateAdressFunction(context, true);
             var currentRecord = context.currentRecord;
             if (field == "otherrefnum" && currentRecord.getValue("otherrefnum") != "") checkDuplicatePO(context);
@@ -416,13 +448,25 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
             if (field == "entity" && context.currentRecord.type == "salesorder") {
                 try {
                     var goodStanding = hasGoodStanding(context.currentRecord);
-                    if (!goodStanding) alert("This customer dont have permission to save order because it is not in good standing!");
+                    if (!goodStanding) alert("This customer does not have permission to save order because it is not in good standing!");
                 } catch (error) {
                     log.error("ERROR hasGoodStanding", error);
                 }
             }
-
             // ------------------------ Good Standing Functionality ------------------------ //
+
+            //------------------Item Lines Colors Functionality 07/06/2024---------------- 
+            var sublistId = context.sublistId;
+            try {
+                //if (sublistId == "item" && (field == "item" || field == 'custcol_sdb_dnr')) {
+                if (sublistId == "item" && field == 'custcol_sdb_dnr' && currentRecord.getCurrentSublistValue({ sublistId: "item", fieldId: "custcol_sdb_dnr" })) {//Add 16/7
+                    updateItemLineColor(context, aHolidays);
+                }
+            } catch (error) {
+
+            }
+
+            //------------------Item Lines Colors Functionality  07/06/2024----------------
         } catch (error) {
             log.error("ERROR fieldChanged: ", error)
         }
@@ -452,12 +496,12 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
             if (!warehouse) {
 
                 var ObjectHouse = getWarehouseFromAddress(currentRecord, 'entity');
-                var WarehouseCustomer = ObjectHouse.warehouse;
-                var ShipMethodCustomer = ObjectHouse.shippingMethod;
+                var WarehouseCustomer = ObjectHouse ? ObjectHouse.warehouse : ''; //Add 15/7
+                var ShipMethodCustomer = ObjectHouse ? ObjectHouse.shippingMethod : ''; //Add 15/7
 
                 // Warehouse
                 if (WarehouseCustomer) {
-                   
+
                     currentRecord.setValue('location', WarehouseCustomer);
                     currentRecord.setValue('custbody_warehouse_roadnet', WarehouseCustomer);
                 }
@@ -701,14 +745,14 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
             //var quantityAvailable = getItemAvailability(item);
 
             //  if (isEmpty(supercedeItemText) || quantityAvailable != 0) return;
-
+            supercedeItem = findFinalItem({ itemId: supercedeItem, name: supercedeItemText }); //Add 30/7
             var scriptObj = runtime.getCurrentScript();
             //drop ship form
             var paramForm = scriptObj.getParameter({ name: 'custscript_sdb_form_drop_ship' });
             //actual form
             var actualForm = rec.getValue('customform');
             if (actualForm != paramForm) {
-                window.alert(`Item ${itemText} is superceded by ${supercedeItemText}. The item will update Automatically`);
+                window.alert(`Item ${itemText} is superseded by ${supercedeItem.name}. The item will update Automatically`);
                 /*rec.setCurrentSublistText({
                     sublistId: "item",
                     fieldId: "item",
@@ -719,15 +763,14 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                 var currentLine = rec.getCurrentSublistIndex({
                     sublistId: 'item',
                 })
-                 debugger;
                 var actualWarehouse = rec.getValue('location');
 
                 rec.setCurrentSublistValue({
                     sublistId: 'item',
                     fieldId: 'item',
-                    value: supercedeItem,
+                    value: supercedeItem.itemId,
                     ignoreFieldChange: false,
-                    enableSourcing:true
+                    enableSourcing: true
                 });
 
                 rec.setCurrentSublistValue({
@@ -735,7 +778,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                     fieldId: 'quantity',
                     value: 1,
                     ignoreFieldChange: false,
-                    enableSourcing:true
+                    enableSourcing: true
                 });
 
                 rec.setCurrentSublistValue({
@@ -743,12 +786,12 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                     fieldId: 'custcol_sdb_item_already_superceded',
                     value: false,
                     ignoreFieldChange: false,
-                    enableSourcing:true
+                    enableSourcing: true
                 });
                 rec.commitLine({
-                     sublistId: 'item'
+                    sublistId: 'item'
                 });
-                
+
                 rec.selectLine({
                     sublistId: 'item',
                     line: currentLine
@@ -779,7 +822,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                     fieldId: "custcol_acme_markup_percent",
                 }));
 
-                sessionStorage.setItem(supercedeItem, `{"margin": ${margin}, "qty": ${qty}, "rule": "Margin Markup", "replacedFrom": ${item}}`);
+                sessionStorage.setItem(supercedeItem.itemId, `{"margin": ${margin}, "qty": ${qty}, "rule": "Margin Markup", "replacedFrom": ${item}}`);
             }
             else if (pricingRule == "Fixed Price") {
                 var rate = Number(rec.getCurrentSublistText({
@@ -787,10 +830,10 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                     fieldId: "rate",
                 }));
 
-                sessionStorage.setItem(supercedeItem, `{"rate": ${rate}, "qty": ${qty}, "rule": "Fixed Price", "replacedFrom": ${item}}`);
+                sessionStorage.setItem(supercedeItem.itemId, `{"rate": ${rate}, "qty": ${qty}, "rule": "Fixed Price", "replacedFrom": ${item}}`);
             }
             else {
-                sessionStorage.setItem(supercedeItem, `{"rule": "No Change"}`);
+                sessionStorage.setItem(supercedeItem.itemId, `{"rule": "No Change"}`);
             }
 
 
@@ -798,6 +841,33 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
 
     }//End supercede logic
 
+    //Search until the last item suoersede is brought - Add 30/7
+    function findFinalItem(objItemId) {
+        try {
+            if(!objItemId || !objItemId.itemId) return objItemId
+            var item = search.lookupFields({
+                type: record.Type.INVENTORY_ITEM,
+                id: objItemId.itemId,
+                columns: ['custitem_acc_supercede_item']
+            })
+            // debugger
+            if (item.custitem_acc_supercede_item.length) {
+                objItemId.itemId = item.custitem_acc_supercede_item[0].value;
+                objItemId.name = item.custitem_acc_supercede_item[0].text;
+                return findFinalItem(objItemId);
+            } else {
+                return objItemId;
+            }
+
+        } catch (error) {
+            log.error({
+                title: 'Error findFinalItem',
+                details: error
+            });
+            return objItemId;
+        }
+    }
+  
     //Populate Warehouse Functionality SDB
     function populateWarehouseFunctionality(context) {
         try {
@@ -819,7 +889,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
             });
 
             if (!itemId) return;
-            if(actualLocation != SAVAGE && actualLocation != RICHMOND){// Add 4/4/24
+            if (actualLocation != SAVAGE && actualLocation != RICHMOND) {// Add 4/4/24
                 salesRecord.setCurrentSublistValue({
                     sublistId: 'item',
                     fieldId: 'location',
@@ -827,6 +897,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                     ignoreFieldChange: false,
                     enableSourcing: true
                 });
+                return
             }
             //Bring all line items with available quantity gratear than 0 for each Warehouse
             var itemInfo = getLocationsAvailablePerItem(itemId);
@@ -892,7 +963,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                             locationToSet = savageLocation.location;
                         }
                         else
-                            //If we dont have location in richmond we are going to look for any location that has qty greater than 0
+                        //If we dont have location in richmond we are going to look for any location that has qty greater than 0
                         {
                             locationToSet = SAVAGE;
                         }
@@ -943,6 +1014,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
             var lineItemCount = salesRecord.getLineCount("item");
             if (lineItemCount < 1) return;
 
+
             for (var i = 0; i < lineItemCount; i++) { // Add 4/4/24
                 var itemId = salesRecord.getSublistValue({
                     sublistId: 'item',
@@ -952,13 +1024,19 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                 if (!itemId) continue;
 
                 //Bring all line items with available quantity gratear than 0 for each Warehouse
-                if(actualLocation != SAVAGE && actualLocation != RICHMOND){
+                if (actualLocation != SAVAGE && actualLocation != RICHMOND) {
+                    salesRecord.selectLine({ sublistId: 'item', line: i });
                     salesRecord.setCurrentSublistValue({
                         sublistId: 'item',
                         fieldId: 'location',
                         value: actualLocation,
                         ignoreFieldChange: true
                     });
+                    try {
+                        salesRecord.commitLine("item");
+                    } catch (error) {
+                    }
+                    continue;
                 }
                 var itemInfo = getLocationsAvailablePerItem(itemId);
                 if (!itemInfo) continue;
@@ -967,7 +1045,6 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                 if (actualLocation == SAVAGE) {
                     //Set location in item line
                     salesRecord.selectLine({ sublistId: 'item', line: i });
-
                     salesRecord.setCurrentSublistValue({
                         sublistId: 'item',
                         fieldId: 'location',
@@ -1000,8 +1077,11 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                             });
                         }
                     }
+                    try {
+                        salesRecord.commitLine("item");
+                    } catch (error) {
+                    }
 
-                    salesRecord.commitLine("item");
                 }
                 //If warehouse at header line is RICHMOND
                 else if (actualLocation == RICHMOND) {
@@ -1024,7 +1104,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                                 locationToSet = savageLocation.location;
                             }
                             else
-                                //If we dont have location in richmond we are going to look for any location that has qty greater than 0
+                            //If we dont have location in richmond we are going to look for any location that has qty greater than 0
                             {
                                 locationToSet = SAVAGE;
                             }
@@ -1046,8 +1126,12 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                         enableSourcing: true
                     });
 
-                    salesRecord.commitLine("item");
+                    try {
+                        salesRecord.commitLine("item");
+                    } catch (error) {
+                    }
                 }
+
             }//End for
         }
         catch (error) {
@@ -1217,7 +1301,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
             if (!currentRecord) return true;
             var goodStanding = hasGoodStanding(currentRecord);
             if (!goodStanding) {
-                alert("This customer dont have permission to save order because it is not in good standing!");
+                alert("This customer does not have permission to save order because it is not in good standing!");
                 return false;
             }
             return true;
@@ -1236,7 +1320,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
                 id: customer,
                 columns: ['custentity_credit_codech']
             });
-           // console.log("hasGoodStanding", { customer, customerFields });
+            // console.log("hasGoodStanding", { customer, customerFields });
             return customerFields.custentity_credit_codech == false ? false : true;
         } catch (error) {
             return true;
@@ -1245,12 +1329,197 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog'], function
     }
     // ------------------------ Good Standing Functionality ------------------------ //
 
+
+    //------------------Item Lines Colors Functionality 07/06/2024---------------- 
+
+    function updateItemLineColor(context, aHolidays) {
+        try {
+            var currentRecord = context.currentRecord;
+            var shipDate = currentRecord.getValue('startdate');
+            var customForm = currentRecord.getValue('customform');
+            var shipDateFormated = new Date(shipDate);
+            var sublistName = context.sublistId;
+            var fieldName = context.fieldId;
+            if (sublistName === 'item' && (fieldName == 'item' || fieldName == 'custcol_sdb_dnr')) {
+                var line = context.line + 1;
+                var DNR = currentRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_sdb_dnr' });
+                var backordered = currentRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'quantitybackordered' });
+                var itemType = currentRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'itemtype' });
+                if (DNR == 2 && Number(backordered) > 0 && itemType == 'InvtPart') {
+                    var trElement = document.querySelector('#item_row_' + line);
+                    if (!trElement) trElement = trElement = document.querySelector(".uir-machine-row-focused"); //This selector is for new lines
+                    if (trElement) setTrAndTdLineColors(trElement, tr_orange_color, tds_orange_color);
+                } else if ((itemType == 'InvtPart') && (shipDateFormated > nextBusinessDay && DNR != 2) || (DNR == 1 && Number(backordered) > 0)) {
+                    var trElement = document.querySelector('#item_row_' + line);
+                    if (!trElement) trElement = trElement = document.querySelector(".uir-machine-row-focused");//This selector is for new lines
+                    if (trElement) setTrAndTdLineColors(trElement, tr_yellow_color, tds_yellow_color);
+                } else if ((itemType == 'NonInvtPart') && (currentRecord.type != record.Type.CREDIT_MEMO) && (customForm != 300)) {
+                    var trElement = document.querySelector('#item_row_' + line);
+                    if (!trElement) trElement = trElement = document.querySelector(".uir-machine-row-focused");//This selector is for new lines
+                    if (trElement) setTrAndTdLineColors(trElement, tr_red_color, tds_red_color);
+                }
+            }
+        } catch (error) {
+            log.error('updateItemLineColor error', error);
+        }
+    }
+    function setLineColours(context, aHolidays) {
+        try {
+            //DNR 2 = O
+            //DNR 1 = N
+            var soRecord = context.currentRecord;
+            var shipDate = soRecord.getValue('startdate');
+            var shipDateFormated = new Date(shipDate);
+            var customForm = soRecord.getValue('customform');
+
+            var lineCount = soRecord.getLineCount('item');
+            for (var i = 0; i < lineCount; i++) {
+                var DNR = soRecord.getSublistValue({ sublistId: "item", fieldId: "custcol_sdb_dnr", line: i });
+                var backordered = soRecord.getSublistValue({ sublistId: "item", fieldId: "quantitybackordered", line: i });
+                var itemType = soRecord.getSublistValue({ sublistId: 'item', fieldId: 'itemtype', line: i });
+                if (DNR == 2 && Number(backordered) > 0 && itemType == 'InvtPart') {
+                    var lineId = i + 1;
+                    var trElement = document.querySelector('#item_row_' + lineId);
+                    if (trElement) setTrAndTdLineColors(trElement, tr_orange_color, tds_orange_color);
+                } else if ((itemType == 'InvtPart') && (shipDateFormated > nextBusinessDay && DNR != 2) || (DNR == 1 && Number(backordered) > 0)) {
+                    var lineId = i + 1;
+                    var trElement = document.querySelector('#item_row_' + lineId);
+                    if (trElement) setTrAndTdLineColors(trElement, tr_yellow_color, tds_yellow_color);
+                } else if ((itemType == 'NonInvtPart') && (soRecord.type != record.Type.CREDIT_MEMO) && (customForm != 300)) {
+                    var lineId = i + 1;
+                    var trElement = document.querySelector('#item_row_' + lineId);
+                    if (trElement) setTrAndTdLineColors(trElement, tr_red_color, tds_red_color);
+                }
+            }
+        } catch (error) {
+            log.error('setLineColours ERROR:', error);
+        }
+    }
+    function setTrAndTdLineColors(tr_element, tr_color, td_color) {
+        try {
+            if (!tr_element) return;
+            var tds = tr_element.querySelectorAll('td');
+            tr_element.style.setProperty('outline', tr_color, 'important');
+            for (let j = 0; j < tds.length; j++) {
+                tds[j].style.setProperty('background-color', td_color, 'important');
+            }
+        } catch (error) {
+            log.error("setTrAndTdLineColors", error);
+        }
+    }
+    function lineInit(context) {
+        try {
+            var sublistId = context.sublistId;
+            if (sublistId != 'item') return;
+          
+            setTimeout(() => {
+                setLineColours(context, aHolidays);
+            },200);
+        } catch (error) {
+            log.error("LineInit ERROR", error)
+        }
+    }
+    function loadHolidaysPageInit() {
+        try {
+            var aHolidays = [];
+            var holidays = search.create({
+                type: "customrecord_acme_official_holidays",
+                filters:
+                    [],
+                columns:
+                    ['custrecord_aoh_holiday_date']
+            });
+            holidays.run().each(function (result) {
+                aHolidays.push(result.getValue('custrecord_aoh_holiday_date'));
+
+                return true;
+            });
+
+            return aHolidays;
+        } catch (error) {
+            log.error("loadHolidaysPageInit error", error);
+        }
+    }
+    function getNextBusinessDayNew(sDate, aHolidays) {
+        try {
+            if (!aHolidays) return;
+            var dDate = new Date(sDate);
+            var sReturn;
+            do {
+                dDate.setDate(dDate.getDate() + 1);
+                sReturn = dDate;
+                sReturn = getFormatDate(sReturn)
+            } while (aHolidays.indexOf(sReturn) >= 0 || dDate.getDay() == 6 || dDate.getDay() == 0);
+
+            return new Date(sReturn);
+        } catch (error) {
+            log.error("getNextBusinessDayNew", error);
+        }
+    }
+    function getFormatDate(d) {
+        try {
+            return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+            d.getDate() < 10 ? "0" + d.getDate() : d.getDate(),
+            d.getFullYear()].join('/')
+        } catch (error) {
+            log.error("getFormateDate", error)
+        }
+    }
+    //------------------Item Lines Colors Functionality 07/06/2024---------------- 
+    function reject(id) {
+        try {
+            var suitelet = url.resolveScript({
+                scriptId: 'customscript_sdb_so_reject_reason_su',
+                deploymentId: 'customdeploy_sdb_so_reject_reason_su',
+                returnExternalUrl: false,
+                params: {
+                    record_id: id,
+                    record_type: 'salesorder',
+                }
+            })
+            https.get({
+                url: suitelet
+            });
+            window.open(suitelet);
+        } catch (error) {
+            console.log('reject ERROR' + error)
+        }
+    }
+
+    function approve(id) {
+        try {
+             // var currenteId = runtime.getCurrentUser().id;
+            //debugger;
+            var suitelet = url.resolveScript({
+                scriptId: 'customscript_sdb_approve_so',
+                deploymentId: 'customdeploy_sdb_approve_so',
+                returnExternalUrl: false,
+                params: {
+                    recordid: id
+                }
+            })
+            var response = https.get({
+                url: suitelet
+            });
+            log.debug('response', response);
+            var status;
+            if (response && response.body) status = JSON.parse(response.body).status;
+            if (status) location.reload();
+        } catch (e) {
+            console.log("approve", e);
+        }
+    }
+
     return {
         pageInit: pageInit,
         validateLine: validateLine,
         postSourcing: postSourcing,
         fieldChanged: fieldChanged,
-        saveRecord: saveRecord
+        saveRecord: saveRecord,
+        lineInit: lineInit,
+        reject: reject,
+        approve: approve
     };
 });
+
 

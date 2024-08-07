@@ -84,7 +84,7 @@ define(["N/log", "N/record", "N/search", "N/ui/serverWidget", 'N/format','N/ui/m
     
             //*CHOOSE COLUMNS FOR SUBLIST VALUES
     
-            let columnHeaders = ["Item", "Description"];
+            let columnHeaders = ["Item", "Description", "Last Date Sold", "Total Inventory On Hand", "Preferred Vendor", "Buyer Name"];
     
             //*SET DATE FORMATS
             //------Date Params-----------
@@ -137,7 +137,7 @@ define(["N/log", "N/record", "N/search", "N/ui/serverWidget", 'N/format','N/ui/m
             
             sublitsData.columnHeaders.forEach(column => {
                 sublist.addField({
-                    id: "custpage_" + sublitsData.transactionType + column?.toLowerCase(),
+                    id: "custpage_" + sublitsData.transactionType + column?.toLowerCase().split(' ').join(''),
                     label: column,
                     type: serverWidget.FieldType.TEXT,
                 });

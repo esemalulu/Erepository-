@@ -3,7 +3,7 @@
  * @NScriptType UserEventScript
  * @NModuleScope SameAccount
  * 
- * Posible Upgrades:
+ * Possible Upgrades:
  *  1. Restockit Entity source from script parameter.
  *  2. Restockit 850 Success Status source from script parameter.
  *  3. SPS Employee source from script parameter
@@ -12,16 +12,22 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
     function beforeSubmit(context) {
         try {
             var recordType = context.newRecord.type;
-            if (recordType == 'salesorder') {
-                updateItemTax(context.newRecord);
-            }
-            updateItemSPSFields(context);
-            if (recordType == 'invoice') {
-                updateSyncStatus(context.newRecord);
-            }
+            if (recordType == 'salesorder') wmsW2Go(context.newRecord)
+            if (recordType == 'salesorder' || recordType == 'invoice' || recordType == 'creditmemo') updateItemTax(context.newRecord);
+            if (recordType == 'salesorder' || recordType == 'invoice' || recordType == 'creditmemo') updateItemSPSFields(context);//Add cedit memo record, 29/7
+            if (recordType == 'invoice') updateSyncStatus(context.newRecord);
             // log.debug("beforeSubmit() Remaining governance units:", runtime.getCurrentScript().getRemainingUsage());
         } catch (error) {
             log.error("ERROR: ", error);
+        }
+    }
+
+    function wmsW2Go(newRecord) {
+        try {
+            var location = newRecord.getValue('location');
+            if (location == 132 || location == 131 || location == 130) newRecord.setValue('custbody_a1wms_dnloadtowms', false);
+        } catch (error) {
+            log.error("ERROR: wmsW2Go ", error);
         }
     }
 
@@ -40,6 +46,7 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
     // CustomRecord ItemUPCByOUM
     var SAPCODEFIELDID = "custrecord_sdb_acme_sap";
     var UPCCODEFIELDID = "custrecord_sdb_acme_upc";
+    var SAPCODEEDIFIELD = "custcol_edi_item_sap_code";
     var ITEMUPCBYUOMSUBLISTUOMFIELDID = "custrecord_sdb_acme_uom";
     // Item Fields
     var ACMECODEFIELDID = "itemid";
@@ -118,8 +125,8 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
                 });
             }
             var enteredBy = newRecord.getValue(ENTEREDBYFIELDID);
-            if (enteredBy != SPSWEBSERVICEEMPLOYEE){
-                newRecord.setValue(NETWORKPONUMBERFIELDID,'');
+            if (enteredBy != SPSWEBSERVICEEMPLOYEE) {
+                newRecord.setValue(NETWORKPONUMBERFIELDID, '');
             }
 
             hasAllFields = hasAllFields && networkNumber;
@@ -129,6 +136,7 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
                 sublistId: 'item'
             });
             for (var i = 0; i < lineCount; i++) {
+                log.debug("updateItemSPSFields() Remaining Usage is: ", runtime.getCurrentScript().getRemainingUsage());
                 var item = newRecord.getSublistValue({
                     sublistId: 'item',
                     fieldId: 'item',
@@ -179,9 +187,11 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
                     fieldId: MANUFCODEFIELDID,
                     line: i,
                 });
+                if (BPN) newRecord.setSublistValue({ sublistId: 'item', fieldId: SAPCODEEDIFIELD, value: BPN, line: i, });
                 if (!BPN || !POLineNum || !NWPrice || !UPC || !itemPart || !prefVendor || !manufCode) { // IF theres a value missing -> go get it
                     if (!BPN || !UPC || !itemPart || !prefVendor || !manufCode) {
-                        var itemAttributes = getItemAttribute(item, UoM, UoMText);
+                        var needsUPCbyUOMAttributes = !BPN || !UPC;
+                        var itemAttributes = getItemAttribute(item, UoM, UoMText, needsUPCbyUOMAttributes);
                     }
                     if (!manufCode) {
                         manufCode = itemAttributes[MANUFCODEFIELDID];
@@ -226,8 +236,15 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
                                 value: BPN,
                                 line: i,
                             });
+                            newRecord.setSublistValue({
+                                sublistId: 'item',
+                                fieldId: SAPCODEEDIFIELD,
+                                value: BPN,
+                                line: i,
+                            });
                         }
                     }
+
                     if (!POLineNum) {
                         POLineNum = addZeros(i + 1);
                         newRecord.setSublistValue({
@@ -348,41 +365,26 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
             log.error("getAttributesByUoMRecord() ERROR", error);
         }
     }
-    function getItemAttribute(item, UoM, UoMText) {
+    function getItemAttribute(item, UoM, UoMText, needsUPCbyUOMAttributes) {
         try {
             var returnObj = {};
-            getAttributesByUoMRecord(item, returnObj, UoMText);
+            if (needsUPCbyUOMAttributes) {
+                getAttributesByUoMRecord(item, returnObj, UoMText);
+            }
 
             // Get Item fields
             var itemLookupFields = search.lookupFields({
                 type: 'item',
                 id: item,
-                columns: [ACMECODEFIELDID, "recordtype", 'vendorname']
+                columns: [ACMECODEFIELDID, "recordtype", 'vendorname', 'vendor']
             });
             log.debug("getItemAttribute() itemLookupFields is: ", itemLookupFields);
             returnObj[ACMECODEFIELDID] = itemLookupFields[ACMECODEFIELDID];
             returnObj[MANUFCODEFIELDID] = itemLookupFields['vendorname'];
             // Get Vendor fields
-            if (itemLookupFields["recordtype"]) {
-                var itemRecord = record.load({
-                    type: itemLookupFields['recordtype'],
-                    id: item,
-                    isDynamic: true,
-                });
-                var prefVendorLine = itemRecord.findSublistLineWithValue({
-                    sublistId: 'itemvendor',
-                    fieldId: 'preferredvendor',
-                    value: 'T'
-                });
-                if (prefVendorLine >= 0) {
-                    itemRecord.selectLine({
-                        sublistId: 'itemvendor',
-                        line: prefVendorLine
-                    });
-                    var prefVendorID = itemRecord.getCurrentSublistValue({
-                        sublistId: 'itemvendor',
-                        fieldId: 'vendor'
-                    });
+            if (itemLookupFields['vendor'] && itemLookupFields['vendor'][0] && itemLookupFields['vendor'][0].value) {
+                var prefVendorID = itemLookupFields['vendor'] ? itemLookupFields['vendor'][0].value : 0;
+                if (prefVendorID) {
                     var prefVendorLookUpFields = search.lookupFields({
                         type: 'vendor',
                         id: prefVendorID,
@@ -436,13 +438,27 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
             var taxItem = taxInfo.filter(function (e) {
                 return e.itemTax == itemTaxType;
             });
-            if (!taxItem.length || !taxItem[0].isTaxable) continue;
+            log.audit("ITEM: ", { customer: customerId, itemId: itemId, taxCode: taxCode, taxItem: taxItem[0], itemTaxType: itemTaxType });
+            if (!taxItem.length || !taxItem[0].isTaxable) {
+                newRecord.setSublistValue({ sublistId: 'item', fieldId: 'taxcode', value: -7, line: i }); //-Not Taxable-
+                continue;
+            }
 
-             log.audit("ITEM: ", { customer: customerId, itemId: itemId, taxCode: taxCode, taxItem: taxItem[0] });
             if (taxItem[0].isTaxable && taxCode) {
                 newRecord.setSublistValue({ sublistId: 'item', fieldId: 'istaxable', value: true, line: i });
                 newRecord.setSublistValue({ sublistId: 'item', fieldId: 'taxcode', value: taxCode, line: i });
             }
+            var itemsWithNoTax = [78555, 131372, 132298, 132294, 132295, 132296, 132297, 132298, 132299, 132260, 131660];
+            var isNotTaxable = false;
+            itemsWithNoTax.forEach(function (it) {
+                if (it == itemId) isNotTaxable = true;
+            })
+            log.debug('Is not Taxable:', { itemId: itemId, isNotTaxable: isNotTaxable })
+            if (isNotTaxable) newRecord.setSublistValue({ sublistId: 'item', fieldId: 'taxcode', value: -7, line: i }); //-Not Taxable-
+
+            // if (itemId == 78555 || itemId == 131372 || itemId == 132298 || itemId == 132294 || itemId == 132295 || itemId == 132296 || itemId == 132297 || itemId == 132298 || itemId == 132299 || itemId == 132260  || itemId == 131660 ) { // 989998 - 888888 - 1141521
+            //     newRecord.setSublistValue({ sublistId: 'item', fieldId: 'taxcode', value: -7, line: i }); //-Not Taxable-
+            // }
         }
     }
 
@@ -496,33 +512,116 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
     }
 
     function beforeLoad(context) {
-        // executePageInit(context); COMMENTED 08/05/2024 
+        try {
+            executePageInit(context);
+            var currentRoleId = runtime.getCurrentUser().role;
+            var roleLabel = search.lookupFields({
+                type: search.Type.ROLE,
+                id: currentRoleId,
+                columns: 'name'
+            });
+            roleLabel = roleLabel ? roleLabel.name : '';
+            log.debug("roleLabel is: ", roleLabel);
+            var arrayRolesList = getRolesListValues();
+            var hasPermissionToApprove = arrayRolesList.indexOf(roleLabel);
+            log.debug("hasPermissionToApprove is: ", hasPermissionToApprove);
+            if (hasPermissionToApprove != -1) addButton(context);
+        } catch (error) {
+            log.error("ERROR beforeLoad: ", error)
+        }
     }
+
+    function addButton(context) {
+        try {
+            if (context.type === context.UserEventType.VIEW) {
+                var status = context.newRecord.getValue("orderstatus")
+                if (status == "A") {
+                    var form = context.form;
+                    var clientPath = "SuiteScripts/SDB-CUE-SupercedeItem.js "
+                    form.clientScriptModulePath = clientPath;
+                    context.form.addButton({ functionName: "approve(" + context.newRecord.id + ")", id: 'custpage_approve', label: 'Approve' });
+                    context.form.addButton({ functionName: "reject(" + context.newRecord.id + ")", id: 'custpage_reject', label: 'Reject' });
+                }
+            }
+        } catch (error) {
+            log.error("ERROR addButton: ", error)
+        }
+    }
+
+    function getRolesListValues() {
+        var arrayRoles = [];
+        var rolesList = search.create({
+            type: "customlist_sdb_approval_roles_so_restr",
+            filters:
+                [
+                ],
+            columns:
+                [
+                    search.createColumn({
+                        name: "name",
+                        sort: search.Sort.ASC,
+                        label: "name"
+                    }),
+                ]
+        });
+        rolesList.run().each(function (result) {
+            arrayRoles.push(result.getValue("name"));
+            return true;
+        });
+
+        return arrayRoles;
+     }//end getRolesListValues
 
     // ------------------------ RECORD HAS BEEN CHANGE ------------------------ //
     function executePageInit(context) {
         try {
             var userObj = runtime.getCurrentUser();
-            if (userObj.id == 85394) return;
+
+            //if (userObj.id != 85394 && userObj.id != 11) return; // Eduardo || Maggie
             if (context.newRecord.type != "salesorder") return;
             var salesOrder = context.newRecord;
             var isDropShipOrder = salesOrder.getValue("custbody_dropship_order");
             if (!salesOrder.id || isDropShipOrder) return;
 
-            var timestamp = salesOrder.getValue('custbody_a1wms_dnloadtimestmp');
-            var download = salesOrder.getValue('custbody_a1wms_dnloadtowms');
-            var status = salesOrder.getValue('custbody_a1wms_orderstatus');
-            var shipcomplete = salesOrder.getValue('shipcomplete');
-            var customform = salesOrder.getValue('customform');
-            var hasCommitedQty = hetHasCommitedQty(salesOrder.id);
-            var networkMissing = getNetworkMissing(salesOrder);
+            // var timestamp = salesOrder.getValue('custbody_a1wms_dnloadtimestmp');
+            // var download = salesOrder.getValue('custbody_a1wms_dnloadtowms');
+            // var status = salesOrder.getValue('custbody_a1wms_orderstatus');
+            // var shipcomplete = salesOrder.getValue('shipcomplete');
+            // var customform = salesOrder.getValue('customform');
+            // var hasCommitedQty = hetHasCommitedQty(salesOrder.id);
+            // var networkMissing = getNetworkMissing(salesOrder);
 
             // log.debug("ALERT INFO: ", { salesOrder: salesOrder.id, timestamp, download, status, shipcomplete, customform, hasCommitedQty, networkMissing });
 
-            if ((timestamp && download && !status && hasCommitedQty && !shipcomplete && customform != 317) || networkMissing) showAlert(context);
+            // if ((timestamp && download && !status && hasCommitedQty && !shipcomplete && customform != 317) || networkMissing) showAlert(context);
+            var spsIsProcessing = getSpsIsProcessing(salesOrder);
+            var rebateFlag = salesOrder.getValue('custbody_rebate_flagged_cb');
+            if (spsIsProcessing) showAlert(context);
         } catch (e) {
             log.error('ERROR: executePageInit', e);
         }
+    }
+
+    function getSpsIsProcessing(salesOrder) {
+        var customrecord_sdb_sps_orders_to_replaceSearchObj = search.create({
+            type: "customrecord_sdb_sps_orders_to_replace",
+            filters:
+                [
+                    ["custrecord_sdb_transaction_id_replace", "is", String(salesOrder.id)]
+                ],
+            columns:
+                [
+                    search.createColumn({ name: "custrecord_sdb_processed_order", label: "Processed Record" })
+                ]
+        });
+        var searchResultCount = customrecord_sdb_sps_orders_to_replaceSearchObj.runPaged().count;
+        if (!searchResultCount) return false;
+        var isProcesed;
+        customrecord_sdb_sps_orders_to_replaceSearchObj.run().each(function (result) {
+            isProcesed = result.getValue('custrecord_sdb_processed_order');
+            return false;
+        });
+        return !isProcesed;
     }
 
     function getNetworkMissing(salesOrder) {
@@ -559,7 +658,7 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
     }
     function showAlert(context) {
         try {
-            context.form.addPageInitMessage({ type: message.Type.WARNING, message: 'This order is being processed by HIGH JUMP, once this process is finished it can be edited. <a href="">refresh</a>', duration: 1000000 });
+            context.form.addPageInitMessage({ type: message.Type.WARNING, message: 'This order is being processed, once this process is finished it can be edited. <a href="">refresh</a>', duration: 1000000 });
             var script = '<script>'
             script += 'setInterval(function(){'
             script += 'var saveBtn = document.querySelectorAll(".pgBntY.pgBntB");'
@@ -609,78 +708,65 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
         return taxCode;
     }
 
-       function afterSubmit(context) {
+    function afterSubmit(context) {
         try {
-            //* Line fields
-            return
+
             if (context.type == context.UserEventType.DELETE) return;
             var newRecord = context.newRecord;
-            var enteredBy = newRecord.getValue('custbody_aps_entered_by')
-            log.debug("enteredBy: ", enteredBy);
-            if (enteredBy != 51363 && newRecord.id != 1821171) return;
-            log.debug("newRecord.id:>>> ", newRecord.id);
-            var rcd = record.load({
-                type: record.Type.SALES_ORDER,
-                id: newRecord.id,
-                isDynamic: true,
-            })
-
-            var lineCount = newRecord.getLineCount({
-                sublistId: 'item'
-            });
-
-            for (var i = 0; i < lineCount; i++) {
-                rcd.selectLine({
-                    sublistId: 'item',
-                    line: i
+            if (newRecord.type == 'salesorder') {
+                var rcd = record.load({
+                    type: record.Type.SALES_ORDER,
+                    id: newRecord.id,
+                    isDynamic: true,
                 })
-                var item = rcd.getCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'item',
 
+                var lineCount = newRecord.getLineCount({
+                    sublistId: 'item'
                 });
 
-                var amount = rcd.getCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'amount',
-                })
-                var taxrate = rcd.getCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'taxrate1',
-                })
-                var tax_amount = rcd.getCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'custcol_ava_taxamount',
-                })
+                for (var i = 0; i < lineCount; i++) {
+                    rcd.selectLine({
+                        sublistId: 'item',
+                        line: i
+                    })
+                    // var item = rcd.getCurrentSublistValue({
+                    //   sublistId: 'item',
+                    //   fieldId: 'item',
+                    // });
 
-                // rcd.setCurrentSublistValue({
-                //     sublistId: 'item',
-                //     fieldId: 'taxrate1',
-                //     value: taxrate
-                // })
-
-                taxrate = taxrate ? parseFloat(taxrate) : false;
-                log.debug("taxrate2: ", taxrate);
-                if (!taxrate) continue;
-                var newTaxAmount = returnTaxAmount(amount, taxrate)
-
-                log.debug("newtaxNount: ", newTaxAmount);
-                if (!tax_amount && newTaxAmount) {
-                    rcd.setCurrentSublistValue({
+                    var amount = rcd.getCurrentSublistValue({
+                        sublistId: 'item',
+                        fieldId: 'amount',
+                    })
+                    var taxrate = rcd.getCurrentSublistValue({
+                        sublistId: 'item',
+                        fieldId: 'taxrate1',
+                    })
+                    var tax_amount = rcd.getCurrentSublistValue({
                         sublistId: 'item',
                         fieldId: 'custcol_ava_taxamount',
-                        value: newTaxAmount
                     })
+                    taxrate = taxrate ? parseFloat(taxrate) : false;
+                    if (!taxrate && taxrate != 0) continue;
+                    var newTaxAmount = returnTaxAmount(amount, taxrate)
+                    if (!tax_amount && newTaxAmount) {
+                        rcd.setCurrentSublistValue({
+                            sublistId: 'item',
+                            fieldId: 'custcol_ava_taxamount',
+                            value: newTaxAmount
+                        })
 
-                    rcd.commitLine({
-                        sublistId: 'item'
-                    });
-             }
+                        rcd.commitLine({
+                            sublistId: 'item'
+                        });
+                    }
+                }
+
+                var soUpdate = rcd.save({
+                    ignoreMandatoryFields: true
+                })
+                log.debug("soUpdate: ", soUpdate);
             }
-
-            rcd.save({
-                ignoreMandatoryFields: true
-            })
 
         } catch (error) {
             log.error("ERROR - afterSubmit ID: " + newRecord.id, error);
@@ -699,7 +785,7 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
 
     return {
         beforeSubmit: beforeSubmit,
-        afterSubmit: afterSubmit
-        // beforeLoad: beforeLoad,
+        afterSubmit: afterSubmit,
+        beforeLoad: beforeLoad
     };
 });

@@ -35,7 +35,7 @@ define(["N/record","N/runtime","N/currentRecord",'N/search'], function (record,r
             var thisRecord = context.currentRecord;
             var currentRoleId = runtime.getCurrentUser().role;
 
-            if((rolesPermissionList.includes(currentRoleId)) && (context.sublistId=='addressbook'||context.sublistId=='recmachcustrecord_acme_ri_customer')){
+            if((rolesPermissionList.includes(currentRoleId)) && (context.sublistId=='recmachcustrecord_acme_ri_customer')){
                 alert('Error: You need a higher permission to do this action');
                 return false;
             }
@@ -50,7 +50,7 @@ define(["N/record","N/runtime","N/currentRecord",'N/search'], function (record,r
             var thisRecord = context.currentRecord;
             var currentRoleId = runtime.getCurrentUser().role;
 
-            if((rolesPermissionList.includes(currentRoleId)) && (context.sublistId=='addressbook'||context.sublistId=='recmachcustrecord_acme_ri_customer')){
+            if((rolesPermissionList.includes(currentRoleId)) && (context.sublistId=='recmachcustrecord_acme_ri_customer')){
                 alert('Error: You need a higher permission to do this action');
                 return false;
             }
@@ -65,7 +65,7 @@ define(["N/record","N/runtime","N/currentRecord",'N/search'], function (record,r
             var thisRecord = context.currentRecord;
             var currentRoleId = runtime.getCurrentUser().role;
 
-            if((rolesPermissionList.includes(currentRoleId)) && (context.sublistId=='addressbook'||context.sublistId=='recmachcustrecord_acme_ri_customer')){
+            if((rolesPermissionList.includes(currentRoleId)) && (context.sublistId=='recmachcustrecord_acme_ri_customer')){
                 alert('Error: You need a higher permission to do this action');
                 return false;
             }

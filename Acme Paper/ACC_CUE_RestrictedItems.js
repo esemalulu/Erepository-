@@ -98,6 +98,7 @@ define(['N/search', 'N/ui/dialog', 'N/record'],
                 var sublistFieldName = context.fieldId;
                 var currentRecord = context.currentRecord;
                 var loc = currentRecord.getValue({ fieldId: 'location' });
+                var customer = currentRecord.getValue({ fieldId: 'entity' });
                 var recordType = currentRecord.type;
 
                 /*	dialog.alert({
@@ -134,7 +135,6 @@ define(['N/search', 'N/ui/dialog', 'N/record'],
                     }
                 } */
 
-                debugger;
                 console.log('restricted items script')
                 if (sublistName == 'item' && sublistFieldName == 'item') {
                     var rate1;
@@ -157,7 +157,9 @@ define(['N/search', 'N/ui/dialog', 'N/record'],
                                     "AND",
                                     ["taxline", "is", "F"],
                                     "AND",
-                                    ["item", "anyof", item]
+                                    ["item", "anyof", item], 
+                                    "AND", 
+                                    ["name","anyof", customer]
                                 ],
                             columns:
                                 [

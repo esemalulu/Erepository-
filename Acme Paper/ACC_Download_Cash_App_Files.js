@@ -111,8 +111,8 @@
 		 {
 			 try{
 				 var connection = sftp.createConnection({
-					 username: 'a1fug2i3', //v6g1nl3l
-					 passwordGuid: '22099ff9984f429cb812ce3bc97336a5',//'bbfc228190bc42dbbbe18335c1597848',//'906df5c125134d659b4447ce47a682ec', // 5880485058ec4836b3befbe694dbe8cc // tee1nee9173#
+					 username: 'a1fug2i3', 
+					 passwordGuid: '6c62dba07c84467eb6a25298e8a5572e',
 					 url: 'safetrans.wellsfargo.com',		
 					 hostKey: prodHostKey,
 					 directory: '/',

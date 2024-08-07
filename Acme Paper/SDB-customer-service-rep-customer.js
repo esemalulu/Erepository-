@@ -2,87 +2,93 @@
  *@NApiVersion 2.1
  *@NScriptType UserEventScript
  */
-define(["N/log", "N/record", "N/ui/serverWidget", "N/search", "N/runtime"], function (log, record, serverWidget, search, runtime) {
+define(["N/log", "N/record", "N/ui/serverWidget", "N/search", "N/runtime","N/task"], function (log, record, serverWidget, search, runtime,task) {
 
     //Create list/record in order for the user to select one
     function beforeLoad(context) {
-        if (context.type != context.UserEventType.EDIT && context.type != context.UserEventType.CREATE) return;
+        try {
+            if (context.type != context.UserEventType.EDIT && context.type != context.UserEventType.CREATE) return;
 
-        var form = context.form;
-        if (!form) return;
-
-        var field = form.addField({
-            id: 'custpage_customer_service_rep',
-            label: 'Customer Service Rep',
-            type: serverWidget.FieldType.SELECT
-        });
-        if (!field) return;
-
-        var fieldOriginal = form.getField({
-            id: 'custentity_sdb_csr_customers'
-        });
-        if (fieldOriginal == null || !fieldOriginal) return;
-
-        if (fieldOriginal.defaultValue != "") {
-            field.defaultValue = fieldOriginal.defaultValue;
+            var form = context.form;
+            if (!form) return;
+    
+            var field = form.addField({
+                id: 'custpage_customer_service_rep',
+                label: 'Customer Service Rep',
+                type: serverWidget.FieldType.SELECT
+            });
+            if (!field) return;
+    
+            var fieldOriginal = form.getField({
+                id: 'custentity_sdb_csr_customers'
+            });
+            if (fieldOriginal == null || !fieldOriginal) return;
+    
+            if (fieldOriginal.defaultValue != "") {
+                field.defaultValue = fieldOriginal.defaultValue;
+            }
+    
+            //Hide original btn
+            fieldOriginal.updateDisplayType({
+                displayType: serverWidget.FieldDisplayType.HIDDEN
+            });
+    
+            setValuesField(field);
+        } catch (error) {
+            log.error("beforeLoad error",error)
         }
-
-        //Hide original btn
-        fieldOriginal.updateDisplayType({
-            displayType: serverWidget.FieldDisplayType.HIDDEN
-        });
-
-        setValuesField(field);
     }
 
     //Creates a Saved Search in order to find only the employees that meet the requirements for roles
     //then those customers are going to be saved in a SELECT field
     function setValuesField(field) {
-
-        var employeeSearchObj = search.create({
-            type: "employee",
-            filters:
-                [
-                    ["role", "anyof", "1052", "1050", "1041", "1049"]
-                ],
-            columns:
-                [
-                    search.createColumn({
-                        name: "internalid",
-                        summary: "GROUP",
-                        label: "Internal ID"
-                    }),
-                    search.createColumn({
-                        name: "entityid",
-                        summary: "GROUP",
-                        sort: search.Sort.ASC,
-                        label: "Name"
-                    })
-                ]
-        });
-        var searchResultCount = employeeSearchObj.runPaged().count;
-        log.debug("employeeSearchObj result count", searchResultCount);
-        employeeSearchObj.run().each(function (result) {
-            var idEmployee = result.getValue({
-                name: 'internalid',
-                summary: 'GROUP',
+        try {
+            var employeeSearchObj = search.create({
+                type: "employee",
+                filters:
+                    [
+                        ["role", "anyof", "1052", "1050", "1041", "1049"]
+                    ],
+                columns:
+                    [
+                        search.createColumn({
+                            name: "internalid",
+                            summary: "GROUP",
+                            label: "Internal ID"
+                        }),
+                        search.createColumn({
+                            name: "entityid",
+                            summary: "GROUP",
+                            sort: search.Sort.ASC,
+                            label: "Name"
+                        })
+                    ]
             });
-
-            var nameEmployee = result.getValue({
-                name: 'entityid',
-                summary: 'GROUP',
-            });
-
-            if (idEmployee && nameEmployee) {
-                field.addSelectOption({
-                    value: idEmployee,
-                    text: nameEmployee,
+            var searchResultCount = employeeSearchObj.runPaged().count;
+            // log.debug("employeeSearchObj result count", searchResultCount);
+            employeeSearchObj.run().each(function (result) {
+                var idEmployee = result.getValue({
+                    name: 'internalid',
+                    summary: 'GROUP',
                 });
-            }
-
-            return true;
-        });
-
+    
+                var nameEmployee = result.getValue({
+                    name: 'entityid',
+                    summary: 'GROUP',
+                });
+    
+                if (idEmployee && nameEmployee) {
+                    field.addSelectOption({
+                        value: idEmployee,
+                        text: nameEmployee,
+                    });
+                }
+    
+                return true;
+            });
+        } catch (error) {
+            log.error("setValuesField ",error);
+        }
     }//End
 
     function afterSubmit(context) {
@@ -96,8 +102,8 @@ define(["N/log", "N/record", "N/ui/serverWidget", "N/search", "N/runtime"], func
                 id: recid,
                 isDynamic: true,
             })
-            log.debug('recid', recid)
-            log.debug('type', type)
+            // log.debug('recid', recid)
+            // log.debug('type', type)
             var lines = rec.getLineCount({
                 sublistId: 'addressbook'
             })
@@ -119,9 +125,9 @@ define(["N/log", "N/record", "N/ui/serverWidget", "N/search", "N/runtime"], func
                 var locationId = subrec.getValue({
                     fieldId: 'custrecord_acc_omnitracs_location_id'
                 })
-                log.debug('locationId', locationId)
+                // log.debug('locationId', locationId)
                 if (!locationId) {
-                    log.debug('customerId_1', id)
+                    // log.debug('customerId_1', id)
                     subrec.setValue({ fieldId: 'custrecord_acc_omnitracs_location_id', value: id })
                 }
 
@@ -135,7 +141,19 @@ define(["N/log", "N/record", "N/ui/serverWidget", "N/search", "N/runtime"], func
                 enableSourcing: true,
                 ignoreMandatoryFields: true
             })
-            log.debug('customerId', customerId)
+            // log.debug('customerId', customerId)
+
+
+
+            try {
+                //Logic to update all the rebate customers associated to current customer
+                updateRebateCustomer(context);
+            } catch (error) {
+                log.error("AfterSubmit calling updateRebateCustomer ", error);
+            }
+
+            
+
         } catch (e) {
             log.error({
                 title: 'ERROR AfterSubmit',
@@ -144,8 +162,57 @@ define(["N/log", "N/record", "N/ui/serverWidget", "N/search", "N/runtime"], func
         }
     }
 
+    function updateRebateCustomer(context) {
+        try {
+            if(context.type!='edit')return;   
+            var newCustomerRecord = context.newRecord;
+            var oldCustomerRecord = context.oldRecord;
+            var newSalesTeamCount = newCustomerRecord.getLineCount({sublistId: 'salesteam'});
+            var oldSalesTeamCount = oldCustomerRecord.getLineCount({sublistId: 'salesteam'});
+            log.debug("newSalesTeamCount " + newSalesTeamCount ,"oldSalesTeamCount " + oldSalesTeamCount );
+            var salesUpdated = false;
+
+            //Check if sales team sublist was updated
+            if(newSalesTeamCount != oldSalesTeamCount) salesUpdated = true;
+            if(!salesUpdated){
+                for (var i = 0; i < newSalesTeamCount; i++) {
+                    var salesMember = newCustomerRecord.getSublistValue({sublistId: 'salesteam',fieldId: 'employee',line: i});
+                    var isNewMember =  oldCustomerRecord.findSublistLineWithValue({sublistId: 'salesteam',fieldId: 'employee',value: salesMember});
+                    log.debug("isNewMember",isNewMember)
+                    if( isNewMember == -1){
+                        log.debug("New Member added", salesMember)
+                        salesUpdated = true;
+                        break;
+                    }
+                }
+            }
+            //IF sales team was updated 
+            if (salesUpdated) {
+                var customerSalesMembers = [];
+                for (var i = 0; i < newSalesTeamCount; i++) {
+                    var salesMember = newCustomerRecord.getSublistValue({sublistId: 'salesteam',fieldId: 'employee',line: i});
+                    customerSalesMembers.push(salesMember);
+                }
+                var customerId = newCustomerRecord.id;
+                var scheduleTask = task.create({
+                    taskType: task.TaskType.SCHEDULED_SCRIPT,
+                    scriptId: 'customscript_sdb_update_rebate_customer',
+                    deploymentId: null,
+                    params: {
+                        custscript_sdb_customer_id: customerId,
+                        custscript_sdb_sales_member: JSON.stringify(customerSalesMembers),
+                    },
+                });
+                var taskId = scheduleTask.submit();
+                log.debug("task Id", taskId)
+            }
+
+        } catch (error) {
+            log.error("updateRebateCustomer error", error)
+        }
+    }
     return {
         beforeLoad: beforeLoad,
-        afterSubmit: afterSubmit
+        afterSubmit: afterSubmit,
     }
 });

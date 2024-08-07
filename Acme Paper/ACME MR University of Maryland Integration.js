@@ -10,9 +10,9 @@
  * Description          : This script will retrieve the FoodPro Orders file from the University of Maryland SFTP server and create Sales Orders in NetSuite. 
  */
 
-define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/encode', 'N/file', 'N/task', 'N/sftp', 'N/error'],
+define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/encode', 'N/file', 'N/task', 'N/sftp', 'N/error','N/url','N/https'],
 
-    function (search, record, log, runtime, format, email, encode, file, task, sftp, error) {
+    function (search, record, log, runtime, format, email, encode, file, task, sftp, error,url,https) {
         var SFTPPort = 22;
         var UoM_SO_Shipping_Country_ScriptField = 'custscript_uom_so_shipping_country';
         var UoM_SalesOrder_PO_No_ScriptField = 'custscript_uom_integ_so_po_no_val';
@@ -68,7 +68,7 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
         }
 
         function map(context) {
-           // log.debug('Map: context.value is ', context.value);
+            // log.debug('Map: context.value is ', context.value);
             if (context.value != '' && context.value != null && context.value != undefined) {
                 try {
                     var fileData = JSON.parse(context.value);
@@ -275,7 +275,7 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
                             currentSalesOrderRecObj.setValue('custbody_address_shiplist_number', currentUofMShiplistNo.toString());
                         }
                         var shipDateObj = returnShipDate(currentOrderDate);
-                        shipDateObj.setDate(shipDateObj.getDate()-1);
+                        shipDateObj.setDate(shipDateObj.getDate() - 1);
                         log.debug('shipDateObj is ', shipDateObj);
                         currentSalesOrderRecObj.setValue('startdate', shipDateObj);// Set Ship date  "startdate" 
                         currentSalesOrderRecObj.setValue('shipdate', shipDateObj); // Set Ship date "shipdate"
@@ -332,6 +332,7 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
                             currentSalesOrderRecObj.setValue('custbody_sdb_from_uofmd_file', true);
                             var newSalesOrderId = currentSalesOrderRecObj.save({ enableSourcing: true, ignoreMandatoryFields: true });
                             log.audit('newSalesOrderId is ', newSalesOrderId);
+                            if (newSalesOrderId) loadNewSo(newSalesOrderId);
                             //log.audit('arrFiles is ', arrFiles);
                             if (newSalesOrderId && arrFiles.length) {
                                 arrFiles.forEach(function (fileId) {
@@ -476,6 +477,24 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
                 }
             } catch (error) {
                 log.error('removeToCompleted', error)
+            }
+        }
+
+        /**
+          * This suiitelet Load the new Sales order and save, trigger WF(not MR context)
+        */
+        function loadNewSo(soId) {
+            try {
+                var suitletURL = url.resolveScript({
+                    scriptId: 'customscript_sdb_load_umd_so',
+                    deploymentId: 'customdeploy_sdb_load_umd_so',
+                    returnExternalUrl: true
+                });
+                var resp = https.get({
+                    url: suitletURL + '&recordid=' + soId
+                });
+            } catch (error) {
+                log.error("ERROR: Run SL soId: " + soId, error);
             }
         }
 
@@ -648,8 +667,8 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
             }
         }
 
-      //
-         function returnShipDate(orderdate) {
+        //
+        function returnShipDate(orderdate) {
             try {
                 var orderdateObj = new Date(orderdate);
                 var nextDateObj = new Date(orderdateObj);

@@ -2,41 +2,65 @@
  *@NApiVersion 2.1
  *@NScriptType UserEventScript
  */
-define(["N/log", "N/search", "N/record", "N/email", "N/ui/message"], function (log, search, record, email, message) {
+define(["N/log", "N/search", "N/record", "N/email", "N/ui/message", 'N/runtime'], function (log, search, record, email, message, runtime) {
 
     function beforeLoad(context) {
         try {
             var bill = context.newRecord;
+            var status = bill.getValue('status');
+            if (context.type === context.UserEventType.VIEW && status != "Open") {
+                var rolesList = runtime.getCurrentScript().getParameter({
+                    name: "custscript_sdb_roles_show_approve",
+                }) || "";
+                rolesList = rolesList.split(",");
+                var currentRoleId = runtime.getCurrentUser().role;
+                log.debug("ROLES INFO: ", { rolesList, currentRoleId, status });
+                if (rolesList.includes(String(currentRoleId))) {
+                    var form = context.form;
+                    var clientPath = "SuiteScripts/SDB_Set_billed_Amount_lines.js"
+                    form.clientScriptModulePath = clientPath;
+                    context.form.addButton({ functionName: "approveBill(" + context.newRecord.id + ")", id: 'custpage_approve_bill', label: 'Approve Bill' });
+                }
+            }
+
             var qtyError = bill.getValue('custbody_sdb_3wm_qty_error');
             var amountError = bill.getValue('custbody_sdb_3wm_cost_error');
 
-            if (qtyError || amountError) errorAlert(context);
+            if (qtyError || amountError) errorAlert(context, amountError);
 
 
-            if (context.type !== context.UserEventType.CREATE) return;
-            var parameters = context.request.parameters;
-            var transform = parameters.transform;
-            var id = parameters.id;
-            if (transform) context.newRecord.setValue("custbody_sdb_po_id", id);
+            // if (context.type !== context.UserEventType.CREATE) return;
+            if (context.request) {
+                var parameters = context.request.parameters;
+                var transform = parameters.transform;
+                var id = parameters.id;
+                if (transform) context.newRecord.setValue("custbody_sdb_po_id", id);
+            }
+
         } catch (e) {
             log.error("ERROR:", e);
         }
     }
 
-    function errorAlert(context) {
-        context.form.addPageInitMessage({ type: message.Type.WARNING, message: 'This bill has a discrepancy with the quantity or cost', duration: 1000000 });
+    function errorAlert(context, amountError) {
+        context.form.addPageInitMessage({ type: message.Type.WARNING, message: amountError ? 'This bill has a discrepancy with the  cost' : 'This bill has a discrepancy with the quantity', duration: 1000000 });
     }
 
     function beforeSubmit(context) {
         try {
             if (context.type == context.UserEventType.DELETE) return;
             var currentRecord = context.newRecord;
-            var errorCost = validateCost(currentRecord, context);
-            var errorQty = validateQuantity(currentRecord, context);
-            // if (errorCost || errorQty) return updatePO(currentRecord, context);
-            var currentStatus = currentRecord.getValue('approvalstatus')
-            if (errorCost || errorQty) return currentRecord.setValue('approvalstatus', '1');
-            if (currentStatus == '1') return currentRecord.setValue('approvalstatus', '2'); //Approve Bill
+            var isApprover = currentRecord.getValue('custbody_sdb_approver_bill');
+            var status = currentRecord.getValue('status');
+            log.debug('status', status)
+            if (!isApprover && status == "Pending Approval") {
+                var errorCost = validateCost(currentRecord, context);
+                var errorQty = validateQuantity(currentRecord, context);
+                // if (errorCost || errorQty) return updatePO(currentRecord, context);
+                var currentStatus = currentRecord.getValue('approvalstatus')
+                if (errorCost || errorQty) return currentRecord.setValue('approvalstatus', '1');
+                if (currentStatus == '1') return currentRecord.setValue('approvalstatus', '2'); //Approve Bill
+            }
         } catch (e) {
             log.error("ERROR:", e);
         }
@@ -71,15 +95,39 @@ define(["N/log", "N/search", "N/record", "N/email", "N/ui/message"], function (l
         log.debug("Data Entry", { poId, billId });
         if (!poId) return false;
         var totalAmount = getTotalAmount(poId, billId);
-        totalAmount = Number(totalAmount) + Number(newContext.getValue("total"));
+        var billAmount = getBillAmount(newContext);
+
+        totalAmount = Number(totalAmount) + Number(billAmount);
+        // totalAmount = Number(totalAmount) + Number(newContext.getValue("total"));
         totalAmount = Number(totalAmount.toFixed(2));
-        var poAmount = getPoAmount(poId);
+        var poAmount = getPoAmount(newContext, poId);
         var hasMoreCost = totalAmount > poAmount;
         log.debug("Data to Compare", { totalAmount, poAmount, hasMoreCost, billAmount: Number(newContext.getValue("total")) });
         hasMoreCost ? newContext.setValue("custbody_sdb_3wm_cost_error", true) : newContext.setValue("custbody_sdb_3wm_cost_error", false);
 
 
         return hasMoreCost;
+    }
+
+    function getBillAmount(newContext) {
+        var amountToReturn = 0;
+        var count = newContext.getLineCount('item');
+        for (var line = 0; line < count; line++) {
+            var amount = newContext.getSublistValue({
+                sublistId: 'item',
+                fieldId: 'amount',
+                line: line,
+            });
+            var itemType = newContext.getSublistValue({
+                sublistId: 'item',
+                fieldId: 'itemtype',
+                line: line,
+            });
+            // if (itemType == 'InvtPart' && amount) 
+            amountToReturn += Number(amount)
+        }
+        return amountToReturn;
+
     }
 
     function getTotalAmount(poId, billId) {
@@ -93,27 +141,31 @@ define(["N/log", "N/search", "N/record", "N/email", "N/ui/message"], function (l
                     "AND",
                     ["billingtransaction", "noneof", "@NONE@", String(billId)],
                     "AND",
-                    ["billingtransaction.status", "noneof", "VendBill:C", "VendBill:E"]
+                    ["billingtransaction.status", "noneof", "VendBill:C", "VendBill:E"],
+                    "AND",
+                    ["billingtransaction.shipping", "is", "F"],
+                    "AND",
+                    ["billingtransaction.cogs", "is", "F"],
+                    "AND",
+                    ["billingtransaction.taxline", "is", "F"],
+                    "AND",
+                    ["billingtransaction.mainline", "is", "F"]
                 ],
             columns:
                 [
-                    // search.createColumn({
-                    //     name: "total",
-                    //     join: "billingTransaction",
-                    //     summary: "SUM",
-                    //     sort: search.Sort.ASC,
-                    //     label: "Amount"
-                    // })
-                    search.createColumn({
-                        name: "amount",
-                        summary: "SUM",
-                        label: "Amount"
-                    }),
+
                     search.createColumn({
                         name: "amount",
                         join: "billingTransaction",
                         summary: "SUM",
+                        sort: search.Sort.ASC,
                         label: "Amount"
+                    }),
+                    search.createColumn({
+                        name: "formulanumeric",
+                        summary: "SUM",
+                        formula: "CASE WHEN {billingtransaction.itemtype} = 'OthCharge' THEN nvl({billingtransaction.amount}, 0) * -1 ELSE nvl({billingtransaction.amount}, 0) END",
+                        label: "Formula (Numeric)"
                     })
                 ]
         });
@@ -125,17 +177,45 @@ define(["N/log", "N/search", "N/record", "N/email", "N/ui/message"], function (l
             // });
 
             totalAmount = Math.abs(Number(result.getValue({
-                name: "amount",
-                join: "billingTransaction",
+                name: "formulanumeric",
                 summary: "SUM"
+
             })));
             return false;
         });
         return Number(totalAmount) ?? 0;
     }
 
-    function getPoAmount(poId) {
+    function getPoAmount(context, poId) {
         if (!poId) return 0;
+        var poRecord = record.load({
+            type: record.Type.PURCHASE_ORDER,
+            id: poId,
+            isDynamic: true
+        });
+        var totalRateReceived = 0;
+        var lineCount = poRecord.getLineCount("item")
+        for (let line = 0; line < lineCount; line++) {
+            var quantity = Number(poRecord.getSublistValue({
+                sublistId: 'item',
+                fieldId: 'quantity',
+                line: line
+            }));
+            var receivedQuantity = Number(poRecord.getSublistValue({
+                sublistId: 'item',
+                fieldId: 'quantityreceived',
+                line: line
+            }));
+            var rate = Number(poRecord.getSublistValue({
+                sublistId: 'item',
+                fieldId: 'rate',
+                line: line
+            }));
+            log.debug("getPoAmount", { quantity, receivedQuantity, rate });
+            totalRateReceived += receivedQuantity ? (Number(rate) * Number(receivedQuantity)) : (Number(rate) * Number(quantity));
+        }
+        return totalRateReceived ? Number(totalRateReceived.toFixed(2)) : 0;
+
         var total = search.lookupFields({
             type: record.Type.PURCHASE_ORDER,
             id: poId,
@@ -159,9 +239,9 @@ define(["N/log", "N/search", "N/record", "N/email", "N/ui/message"], function (l
             var poInfo = itemInfoPO.find(function (poItem) {
                 return item.id == poItem.id;
             });
-            if (item.qty < poInfo.qty) hasLessQty = true;
+            if (item && poInfo && item.qty < poInfo.qty) hasLessQty = true;
             if (!poInfo) return;
-            if (item.qty > poInfo.qty) hasMoreQty = true;
+            if (item && poInfo && item.qty > poInfo.qty) hasMoreQty = true;
         });
         log.debug("Data to Compare", { billItemsIds, itemInfoPO, hasMoreQty });
         hasMoreQty ? newContext.setValue("custbody_sdb_3wm_qty_error", true) : newContext.setValue("custbody_sdb_3wm_qty_error", false);
@@ -206,7 +286,7 @@ define(["N/log", "N/search", "N/record", "N/email", "N/ui/message"], function (l
 
     function getOtherBillItems(context, billId) {
         var objToReturn = {};
-        var filters = [["type", "anyof", "VendBill"], "AND", ["custbody_sdb_po_id", "is", context.getValue("custbody_sdb_po_id")]];
+        var filters = [["type", "anyof", "VendBill"], "AND", ["custbody_sdb_po_id", "is", context.getValue("custbody_sdb_po_id")], "AND", ["status", "noneof", "VendBill:C", "VendBill:E"]];
 
         if (billId) filters.push("AND", ["internalid", "noneof", billId]);
         var vendorbillSearchObj = search.create({
@@ -323,59 +403,59 @@ define(["N/log", "N/search", "N/record", "N/email", "N/ui/message"], function (l
         return arrItems;
     }
 
-    function updatePO(newContext, context) {
-        var poId = getPoId(context);
-        if (!poId) return;
-        var itemsBill = getItemsBill(newContext);
-        log.debug("Data Entry updatePO", { poId, itemsBill });
-        var poRecord = record.load({
-            type: record.Type.PURCHASE_ORDER,
-            id: poId,
-            isDynamic: true
-        });
-        var hasChanges = false;
-        itemsBill.forEach(function (billItem) {
-            var item_line = poRecord.findSublistLineWithValue({
-                sublistId: 'item',
-                fieldId: 'item',
-                value: billItem.id
-            });
-            var poAmount = poRecord.getSublistValue({
-                sublistId: "item",
-                fieldId: "amount",
-                line: item_line
-            });
-            var poQty = poRecord.getSublistValue({
-                sublistId: "item",
-                fieldId: "quantity",
-                line: item_line
-            });
-            log.debug("Data to Compare updatePO", { poId, billItem, poItem: { poAmount, poQty } });
-            if (poAmount != billItem.amount || poQty != billItem.qty) {
-                try {
-                    poRecord.selectLine({ sublistId: 'item', line: item_line });
-                    poRecord.setCurrentSublistValue({
-                        sublistId: 'item',
-                        fieldId: 'amount',
-                        value: billItem.amount,
-                        ignoreFieldChange: true
-                    });
-                    poRecord.setCurrentSublistValue({
-                        sublistId: 'item',
-                        fieldId: 'quantity',
-                        value: billItem.qty,
-                        ignoreFieldChange: true
-                    });
-                    poRecord.commitLine("item");
-                    hasChanges = true;
-                } catch (error) {
-                    log.error("ERROR Setting Lines", error);
-                }
-            }
-        });
-        log.debug("Data End updatePO", { poId, hasChanges });
-        if (hasChanges) poRecord.save({ enableSourcing: false, ignoreMandatoryFields: true });
-    }
+    // function updatePO(newContext, context) {
+    //     var poId = getPoId(context);
+    //     if (!poId) return;
+    //     var itemsBill = getItemsBill(newContext);
+    //     log.debug("Data Entry updatePO", { poId, itemsBill });
+    //     var poRecord = record.load({
+    //         type: record.Type.PURCHASE_ORDER,
+    //         id: poId,
+    //         isDynamic: true
+    //     });
+    //     var hasChanges = false;
+    //     itemsBill.forEach(function (billItem) {
+    //         var item_line = poRecord.findSublistLineWithValue({
+    //             sublistId: 'item',
+    //             fieldId: 'item',
+    //             value: billItem.id
+    //         });
+    //         var poAmount = poRecord.getSublistValue({
+    //             sublistId: "item",
+    //             fieldId: "amount",
+    //             line: item_line
+    //         });
+    //         var poQty = poRecord.getSublistValue({
+    //             sublistId: "item",
+    //             fieldId: "quantity",
+    //             line: item_line
+    //         });
+    //         log.debug("Data to Compare updatePO", { poId, billItem, poItem: { poAmount, poQty } });
+    //         if (poAmount != billItem.amount || poQty != billItem.qty) {
+    //             try {
+    //                 poRecord.selectLine({ sublistId: 'item', line: item_line });
+    //                 poRecord.setCurrentSublistValue({
+    //                     sublistId: 'item',
+    //                     fieldId: 'amount',
+    //                     value: billItem.amount,
+    //                     ignoreFieldChange: true
+    //                 });
+    //                 poRecord.setCurrentSublistValue({
+    //                     sublistId: 'item',
+    //                     fieldId: 'quantity',
+    //                     value: billItem.qty,
+    //                     ignoreFieldChange: true
+    //                 });
+    //                 poRecord.commitLine("item");
+    //                 hasChanges = true;
+    //             } catch (error) {
+    //                 log.error("ERROR Setting Lines", error);
+    //             }
+    //         }
+    //     });
+    //     log.debug("Data End updatePO", { poId, hasChanges });
+    //     if (hasChanges) poRecord.save({ enableSourcing: false, ignoreMandatoryFields: true });
+    // }
 
     function sendEmailToBuyer(newRecord, isCostIssue, poId, billNumber) {
         try {
@@ -393,12 +473,12 @@ define(["N/log", "N/search", "N/record", "N/email", "N/ui/message"], function (l
             var body = isCostIssue ? "Discrepancy with the cost between Bill: " + billNumber + ' and ' + 'Purchase Order ' + poNumber : "Discrepancy with the quantity between Bill: " + billNumber + ' and ' + 'Purchase Order ' + poNumber
             log.audit("Data Send Email", { userId, buyerEmail, body });
             if (buyerEmail) {
-                email.send({
-                    author: userId,
-                    body: body,
-                    recipients: buyerEmail,
-                    subject: "Discrepancy in the PO id " + poId
-                });
+                // email.send({
+                //     author: userId,
+                //     body: body,
+                //     recipients: buyerEmail,
+                //     subject: "Discrepancy in the PO id " + poId
+                // });
             }
             // newRecord.setValue('custbody_sdb_send_email_3wm', true)
             // newRecord.save({ enableSourcing: false, ignoreMandatoryFields: true });

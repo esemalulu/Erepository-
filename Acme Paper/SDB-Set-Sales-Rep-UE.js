@@ -2,7 +2,7 @@
  *@NApiVersion 2.1
  *@NScriptType UserEventScript
  */
-define(['N/search', 'N/log'], function (search, log) {
+ define(['N/search', 'N/log','N/record'], function (search, log,record) {
 
     function beforeSubmit(context) {
         try {
@@ -24,12 +24,39 @@ define(['N/search', 'N/log'], function (search, log) {
                 })
             }
         } catch (error) {
-            log.error("Error: ", error);
+            log.error("beforeSubmit Error: ", error);
         }
     }
 
+    function afterSubmit(scriptContext) {
+        try {
+            var scriptContextType = scriptContext.type;
+            if( scriptContextType == 'delete')return;
+            var rebateCustomerRecord = scriptContext.newRecord;
+            var rebateCustomerValues = search.lookupFields({
+                type: 'customrecord_rebate_customer',
+                id: rebateCustomerRecord.id,
+                columns: 'custrecord_rebate_customer_customer'
+            })?.custrecord_rebate_customer_customer
+            var newSearchFieldValue = '';
+            for (var i = 0; i < rebateCustomerValues.length; i++) {
+                var customer = rebateCustomerValues[i]?.text;
+                var customerNumber = customer.split(" ")[0];
+                newSearchFieldValue += customerNumber + ',';
+            }
+            record.submitFields({
+                type: 'customrecord_rebate_customer',
+                id: rebateCustomerRecord.id,
+                values: {'custrecord_sdb_rebate_customer_search':newSearchFieldValue},
+            })
+            
+        } catch (error) {
+            log.error("afterSubmit error ",error);
+        }
+    }
 
     return {
         beforeSubmit: beforeSubmit,
+        afterSubmit:afterSubmit
     }
 });

@@ -5,6 +5,7 @@
 define(["N/search", "N/log", "N/record"], function (search, log, record) {
 
     function onAction(context) {
+     //  return;
         const RICHMOND = 103;
         const SAVAGE = 104;
         const DropshipWarehouse = 129;

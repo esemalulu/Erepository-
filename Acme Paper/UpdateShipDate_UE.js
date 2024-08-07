@@ -89,7 +89,8 @@ function setShipDate(aHolidays)
         }
 
         sNextBusinessDate = getNextBusinessDay(sDate, aHolidays);
-        nlapiSetFieldValue('shipdate', sNextBusinessDate);
+        nlapiLogExecution('debug', 'sNextBusinessDate to set',sNextBusinessDate);
+        // nlapiSetFieldValue('shipdate', sNextBusinessDate);
         nlapiSetFieldValue('startdate', sNextBusinessDate);
         if (!nlapiGetFieldValue('startdate')) {
              nlapiSetFieldValue('startdate', sNextBusinessDate);

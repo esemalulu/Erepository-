@@ -69,6 +69,7 @@
       }
       if (wasUpdated) {
         customer.setValue('custentity_customer_price_updated', true)
+         customer.setValue('custentity_sdb_item_pricing_updated', true)
         customer.save({ ignoreMandatoryFields: true });
       }
 

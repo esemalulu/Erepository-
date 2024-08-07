@@ -2,63 +2,52 @@
  *@NApiVersion 2.1
  *@NScriptType ClientScript
  */
-define(['N/record', 'N/ui/dialog'], function(record, dialog) {
+define(['N/record', 'N/ui/dialog'], function (record, dialog) {
 
-    function saveRecord(context) {
-        var currentRecord = context.currentRecord;
-        var returnAuth = record.load({
-            type: record.Type.RETURN_AUTHORIZATION,
-            id: currentRecord.getValue('createdfrom'),
-            isDynamic: true
-        });
-        var lineCount = currentRecord.getLineCount({
-            sublistId: 'item'
-        })
-        var letSave = true;
-        for (let i = 0; i < lineCount; i++) {
-            currentRecord.selectLine({
-                sublistId: 'item',
-                line: i
-            });
-            var qty = currentRecord.getCurrentSublistValue({
-                sublistId: 'item',
-                fieldId: 'quantity'
-            });
-            var orderLine = currentRecord.getCurrentSublistValue({
-                sublistId: 'item',
-                fieldId: 'orderline'
-            });
-            var lineIndex = returnAuth.findSublistLineWithValue({
-                sublistId: 'item',
-                fieldId: 'line',
-                value: orderLine
-            });
-            var qtyReceived = returnAuth.getSublistValue({
-                sublistId: 'item',
-                fieldId: 'quantityreceived',
-                line: lineIndex
-            });
-            var qtyToReturn = returnAuth.getSublistValue({
-                sublistId: 'item',
-                fieldId: 'quantity',
-                line: lineIndex
-            });
-            if ((qty > qtyReceived) || (qty + qtyReceived > qtyToReturn)){
-                letSave = false;
+    function fieldChanged(context) {
+        try {
+            var rec = context.currentRecord;
+            var sublistName = context.sublistId;
+            var fieldName = context.fieldId;
+            if (sublistName == 'item' && fieldName == 'quantity') {
+
+                var quantity = rec.getCurrentSublistValue({
+                    sublistId: "item",
+                    fieldId: "quantity",
+                });
+                if (quantity) rec.setCurrentSublistValue({
+                    sublistId: 'item',
+                    fieldId: 'custcol_sdb_quantity_returned',
+                    value: quantity,
+                    ignoreFieldChange: true
+                });
+
             }
-        }
-        if (letSave){
-            return true
-        }
-        else {
-            dialog.alert({
-                title: 'Quantity not allowed',
-                message: 'The quantity that you are trying to refund is greater than the quantity physically received'
-            });
+
+            if (sublistName == 'item' && fieldName == 'custcol_sdb_quantity_returned') {
+
+                var quantityReturned = rec.getCurrentSublistValue({
+                    sublistId: "item",
+                    fieldId: "custcol_sdb_quantity_returned",
+                });
+                var rate = rec.getCurrentSublistValue({
+                    sublistId: "item",
+                    fieldId: "rate",
+                });
+                if ((quantityReturned || quantityReturned == 0) && rate) rec.setCurrentSublistValue({
+                    sublistId: 'item',
+                    fieldId: 'amount',
+                    value: (quantityReturned * rate),
+                    ignoreFieldChange: true
+                });
+
+            }
+        } catch (e) {
+            console.log("ERROR fieldChanged", e);
         }
     }
 
     return {
-        saveRecord: saveRecord,
+        fieldChanged: fieldChanged
     }
 });

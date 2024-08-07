@@ -29,7 +29,7 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
             var locationIdentifier = scriptObj.getParameter({
                 name: "custscript_acc_odoi_location_identifier",
             });
-            createTotalOrdersSentFile();
+            //  createTotalOrdersSentFile();
             if (
                 isEmpty(orderExportSearchId) ||
                 isEmpty(loginURL) ||
@@ -40,16 +40,16 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
             ) {
                 log.error(errorTitle, "Script Parameters are missing.");
 
-                createTotalOrdersSentFile();
+                // createTotalOrdersSentFile();
                 return;
             }
-          log.debug("params", "login: " +loginURL+", order: " +orderURL+", username: " +username+", password: "+password)
-                
-          
-            var token =getToken(loginURL, username, password);
+            log.debug("params", "login: " + loginURL + ", order: " + orderURL + ", username: " + username + ", password: " + password)
+
+
+            var token = getToken(loginURL, username, password);
             log.debug("token: ", token)
             if (isEmpty(token)) {
-                createTotalOrdersSentFile();
+                // createTotalOrdersSentFile();
 
                 log.error(errorTitle, "Token Retrieved is blank.");
                 return;
@@ -57,7 +57,7 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
             var ordersObj = getOrders(orderExportSearchId);
             if (isEmpty(ordersObj)) {
                 // Save qty files received
-                createTotalOrdersSentFile();
+                //  createTotalOrdersSentFile();
 
                 log.debug("Creating file", ordersSentFile.save());
 
@@ -66,7 +66,7 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
                     "No orders retrived using the saved search provided."
                 );
 
-                createTotalOrdersSentFile();
+                //  createTotalOrdersSentFile();
 
                 return;
             }
@@ -84,7 +84,7 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
             var resultOrders = sendOrders(requestBody, token, orderURL);
             log.debug("🚀 ~ file: ACC_SS_OmnitracsDailyOrders.js:87 ~ resultOrders:", resultOrders)
 
-            createTotalOrdersSentFile(resultOrders.totalOrdersSent, JSON.parse(requestBody).items.length, resultOrders.totalErrorOrders);
+            // createTotalOrdersSentFile(resultOrders.totalOrdersSent, JSON.parse(requestBody).items.length, resultOrders.totalErrorOrders);
 
         } catch (error) {
             log.error("Error in Main", error.toString());
@@ -104,7 +104,8 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
 
     function populateRequestBody(ordersObj, locationIdentifier) {
         try {
-            var sessionDate = getNextBusinessDay();
+            // var sessionDate = getNextBusinessDay();
+            var sessionDate = getNextBusinessDayNew(new Date());
             log.debug('sessionDate', sessionDate);
             var requestObj = { items: [] };
             for (var i = 0; i < ordersObj.length; i++) {
@@ -128,8 +129,8 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
                         {
                             taskType: "Delivery",
                             quantities: [
-                                parseInt(ordersObj[i].totalCount)  || 0,
-                                parseInt(ordersObj[i].totalCube)   || 0,
+                                parseInt(ordersObj[i].totalCount) || 0,
+                                parseInt(ordersObj[i].totalCube) || 0,
                                 parseInt(ordersObj[i].totalWeight) || 0,
                             ],
                             locationIdentity: {
@@ -168,6 +169,7 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
                 authorization: "Bearer " + token,
             },
         });
+        log.debug('response', response);
         var responseCode = response.code;
 
 
@@ -237,7 +239,7 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
     function sendItemsInBatches(array, batchSize, token, orderURL) {
         let totalItems = JSON.parse(array).items.length;
 
-        createTotalOrdersSentFile(0, totalItems, 0);
+        // createTotalOrdersSentFile(0, totalItems, 0);
 
         let startIndex = 0;
         let totalOrdersSentResult = 0;
@@ -262,7 +264,7 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
             // Update the start index for the next batch
             startIndex += batchSize;
 
-            createTotalOrdersSentFile(totalOrdersSentResult, totalItems, totalErrorOrdersResult);
+            //  createTotalOrdersSentFile(totalOrdersSentResult, totalItems, totalErrorOrdersResult);
         }
 
         log.debug("totalOrdersSent", totalOrdersSentResult);
@@ -284,7 +286,7 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
                 myIds.push(elem.identity.identifier);
             }
         })
-        if(myIds.length == 0) return groups;
+        if (myIds.length == 0) return groups;
         myIds = JSON.stringify(myIds).replaceAll('"', "'").replace('[', '').replace(']', '');
         var criteria = "formulatext: CASE WHEN {number} IN (" + myIds + ") THEN 'YES' ELSE 'NO' END";
         log.debug('criteria', criteria);
@@ -419,6 +421,46 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
     function isBusinessDay(date) {
         // Verifica si el día de la semana es de lunes (1) a viernes (5)
         return date.getDay() >= 1 && date.getDay() < 5;
+    }
+    function loadHolidaysPageInit() {
+        var aHolidays = [];
+        var holidays = search.create({
+            type: "customrecord_acme_official_holidays",
+            filters:
+                [],
+            columns:
+                ['custrecord_aoh_holiday_date']
+        });
+        holidays.run().each(function (result) {
+            aHolidays.push(result.getValue('custrecord_aoh_holiday_date'));
+            return true;
+        });
+        return aHolidays;
+    }
+
+    function getNextBusinessDayNew(sDate) {
+        var aHolidays = loadHolidaysPageInit();
+        var dDate = new Date(sDate);
+        var sReturn;
+        do {
+            dDate.setDate(dDate.getDate() + 1);
+            sReturn = dDate;
+            sReturn = getFormatDate(sReturn)
+        } while (aHolidays.indexOf(sReturn) >= 0 || dDate.getDay() == 6 || dDate.getDay() == 0);
+
+        return getFormatDate2(new Date(sReturn));
+    }
+
+    function getFormatDate2(d) {
+        return [d.getFullYear(),
+        d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+        d.getDate() < 10 ? "0" + d.getDate() : d.getDate()].join('-')
+    }
+
+    function getFormatDate(d) {
+        return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+        d.getDate() < 10 ? "0" + d.getDate() : d.getDate(),
+        d.getFullYear()].join('/')
     }
 
     function getNextBusinessDay() {

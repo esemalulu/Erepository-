@@ -4,14 +4,14 @@
  * @NModuleScope Public
  */
 
- define(["N/currentRecord", "N/search", 'N/ui/dialog'], function (currentRecord, search, dialog) {
+define(["N/currentRecord", "N/search", 'N/ui/dialog'], function (currentRecord, search, dialog) {
     function fieldChanged(context) {
         try {
             //debugger
             var salesRecord = context.currentRecord;
             var sublistName = context.sublistId;
             var fieldName = context.fieldId;
-
+           // if(nlapiGetContext().user == 84419) return true;
             //----------------------------------- CODE FROM MARKUP -----------------------------------------------------------------------
 
             /* if (sublistName == 'item' && fieldName == 'units') {
@@ -120,7 +120,7 @@
                 console.log('rate2', rate);
                 if (isEmpty(rate)) return;
 
-                var amount = rate * quantity;
+                var amount = rate.toFixed(2) * quantity;
                 if (isEmpty(amount)) return;
 
                 //Set item rate
@@ -132,6 +132,13 @@
                     sublistId: 'item',
                     fieldId: 'rate',
                     value: rate.toFixed(2),
+                    ignoreFieldChange: true
+                });
+
+                salesRecord.setCurrentSublistValue({
+                    sublistId: 'item',
+                    fieldId: 'custcol_sdb_rate_manually_modified',
+                    value: true,
                     ignoreFieldChange: true
                 });
 
@@ -257,12 +264,12 @@
             var sublistName = context.sublistId;
             var fieldName = context.fieldId;
             var line = context.line;
-
+             //if(nlapiGetContext().user == 84419) return true;
             //Check if price level is custom when changing
             if (sublistName == 'item' && fieldName == 'price') {
                 // checkPriceLevelCustom(salesRecord);
             }
-
+        //debugger
             if (sublistName == 'item' && (fieldName == 'item')) {
                 var rate = salesRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'rate' }) || "";
                 var dropShip = salesRecord.getValue({ fieldId: "custbody_dropship_order" }) || "";
@@ -421,14 +428,16 @@
 
     function getVendorPrice(item) {
         try {
-            debugger;
+            //debugger;
             var vendorCost = -1;
           if(!item) return vendorCost;
             var itemSearchObj = search.create({
                 type: "item",
                 filters:
                     [
-                        ["internalid", "anyof", item]
+                        ["internalid", "anyof", item],
+                        "AND",
+                        ["ispreferredvendor","is","T"]
                     ],
                 columns:
                     [

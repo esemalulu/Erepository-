@@ -1,9 +1,8 @@
 //this file has several script records all with their own deployments
 //deployed to rebate item details to source item id from mpn/sap/upc on CREATE
 //deployed to rebate customer to source customer id from customer_number on CREATE/EDIT
-//deployed to rebate parent to source contract number beforeLoad in UI AutoGenerateContractNumber
 //  deployed to parent beforeSubmit to source rebate_parent_vendor from vendor_id beforeSubmitParent
-//  deployed to parent afterSubmit to increment internal contract number AutoGenerateSubmit
+//  deployed to parent afterSubmit to place internalid in contract number
 
 function errLog(a, b){
   nlapiLogExecution("ERROR", a, b)
@@ -224,52 +223,13 @@ function beforeSubmitParent(type, form) {
 
 }
 
-//parent beforeLoad
-//this fires on import, handling the auto-gen for every line of an import
-function AutoGenerateContractNumber(type, form) {
-  if(type == "create" || type == "copy"){
-    form
-      .getField("custrecord_acme_internal_con_num")
-      .setDisplayType("disabled");
-    var cusRecAuto = nlapiLoadRecord(
-      "customrecord_acme_autogen_contract_num",
-      1
-    );
-    var startingValue = cusRecAuto.getFieldValue("custrecord_starting_number");
-    startingValue = parseInt(startingValue);
-    var startingValueResult = startingValue + parseInt(1);
-    startingValueResult = startingValueResult.toFixed(0);
-    nlapiSetFieldValue("custrecord_acme_internal_con_num", startingValueResult);
-  }
-}
-
 //parent afterSubmit
-function AutoGenerateSubmit(type) {
-  if(type == "create"){
-    var cusRecAuto = nlapiLoadRecord(
-      "customrecord_acme_autogen_contract_num",
-      1
-    );
-    var startingValue = cusRecAuto.getFieldValue("custrecord_starting_number");
-    startingValue = parseInt(startingValue);
-    var startingValueResult = startingValue + parseInt(1);
-    startingValueResult = startingValueResult.toFixed(0);
-
-    var currentNum = nlapiGetFieldValue("custrecord_acme_internal_con_num");
-    currentNum = parseInt(currentNum);
-    currentNum = currentNum.toFixed(0);
-    if (currentNum == startingValueResult) {
-      // save the new record number
-      cusRecAuto.setFieldValue("custrecord_starting_number", currentNum);
-      var redID = nlapiSubmitRecord(cusRecAuto);
-    } else if (currentNum < startingValueResult) {
-      // someone else saved a record before this one
-      cusRecAuto.setFieldValue(
-        "custrecord_starting_number",
-        startingValueResult
-      );
-      var redID = nlapiSubmitRecord(cusRecAuto);
-    }
+function afterSubmitParent(type) {
+  if(type == "create" || type == "copy"){
+    var record_id = nlapiGetRecordId()
+    var record = nlapiLoadRecord("customrecord_rebate_parent", record_id)
+    record.setFieldValue("custrecord_acme_internal_con_num", record_id)
+    var id = nlapiSubmitRecord(record)
   }
 }
 

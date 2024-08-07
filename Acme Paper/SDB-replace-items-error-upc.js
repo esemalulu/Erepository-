@@ -7,14 +7,14 @@ define(["N/log", "N/search", "N/record", "N/https", "N/task", "N/runtime"], func
     function beforeLoad(context) {
         try {
             var user = runtime.getCurrentUser()
-          var thisRecord = context.newRecord;
-          var enteredBy=thisRecord.getValue('custbody_aps_entered_by')
-           
-            if (user.id == 75190 && runtime.executionContext == "WEBSERVICES")return; 
-                //-----------------------------  HIDE BTN SAVE ONLY FOR CUSTOMER ------------------------------------
-                // Hide btn save for sales order only if customer selected in order has checkbox in false
-                if (context.type === context.UserEventType.EDIT) blockSaleOrderGoodStanding(context);
-                if (context.type === context.UserEventType.CREATE) return;
+            var thisRecord = context.newRecord;
+            var enteredBy = thisRecord.getValue('custbody_aps_entered_by')
+
+            if (user.id == 75190 && runtime.executionContext == "WEBSERVICES") return;
+            //-----------------------------  HIDE BTN SAVE ONLY FOR CUSTOMER ------------------------------------
+            // Hide btn save for sales order only if customer selected in order has checkbox in false
+            if (context.type === context.UserEventType.EDIT) blockSaleOrderGoodStanding(context);
+            if (context.type === context.UserEventType.CREATE) return;
         }
         catch (e) {
             log.error('error at beforeLoad', e)
@@ -26,22 +26,20 @@ define(["N/log", "N/search", "N/record", "N/https", "N/task", "N/runtime"], func
         try {
             if (context.type === context.UserEventType.DELETE) return;
             var user = runtime.getCurrentUser()
-          log.audit("runtime.executionContext: ", runtime.executionContext);
-            if (user.id == 75190 && runtime.executionContext == "WEBSERVICES")return; 
-            if (runtime.executionContext == "MAPREDUCE")return; 
-                const salesRecord = context.newRecord;
-                //Check if entered by field is only sps webservices
-                var enteredById = salesRecord.getValue("custbody_aps_entered_by");
-                //salesRecord.getValue({ fieldId: 'custbody_sdb_original_sales_order' })
-                if (enteredById && (String(enteredById) == "84216" || String(enteredById) == '66155')) {
-                    if (salesRecord.getValue("custbody_sdb_order_sps_replaced")) return;
-                    // Create new to replace order
-                     log.debug('afterSubmit userId2', user.id)
-                     log.audit("runtime.executionContext afterSubmit: ", runtime.executionContext)
-                    var myRec = record.create({type: "customrecord_sdb_sps_orders_to_replace"});
-                    myRec.setValue({fieldId: "custrecord_sdb_transaction_id_replace", value: salesRecord.id});
-                    var myId = myRec.save();
-                   var mrTask = task.create({
+            log.audit("runtime.executionContext: ", runtime.executionContext);
+            if (user.id == 75190 && runtime.executionContext == "WEBSERVICES") return;
+            if (runtime.executionContext == "MAPREDUCE") return;
+            const salesRecord = context.newRecord;
+            //Check if entered by field is only sps webservices
+            var enteredById = salesRecord.getValue("custbody_aps_entered_by");
+            //salesRecord.getValue({ fieldId: 'custbody_sdb_original_sales_order' })
+            if (enteredById && (String(enteredById) == "84216" || String(enteredById) == '66155')) {
+                if (salesRecord.getValue("custbody_sdb_order_sps_replaced")) return;
+                // Create new to replace order
+                var myRec = record.create({ type: "customrecord_sdb_sps_orders_to_replace" });
+                myRec.setValue({ fieldId: "custrecord_sdb_transaction_id_replace", value: String(parseInt(salesRecord.id)) });
+                var myId = myRec.save();
+                var mrTask = task.create({
                     taskType: task.TaskType.MAP_REDUCE,
                     scriptId: 'customscript_sdb_replace_items_error_mr',
                     deploymentId: null,
@@ -50,9 +48,9 @@ define(["N/log", "N/search", "N/record", "N/https", "N/task", "N/runtime"], func
                     },
                 });
                 var taskId = mrTask.submit();
-                  log.audit("taskId: ", taskId);
-                }//If user is sps webservices
-            
+                log.audit("taskId: ", taskId);
+            }//If user is sps webservices
+
         }
         catch (error) {
             log.error("error", error);

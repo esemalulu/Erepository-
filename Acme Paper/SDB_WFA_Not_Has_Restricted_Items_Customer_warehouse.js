@@ -41,7 +41,7 @@ define(['N/record', 'N/error', 'N/ui/message', 'N/runtime', 'N/search'], functio
                     sublistId: 'recmachcustrecord_acme_ri_item'
                 });
                 log.debug('customerLineCount', customerLineCount);
-                if (customerLineCount < 1) newRecord.setValue("custbody_a1wms_dnloadtowms", false);
+              //  if (customerLineCount < 1) newRecord.setValue("custbody_a1wms_dnloadtowms", false);
                 var correctCustomer = 0;
     
                 for (let i = 0; i < customerLineCount && !correctCustomer; i++)
@@ -59,7 +59,7 @@ define(['N/record', 'N/error', 'N/ui/message', 'N/runtime', 'N/search'], functio
                 }
     
                 //If customer is not inside customer's restricted list inside item record
-                if (!correctCustomer) newRecord.setValue("custbody_a1wms_dnloadtowms", false);
+                //if (!correctCustomer) newRecord.setValue("custbody_a1wms_dnloadtowms", false);
     
             }//end for
     

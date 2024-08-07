@@ -104,6 +104,12 @@
                 value: true,
                 ignoreFieldChange: true
             })
+            //Add field custbody_sdb_charge_fuel_fee to not have fuel charge added
+            rec.setValue({
+                fieldId: 'custbody_sdb_charge_fuel_fee',
+                value: true,
+                ignoreFieldChange: true
+            });
             var recId = rec.save({
                 enableSourcing: true,
                 ignoreMandatoryFields: true,
@@ -147,14 +153,14 @@
                         line: i,
                     }) || 0;
                 var quantityRemaining = quantityOrdered - quantityInvoiced;
-                if (quantityRemaining > 0) {
+                // if (quantityRemaining > 0) {
                     rec.setSublistValue({
                         sublistId: "item",
                         fieldId: "isclosed",
                         value: true,
                         line: i,
                     });
-                }
+                // }
             }
              rec.setValue({// add 15/3
                 fieldId:'custbody_sdb_has_copy',

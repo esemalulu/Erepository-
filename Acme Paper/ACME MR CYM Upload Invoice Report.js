@@ -112,7 +112,7 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
 						var curItemQty = tranReportSearchResults[tranReportSearchResultsIndex]['values'].quantity;
 						var curItemUnitPrice = parseFloat(tranReportSearchResults[tranReportSearchResultsIndex]['values'].rate).toFixed(2);
 						//curVendor =  tranReportSearchResults[tranReportSearchResultsIndex]['values'].entity.text;
-						//curLocation =  tranReportSearchResults[tranReportSearchResultsIndex].values['custentity_network_number.customer'];
+						curLocation =  tranReportSearchResults[tranReportSearchResultsIndex].values['custentity_dt_rest365_account_number.customer'];
 
 						log.debug('curDate is ' + curDate, 'curDocNumber is ' + curDocNumber);
 						if (isTaxLine == 'T') {

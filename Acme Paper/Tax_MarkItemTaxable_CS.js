@@ -1,4 +1,3 @@
-
 //This scripts set the line item if taxable based on the Customer - Item Tax Type Mapping
 
 var REC_CUST_ITEM_TAXTYPEMAPPING = 'customrecord_cust_item_taxtypemapping'; 
@@ -34,7 +33,7 @@ function setTaxablePageInit(type){
  */
 function setTaxableFieldChanged(type, name, linenum){
     var idItemTaxType = null;
-    
+   
     if(name == 'entity' && nlapiGetFieldValue('entity')) {
         setTaxTypeMappingOfCustomer(nlapiGetFieldValue('entity'));
     }

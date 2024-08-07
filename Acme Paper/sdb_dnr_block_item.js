@@ -5,8 +5,8 @@
 define(['N/currentRecord', 'N/record', 'N/search', 'N/ui/dialog', 'N/log'], function (currentRecord, record, search, dialog, log) {
     function postSourcing(context) {
         try {
-            var record = context.currentRecord;
-
+            var record = context.currentRecord; 
+           //  if(nlapiGetContext().user == 84419) return true;
             if (context.sublistId == 'item' && context.fieldId == 'item') {
                 var item = record.getCurrentSublistValue({
                     sublistId: "item",
@@ -56,7 +56,7 @@ define(['N/currentRecord', 'N/record', 'N/search', 'N/ui/dialog', 'N/log'], func
         try {
 
             var record = context.currentRecord;
-
+           // if(nlapiGetContext().user == 84419) return true;
             if (context.sublistId == "item") {
                 var item = record.getCurrentSublistValue({
                     sublistId: "item",
@@ -110,7 +110,7 @@ define(['N/currentRecord', 'N/record', 'N/search', 'N/ui/dialog', 'N/log'], func
             //  context.currentRecord.setValue("custbody_a1wms_dnloadtimestmp", new Date());
             // }
 
-
+           //if(nlapiGetContext().user == 84419) return true;
             var fieldId = context.fieldId;
             var currentRecord = context.currentRecord;
             var recType = currentRecord.type;
@@ -122,7 +122,7 @@ define(['N/currentRecord', 'N/record', 'N/search', 'N/ui/dialog', 'N/log'], func
                 var closeDays = getCloseDay(entity);
                 var day = getDay(shipDate);
                 if (closeDays.includes(day)) {
-                    alert("The ship date is the customer's closing date");
+                    alert("The customer is closed on this ship date");
                 }
             }
 

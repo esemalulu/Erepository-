@@ -8,7 +8,11 @@ define(["N/search", "N/record", "N/runtime"], function (search, record, runtime)
             var userObj = runtime.getCurrentUser();
             if (userObj.id == 75190) return;//2 High Jump id
 
+            var newRec = context.newRecord
             var recordType = context.newRecord.type
+            
+            if (newRec.getValue('custbody_aps_entered_by') == 66155) return; // DCKAP
+
             recordType == record.Type.SALES_ORDER ? salesOrderFunction(context) : invoiceOrderFunction(context)
         } catch (error) {
             log.error("Error at onAction", error);

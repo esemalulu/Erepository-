@@ -54,7 +54,7 @@ define(['N/record', 'N/runtime', 'N/task', 'N/search', 'N/redirect'],
                         totalWeight += (itemWeight * itemQty);
                         totalCube += itemCube * itemQty;
                     }
-                    tbody.innerHTML = GetHTMLLine("Total Pieces", totalPieces) + GetHTMLLine("Total Weight", totalWeight.toFixed(2)) + GetHTMLLine("Total Cube", totalCube.toFixed(2)) + tbody.getInnerHTML()
+                    tbody.innerHTML = GetHTMLLine("Total Pieces", totalPieces) + GetHTMLLine("Total Weight", totalWeight.toFixed(2)) + GetHTMLLine("Total Cube", totalCube.toFixed(2)) + tbody.innerHTML
                     jQuery('.bgmd.totallingbg').append('<table class="totallingtable" cellspacing="0" cellpadding="0px" border="0px"> <caption style="display: none">Received Summary</caption> <tbody> <tr> <td> <div class="uir-field-wrapper"> <span class="smalltextnolink uir-label"> <span class="smalltextnolink"> <a class="smalltextnolink" tabindex="-1">Total Pieces</a> </span> </span> <span class="uir-field inputreadonly"> ' + totalQtyReceived + '</span> </div> </td> </tr> <tr></tr> <tr> <td> <div class="uir-field-wrapper"> <span class="smalltextnolink uir-label"> <span class="smalltextnolink"> <a class="smalltextnolink" tabindex="-1">Total</a> </span> </span> <span class="uir-field inputreadonly"> ' + totalRateReceived.toFixed(2) + '</span> </div> </td> <td></td> </tr> </tbody> </table>');
                     function GetHTMLLine(name, value) {
                        
@@ -67,6 +67,9 @@ define(['N/record', 'N/runtime', 'N/task', 'N/search', 'N/redirect'],
                     label: "Summary Fields",
                     type: 'inlinehtml'
                 }).defaultValue = html;
+
+                if(rec.getValue("custbody_dropship_order") == true && context.type == "view") setExtendedCostReceivedInItems(rec, rec.getValue("custbody_dropship_order"));
+
             }
             catch (error) {
                 log.error('Error in beforeLoad', error.toString());
@@ -76,6 +79,10 @@ define(['N/record', 'N/runtime', 'N/task', 'N/search', 'N/redirect'],
         function beforeSubmit(context) {
             try {
                 var newRecord = context.newRecord;
+                if(newRecord && !newRecord.getValue("custbody_dropship_order") || newRecord.getValue("custbody_dropship_order") == false) setExtendedCostReceivedInItems(newRecord);
+
+
+              
                 var vendorNotes = newRecord.getValue('custbody_acc_noted_to_vendor');
                 if (!vendorNotes) return;
                 var newNotes = vendorNotes.replaceAll('--', '');
@@ -83,6 +90,53 @@ define(['N/record', 'N/runtime', 'N/task', 'N/search', 'N/redirect'],
                 newRecord.setValue('custbody_acc_noted_to_vendor', newNotes);
             } catch (error) {
                 log.error('ERROR', error);
+            }
+        }
+
+
+      /**
+         * This function do sets in the new column Extended Cost Received at item line level.
+         * The calculation is item.cost * item.quantityreceived
+         * @param {object} poRec
+         * @return {void}
+         */
+        function setExtendedCostReceivedInItems(poRec, isDropShipOrder){
+            log.debug("poRec id in setExtendedCostReceivedInItems", poRec.id);
+            let itemsCount = poRec.getLineCount("item");
+            if(itemsCount > 0){
+                if(isDropShipOrder){
+                    let poRecLoad = record.load({type:"purchaseorder", id: poRec.id, isDynamic: true});
+                    for(let i= 0; i < itemsCount; i++){
+                        let lineNum = poRecLoad.selectLine({sublistId: 'item', line: i});
+                        let cost = poRecLoad.getCurrentSublistValue({sublistId: "item", fieldId: "origrate"});
+                        let quantityReceived = poRecLoad.getCurrentSublistValue({sublistId: "item", fieldId: "quantityreceived"});
+                        if(cost && quantityReceived){
+                            log.debug("Number(cost) * Number(quantityReceived)", Number(cost) * Number(quantityReceived));
+                            poRecLoad.setCurrentSublistValue({
+                                fieldId: "custcol_sdb_ac_extended_cost_received",
+                                sublistId: "item",
+                                value: Number(cost) * Number(quantityReceived),
+                            });
+                        }
+                        poRecLoad.commitLine({sublistId:"item"});
+                    }
+                    let recId = poRecLoad.save({});
+                    return;
+                } else{
+                    for(let i= 0; i < itemsCount; i++){
+                        let cost = poRec.getSublistValue({sublistId: "item", fieldId: "origrate", line: i});
+                        let quantityReceived = poRec.getSublistValue({sublistId: "item", fieldId: "quantityreceived", line: i});
+                        if(cost && quantityReceived){
+                            log.debug("Number(cost) * Number(quantityReceived)", Number(cost) * Number(quantityReceived));
+                            poRec.setSublistValue({
+                                sublistId: "item",
+                                fieldId: "custcol_sdb_ac_extended_cost_received",
+                                line: i,
+                                value: Number(cost) * Number(quantityReceived),
+                            });
+                        }
+                    }
+                }
             }
         }
 

@@ -185,6 +185,10 @@ define(['N/search', 'N/record', 'N/file', 'N/email', 'N/https', 'N/xml', 'N/rend
     function beforeSubmit(context) {
         try {
             var invoice = context.newRecord;
+          if (invoice.getValue('otherrefnum')) {
+				 	var poNumb = invoice.getValue('otherrefnum').replace(/-/gi, "")
+				 	invoice.setValue('otherrefnum', poNumb)
+				 }
             var salesOrderId = context.newRecord.getValue("createdfrom");
 
             if (!salesOrderId) salesOrderId = context.newRecord.getValue("custbody_sdb_original_sales_order");
