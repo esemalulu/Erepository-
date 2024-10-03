@@ -25,7 +25,7 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
 
 
             return search.load({
-                id: "6559",//customsearch5547 customsearch5543
+                id: "customsearch6878",//customsearch5547 customsearch5543
                 //   let mySearch = search.load({
                 //       id: "customsearch_sdb_delete_items"
             });
@@ -52,10 +52,10 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
                
                // var type = json.values["GROUP(type)"].value == "SalesOrd" ? 'salesorder' : 'invoice';
                 var itemsDelete = record.load({
-                    type: 'salesorder',//json.values["GROUP(type)"].text,
+                    type: 'creditmemo',//json.values["GROUP(type)"].text,
                     id: json.values["GROUP(internalid)"].value,
                 });
-
+                // itemsDelete.setValue('startdate', new Date('09/03/2024'))
                 var recordId = itemsDelete.save({
                     enableSourcing: false,
                     ignoreMandatoryFields: true

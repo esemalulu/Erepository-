@@ -483,11 +483,11 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
 							//log.debug('cur array data in startIndexFlag == F is : ', arr[i]);
 							startIndexFlag = 'T';
 						}
-						else if (startIndexFlag == 'T' && arr[i].indexOf(endval) == -1) {
+						else if (startIndexFlag == 'T' && arr[i].indexOf(endval) != 0) {
 							//log.debug('cur array data in startIndexFlag == T is : ', arr[i]);
 							curSOLineArray.push(arr[i]);
 						}
-						else if (startIndexFlag == 'T' && arr[i].indexOf(endval) != -1) {
+						else if (startIndexFlag == 'T' && arr[i].indexOf(endval) == 0) {
 							curSOLineArray.push(arr[i]);
 							allSOLines.push({ 'edifilename': edifilename, 'filedata': curSOLineArray });
 							//allSOLines.push(curSOLineArray);
@@ -1134,7 +1134,7 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
 					sendDetailedEmail(emailSubject, emailBody);
 				}
 			} catch (createSalesOrderFrom850Err) {
-				log.error('createSalesOrderFrom850 error: ', createSalesOrderFrom850Err.message);
+				log.error('createSalesOrderFrom850 error: ', createSalesOrderFrom850Err);
 
 				var emailSubject = 'Restockit 850-' + edifilename + ': Sales Order Creation Unsuccessful for ';
 				var emailBody = ',<br/><p>The Restockit 850 Sales Order Creation was Unsuccessful for ' + edifilename + '. Please find the details:<br/>';
@@ -1263,7 +1263,7 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
 				// ]
 
 				//var edi850FileObj = sftpConnectionDownload();
-				//var edi850FileObj = file.load({id:8929});
+                // var edi850FileObjArray = [file.load({id: 4362253})];
 				var edi850FileObjArray = sftpConnectionDownload();
 				if (!isEmpty(edi850FileObjArray)) {
 					log.debug('edi850FileObjArray length : ', edi850FileObjArray.length);

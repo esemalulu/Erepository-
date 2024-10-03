@@ -57,15 +57,12 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                 });
                 return;
             }
-            if (String(enteredById) == SPS_NETWORK) convert_item_sps_Error(salesRecord);
-            //----- Set Price By Customer ---- Function by Diego
-            //set_Customer_Pricing(salesRecord);
             salesRecord.setValue({ fieldId: 'custbody_sdb_order_sps_replaced', value: true });
-            // set_Customer_Pricing(salesRecord);
-            // var hasSpsErrorItems = getSpsErrorItems(salesRecord, ERROR_ITEM_ID);
-            // salesRecord.setValue({ fieldId: 'shipaddresslist', value: 740566 });
+
             if (String(enteredById) == SPS_NETWORK) {
                 setShipTo(salesRecord, salesRecord.getValue('entity'));
+                convert_item_sps_Error(salesRecord)
+                setDnrItems(salesRecord);
                 // if shipping date field is empty, orders over the weekend for sps
                 if (!salesRecord.getValue('startdate')) {
                     var today = new Date();
@@ -82,9 +79,9 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                         timezone: cinfo.getValue('timezone')
                     }))
                 }
-                setDnrItems(salesRecord);
             }
-            if (String(enteredById) == DCKAP) populateAdress(salesRecord);
+            if (String(enteredById) == DCKAP) populateWarehouse(salesRecord);
+
             var id = salesRecord.save({
                 ignoreMandatoryFields: true,
                 enableSourcing: true
@@ -112,11 +109,13 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         }
 
     }
+
     return {
         getInputData: getInputData,
         map: map,
         reduce: reduce
     }
+    // ------------------------------------ AUXILIAR FUNCTIONS --------------------------------------------------
 
     function setDnrItems(salesRecord) {
         try {
@@ -205,7 +204,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                 ]
         });
         itemSearchObj.run().each(function (result) {
-           var item = findFinalItem(result.getValue("internalid")); //Add 31/7
+            var item = findFinalItem(result.getValue("internalid")); //Add 31/7
             arrToReturn.push({
                 item: result.getValue("internalid"),
                 supercedItem: item
@@ -215,7 +214,6 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         return arrToReturn;
     }
 
-   //Search until the last item suoersede is brought - Add 31/7
     function findFinalItem(itemId) {
         try {
             var item = search.lookupFields({
@@ -224,7 +222,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                 columns: ['custitem_acc_supercede_item']
             })
 
-            if (item.custitem_acc_supercede_item.length) {
+            if (item.custitem_acc_supercede_item && item.custitem_acc_supercede_item.length) {
                 return findFinalItem(item.custitem_acc_supercede_item[0].value);
             } else {
                 return itemId;
@@ -249,27 +247,12 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         return arrToReturn;
     }
 
-    function setNextBusinessDate() {
-
-    }
-
-    // ------------------------------------ AUXILIAR FUNCTIONS --------------------------------------------------
-    function getSpsErrorItems(salesRecord, errorItemid) {
-        var hasError = salesRecord.findSublistLineWithValue({
-            sublistId: 'item',
-            fieldId: 'item',
-            value: errorItemid,
-        });
-        return Number(hasError) >= 0;
-
-    }
-
     function convert_item_sps_Error(salesRec) {
         try {
             if (!salesRec) return;
             var salesRecord = salesRec;
-            var locationSet = populateAdress(salesRec);
-
+            var locationSet = populateWarehouse(salesRec);
+            if (!locationSet) locationSet = salesRec.getValue('location');
             //Get all error items in sales order or if the item is not an item error set location
             let { itemsArray, itemsInfoLines, itemsError } = getItemsErrors(salesRecord);
 
@@ -283,23 +266,8 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                     setLocationWarehouse(salesRecord, itemInfoLocations, item, locationSet);
                 });
             }
-
             const itemsErrorFiltered = replaceItemErrors(salesRecord, itemsError, locationSet);
             if (!itemsErrorFiltered || itemsErrorFiltered.length < 1) return;
-            //Delete error linesc
-            /*for (var i = itemsErrorFiltered.length - 1; i >= 0; i--) {
-                try {
-                    if (!itemsErrorFiltered[i].hasOwnProperty("errorIndex")) continue;
-                    //Deleting error item
-                    salesRecord.removeLine({
-                        sublistId: 'item',
-                        line: itemsErrorFiltered[i].errorIndex,
-                        ignoreRecalc: false,
-                    });
-                }
-                catch (error) {
-                }
-            }*/
         }
 
         catch (error) {
@@ -307,10 +275,14 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         }
     }
 
-    function populateAdress(saleRec) {
+    function populateWarehouse(saleRec) {
         var customerId = saleRec.getValue("entity");
-        var WarehouseToSet = setCustomerShipTo(saleRec, customerId);
-        if (!WarehouseToSet) WarehouseToSet = AdressLogic(saleRec);
+        var address = saleRec.getValue("shipaddresslist");
+        // var WarehouseToSet = getWarehouseSelected(saleRec, customerId);
+        // if (!WarehouseToSet) WarehouseToSet = AdressLogic(saleRec);
+
+        var WarehouseToSet = AdressLogic(saleRec);
+        log.debug('WAREHOUSE TO SET: ', { WarehouseToSet, address, orderId: saleRec.id });
         if (WarehouseToSet) {
             //---------------------------------- Populate Warehouse from customer record ----------------------------------------------------
             saleRec.setValue({ fieldId: 'location', value: WarehouseToSet });
@@ -364,22 +336,6 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         }
     }
 
-    function setCustomerShipTo(salesRecord, customerId) {
-        try {
-            if (!customerId) return;
-            const customerRecord = record.load({
-                type: 'customer',
-                id: customerId
-            });
-            var ObjectFromAdress
-            var locationIdAddress = salesRecord.getValue("custbody_sps_st_addresslocationnumber");
-            if (customerRecord) ObjectFromAdress = getCustomerDefaultAddress(customerRecord, locationIdAddress);
-            return ObjectFromAdress.Warehouse
-        } catch (error) {
-            log.error("ERROR setCustomerShipTo", { error, salesRecord, customerId })
-        }
-    }
-
     function setShipTo(salesRecord, customerId) {
         try {
             // Set shipTo field with default ship address in sales order
@@ -390,7 +346,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
             });
             var ObjectFromAdress
             var locationIdAddress = salesRecord.getValue("custbody_sps_st_addresslocationnumber");
-            if (customerRecord) ObjectFromAdress = getCustomerDefaultAddress(customerRecord, locationIdAddress);
+            if (customerRecord) ObjectFromAdress = getSPSAddressSelected(customerRecord, locationIdAddress);
             log.audit("ObjectFromAdress: ", ObjectFromAdress)
             if (ObjectFromAdress.Adress) salesRecord.setValue({ fieldId: 'shipaddresslist', value: Number(ObjectFromAdress.Adress) });
         } catch (error) {
@@ -653,15 +609,6 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         }
     }
 
-    function wait(milliseconds) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds) {
-                break;
-            }
-        }
-    }
-
     function searchExistingUOM(recordUnitId, unitRecord, itemInfo) {
         if (!unitRecord) {
             unitRecord = record.load({
@@ -686,8 +633,6 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
             line: uomLine
         });
     }
-
-    //added 29/01/24  adress logic for sps
 
     function AdressLogic(SaleRecord) {
         var warehoseFormAddress = getWarehouse(SaleRecord, 'shipaddresslist');
@@ -747,7 +692,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         }
     }
 
-    function getCustomerDefaultAddress(customerRecord, sps_network_address) {
+    function getSPSAddressSelected(customerRecord, sps_network_address) {
         const sublistId = 'addressbook';
 
         var lines = customerRecord.getLineCount("addressbook");
@@ -775,21 +720,6 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         }
 
         return {};
-    }
-
-    function getIsRitchmodCustomer(customerId, RICHMOND) {
-        try {
-            var customerInfo = search.lookupFields({
-                type: search.Type.CUSTOMER,
-                id: customerId,
-                columns: ['custentity_warehouse']
-            });
-            log.debug('customerInfo', customerInfo);
-            customerInfo = customerInfo.custentity_warehouse;
-            return customerInfo ? customerInfo[0].value == RICHMOND : false;
-        } catch (error) {
-            log.error("ERROR: ", error);
-        }
     }
 
     function setLocationWarehouse(salesRecord, itemInfo, item, actualLocation) {
@@ -826,7 +756,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                 if (locations.length) {
                     var locationFound = locations.find(element => (Number(element.location) == Number(actualLocation)) && (Number(element.quantity) - Number(item.qty) >= 0));
                     if (locationFound) {
-                    //  log.emergency("locationFound.quantity: ", locationFound.quantity)
+                        //  log.emergency("locationFound.quantity: ", locationFound.quantity)
                         salesRecord.selectLine({
                             sublistId: 'item',
                             line: item.line
@@ -868,11 +798,10 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                 enteredBySPS = enteredBySPS == 84216;
                 var locationFound = locations.find(element => (Number(element.location) == Number(actualLocation)));
                 var hasRitchmondStock = locations.find(element => (Number(element.location) == Number(RICHMOND)) && (Number(element.quantity) - Number(item.qty) >= 0));
-                var isRitchmodCustomer = getIsRitchmodCustomer(salesRecord.getValue('entity'), RICHMOND);
                 var isOnlySavageStock = getOnlySavageStock(item.itemId);
 
                 log.debug("RITCHMOND CASE INFO: ", { locationFound, locations, isOnlySavageStock });
-                if (hasRitchmondStock) {//&& (!savageLocation || !locations.length)) {
+                if (hasRitchmondStock) { //&& (!savageLocation || !locations.length)) {
                     salesRecord.selectLine({ sublistId: 'item', line: item.line });
                     salesRecord.setCurrentSublistValue({
                         sublistId: 'item',
@@ -894,10 +823,16 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                     return;
                 }
 
-                if (!enteredBySPS && locationFound && (Number(item.qty) - (locationFound.quantity) > 0)) {
+                if (locationFound && (Number(item.qty) - (locationFound.quantity) > 0)) {
                     salesRecord.selectLine({
                         sublistId: 'item',
                         line: item.line
+                    });
+                    salesRecord.setCurrentSublistValue({
+                        sublistId: 'item',
+                        fieldId: 'location',
+                        value: RICHMOND,
+                        ignoreFieldChange: false
                     });
                     salesRecord.setCurrentSublistValue({
                         sublistId: 'item',
@@ -905,6 +840,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                         value: locationFound.quantity,
                         ignoreFieldChange: false
                     });
+                    salesRecord.commitLine("item");
 
                     var lastLine = salesRecord.getLineCount("item");
 
@@ -941,7 +877,8 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                         value: SAVAGE,
                         ignoreFieldChange: false
                     });
-
+                    salesRecord.commitLine("item");
+                    return;
                     // ----------------------------------------------------------
                 }
                 else {
@@ -963,11 +900,9 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
                         value: Number(locationToSet),
                         ignoreFieldChange: false
                     });
-
+                    salesRecord.commitLine("item");
+                    return;
                 }
-                salesRecord.commitLine({
-                    sublistId: 'item'
-                });
             }//End if backorder
         } catch (error) {
             log.error('setLocationWarehouse', error)
@@ -1029,7 +964,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         });
         return itemsInfo;
 
-    }//End setLocationAvailable
+    }
 
     function findObjectByCode(codes, itemsUpcFound) {
         const { sapCode, upcCode } = codes;
@@ -1128,6 +1063,202 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         return itemsError;
     }
 
+    function getPermanentPricedLines(rec) {
+        try {
+            var lineCount = rec.getLineCount({ sublistId: 'item' });
+            var itemsArr = [];
+            for (var i = 0; i < lineCount; i++) {
+                rec.selectLine({ sublistId: 'item', line: i })
+                var permanentPrice = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_permanent_price', line: i });
+                var permanentPriceUpdated = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_permanent_price_updated', line: i });
+                if (permanentPrice == true && permanentPriceUpdated == false) {
+                    var item = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'item', line: i });
+                    var qty = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'quantity', line: i });
+                    var price = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'rate', line: i });
+                    itemsArr.push({ line: i, item: item, price: price, ex_total: (Number(price) * Number(qty)) });
+                }
+            }
+            return itemsArr;
+        }
+        catch (error) {
+            log.error('Error in permanentPricedLines', error.toString());
+        }
+    }
+
+    function updateCustomerSpecificPricing(lineItems, customer, rec) {
+        try {
+            var customerRec = record.load({ type: 'customer', id: customer, isDynamic: true });
+            for (var i = 0; i < lineItems.length; i++) {
+                var line = customerRec.findSublistLineWithValue({
+                    sublistId: 'itempricing',
+                    fieldId: 'item',
+                    value: lineItems[i].item
+                });
+                if (line == -1) {
+                    customerRec.selectNewLine({ sublistId: 'itempricing' });
+                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'item', value: lineItems[i].item });
+                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'level', value: -1 });
+                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'price', value: lineItems[i].price.toFixed(2) });
+                    customerRec.commitLine({ sublistId: 'itempricing' });
+
+                }
+                else {
+                    customerRec.selectLine({ sublistId: 'itempricing', line: line });
+                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'level', value: -1 });
+                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'price', value: lineItems[i].price.toFixed(2) });
+                    customerRec.commitLine({ sublistId: 'itempricing' });
+                }
+            }
+            var customerId = customerRec.save({ ignoreMandatoryFields: true });
+            return customerId;
+        }
+        catch (error) {
+            log.error('Error in updateCustomerSpecificPricing', error.toString());
+        }
+    }
+
+    function updatePricedLines(lineItems, rec) {
+        try {
+            for (var i = 0; i < lineItems.length; i++) {
+                rec.selectLine({ sublistId: 'item', line: lineItems[i].line })
+                rec.setCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_permanent_price_updated', value: true });
+                rec.commitLine({ sublistId: 'item' })
+            }
+        }
+        catch (error) {
+            log.error('Error in updatePricedLines', error.toString());
+        }
+    };
+
+    function isEmpty(stValue) {
+        if ((stValue == null) || (stValue == '') || (stValue == ' ') || (stValue == undefined)) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    function getRebatePrice(itemId, customerId, isDropShip) {
+        try {
+            let rebateObj = {
+                rebateCost: -1,
+                rebateId: -1,
+                originalCost: -1
+            }
+            var customrecord_rebate_parentSearchObj = search.create({
+                type: "customrecord_rebate_parent",
+                filters:
+                    [
+                        ["custrecord_rebate_customer_rebate_parent.custrecord_rebate_customer_customer", "anyof", customerId],
+                        "AND",
+                        ["custrecord_rebate_items_parent.custrecord_rebate_items_item", "anyof", itemId]
+                    ],
+                columns:
+                    [
+                        search.createColumn({
+                            name: "custrecord_rebate_items_rebate_cost",
+                            join: "CUSTRECORD_REBATE_ITEMS_PARENT",
+                            label: "Rebate Cost"
+                        }),
+                        search.createColumn({ name: "custrecord_rebate_additional_load_cb", label: "Additional Load" }),
+                        search.createColumn({ name: "custrecord_rebate_load_value", label: "Load Value (Margin)" })
+                    ]
+            });
+            customrecord_rebate_parentSearchObj.run().each(function (result) {
+                rebateObj.rebateCost = Number(result.getValue({
+                    name: "custrecord_rebate_items_rebate_cost",
+                    join: "CUSTRECORD_REBATE_ITEMS_PARENT"
+                }))
+                rebateObj.originalCost = rebateObj.rebateCost;
+                rebateObj.rebateId = result.id
+                if (isDropShip === false || isDropShip === 'F') {
+                    let additionalLoad = result.getValue('custrecord_rebate_additional_load_cb')
+                    if (additionalLoad === true || additionalLoad === 'T') {
+                        let loadValue = Number(result.getValue('custrecord_rebate_load_value'));
+                        let qtyToAdd = Number((rebateObj.rebateCost * loadValue) / 100)
+                        rebateObj.rebateCost = rebateObj.rebateCost + qtyToAdd
+                    }
+                }
+                return false;
+            });
+            return rebateObj;
+        } catch (e) {
+            log.error('error at getRebatePrice', e)
+        }
+    };
+
+    function getVendorPrice(itemId) {
+        try {
+            let vendorCost = -1;
+            var itemSearchObj = search.create({
+                type: "item",
+                filters:
+                    [
+                        ["internalid", "anyof", itemId]
+                    ],
+                columns:
+                    [
+                        search.createColumn({ name: "vendorcost", label: "Vendor Price" })
+                    ]
+            });
+            itemSearchObj.run().each(function (result) {
+                let newVendorCost = result.getValue('vendorcost');
+                if (newVendorCost) {
+                    vendorCost = newVendorCost
+                }
+                return false;
+            });
+            return vendorCost
+        } catch (e) {
+            log.error('Error at getVendorPrice', e)
+        }
+    };
+
+    function getLoadedCost(itemId) {
+        try {
+            let loadedCost = -1;
+            var itemSearchObj = search.create({
+                type: "item",
+                filters:
+                    [
+                        ["internalid", "anyof", itemId]
+                    ],
+                columns:
+                    [
+                        search.createColumn({ name: "costestimate", label: "Item Defined Cost" })
+                    ]
+            });
+            itemSearchObj.run().each(function (result) {
+                let newLoadedCost = result.getValue('costestimate');
+                if (newLoadedCost) {
+                    loadedCost = newLoadedCost
+                }
+                return false;
+            });
+            return loadedCost
+        } catch (error) {
+            log.error('Error at getLoadedCost', error)
+        }
+    }
+
+    // NOT USED
+
+    function getWarehouseSelected(salesRecord, customerId) {
+        try {
+            if (!customerId) return;
+            const customerRecord = record.load({
+                type: 'customer',
+                id: customerId
+            });
+            var ObjectFromAdress
+            var locationIdAddress = salesRecord.getValue("custbody_sps_st_addresslocationnumber");
+            if (customerRecord) ObjectFromAdress = getSPSAddressSelected(customerRecord, locationIdAddress);
+            return ObjectFromAdress.Warehouse
+        } catch (error) {
+            log.error("ERROR getWarehouseSelected", { error, salesRecord, customerId })
+        }
+    }
+
     function getSalesOrderToReplace() {
         let resultOrders = [];
 
@@ -1150,7 +1281,6 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
         return resultOrders;
     }
 
-    //Function set Pricing
     function set_Customer_Pricing(rec) {
         if (!rec) return
         // const rec = record.load({
@@ -1393,7 +1523,7 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
             log.error('Error at SetCustmerPricing', error);
         }
     }
-    // -------------------------Functions of Script Extension set Pricing ---------------------------
+
     function createButton(scriptContext, recordid, rcdtype) {
 
         // Getting the URL to open the suitelet.
@@ -1408,28 +1538,6 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
 
         // Creating a button on form.
         var printButton = scriptContext.form.addButton({ id: 'custpage_print', label: 'Print', functionName: stringScript });
-    }
-
-    function getPermanentPricedLines(rec) {
-        try {
-            var lineCount = rec.getLineCount({ sublistId: 'item' });
-            var itemsArr = [];
-            for (var i = 0; i < lineCount; i++) {
-                rec.selectLine({ sublistId: 'item', line: i })
-                var permanentPrice = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_permanent_price', line: i });
-                var permanentPriceUpdated = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_permanent_price_updated', line: i });
-                if (permanentPrice == true && permanentPriceUpdated == false) {
-                    var item = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'item', line: i });
-                    var qty = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'quantity', line: i });
-                    var price = rec.getCurrentSublistValue({ sublistId: 'item', fieldId: 'rate', line: i });
-                    itemsArr.push({ line: i, item: item, price: price, ex_total: (Number(price) * Number(qty)) });
-                }
-            }
-            return itemsArr;
-        }
-        catch (error) {
-            log.error('Error in permanentPricedLines', error.toString());
-        }
     }
 
     function getAllLines(rec) {
@@ -1462,162 +1570,6 @@ define(["N/search", "N/record", "N/log", "N/runtime", "N/format", 'N/config'], f
             }
         } catch (error) {
             log.error("Error in setExxTotal", error);
-        }
-    }
-
-    function updateCustomerSpecificPricing(lineItems, customer, rec) {
-        try {
-            var customerRec = record.load({ type: 'customer', id: customer, isDynamic: true });
-            for (var i = 0; i < lineItems.length; i++) {
-                var line = customerRec.findSublistLineWithValue({
-                    sublistId: 'itempricing',
-                    fieldId: 'item',
-                    value: lineItems[i].item
-                });
-                if (line == -1) {
-                    customerRec.selectNewLine({ sublistId: 'itempricing' });
-                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'item', value: lineItems[i].item });
-                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'level', value: -1 });
-                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'price', value: lineItems[i].price.toFixed(2) });
-                    customerRec.commitLine({ sublistId: 'itempricing' });
-
-                }
-                else {
-                    customerRec.selectLine({ sublistId: 'itempricing', line: line });
-                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'level', value: -1 });
-                    customerRec.setCurrentSublistValue({ sublistId: 'itempricing', fieldId: 'price', value: lineItems[i].price.toFixed(2) });
-                    customerRec.commitLine({ sublistId: 'itempricing' });
-                }
-            }
-            var customerId = customerRec.save({ ignoreMandatoryFields: true });
-            return customerId;
-        }
-        catch (error) {
-            log.error('Error in updateCustomerSpecificPricing', error.toString());
-        }
-    }
-
-    function updatePricedLines(lineItems, rec) {
-        try {
-            for (var i = 0; i < lineItems.length; i++) {
-                rec.selectLine({ sublistId: 'item', line: lineItems[i].line })
-                rec.setCurrentSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_permanent_price_updated', value: true });
-                rec.commitLine({ sublistId: 'item' })
-            }
-        }
-        catch (error) {
-            log.error('Error in updatePricedLines', error.toString());
-        }
-    };
-
-    function isEmpty(stValue) {
-        if ((stValue == null) || (stValue == '') || (stValue == ' ') || (stValue == undefined)) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-    function getRebatePrice(itemId, customerId, isDropShip) {
-        try {
-            let rebateObj = {
-                rebateCost: -1,
-                rebateId: -1,
-                originalCost: -1
-            }
-            var customrecord_rebate_parentSearchObj = search.create({
-                type: "customrecord_rebate_parent",
-                filters:
-                    [
-                        ["custrecord_rebate_customer_rebate_parent.custrecord_rebate_customer_customer", "anyof", customerId],
-                        "AND",
-                        ["custrecord_rebate_items_parent.custrecord_rebate_items_item", "anyof", itemId]
-                    ],
-                columns:
-                    [
-                        search.createColumn({
-                            name: "custrecord_rebate_items_rebate_cost",
-                            join: "CUSTRECORD_REBATE_ITEMS_PARENT",
-                            label: "Rebate Cost"
-                        }),
-                        search.createColumn({ name: "custrecord_rebate_additional_load_cb", label: "Additional Load" }),
-                        search.createColumn({ name: "custrecord_rebate_load_value", label: "Load Value (Margin)" })
-                    ]
-            });
-            customrecord_rebate_parentSearchObj.run().each(function (result) {
-                rebateObj.rebateCost = Number(result.getValue({
-                    name: "custrecord_rebate_items_rebate_cost",
-                    join: "CUSTRECORD_REBATE_ITEMS_PARENT"
-                }))
-                rebateObj.originalCost = rebateObj.rebateCost;
-                rebateObj.rebateId = result.id
-                if (isDropShip === false || isDropShip === 'F') {
-                    let additionalLoad = result.getValue('custrecord_rebate_additional_load_cb')
-                    if (additionalLoad === true || additionalLoad === 'T') {
-                        let loadValue = Number(result.getValue('custrecord_rebate_load_value'));
-                        let qtyToAdd = Number((rebateObj.rebateCost * loadValue) / 100)
-                        rebateObj.rebateCost = rebateObj.rebateCost + qtyToAdd
-                    }
-                }
-                return false;
-            });
-            return rebateObj;
-        } catch (e) {
-            log.error('error at getRebatePrice', e)
-        }
-    };
-
-    function getVendorPrice(itemId) {
-        try {
-            let vendorCost = -1;
-            var itemSearchObj = search.create({
-                type: "item",
-                filters:
-                    [
-                        ["internalid", "anyof", itemId]
-                    ],
-                columns:
-                    [
-                        search.createColumn({ name: "vendorcost", label: "Vendor Price" })
-                    ]
-            });
-            itemSearchObj.run().each(function (result) {
-                let newVendorCost = result.getValue('vendorcost');
-                if (newVendorCost) {
-                    vendorCost = newVendorCost
-                }
-                return false;
-            });
-            return vendorCost
-        } catch (e) {
-            log.error('Error at getVendorPrice', e)
-        }
-    };
-
-    function getLoadedCost(itemId) {
-        try {
-            let loadedCost = -1;
-            var itemSearchObj = search.create({
-                type: "item",
-                filters:
-                    [
-                        ["internalid", "anyof", itemId]
-                    ],
-                columns:
-                    [
-                        search.createColumn({ name: "costestimate", label: "Item Defined Cost" })
-                    ]
-            });
-            itemSearchObj.run().each(function (result) {
-                let newLoadedCost = result.getValue('costestimate');
-                if (newLoadedCost) {
-                    loadedCost = newLoadedCost
-                }
-                return false;
-            });
-            return loadedCost
-        } catch (error) {
-            log.error('Error at getLoadedCost', error)
         }
     }
 

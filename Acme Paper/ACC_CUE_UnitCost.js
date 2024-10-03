@@ -11,7 +11,7 @@ define(["N/currentRecord", "N/search", 'N/ui/dialog'], function (currentRecord, 
             var salesRecord = context.currentRecord;
             var sublistName = context.sublistId;
             var fieldName = context.fieldId;
-           // if(nlapiGetContext().user == 84419) return true;
+            // if(nlapiGetContext().user == 84419) return true;
             //----------------------------------- CODE FROM MARKUP -----------------------------------------------------------------------
 
             /* if (sublistName == 'item' && fieldName == 'units') {
@@ -264,29 +264,30 @@ define(["N/currentRecord", "N/search", 'N/ui/dialog'], function (currentRecord, 
             var sublistName = context.sublistId;
             var fieldName = context.fieldId;
             var line = context.line;
-             //if(nlapiGetContext().user == 84419) return true;
+            //if(nlapiGetContext().user == 84419) return true;
             //Check if price level is custom when changing
             if (sublistName == 'item' && fieldName == 'price') {
                 // checkPriceLevelCustom(salesRecord);
             }
-        //debugger
+            //debugger
             if (sublistName == 'item' && (fieldName == 'item')) {
                 var rate = salesRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'rate' }) || "";
                 var dropShip = salesRecord.getValue({ fieldId: "custbody_dropship_order" }) || "";
+                var itemId = salesRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'item' })
+                var costestimaterate = salesRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'costestimaterate' }) || ""; 
 
-                /* if (dropShip == true || dropShip == 'T') {
+                if (dropShip == true || dropShip == 'T') { //If its a dropship, set base cost (without 3%)
+                    var baseCost = getBaseCost(itemId)
+                    if (baseCost < costestimaterate)
+                    costestimaterate = baseCost
                     salesRecord.setCurrentSublistValue({
                         sublistId: 'item',
                         fieldId: 'costestimatetype',
                         value: 'CUSTOM',
                         ignoreFieldChange: false
                     });
-                } */
 
-                var costestimaterate = salesRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'costestimaterate' }) || "";
-                var itemId = salesRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'item' })
-                if (dropShip == true || dropShip == 'T') {
-                    var vendorPrice = getVendorPrice(itemId);
+                    var vendorPrice = getVendorPrice(itemId); //If vendor price is lower set the vendor price
                     if (vendorPrice != -1) {
                         if (vendorPrice < costestimaterate) {
                             costestimaterate = vendorPrice;
@@ -322,12 +323,23 @@ define(["N/currentRecord", "N/search", 'N/ui/dialog'], function (currentRecord, 
 
                 var entityId = salesRecord.getValue({ fieldId: "entity" })
                 if (entityId == 96580) { //RESTOCKIT 6% MARKUP
-                    salesRecord.setCurrentSublistValue({
-                        sublistId: 'item',
-                        fieldId: 'custcol_acme_markup_percent',
-                        value: 6,
-                        ignoreFieldChange: false
-                    });
+                    if (dropShip == true || dropShip == 'T') {
+                        salesRecord.setCurrentSublistValue({
+                            sublistId: 'item',
+                            fieldId: 'custcol_acme_markup_percent',
+                            value: 9.18,
+                            ignoreFieldChange: false
+                        });
+                    }
+                    else {
+                        salesRecord.setCurrentSublistValue({
+                            sublistId: 'item',
+                            fieldId: 'custcol_acme_markup_percent',
+                            value: 6,
+                            ignoreFieldChange: false
+                        });
+                    }
+
                 }
                 else {
                     var markup = ((Number(rate) - Number(costestimaterate)) / Number(rate)) * 100;
@@ -426,18 +438,45 @@ define(["N/currentRecord", "N/search", 'N/ui/dialog'], function (currentRecord, 
         });
     }
 
+    function getBaseCost(item) {
+        try {
+            //debugger;
+            var baseCost = -1;
+            if (!item) return baseCost;
+            var itemSearchObj = search.create({
+                type: "item",
+                filters:
+                    [
+                        ["internalid", "anyof", item]
+                    ],
+                columns:
+                    [
+                        search.createColumn({ name: "custitem_acc_base_cost", label: "Base Cost" })
+                    ]
+            });
+            itemSearchObj.run().each(function (result) {
+                baseCost = Number(result.getValue('custitem_acc_base_cost'))
+                return false;
+            });
+            return baseCost
+        } catch (error) {
+            console.log(error)
+            log.error('Error in getBaseCost', error.toString())
+        }
+    }
+
     function getVendorPrice(item) {
         try {
             //debugger;
             var vendorCost = -1;
-          if(!item) return vendorCost;
+            if (!item) return vendorCost;
             var itemSearchObj = search.create({
                 type: "item",
                 filters:
                     [
                         ["internalid", "anyof", item],
                         "AND",
-                        ["ispreferredvendor","is","T"]
+                        ["ispreferredvendor", "is", "T"]
                     ],
                 columns:
                     [

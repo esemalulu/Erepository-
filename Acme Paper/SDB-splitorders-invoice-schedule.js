@@ -2,7 +2,7 @@
  *@NApiVersion 2.1
  *@NScriptType ScheduledScript
  */
- define(["N/runtime", "N/record"], function (runtime, record) {
+define(["N/runtime", "N/record"], function (runtime, record) {
 
     function execute(context) {
         try {
@@ -28,8 +28,13 @@
                 id: salesOrderId,
                 type: record.Type.SALES_ORDER,
             });
-            var hasCopy = soRec.getValue({fieldId:'custbody_sdb_has_copy'});// add 15/3
-            if(hasCopy) return;
+            var isDropShipOrder = soRec.getValue('customform') == 300; //ACME Sales Order Drop Ship Entry custbody_dropship_order
+            var isDropShipOrder2 = soRec.getValue('custbody_dropship_order'); //ACME Sales Order Drop Ship Entry 
+            if (isDropShipOrder || isDropShipOrder2) return false;
+
+
+            var hasCopy = soRec.getValue({ fieldId: 'custbody_sdb_has_copy' });// add 15/3
+            if (hasCopy) return;
             var documentNumber = soRec.getValue({ fieldId: "tranid" });
             var rec = record.copy({
                 type: record.Type.SALES_ORDER,
@@ -154,18 +159,18 @@
                     }) || 0;
                 var quantityRemaining = quantityOrdered - quantityInvoiced;
                 // if (quantityRemaining > 0) {
-                    rec.setSublistValue({
-                        sublistId: "item",
-                        fieldId: "isclosed",
-                        value: true,
-                        line: i,
-                    });
+                rec.setSublistValue({
+                    sublistId: "item",
+                    fieldId: "isclosed",
+                    value: true,
+                    line: i,
+                });
                 // }
             }
-             rec.setValue({// add 15/3
-                fieldId:'custbody_sdb_has_copy',
+            rec.setValue({// add 15/3
+                fieldId: 'custbody_sdb_has_copy',
                 value: true
-             })
+            })
             var idClosed = rec.save({ enableSourcing: true, ignoreMandatoryFields: true });
             log.debug("Close Order: ", idClosed);
         } catch (error) {
@@ -186,6 +191,9 @@
             var lineCount = rec.getLineCount({ sublistId: "item" });
             var objItems = {};
             var hasItems = false;
+            var isDropShipOrder = rec.getValue('customform') == 300; //ACME Sales Order Drop Ship Entry custbody_dropship_order
+            var isDropShipOrder2 = rec.getValue('custbody_dropship_order'); //ACME Sales Order Drop Ship Entry 
+            if (isDropShipOrder || isDropShipOrder2) return false;
             for (var i = 0; i < lineCount; i++) {
                 var item = rec.getSublistValue({
                     sublistId: "item",
@@ -198,10 +206,10 @@
                     fieldId: "itemtype",
                     line: i,
                 });
-              // log.debug("itemType: ", itemType);
-              
-              //if (item == itemfuelCherge || item == itemError) continue;
-               if(itemType !=  "InvtPart" || item == itemError) continue; //add 15/3
+                // log.debug("itemType: ", itemType);
+
+                //if (item == itemfuelCherge || item == itemError) continue;
+                if (itemType != "InvtPart" || item == itemError) continue; //add 15/3
                 var quantityInvoiced = rec.getSublistValue({
                     sublistId: "item",
                     fieldId: "quantityfulfilled",

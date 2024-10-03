@@ -22,6 +22,11 @@ define(['N/record', 'N/search', "N/log", "N/config", "N/format"],
                     id: id,
                     type: record.Type.SALES_ORDER
                 });
+                var isdropShip = rec.getValue('custbody_dropship_order');
+                var orderSatus = rec.getValue('orderstatus');
+                log.audit("isdropShip", isdropShip);
+                log.audit("orderSatus", orderSatus);
+                if (orderSatus == 'D' && isdropShip) return;
                 var lineCount = rec.getLineCount({ sublistId: "item" });
                 for (var i = 0; i < lineCount; i++) {
                     rec.setSublistValue({

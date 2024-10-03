@@ -51,7 +51,7 @@ define(['N/log', "N/format","N/record","N/search"], function (log, format,record
     
             function getFormatDate(d) {
               try {
-                return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+                return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1),
                   d.getDate() < 10 ? "0" + d.getDate() : d.getDate(),
                   d.getFullYear()].join('/')
               } catch (error) {

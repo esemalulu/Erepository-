@@ -2,11 +2,13 @@
  * @NApiVersion 2.1
  * @NScriptType MapReduceScript
  */
-define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file', 'N/task'], function (log,record,search,runtime,encode,file, task) {
+define(["N/log","N/search","N/runtime",'N/file', 'N/task'], function (log,search,runtime,file, task) {
 
     function getInputData(context) {
         try {
             createCsvFile();
+            var customerPartner = runtime.getCurrentScript().getParameter("custscript_sdb_customer_partner");
+            log.debug("customerPartner",customerPartner)
             var transactionSearchObj = search.create({
                 type: "transaction",
                 filters:
@@ -17,9 +19,10 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file', 'N/task']
                    "AND", 
                    ["mainline","is","T"], 
                    "AND", 
-                   ["customermain.partner","anyof","51327"], 
+                //    ["customermain.partner","anyof","51327"], 
+                   ["customermain.partner","anyof",customerPartner],
                    "AND", 
-                   ["status","anyof","CustInvc:B"]
+                    ["status","anyof","CustInvc:A","CustCred:A"]
                 ],
                 columns:
                 [
@@ -29,7 +32,8 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file', 'N/task']
                    search.createColumn({name: "trandate",summary: "GROUP",label: "Date"}),
                    search.createColumn({name: "formulatext_1",summary: "GROUP",formula: "{otherrefnum}",label: "PO #"}),
                    search.createColumn({name: "amount",summary: "MAX",label: "Original Invoice Amount"}),
-                   search.createColumn({name: "amountremaining",summary: "MAX",label: "Current Total Open Amount"}),
+                   search.createColumn({name: "formulanumeric",summary: "MAX",formula: "case when {type} = 'Invoice' then {amountremaining} else {amountremaining} * -1 end",label: "Formula (Numeric)"}),
+                   //search.createColumn({name: "amountremaining",summary: "MAX",label: "Current Total Open Amount"}),
                    search.createColumn({name: "formulatext_2",summary: "MAX",formula: "{customermain.entityid}",label: "ACME Customer Number"}),
                    search.createColumn({name: "custrecord_address_shiplist_no",join: "shippingAddress",summary: "MAX",label: "Ship to  Network number"})
                 ]
@@ -50,7 +54,8 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file', 'N/task']
                     var trandate = element.getValue({name:'trandate',summary:'GROUP'});
                     var poNumber = element.getValue({name:'formulatext_1',summary:'GROUP'});
                     var amount = element.getValue({name:'amount',summary:'MAX'});
-                    var amountRemaining = element.getValue({name:'amountremaining', summary:'MAX'});
+                    //var amountRemaining = element.getValue({name:'amountremaining', summary:'MAX'});
+                    var amountRemaining = element.getValue({name:'formulanumeric', summary:'MAX'});
                     var acmeCustomerNumber = element.getValue({name:'formulatext_2', summary:'MAX'});
                     var shipToNetworkNumber = element.getValue({name:'custrecord_address_shiplist_no',join:'shippingAddress',summary:'MAX'});
                     pageResults.push({account:account,headerCodeType:headerCodeType,tranId:tranId,trandate:trandate,poNumber:poNumber,amount:amount,amountRemaining:amountRemaining,acmeCustomerNumber:acmeCustomerNumber,shipToNetworkNumber:shipToNetworkNumber})
@@ -129,7 +134,7 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file', 'N/task']
                     [
                         ["folder", "anyof", "-15"],
                         "AND",
-                        ["name","contains",runtime.getCurrentScript().getParameter('custscript_sdb_file_name')]
+                        ["name","is",runtime.getCurrentScript().getParameter('custscript_sdb_file_name')]
                     ],
                 columns:
                     [
@@ -187,16 +192,20 @@ define(["N/log","N/record","N/search","N/runtime",'N/encode','N/file', 'N/task']
 
     function summarize(context){
         try {
-            let csvName = runtime.getCurrentScript().getParameter("custscript_sdb_file_name");
-            log.debug("Csv name", csvName);
+            var arrFileName = runtime.getCurrentScript().getParameter("custscript_sdb_arr_file_name");
+            var fileId = searchFileByName();
+            var fileLoaded = getCurrentFile(fileId);
+            fileLoaded.name = arrFileName
+            var fileUpdated = fileLoaded.save();
+            log.audit("fileUpdated",fileUpdated)
             let callScheduled = task.create({
                 taskType: task.TaskType.SCHEDULED_SCRIPT,
                 scriptId: "customscript_sdb_send_net_discr_csv",
                 deploymentId: "customdeploy_sdb_send_net_discr_csv",
-                params: { custscript_sdb_file_name_scheduled: csvName }
+                params: { custscript_sdb_file_name_scheduled: arrFileName }
             });
-            log.debug("callScheduled", callScheduled);
             var taskId = callScheduled.submit();
+            log.debug("callScheduled taskId", taskId);
         } catch (error) {
             log.error("summarize", error);
         }

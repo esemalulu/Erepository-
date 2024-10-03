@@ -3,14 +3,27 @@
  *@NScriptType UserEventScript
 */
 define(['N/record', 'N/search', 'N/runtime'], function (record, search, runtime) {
-
+    function beforeLoad(context) {
+      try{
+            var rec = context.newRecord;
+            var isDropShip = rec.getValue('custbody_dropship_order');
+            if (isDropShip) {
+                var script = '<script>var elements = document.getElementsByTagName("a");'
+                script += 'var filtered = Array.from(elements).filter((el) => el.innerText === "Spec. Ord.");'
+                script += 'filtered.forEach(function(a){a.remove()});<\/script>'
+                rec.setValue({ fieldId: 'custbody_sdb_remove_link', value: script })
+            }
+      }catch(e){
+         log.error("error: ", e);
+      }
+    }
     function beforeSubmit(context) {
         log.debug("On beforeSubmit");
         try {
             if (context.type != context.UserEventType.EDIT && context.type != context.UserEventType.CREATE) return;
             var rec = context.newRecord;
             var recCount = rec.getLineCount("item");
-            log.audit("recCount: ", recCount);
+           
             for (var x = 0; x < recCount; x++) {
                 var Available = rec.getSublistValue({
                     sublistId: 'item',
@@ -44,11 +57,11 @@ define(['N/record', 'N/search', 'N/runtime'], function (record, search, runtime)
 
             /*SUPERSEDE FUNCTIONALITY*/
             var validateContext = (runtime.executionContext == runtime.ContextType.SUITELET || runtime.executionContext == runtime.ContextType.SCHEDULED);
-            log.debug('Context: '+runtime.executionContext, runtime.ContextType.SUITELET +' - '+runtime.ContextType.SCHEDULED)
+            log.debug('Context: ' + runtime.executionContext, runtime.ContextType.SUITELET + ' - ' + runtime.ContextType.SCHEDULED)
             log.debug('validateFromContext', validateContext)
             var rec = context.newRecord;
-           if(rec.getValue({ fieldId: 'custbody_sdb_from_uofmd_file' }) || validateContext) setDnrItems(rec);
-           if(runtime.executionContext == runtime.ContextType.REST_WEBSERVICES || rec.getValue({ fieldId: 'custbody_aps_entered_by' }) == 66155) setDnrItems(rec);
+            if (rec.getValue({ fieldId: 'custbody_sdb_from_uofmd_file' }) || validateContext) setDnrItems(rec);
+            if (runtime.executionContext == runtime.ContextType.REST_WEBSERVICES || rec.getValue({ fieldId: 'custbody_aps_entered_by' }) == 66155) setDnrItems(rec);//DCKAP User 
             /*SUPERSEDE FUNCTIONALITY*/
         } catch (error) {
             log.error('error beforeSubmit', error);
@@ -72,10 +85,12 @@ define(['N/record', 'N/search', 'N/runtime'], function (record, search, runtime)
                 if (!dnrInfo) continue;
                 if (!dnrInfo.supercedItem) continue;
                 var qty = salesRecord.getSublistValue({ sublistId: 'item', fieldId: 'quantity', line: i });
-                log.debug("UPDATE ITEM: ", { salesOrder: salesRecord.id, dnrInfo });
-                salesRecord.setSublistValue({ sublistId: 'item', fieldId: 'item', value: dnrInfo.supercedItem, line: i });// Add 4/4/24
-                salesRecord.setSublistValue({ sublistId: 'item', fieldId: 'quantity', value: qty, line: i });// Add 4/4/24
-                //salesRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'rate', value: rate });
+                if (dnrInfo.item != dnrInfo.supercedItem) {
+                    log.debug("UPDATE ITEM: ", { salesOrder: salesRecord.id, dnrInfo });
+                    salesRecord.setSublistValue({ sublistId: 'item', fieldId: 'item', value: dnrInfo.supercedItem, line: i });// Add 4/4/24
+                    salesRecord.setSublistValue({ sublistId: 'item', fieldId: 'quantity', value: qty, line: i });// Add 4/4/24
+                    //salesRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'rate', value: rate });
+                }
             }
         } catch (error) {
             log.error('setDnrItems', error)
@@ -121,8 +136,8 @@ define(['N/record', 'N/search', 'N/runtime'], function (record, search, runtime)
         return arrToReturn;
     }
 
-      //Search until the last item suoersede is brought - Add 31/7
-      function findFinalItem(itemId) {
+    //Search until the last item supersede is brought - Add 31/7
+    function findFinalItem(itemId) {
         try {
             var item = search.lookupFields({
                 type: record.Type.INVENTORY_ITEM,
@@ -147,6 +162,6 @@ define(['N/record', 'N/search', 'N/runtime'], function (record, search, runtime)
 
 
     return {
-        beforeSubmit: beforeSubmit,
+        beforeSubmit: beforeSubmit
     }
 });

@@ -2,7 +2,7 @@
  *@NApiVersion 2.1
  *@NScriptType WorkflowActionScript
  */
- define(["N/search", "N/log", "N/record", "N/runtime"], function (search, log, record, runtime) {
+define(["N/search", "N/log", "N/record", "N/runtime"], function (search, log, record, runtime) {
 
     function onAction(context) {
         const RICHMOND = 103;
@@ -10,20 +10,71 @@
         const DropshipWarehouse = 129;
         var currentRoleId = runtime.getCurrentUser().id
         if (currentRoleId == 75190) return; //2 High Jump id
+
         var salesRecord = context.newRecord;
         var lineItemCount = salesRecord.getLineCount("item");
         var recordType = salesRecord.type;
+        
+        log.debug('CONTEXT INFO: ', { current: context.type, ue: 'create' });
+        if (recordType == 'salesorder' && context.type == 'create') populateWarehouse(salesRecord)
 
-        if (recordType === 'salesorder' && salesRecord.getValue("customform") == 300) {
-            setDropShipmentLocations(salesRecord, DropshipWarehouse, lineItemCount)
-        }
+        if (recordType === 'salesorder' && salesRecord.getValue("customform") == 300) setDropShipmentLocations(salesRecord, DropshipWarehouse, lineItemCount)
         if (recordType === 'purchaseorder') updateMissingLocation(salesRecord);
-        else
-            adjustLocationSPS(context, RICHMOND, SAVAGE);
+        else adjustLocationSPS(context, RICHMOND, SAVAGE);
+
+
 
         var actualLocation = salesRecord.getValue("location");
         salesRecord.setValue('custbody_warehouse_roadnet', actualLocation);
+    }
 
+    function populateWarehouse(saleRec) {
+        try {
+            var address = saleRec.getValue("shipaddresslist");
+            var warehouseToSet = getWarehouseSelected(saleRec);
+
+            log.debug('WAREHOUSE TO SET: ', { warehouseToSet, address, orderId: saleRec.id });
+            if (warehouseToSet) {
+                saleRec.setValue({ fieldId: 'location', value: warehouseToSet });
+                saleRec.setValue({ fieldId: 'custbody_warehouse_roadnet', value: warehouseToSet });
+            }
+        } catch (error) {
+            log.error("ERROR: populateWarehouse", error);
+        }
+    }
+
+    function getWarehouseSelected(SaleRecord) {
+        try {
+            var warehoseFormAddress = getWarehouse(SaleRecord, 'shipaddresslist');
+            if (warehoseFormAddress) return warehoseFormAddress;
+
+            warehoseFormAddress = getWarehouse(SaleRecord, 'entity');
+            return warehoseFormAddress;
+        } catch (error) {
+            log.error("ERROR: getWarehouseSelected", error);
+        }
+    }
+
+    function getWarehouse(saleOrder, option) {
+        try {
+            var warehouse = false;
+            if (option == 'shipaddresslist') {
+                let subRecord = saleOrder.getSubrecord('shippingaddress');
+                if (subRecord) warehouse = subRecord.getValue('custrecord_ship_zone');
+                return warehouse;
+            } else if (option == 'entity') {
+                let customer = saleOrder.getValue('entity');
+                if (!customer) return null;
+                let customerRecord = record.load({
+                    type: 'customer',
+                    id: customer,
+                });
+                var customerwarehouse = customerRecord.getValue('custentity_warehouse');
+                return customerwarehouse;
+            }
+        } catch (error) {
+            log.error("ERROR: getWarehouse", error);
+        }
     }
 
     function updateMissingLocation(transaction) {
@@ -206,7 +257,7 @@
 
                     var locationFound = locations.find(element => (Number(element.location) == Number(actualLocation)));
                     var hasRitchmondStock = locations.find(element => (Number(element.location) == Number(RICHMOND)) && (Number(element.quantity) - Number(item.qty) >= 0));
-                    var isRitchmodCustomer = getIsRitchmodCustomer(salesRecord.getValue('entity'), RICHMOND);
+                    // var isRitchmodCustomer = getIsRitchmodCustomer(salesRecord.getValue('entity'), RICHMOND);
                     var isOnlySavageStock = getOnlySavageStock(item.itemId);
 
                     log.debug("RITCHMOND CASE INFO: ", { item: item.itemId, locationFound, locations, isOnlySavageStock, orderId: salesRecord.id });
@@ -233,10 +284,14 @@
                         return;
                     }
 
-                    if (!enteredBySPS && locationFound && (Number(item.qty) - Number(locationFound.quantity) > 0)) { // Maggie issue SO10080395 - 500431 (10/07/2024)
+                    if (locationFound && (Number(item.qty) - Number(locationFound.quantity) > 0)) { // Maggie issue SO10080395 - 500431 (10/07/2024)
                         //Set qty for actual line to max qty available in Richmond
                         salesRecord.selectLine({ sublistId: 'item', line: item.line });
-
+                        salesRecord.setCurrentSublistValue({
+                            sublistId: 'item',
+                            fieldId: 'location',
+                            value: RICHMOND,
+                        });
                         //Set actual item qty
                         salesRecord.setCurrentSublistValue({
                             sublistId: 'item',
@@ -278,10 +333,10 @@
                         });
 
                         salesRecord.commitLine("item");
+                        return;
                     }
                     else {
                         log.debug('STATUS', 'ITEM DOES NOT HAVE BACKORDER');
-
                         if (!locations.length) {
                             locationToSet = SAVAGE;
                         } else {
@@ -305,6 +360,7 @@
                             });
                         }
                         salesRecord.commitLine("item");
+                        return;
                     }
 
                 }//End if backorder
@@ -385,7 +441,7 @@
 
         return itemsInfo;
 
-    }//End setLocationAvailable
+    }
 
     // -----------------------------------------------------------------------------------
     return {

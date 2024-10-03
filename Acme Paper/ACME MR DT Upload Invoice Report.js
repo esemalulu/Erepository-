@@ -107,7 +107,8 @@ define(['N/search', 'N/record', 'N/log', 'N/runtime', 'N/format', 'N/email', 'N/
 						curACMEAccountNumber = customerDetails['custentity_dt_rest365_account_number'];
 						curLocation = mapperLocation[customerDetails['entityid']];
 						log.debug('curACMEAccountNumber  is ' + curACMEAccountNumber, 'curLocation  is ' + curLocation);
-						dtReportVendorNamewithAccount = dtReportVendorName + ' ' + curACMEAccountNumber;
+						dtReportVendorNamewithAccount = dtReportVendorName;
+                        if(!curLocation) curLocation = curACMEAccountNumber;
 					}
 					else {
 						dtReportVendorNamewithAccount = dtReportVendorName;

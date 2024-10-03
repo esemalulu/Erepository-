@@ -8,7 +8,7 @@ function itemFulfilmentsDateUpdate()
     var fulFilFilters = [new nlobjSearchFilter('type',null,'anyof', ['ItemShip']), 
 		                new nlobjSearchFilter('mainline',null,'is', 'T'), 
 		                //new nlobjSearchFilter('custbody_apinc_processed_by_ss',null,'is', 'F'),
-                        new nlobjSearchFilter('trandate',null,'within', ['04/01/2024','04/30/2024'])];	
+                        new nlobjSearchFilter('trandate',null,'with in', ['04/01/2024','04/30/2024'])];	
   
     if (paramLastProcId)
     {
@@ -23,9 +23,6 @@ function itemFulfilmentsDateUpdate()
 
 	//Search result will be ordered either in ASC or DESC of internal ID
 	var fulFilpSrchResults = nlapiSearchRecord(null, 'customsearch5968', null, null);
-
-
-
 
 
 
@@ -56,12 +53,9 @@ function itemFulfilmentsDateUpdate()
  
              var maxInvDate =  maxInvSrch[0].getValue('trandate', null, 'max');
              var maxInvDateMnth = nlapiStringToDate(maxInvDate).getMonth();
-      
 
+     		 //break;
 
-
-
-     
       
 
       
@@ -99,7 +93,7 @@ function itemFulfilmentsDateUpdate()
 					 nlapiSubmitRecord(trxRec);	 
              
 			}  
-            else
+            else if(maxInvDate == maxItemShipDate )
             {
                      fulfilRec.setFieldValue('custbody_apinc_processed_by_ss', 'T')
                      nlapiSubmitRecord(fulfilRec);              
@@ -128,9 +122,10 @@ function itemFulfilmentsDateUpdate()
             if(PurchOrdId)   
             {
 
-                   var PurchOrdId = PurchOrdSrch[0].getValue(PurchOrdColumns[0]);
+                   var PurchOrdId = PurchOrdSrch[0].getValue(PurchOrdColumns[0]); //Get Internal ID of PO
               
-                   //Search for VENDOR BILLS to update trandate
+                   //Search for VENDOR BILLS associatted to the above PO Search
+              
                    var VendBillFilters = [new nlobjSearchFilter('type',null,'anyof', ['VendBill']),
                                           new nlobjSearchFilter('createdfrom', null,'anyof',PurchOrdId),
                                           new nlobjSearchFilter('mainline',null,'is', 'T')];                              
@@ -160,6 +155,7 @@ function itemFulfilmentsDateUpdate()
                     }
                     else if(maxInvDate == maxVendBillDate )
                     {
+                           nlapiLogExecution('error', 'DATE MATCH', VendBillSrch[0].getValue(VendBillColumns[3]));  
                            fulfilRec.setFieldValue('custbody_apinc_processed_by_ss', 'T')
                            nlapiSubmitRecord(fulfilRec);              
                     }       
@@ -186,7 +182,7 @@ function itemFulfilmentsDateUpdate()
 				var rparam = new Object();
 				
 				rparam['custscript_sct6081_lastprocid'] = fulFilpSrchResults[i].getValue('internalid');				
-				nlapiScheduleScript(nlapiGetContext().getScriptId(), nlapiGetContext().getDeploymentId(), rparam);
+				//nlapiScheduleScript(nlapiGetContext().getScriptId(), nlapiGetContext().getDeploymentId(), rparam);
 				break;
 			}
 
@@ -218,35 +214,46 @@ function generalUpdates()
 */
 	
 	//Search result will be ordered either in ASC or DESC of internal ID
-	var searchResults = nlapiSearchRecord(null, 'customsearch6076');
+	var searchResults = nlapiSearchRecord(null, 'customsearch5616');
 	
 	for (var i=0; searchResults && i < searchResults.length; i++)
 	{		     
-            nlapiLogExecution('audit','TRX ID', searchResults[i].getValue('tranid')); 
-            nlapiLogExecution('audit','TRX OLD VALUE', searchResults[i].getValue('oldvalue','systemNotes')); 
+
+			//var trxRec = nlapiLoadRecord(searchResults[i].getRecordType(), searchResults[i].getId(), {recordmode:'dynamic',customform: '322'}); 
+			var trxRec = nlapiLoadRecord(searchResults[i].getRecordType(), searchResults[i].getId(), {recordmode:'dynamic',customform: '322'}); 
+
+
+				var count = trxRec.getLineItemCount('item');
+				
+			    for (var l = 1; l <= count; l += 1)
+				{
+                     var qntyReturned = trxRec.getLineItemValue('item', 'custcol_sdb_quantity_returned	', l);
+                     var unitCost = trxRec.getLineItemValue('item', 'custcol_acc_unitcost', l);                  
+                     //trxRec.setLineItemValue('item', 'costestimatetype', l, 'CUSTOM'); 
+                     trxRec.setLineItemValue('item', 'costestimate', l, qntyReturned * unitCost); 
+                 
+
+                }
+
       
-            //var vendBillId = searchResults[i].getValue('billingtransaction','appliedToTransaction')
-			//var vendBillRec = nlapiLoadRecord('vendorbill', vendBillId, {recordmode:'dynamic'}); 
+            //trxRec.setFieldValue('custbody_apinc_processed_by_ss', 'T')
+            nlapiLogExecution('error', 'TRX ID ', searchResults[i].getId()); 
+			nlapiSubmitRecord(trxRec);
 
-			var trxRec = nlapiLoadRecord(searchResults[i].getRecordType(), searchResults[i].getId());  
-      		trxRec.setFieldValue('trandate', searchResults[i].getValue('oldvalue','systemNotes'));
-            trxRec.setFieldValue('custbody_apinc_processed_by_ss', 'T')
-			nlapiSubmitRecord(trxRec);			
-
-																															
+																														
 			//Set % completed of script processing			
 			var pctCompleted = Math.round(((i+1) / searchResults.length) * 100);
 			nlapiGetContext().setPercentComplete(pctCompleted);
 					
 			//AFter each record is processed, you check to see if you need to reschedule
-			if ((i+1)==1000 || ((i+1) < searchResults.length && nlapiGetContext().getRemainingUsage() < 200)) 
+			if ((i+1)==1 || ((i+1) < searchResults.length && nlapiGetContext().getRemainingUsage() < 200)) 
 			{
 				//reschedule
-				//nlapiLogExecution('audit','Getting Rescheduled at', searchResults[i].getValue('internalid'));
+				nlapiLogExecution('audit','Getting Rescheduled at', searchResults[i].getValue('internalid'));
 				var rparam = new Object();
 				
-				//rparam['custscript_sct51_lastprocid'] = searchResults[i].getValue('internalid');				
-				nlapiScheduleScript(nlapiGetContext().getScriptId(), nlapiGetContext().getDeploymentId(), rparam);
+				rparam['custscript_sct51_lastprocid'] = searchResults[i].getValue('internalid');				
+				//nlapiScheduleScript(nlapiGetContext().getScriptId(), nlapiGetContext().getDeploymentId(), rparam);
 				break;
 			}
 	

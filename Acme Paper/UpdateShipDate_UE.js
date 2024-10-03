@@ -25,19 +25,15 @@ function updateShipDateBeforeSubmit(type)
 
     if (type != 'create') return;
 
-    nlapiLogExecution('debug', 'CREATE', 'CREATE RUNNING');
-
     aColSearch.push(new nlobjSearchColumn(FLD_AOH_HOLIDAY_DATE));
 
     aResult = nlapiSearchRecord(REC_ACME_OFFICIAL_HOLIDAYS, null, aFltSearch, aColSearch);
 
-    nlapiLogExecution('debug', 'aResult', aResult);
 
     if (typeof aResult !== 'undefined' && aResult)
     {
         aResult.forEach(function (oItem)
         {
-            nlapiLogExecution('debug', 'Field holiday date', oItem.getValue(FLD_AOH_HOLIDAY_DATE));
 
             aHolidays.push(oItem.getValue(FLD_AOH_HOLIDAY_DATE));
         });
@@ -50,7 +46,6 @@ function updateShipDateBeforeSubmit(type)
 
 function setShipDate(aHolidays)
 {
-    nlapiLogExecution('debug', 'aHolidays', aHolidays);
     var sDate, sNextBusinessDate, dDate, startDate;
     var dCurrentDate = getCurrentDateTime();
     var nCurrentDateMinute = (dCurrentDate.getHours() * 60) + dCurrentDate.getMinutes();
@@ -63,11 +58,8 @@ function setShipDate(aHolidays)
 
         // Check if startdate is future than bussiness day then the script will return and no nothing
         startDate = nlapiGetFieldValue('startdate');
-        nlapiLogExecution("debug", "StartDate", startDate);
 
         var bussinessDay = getNextBusinessDay(sDate, aHolidays);
-        nlapiLogExecution("debug", "bussinessDay", bussinessDay);
-
 
         if(new Date(startDate) > new Date(bussinessDay)) return; 
 
@@ -89,7 +81,6 @@ function setShipDate(aHolidays)
         }
 
         sNextBusinessDate = getNextBusinessDay(sDate, aHolidays);
-        nlapiLogExecution('debug', 'sNextBusinessDate to set',sNextBusinessDate);
         // nlapiSetFieldValue('shipdate', sNextBusinessDate);
         nlapiSetFieldValue('startdate', sNextBusinessDate);
         if (!nlapiGetFieldValue('startdate')) {

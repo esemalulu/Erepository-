@@ -172,6 +172,33 @@ function beforeSubmit(type, form) {
   }
 
   if(type !== "delete"){
+
+    function hasNumberValue(value){
+      if(value === undefined){
+        return false
+      }
+      if(value === null){
+        return false
+      }
+      if(value === ""){
+        return false
+      }
+      if(value === []){
+        return false
+      }
+      return Number(value) >= 0
+    }
+
+    var rebate_cost = nlapiGetFieldValue("custrecord_rebate_items_rebate_cost")
+    var dollars_per_case = nlapiGetFieldValue("custrecord_acme_rebate_item_doll_pcase")
+    var discount_percent = nlapiGetFieldValue("custrecord_rebate_discount_pct")
+    if(discount_percent){
+      discount_percent = Number(discount_percent.split("%")[0])
+    }
+    if(!hasNumberValue(rebate_cost) && !hasNumberValue(dollars_per_case) && !hasNumberValue(discount_percent)){
+      throw new Error("Please assign a costing method")
+    }
+
     var item_value = nlapiGetFieldValue("custrecord_rebate_items_item")
     var mpn_value = nlapiGetFieldValue("custrecord_rebate_vendor_name")
     if(!item_value){

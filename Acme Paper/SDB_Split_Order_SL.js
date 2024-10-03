@@ -14,7 +14,7 @@ function (runtime,record) {
          log.debug("createdFrom", createdFrom);
 
          var objItems = getSalesOrderLines(createdFrom);
-         if (isEmpty(objItems)) return;
+         if (isEmpty(objItems) || !objItems) return;
 
          copySalesOrder(createdFrom, objItems);
 
@@ -29,6 +29,10 @@ function (runtime,record) {
                id: salesOrderId,
                type: record.Type.SALES_ORDER,
            });
+           var isDropShipOrder = soRec.getValue('customform') == 300; //ACME Sales Order Drop Ship Entry custbody_dropship_order
+           var isDropShipOrder2 = soRec.getValue('custbody_dropship_order'); //ACME Sales Order Drop Ship Entry 
+           if (isDropShipOrder || isDropShipOrder2) return false;
+           
            var hasCopy = soRec.getValue({fieldId:'custbody_sdb_has_copy'});// add 15/3
            if(hasCopy) return;
            var documentNumber = soRec.getValue({ fieldId: "tranid" });
@@ -186,6 +190,9 @@ function (runtime,record) {
            var lineCount = rec.getLineCount({ sublistId: "item" });
            var objItems = {};
            var hasItems = false;
+           var isDropShipOrder = rec.getValue('customform') == 300; //ACME Sales Order Drop Ship Entry custbody_dropship_order
+           var isDropShipOrder2 = rec.getValue('custbody_dropship_order'); //ACME Sales Order Drop Ship Entry 
+           if (isDropShipOrder || isDropShipOrder2) return false;
            for (var i = 0; i < lineCount; i++) {
                var item = rec.getSublistValue({
                    sublistId: "item",

@@ -118,7 +118,7 @@
             var isdropShip = currentRecord.getValue('custbody_dropship_order');
             log.audit("isdropShip", isdropShip)
             if (context.type == 'create' || context.type == 'edit') {
-                 if ((context.type == 'create' && orderStatus == 'A') || (orderStatus == 'A' && oldStatus == 'B') && !isdropShip) validateApprove(context);
+                if ((context.type == 'create' && orderStatus == 'A') || (orderStatus == 'A' && oldStatus == 'B') && !isdropShip) validateApprove(context, orderStatus, oldStatus);
                 var recordId = context.newRecord.id;
                 var i_custId = currentRecord.getValue("entity");
                 var i_shipname = '';
@@ -239,6 +239,16 @@
                     var itemLineTotal = soObj.getLineCount({ sublistId: 'item' });
 
                     for (var curLine = 0; curLine < itemLineTotal; curLine++) {
+                       //Markup for Restockit // ADD 19-08-24
+                        soObj.setSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_markup_percent', line: curLine, value: 6 });
+                        var costestimaterate = soObj.getSublistValue({ sublistId: 'item', fieldId: 'custcol_acc_unitcost', line: curLine }) || "";
+                        var markup = soObj.getSublistValue({ sublistId: 'item', fieldId: 'custcol_acme_markup_percent', line: curLine }) || 6;
+                        var temp = 1 - (Number(markup) / 100);
+                        var rate = costestimaterate ? (1 / Number(temp)) * Number(costestimaterate) : soObj.getSublistValue({ sublistId: 'item', fieldId: 'rate', line: curLine });
+                        log.debug('rate is ', rate);
+                        soObj.setSublistValue({ sublistId: 'item', fieldId: 'rate', line: curLine, value: rate.toFixed(2) });
+                        //Markup for Restockit END 
+                      
                         var ediLineUnitPrice = soObj.getSublistValue({ sublistId: 'item', fieldId: 'custcol_edi_unit_price', line: curLine });
                         log.debug('AS ediLineUnitPrice is ', ediLineUnitPrice);
                         if (ediLineUnitPrice) {
@@ -345,10 +355,11 @@
         return 0;
     }
 
-    function validateApprove(context) {
+    function validateApprove(context, orderStatus, oldStatus) {
         try {
 
             var currentRecord = context.newRecord;
+            var enteredby = currentRecord.getValue('custbody_aps_entered_by');
             var currentRoleId = runtime.getCurrentUser().role;
             var roleLabel = search.lookupFields({
                 type: search.Type.ROLE,
@@ -364,8 +375,9 @@
 
             if (hasPermissionToApprove && checkRestrict) {
                 var docNumber = currentRecord.getValue('tranid')
-               if(context.type == 'create') sendApprovalEmail(docNumber, currentRecord.id)
+                if (context.type == 'create') sendApprovalEmail(docNumber, currentRecord.id)
             }
+            if (context.type == 'create' || (orderStatus == 'A' && oldStatus == 'B')) sendResultByEmail(currentRecord.id, enteredby);
         } catch (error) {
             log.error({
                 title: 'validateApprove',
@@ -373,7 +385,7 @@
             })
         }
     }
-
+    //Send email for approval process to Keith
     function sendApprovalEmail(docNumber, soId) {
 
         try {
@@ -397,8 +409,68 @@
         } catch (error) {
             log.error('ERROR senEmail', error)
         }
-
     }
+    //Send email for approval process to Keith and Cc. 
+    function sendResultByEmail(id, enteredby) {
+        try {
+
+            var ss = runtime.getCurrentScript().getParameter({ name: 'custscript_sdb_approval_ss' })
+            var emailSender = runtime.getCurrentScript().getParameter({ name: 'custscript_sdb_sender_noreply' })
+            var emailRecipients = runtime.getCurrentScript().getParameter({ name: 'custscript_sdb_receiptients' });
+            var pathtransactions = runtime.getCurrentScript().getParameter({ name: 'custscript_sdb_path_so' })
+            var customerService = runtime.getCurrentScript().getParameter({ name: 'custscript_sdb_customer_service' })
+            pathtransactions += id;
+            log.audit('ss', ss);
+            if (!ss) return;
+            var mySearch = search.load({ id: ss });
+            var transactionIdFilter = search.createFilter({
+                name: 'internalid',
+                operator: search.Operator.IS,
+                values: [id]
+            });
+
+            mySearch.filters.push(transactionIdFilter);
+            var results = mySearch.run().getRange({ start: 0, end: 1000 });
+
+            var buyer = '';
+            var emailBody = '<h2>Result : Sales Orders - Pending Purchasing Approval</h2><br/>';
+            var count = 0;
+            var cc = customerService ? [customerService] : [];
+            var salesRepSS = '';
+            results.forEach(function (result) {
+                buyer = result.getValue({ name: 'custitem_buyer', join: 'item' });
+                salesRepSS = result.getValue({ name: 'salesrep' })
+                emailBody += '<p>Date: ' + result.getValue({ name: 'trandate' }) || '' + '</p><br>';
+                emailBody += '<p>Document Number: ' + result.getValue({ name: 'tranid' }) || '' + '</p><br>';
+                emailBody += '<p>Name: ' + result.getText({ name: 'entity' }) || '' + '</p><br>';
+                emailBody += '<p>Memo: ' + result.getValue({ name: 'memo' }) || '' + '</p><br>';
+                emailBody += '<p>Amount: ' + result.getValue({ name: 'amount' }) || '' + '</p><br>';
+                emailBody += '<p>Ship Date: ' + result.getValue({ name: 'startdate' }) || '' + '</p><br>';
+                emailBody += '<p>Item: ' + result.getText({ name: 'item' }) || '' + '</p><br>';
+                emailBody += '<p>Buyer: ' + result.getText({ name: 'custitem_buyer', join: 'item' }) || '' + '</p><br><br>';
+                emailBody += '<p><a href=' + pathtransactions + '>View Record</a></p><br>';
+                count++;
+            });
+            if (salesRepSS) cc.push(salesRepSS);
+            if (buyer) cc.push(buyer);
+            if (enteredby) cc.push(enteredby);
+            if (count == 0) return;
+            log.audit('cc', cc);
+            //Sen Email for Keith - CC:Entered by , buyer and customer service
+            email.send({
+                author: emailSender,
+                recipients: emailRecipients,
+                cc: cc,
+                subject: 'Alert: Sales Orders - Pending Purchasing Approval',
+                body: emailBody
+            });
+
+        } catch (error) {
+            log.error('Error on sendResultByEmail', error)
+        }
+    }
+
+
 
     function setForRestockit(soObj) {
         try {

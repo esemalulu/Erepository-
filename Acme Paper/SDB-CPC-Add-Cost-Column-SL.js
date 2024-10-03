@@ -10,7 +10,8 @@ define(['N/log', 'N/search'], function (log, search) {
                 var requestBody = JSON.parse(context.request.body);
                 var itemNamesArr = requestBody.itemsArr;
                 var customerId = requestBody.customerId;
-                var costsArr = searchRebateCosts(itemNamesArr, customerId);
+                var downloadAction = requestBody.downloadAction;
+                var costsArr = searchRebateCosts(itemNamesArr, customerId, downloadAction);
                 log.debug('costArr', costsArr)
                 context.response.write({
                     output: JSON.stringify(costsArr)
@@ -44,9 +45,9 @@ define(['N/log', 'N/search'], function (log, search) {
         return itemIds;
     }
 
-    function searchRebateCosts(itemsArr, customerId) {
+    function searchRebateCosts(itemsArr, customerId, downloadAction) {
         try {
-            itemsArr = getItemIds(itemsArr)
+            if (!downloadAction) itemsArr = getItemIds(itemsArr)
             var res = [];
             var itemsFilter = ["custrecord_rebate_items_parent.custrecord_rebate_items_item", "anyof"]
             itemsFilter = itemsFilter.concat(itemsArr)
@@ -86,13 +87,15 @@ define(['N/log', 'N/search'], function (log, search) {
                     ]
             });
             customrecord_rebate_parentSearchObj.run().each(function (result) {
+                var itemInternalId = result.getValue({ name: "custrecord_rebate_items_item", join: "CUSTRECORD_REBATE_ITEMS_PARENT" })
                 var itemId = result.getText({ name: "custrecord_rebate_items_item", join: "CUSTRECORD_REBATE_ITEMS_PARENT" })
                 var itemDefinedCost = result.getValue({ name: "custrecord_rebate_item_defined_cost", join: "CUSTRECORD_REBATE_ITEMS_PARENT" })
                 var rebateCost = result.getValue({ name: "custrecord_rebate_items_rebate_cost", join: "CUSTRECORD_REBATE_ITEMS_PARENT" })
                 var itemObj = {
                     itemId: itemId,
                     itemDefinedCost: Number(itemDefinedCost),
-                    rebateCost: Number(rebateCost)
+                    rebateCost: Number(rebateCost),
+                    itemInternalId: itemInternalId
                 }
                 res.push(itemObj)
                 return true;

@@ -41,6 +41,8 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
             dDate.setDate(dDate.getDate() + 1);
             sReturn = dDate;
             sReturn = getFormatDate(sReturn)
+            log.debug('info: ', { dDate, sReturn, number: dDate.getDay() })
+
         } while (aHolidays.indexOf(sReturn) >= 0 || dDate.getDay() == 6 || dDate.getDay() == 0);
 
         return new Date(sReturn);
@@ -63,7 +65,7 @@ define(['N/record', 'N/search', 'N/log'], function (record, search, log) {
     }
 
     function getFormatDate(d) {
-        return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+        return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1),
         d.getDate() < 10 ? "0" + d.getDate() : d.getDate(),
         d.getFullYear()].join('/')
     }

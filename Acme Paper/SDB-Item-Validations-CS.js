@@ -6,6 +6,7 @@ define(["N/ui/dialog", "N/record"], function (dialog, record) {
 
   function saveRecord(context) {
     try {
+
       var currRecord = context.currentRecord;
       var lineCount = currRecord.getLineCount({
         sublistId: "itemvendor"
@@ -59,7 +60,7 @@ define(["N/ui/dialog", "N/record"], function (dialog, record) {
     try {
       var objRecord = record.load({ type: 'noninventoryitem', id: newRecord.id });
       objRecord.setValue('expenseaccount', 429); //EXPENSE ACCOUNT
-      objRecord.save({ enableSourcing: false, ignoreMandatoryFields: true });
+      objRecord.save({ enableSourcing: true, ignoreMandatoryFields: true });
       location.reload();
     } catch (error) {
       log.error('ERROR updateOriginalItem: ', error);

@@ -2,20 +2,18 @@
  * @NApiVersion 2.1
  * @NScriptType ClientScript
  */
-define(["N/currentRecord", "N/runtime", "N/search", "N/email", "N/https", "N/record"], function (
+define(["N/currentRecord", "N/runtime", "N/search", "N/email", "N/https", "N/record", "N/format"], function (
     currentRecord,
     runtime,
     search,
     email,
     https,
-    record
-)
-{
-    function pageInit(ctx) { }
-    function sendPOemail()
-    {
-        try
-        {
+    record,
+    format
+) {
+
+    function sendPOemail() {
+        try {
             let myRecord = currentRecord.get();
             const stSuiteletLinkParam = runtime.getCurrentScript().getParameter({
                 name: "custscript_suiteletlink1",
@@ -39,8 +37,7 @@ define(["N/currentRecord", "N/runtime", "N/search", "N/email", "N/https", "N/rec
                 id: fieldLookUp.entity[0].value,
                 isDynamic: true,
             });
-            if (loadedRecord.getSublist({ sublistId: 'contactroles' }))
-            {
+            if (loadedRecord.getSublist({ sublistId: 'contactroles' })) {
                 vendor_email = loadedRecord.getSublistValue({
                     sublistId: "contactroles",
                     fieldId: "email",
@@ -50,35 +47,31 @@ define(["N/currentRecord", "N/runtime", "N/search", "N/email", "N/https", "N/rec
             console.log(vendor_email);
             if (!vendor_email) vendor_email = fieldLookUp.custbody_cust_primary_email;//If we dont have any, we use this fields
 
-            if (vendor_email)
-            {
+            if (vendor_email) {
                 const suiteletURL = `${stSuiteletLinkParam}&record_id=${record_id}&po_number=${po_number}&email=${vendor_email}&author=${author}`;
                 let response = https.get({
                     url: suiteletURL,
                 });
-            } else
-            {
+            } else {
                 vendor_email = search.lookupFields({
                     type: search.Type.VENDOR,
                     id: parseInt(fieldLookUp.entity[0].value),
                     columns: ["email"],
                 });
 
-                if (vendor_email.email)
-                {
+                if (vendor_email.email) {
                     const suiteletURL = `${stSuiteletLinkParam}&record_id=${record_id}&po_number=${fieldLookUp.tranid}&email=${vendor_email.email}&author=${author}`;
                     let response = https.get({
                         url: suiteletURL,
                     });
                 }
             }
-        } catch (e)
-        {
+        } catch (e) {
             console.log("error in send email", e);
         }
     }
-    function printCustomPDF()
-    {
+
+    function printCustomPDF() {
         let myRecord = currentRecord.get();
         const stSuiteletLinkParam = runtime.getCurrentScript().getParameter({
             name: "custscript_suiteletlink1",
@@ -93,9 +86,42 @@ define(["N/currentRecord", "N/runtime", "N/search", "N/email", "N/https", "N/rec
 
         window.open(suiteletURL);
     }
+
+    function fieldChanged(context) {
+        try {
+            var transactionRecord = context.currentRecord;
+            var sublistName = context.sublistId;
+            var fieldName = context.fieldId;
+            var dateToSet = transactionRecord.getValue('duedate') || '';
+            if (dateToSet) dateToSet = getFormatDate(new Date(dateToSet));
+
+            if (sublistName == 'item' && fieldName == 'item' && dateToSet) {
+                setTimeout(function () {
+                    console.log('SET expectedreceiptdate DATA: ', { id: transactionRecord.id, sublistName, fieldName, dateToSet })
+                    transactionRecord.setCurrentSublistValue({ sublistId: 'item', fieldId: 'expectedreceiptdate', value: new Date(dateToSet) });
+                }, 2000)
+            
+            }
+        }
+        catch (error) {
+            console.log('ERROR: fieldChanged', error.toString());
+        }
+    }
+
+    function getFormatDate(date) {
+        let parsedDate = format.parse({
+            value: date,
+            type: format.Type.DATE
+        });
+        return format.format({
+            value: new Date(parsedDate),
+            type: format.Type.DATE
+        });
+    }
+
     return {
         sendPOemail: sendPOemail,
-        pageInit: pageInit,
         printCustomPDF: printCustomPDF,
+        fieldChanged: fieldChanged
     };
 });

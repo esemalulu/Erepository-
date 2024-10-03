@@ -3,9 +3,9 @@
  * @NScriptType UserEventScript
  * @NModuleScope SameAccount
  */
-define(['N/error'],
+define(['N/ui/message'],
 
-function(error) {
+function(message) {
    
     /**
      * Function definition to be triggered before record is loaded.
@@ -58,20 +58,12 @@ function(error) {
     		log.debug("salesorderSearchObj result count",searchResultCount);
     		if(searchResultCount > 0){
     			
-    		/*	var myMsg4 = message.create({
+    			let myMsg4 = message.create({
     		        title: 'My Title 4',
     		        message: 'My Message 4',
     		        type: message.Type.ERROR
     		    });
-    		    myMsg4.show(); */
-              function createError() {
-        var myCustomError = error.create({
-            name: 'MY_ERROR_CODE',
-            message: 'My custom error details',
-            notifyOff: true
-        });
-    }
-    createError();
+    		    myMsg4.show();
     			
     		
     		}
@@ -93,9 +85,9 @@ function(error) {
     }
 
     return {
-    //    beforeLoad: beforeLoad,
-        beforeSubmit: beforeSubmit
-    //    afterSubmit: afterSubmit
+        beforeLoad: beforeLoad,
+        beforeSubmit: beforeSubmit,
+        afterSubmit: afterSubmit
     };
     
 });

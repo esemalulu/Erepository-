@@ -453,12 +453,12 @@ define(["N/search", "N/runtime", "N/https", "N/email", "N/record", "N/file"], fu
 
     function getFormatDate2(d) {
         return [d.getFullYear(),
-        d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+        d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1),
         d.getDate() < 10 ? "0" + d.getDate() : d.getDate()].join('-')
     }
 
     function getFormatDate(d) {
-        return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+        return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1),
         d.getDate() < 10 ? "0" + d.getDate() : d.getDate(),
         d.getFullYear()].join('/')
     }

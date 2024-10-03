@@ -64,6 +64,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
 
     function pageInit(context) {
         try {
+            //if(nlapiGetContext().user != '84419')
             aHolidays = loadHolidaysPageInit();
             currentDate = new Date();
             nextBusinessDay = getNextBusinessDayNew(currentDate, aHolidays);
@@ -211,10 +212,11 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
     }
     function postSourcing(context) {//101889 MISSION BBQ DEPTFORD NJ
         try {
+            //if(nlapiGetContext().user != '84419')
             var rec = context.currentRecord;
             var sublistId = context.sublistId;
             var fieldId = context.fieldId;
-            
+
             if (context.sublistId == 'item' && context.fieldId == 'item') {
                 var itemId = rec.getCurrentSublistValue({
                     sublistId: "item",
@@ -363,6 +365,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
 
     function validateLine(context) {
         try {
+            //if(nlapiGetContext().user != '84419')
             if (context.currentRecord.type == "invoice" || context.currentRecord.type == "estimate" || context.currentRecord.type == 'returnauthorization') return true;
             var rec = context.currentRecord;
             var sublistId = context.sublistId;
@@ -437,15 +440,14 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
 
     function fieldChanged(context) {
         try {
+            //if(nlapiGetContext().user != '84419')
             var field = context.fieldId;
-
-
             if (context.currentRecord.type != 'invoice') PopulateAdressFunction(context, true, context.currentRecord.type);
             // if (context.currentRecord.type != 'returnauthorization') PopulateAdressFunction(context, true);
             var currentRecord = context.currentRecord;
             if (field == "otherrefnum" && currentRecord.getValue("otherrefnum") != "") checkDuplicatePO(context);
             // ------------------------ Good Standing Functionality ------------------------ //
-            if (field == "entity" && context.currentRecord.type == "salesorder") {
+            if (field == "entity" && (context.currentRecord.type == "salesorder" || context.currentRecord.type == "invoce")) {
                 try {
                     var goodStanding = hasGoodStanding(context.currentRecord);
                     if (!goodStanding) alert("This customer does not have permission to save order because it is not in good standing!");
@@ -642,6 +644,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
     }
 
     function supercedeItemLogic(itemInformation, type) {
+      debugger;
         if (type == "get") {
             var { rec } = itemInformation;
 
@@ -753,25 +756,27 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
             var actualForm = rec.getValue('customform');
             if (actualForm != paramForm) {
                 window.alert(`Item ${itemText} is superseded by ${supercedeItem.name}. The item will update Automatically`);
-                /*rec.setCurrentSublistText({
+                debugger;
+                rec.setCurrentSublistText({   // Change 6/9/24
                     sublistId: "item",
                     fieldId: "item",
-                    text:supercedeItemText,
-                    ignoreFieldChange: true,
-                    enableSourcing:true
-                })*/
+                    text: supercedeItem.name,//supercedeItemText,
+                    ignoreFieldChange: false,
+                    enableSourcing: true
+                })
+
                 var currentLine = rec.getCurrentSublistIndex({
                     sublistId: 'item',
                 })
                 var actualWarehouse = rec.getValue('location');
 
-                rec.setCurrentSublistValue({
-                    sublistId: 'item',
-                    fieldId: 'item',
-                    value: supercedeItem.itemId,
-                    ignoreFieldChange: false,
-                    enableSourcing: true
-                });
+                // rec.setCurrentSublistValue({  // Change 6/9/24
+                //     sublistId: 'item',
+                //     fieldId: 'item',
+                //     value: supercedeItem.itemId,
+                //     ignoreFieldChange: false,
+                //     enableSourcing: true
+                // });
 
                 rec.setCurrentSublistValue({
                     sublistId: 'item',
@@ -844,7 +849,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
     //Search until the last item suoersede is brought - Add 30/7
     function findFinalItem(objItemId) {
         try {
-            if(!objItemId || !objItemId.itemId) return objItemId
+            if (!objItemId || !objItemId.itemId) return objItemId
             var item = search.lookupFields({
                 type: record.Type.INVENTORY_ITEM,
                 id: objItemId.itemId,
@@ -867,7 +872,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
             return objItemId;
         }
     }
-  
+
     //Populate Warehouse Functionality SDB
     function populateWarehouseFunctionality(context) {
         try {
@@ -1297,6 +1302,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
     // ------------------------ Good Standing Functionality ------------------------ //
     function saveRecord(context) {
         try {
+            //if(nlapiGetContext().user != '84419')
             var currentRecord = context.currentRecord;
             if (!currentRecord) return true;
             var goodStanding = hasGoodStanding(currentRecord);
@@ -1312,16 +1318,18 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
 
     function hasGoodStanding(currentRecord) {
         try {
-            if (currentRecord.type != "salesorder") return true;
-            var customer = currentRecord.getValue("entity");
-            if (!customer) return true;
-            var customerFields = search.lookupFields({
-                type: "customer",
-                id: customer,
-                columns: ['custentity_credit_codech']
-            });
-            // console.log("hasGoodStanding", { customer, customerFields });
-            return customerFields.custentity_credit_codech == false ? false : true;
+            if (currentRecord.type == "salesorder" || currentRecord.type == "invoice") {
+                var customer = currentRecord.getValue("entity");
+                if (!customer) return true;
+                var customerFields = search.lookupFields({
+                    type: "customer",
+                    id: customer,
+                    columns: ['custentity_credit_codech']
+                });
+                // console.log("hasGoodStanding", { customer, customerFields });
+                return customerFields.custentity_credit_codech == false ? false : true;
+            }
+            return true
         } catch (error) {
             return true;
         }
@@ -1409,12 +1417,13 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
     }
     function lineInit(context) {
         try {
+            //if(nlapiGetContext().user != '84419')
             var sublistId = context.sublistId;
             if (sublistId != 'item') return;
-          
+            if (nlapiGetContext().user == '84419') return
             setTimeout(() => {
                 setLineColours(context, aHolidays);
-            },200);
+            }, 200);
         } catch (error) {
             log.error("LineInit ERROR", error)
         }
@@ -1458,7 +1467,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
     }
     function getFormatDate(d) {
         try {
-            return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth(),
+            return [d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1),
             d.getDate() < 10 ? "0" + d.getDate() : d.getDate(),
             d.getFullYear()].join('/')
         } catch (error) {
@@ -1488,7 +1497,7 @@ define(["N/search", 'N/runtime', 'N/record', 'N/https', 'N/ui/dialog', 'N/url'],
 
     function approve(id) {
         try {
-             // var currenteId = runtime.getCurrentUser().id;
+            // var currenteId = runtime.getCurrentUser().id;
             //debugger;
             var suitelet = url.resolveScript({
                 scriptId: 'customscript_sdb_approve_so',

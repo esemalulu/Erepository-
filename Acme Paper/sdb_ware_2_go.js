@@ -3,6 +3,13 @@
  *@NScriptType Suitelet
  */
  define(["N/search", "N/record", "N/https"], function (search, record, https) {
+    const itemsMapper = {
+        sku: {
+            1129636: "WC09",
+            1129637: "WC12"
+        }
+    }
+
     function onRequest(context) {
         try {
             log.debug('STATUS', 'INIT');
@@ -164,13 +171,25 @@
                 while (upc && upc.length < 12) {
                     upc = "0" + upc;
                 }
-                
-                arrItems.push({
-                    skuId: salesOrder.getSublistValue({
+
+                var sku = search.lookupFields({
+                    type: 'item',
+                    id: salesOrder.getSublistValue({
                         sublistId: 'item',
-                        fieldId: 'item_display',
+                        fieldId: 'item',
                         line: i,
-                    }).split(' ')[0],
+                    }),
+                    columns: 'itemid'
+                }).itemid;
+
+                if (itemsMapper.sku[sku]) {
+                    log.debug('Changing items SKU id', 'from: ' + sku + ' to: ' + itemsMapper.sku[sku]);
+                    sku = itemsMapper.sku[sku];
+                }
+                // log.debug('SKU', sku)
+
+                arrItems.push({
+                    skuId: '' + sku,
                     skuName: salesOrder.getSublistValue({
                         sublistId: 'item',
                         fieldId: 'description',

@@ -448,7 +448,7 @@ define(["N/log", "N/search", "N/runtime", "N/ui/message", "N/record"], function 
                 newRecord.setSublistValue({ sublistId: 'item', fieldId: 'istaxable', value: true, line: i });
                 newRecord.setSublistValue({ sublistId: 'item', fieldId: 'taxcode', value: taxCode, line: i });
             }
-            var itemsWithNoTax = [78555, 131372, 132298, 132294, 132295, 132296, 132297, 132298, 132299, 132260, 131660];
+            var itemsWithNoTax = [78555, 131372, 132298, 132294, 132295, 132296, 132297, 132298, 132299, 132260, 131660, 101912];
             var isNotTaxable = false;
             itemsWithNoTax.forEach(function (it) {
                 if (it == itemId) isNotTaxable = true;

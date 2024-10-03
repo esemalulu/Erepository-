@@ -8,9 +8,9 @@ define([],
     function () {
         function beforeLoad(context) {
             try {
+                context.form.clientScriptModulePath = "SuiteScripts/SDB-Remove-Marked-Records-CS.js";
                 if (context.type == context.UserEventType.EDIT) {
                     var sublistCust = context.form.getSublist({ id: 'recmachcustrecord_acme_cpc_item_header' });
-                    context.form.clientScriptModulePath = "SuiteScripts/SDB-Remove-Marked-Records-CS.js";
                     sublistCust.addButton({
                         id: "custpage_cpcmarkall",
                         label: "Mark All",
@@ -45,6 +45,11 @@ define([],
                     });
                     return;
                 }
+                context.form.addButton({
+                        id: "custpage_generateexcel",
+                        label: "Generate Excel",
+                        functionName: "generateExcel()"
+                });
             } catch (e) {
                 log.debug('Error at beforeLoad', e)
             }

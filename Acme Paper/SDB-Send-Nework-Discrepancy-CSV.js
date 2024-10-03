@@ -8,8 +8,10 @@ define(['N/runtime', 'N/sftp', 'N/search', 'N/file'],
         const execute = (scriptContext) => {
             try {
                 let csvFileName = runtime.getCurrentScript().getParameter({name: 'custscript_sdb_file_name_scheduled'});
+                log.debug("csvFileName",csvFileName)
                 let csvFileId = csvFileName != "" ? getFileIdByFileName(csvFileName) : '';
                 log.debug("csvFileId",csvFileId);
+                var directory = runtime.getCurrentScript().getParameter({name: 'custscript_sdb_network_sftp_path'});
                 if(csvFileId != ''){
                     let fileObj = file.load(csvFileId);
                     log.debug("fileObj",fileObj);
@@ -17,10 +19,8 @@ define(['N/runtime', 'N/sftp', 'N/search', 'N/file'],
                         // Establish a connection to a remote FTP server
                         let objConnection = getServerConnection();
                         log.debug('objConnection',objConnection);
-                        var objConnection1 = objConnection.list({ path: '/' });   
-                        log.debug("objConnection1",objConnection1)
   
-                        uploadFileToServer(objConnection, getCredentials().DIRECTORY, csvFileName, fileObj);
+                        uploadFileToServer(objConnection, directory, csvFileName, fileObj);
                     }
                 }
             } catch (error) {
@@ -30,7 +30,7 @@ define(['N/runtime', 'N/sftp', 'N/search', 'N/file'],
 
         function uploadFileToServer(objConnection, directory, fileName, file) {
             try{
-                if(objConnection!='' && directory!='' && fileName!='' && file!=''){
+                if(objConnection && directory  && fileName  && file){
                     objConnection.upload({
                         directory: directory,
                         filename: fileName,
@@ -45,32 +45,16 @@ define(['N/runtime', 'N/sftp', 'N/search', 'N/file'],
 
         function getServerConnection(){
             try {
-                const CREDENTIALS = getCredentials();
                 let connection = sftp.createConnection({
-                    username: CREDENTIALS.USER_NAME,
-                    secret: CREDENTIALS.SECRET,
-                    url: CREDENTIALS.URL,
-                    directory: CREDENTIALS.DIRECTORY,
-                    hostKey: CREDENTIALS.HOST_KEY
+                    username: runtime.getCurrentScript().getParameter({name: 'custscript_sdb_network_sftp_username'}),
+                    secret: runtime.getCurrentScript().getParameter({name: 'custscript_sdb_network_sftp_secret'}),
+                    url: runtime.getCurrentScript().getParameter({name: 'custscript_sdb_network_sftp_url'}),
+                    //directory: runtime.getCurrentScript().getParameter({name: 'custscript_sdb_network_sftp_path'}),
+                    hostKey: runtime.getCurrentScript().getParameter({name: 'custscript_sdb_network_sftp_hostkey'}),
                 });
                 return connection;
             } catch (e) {
                 log.error("error in getServerConnection", e);
-            }
-        }
-
-        function getCredentials(){
-            try {
-                return {
-                    USER_NAME:"AcmeAR652",
-                    // PASSWORD_GUIDE: "a6a37c18e0834dc79448dfdfc35190bc",
-                    HOST_KEY: "AAAAB3NzaC1yc2EAAAADAP//AAAAgQDXcjnI+qoNhxc/IBO3A0qIJRLqV19ropWsDWJSUPC5MblTlp47em8w8vnFEhYvwU8Cf1GY1Wy+r0tIMBL/gpr8WHDqmfpXH8Z13LRuw1m2Zgn6bRp1T0iZiwYFPNs0iF2szbiTErGY6By1oVCT1QOBhRwW9tGQ1wnityzbTMuzYw==",
-                    SECRET: "custsecret_sdb_network_discrepancy_report",
-                    URL: "transfer.networkdistribution.com",
-                    // DIRECTORY: "/"
-                }
-            }catch (e) {
-                log.error("error in getCredentials", e);
             }
         }
 
@@ -84,7 +68,7 @@ define(['N/runtime', 'N/sftp', 'N/search', 'N/file'],
                             [
                                 ["folder", "anyof", "-15"],
                                 "AND",
-                                ["name","contains",fileName]
+                                ["name","is",fileName]
                             ],
                         columns:
                             [
