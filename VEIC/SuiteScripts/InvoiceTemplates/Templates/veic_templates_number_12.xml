@@ -1,0 +1,9 @@
+<invoice_body>
+  <item>
+    <description>{{item_description}}</description>
+    <quantity>{{quantity}}</quantity>
+    <unit_price>{{unit_price}}</unit_price>
+    <total>{{total}}</total>
+  </item>
+  <!-- Additional items can be added dynamically if needed -->
+</invoice_body>

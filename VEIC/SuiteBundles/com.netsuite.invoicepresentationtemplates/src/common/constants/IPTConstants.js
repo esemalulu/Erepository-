@@ -1,0 +1,196 @@
+define(["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    const Constants = {
+        FIELDS: {
+            CHARGE_SUMMARY_CODE: 'custbody_ipt_ftl_charge_summary_code',
+            CHARGE_SUMMARY_CODE2: 'custbody_ipt_ftl_charge_summary_code2',
+            CURRENCY_SYMBOL: 'currencysymbol',
+            CUSTOMER: 'entity',
+            CUSTOMER_IN_PROJECT: 'parent',
+            CUSTOMER_TYPE_AT_ENTITY: 'CustJob',
+            ENTITY_TYPE: 'type',
+            IPT_AT_CUSTOMER_AND_PROJECT: 'custentity_ipt_template',
+            IPT_AT_INVOICE: 'custbody_ipt_template',
+            IPT_DESCRIPTION: 'custrecord_ipt_description',
+            IPT_ID: 'id',
+            ID: 'id',
+            IPT_IS_DEFAULT: 'custrecord_ipt_isdefault',
+            IPT_NAME: 'name',
+            NAME: 'name',
+            IPT_CONFIG: 'custrecord_ipt_chargetableconfig',
+            IPT_INCLUDE_RECEIPT: 'custrecord_ipt_include_receipts',
+            IPT_CHARGE_SUMMARY_DATA1: 'custbody_ipt_charge_summary_data1',
+            IPT_CHARGE_SUMMARY_DATA2: 'custbody_ipt_charge_summary_data2',
+            IPT_CHARGE_SUMMARY_DATA_EMAIL1: 'custbody_ipt_charge_summary_email1',
+            IPT_CHARGE_SUMMARY_DATA_EMAIL2: 'custbody_ipt_charge_summary_email2',
+            IPT_EXPENSE_RECEIPTS_PRINT: 'custbody_ipt_expense_receipts_print',
+            IPT_EXPENSE_RECEIPTS_EMAIL: 'custbody_ipt_expense_receipts_email',
+            TRANSACTION: 'transaction',
+            IPT_EMAIL_TEMPLATE: 'custbody_ipt_email_template',
+            IPT_EMAIL_TEMPLATE2: 'custbody_ipt_email_template2',
+            IPT_PRINT_TEMPLATE: 'custbody_ipt_print_template',
+            TAX_RATE: 'taxrate',
+            IPT_PREFERENCES_FIELD: 'custrecord_ipt_preferences',
+            IPT_SUBSIDIARY_INTERNAL: 'custrecord_ipt_subsidiary_internal',
+            IPT_SUBSIDIARY: 'custrecord_ipt_subsidiary',
+            IS_INACTIVE: 'isinactive',
+            IS_ELIMINATED: 'iselimination',
+            PREFERENCES_KEY: 'ipt_preferences',
+            PROJECT: 'job',
+            SUBSIDIARY_IN_PROJECT: 'subsidiary',
+            SUBSIDIARY: 'subsidiary',
+            CURRENCY: 'currency',
+            CURRENCY_DISPLAY_SYMBOL: 'symbol',
+            MAINADDRESS: 'mainaddress',
+            ADDRESS: 'address',
+            ADDRPHONE: 'addrphone',
+            TELEPHONE: 'telephone',
+            N_KEY_SUBSIDIARY_MAINADDRESS: 'nkey',
+            STATE: 'state',
+            COUNTRY: 'country',
+            EMAIL: 'email',
+            FAX: 'fax',
+            CRN_FIELD: 'custrecord_alf_company_reg_num',
+            URL: 'url',
+            CRN: 'crn',
+            TRANSACTION_ID: 'tranid',
+            TRANSACTION_DATE: 'trandate',
+            PARENT: 'parent',
+            RATE: 'Rate',
+            IPT_INTERNAL_ID: 'InternalID'
+        },
+        FTL_LOGIC_FILE_PATH: './../../../templates/ipt_charge_summary.ftl',
+        IPT_CREATE_PREVIEW_FTL_PATH_EDIT: '../../../com.netsuite.invoicepresentationtemplates/templates/ipt_create_preview_edit_mode.ftl',
+        MODE: {
+            CREATE: 'create',
+            EDIT: 'edit',
+            PRINT: 'print',
+            VIEW: 'view'
+        },
+        RECORDS: {
+            CHARGE: 'charge',
+            CUSTOMER: 'customer',
+            ENTITY: 'entity',
+            INVOICE: 'invoice',
+            MESSAGE: 'message',
+            IPT_RECORD: 'customrecord_ipt_template',
+            IPT_PREFERENCE_RECORD: 'customrecord_ipt_preference',
+            PROJECT: 'job',
+            TRANSACTION: 'transaction',
+            CURRENCY: 'currency',
+            EMPLOYEE: 'employee',
+            ROLE: 'role',
+            SUBSIDIARY_MAIN_ADDRESS: 'SubsidiaryMainAddress',
+            SUBSIDIARY: 'subsidiary'
+        },
+        PREVIEW: {
+            IPT_PREVIEW_BUTTON: 'custpage_preview_btnn',
+            IPT_ALF_PRIMARY_COLOR: 'custrecord_alf_cfg_primary_color',
+            IPT_ALF_PRIMARY_TEXT: 'custrecord_alf_cfg_primary_text',
+            IPT_ALF_FOOTER_COLOR: 'custrecord_alf_cfg_footer_color',
+            IPT_ALF_FOOTER_TEXT: 'custrecord_alf_cfg_footer_text',
+            ALF_CFG_TABLE: 'customrecord_alf_cfg',
+            BILLING_CONTAINER: 'billingtab',
+            FINANCIAL_CONTAINER: 'financial',
+            CURRENCY_CONTAINER: 'currency',
+            SL_SCRIPT_ID: 'customscript_ipt_sl_read_ftl',
+            SL_DEPLOYMENT_ID: 'customdeploy_ipt_sl_read_ftl',
+            PREVIEW_POPUP: 'previewPopup',
+            PREVIEW_BTN_ID: 'preview_ipt',
+            IPT_DROPDOWN_LABEL_ID: 'custbody_ipt_template_fs_lbl_uir_label',
+            IPT_DROPDOWN_LABEL_ID_CUSTOMER_AND_PROJECT: 'custentity_ipt_template_fs_lbl_uir_label',
+            PRIMARY_COLOR: 'primary_color',
+            FOOTER_COLOR: 'footer_color',
+            PRIMARY_TEXT: 'primary_text',
+            FOOTER_TEXT: 'footer_text',
+            PROJECT_NEW_UI: 'SHOWPROJECTINNEWUI',
+            ALF_BUNDLE_ID: 359132,
+            BILLING_SCHEDULE_CONTAINER: 'billingschedule',
+            BILLING_TYPE_CONTAINER: 'jobbillingtype',
+            BILL_TO_SELECT_LIST_CONTAINER: 'billaddresslist',
+            BILL_TO_SELECT_CONTAINER: 'billaddress'
+        },
+        CHARGE_TYPES: [
+            'TIME_BASED',
+            'EXPENSE_BASED',
+            'MILESTONE',
+            'FIXED_DATE',
+            'PROJECT_PROGRESS',
+            'PURCHASE'
+        ],
+        SUITELET: {
+            POST_METHOD: 'POST'
+        },
+        PREFERENCES: {
+            IPT_DEFAULT_INVOICE_TEMPLATE: 'default_invoice_template',
+            IPT_PREFERNCES_FIELD: 'custrecord_ipt_preferences',
+            PREFERENCES_KEY: 'ipt_preferences',
+            GRID_DISPLAY_MEMBER: 'name',
+            COLUMN_NAME: {
+                SUBSIDIARY: 'subsidiary',
+                BASE_TEMPLATE: 'base_template',
+                DEFAULT_INVOICE_EMAIL_LAYOUT: 'default_invoice_email_layout',
+                DEFAULT_INVOICE_TEMPLATE: 'default_invoice_template',
+                NAME: 'name',
+                ID: 'id'
+            }
+        },
+        SHIPPED_TEMPLATES: {
+            PRINT: 'CUSTTMPL_IPT_PRINT_TEMPLATE',
+            EMAIL: 'CUSTTMPL_IPT_EMAIL_TEMPLATE'
+        },
+        INVOICE_ACTIONS: {
+            PRINT: 'print',
+            EMAIL: 'email'
+        },
+        BLOCKED_IPT_CRUD_CHANNELS: {
+            WEBSERVICES: 'WEBSERVICES',
+            RESTWEBSERVICES: 'RESTWEBSERVICES',
+            CSVIMPORT: 'CSVIMPORT'
+        },
+        BLOCKED_IPT_CHANNEL_ERROR_NAME: 'BLOCKEDACCESS',
+        BLOCKED_RECORD_ACCESS_ERROR_MESSAGE: 'BLOCKED_RECORD_ACCESS_ERROR_MESSAGE',
+        EXPENSE_BASED_CHARGE_TYPE: 'EXPENSE_BASED',
+        NO_ACCESS_PERMISSION_ERROR_NAME: 'NOACCESSPERMISSION',
+        EXPENSE_SUBLIST_ID: 'expense',
+        EXPENSE_SUBLIST_FIELDS: {
+            EXPMEDIAITEM: 'expmediaitem',
+            EXPENSEDATE: 'expensedate'
+        },
+        PRINT_EMAIL_TEMPLATES: {
+            RECORD: 'AdvancedpdfTemplate',
+            ID: 'Id',
+            NAME: 'name',
+            SCRIPT_ID: 'scriptid',
+            EMAIL_TEMPLATE: 'CUSTTMPL_IPT_EMAIL_TEMPLATE',
+            PRINT_TEMPLATE: 'CUSTTMPL_IPT_PRINT_TEMPLATE',
+            INACTIVE: 'inactive',
+            TRANSACTION_TYPE: 'trantype'
+        },
+        RequestType: {
+            FETCHCURRENCYINFO: 'FETCHCURRENCYINFO',
+            FETCHSUBSIDIARYINFO: 'FETCHSUBSIDIARYINFO',
+            FETCHIPTCONFIGURATION: 'FETCHIPTCONFIGURATION',
+            FETCHPARENTSUBSIDIARY: 'FETCHPARENTSUBSIDIARY',
+            FETCHACTIVEADVANCEDPDFTEMPLATES: 'FETCHACTIVEADVANCEDPDFTEMPLATES',
+            FETCHCHARGESBYID: 'FETCHCHARGESBYID',
+            FETCHEXPENSERECEIPTS: 'FETCHEXPENSERECEIPTS',
+            GETACTIVESUBSIDIARIES: 'GETACTIVESUBSIDIARIES',
+            SETINTERNALSUBSIDIARY: 'SETINTERNALSUBSIDIARY',
+            GETSUBSIDIARIESFROMROLE: 'GETSUBSIDIARIESFROMROLE',
+            GETUSERSUBSIDIARY: 'GETUSERSUBSIDIARY',
+            FETCHSUBSIDIARYFROMLIST: 'FETCHSUBSIDIARYFROMLIST',
+            FETCHALLSUBSIDIARIES: 'FETCHALLSUBSIDIARIES'
+        },
+        SUBSIDIARYLIST: {
+            OWN: 'OWN',
+            ALL: 'ALL',
+            ALLACTIVE: 'ALLACTIVE',
+            SUBSIDIARY_VIEWING_ALLOWED: 'subsidiaryviewingallowed',
+            SUBSIDIARY_OPTION: 'subsidiaryoption',
+            SUBSIDIARY_RESTRICTION: 'subsidiaryrestriction'
+        }
+    };
+    exports.default = Constants;
+});

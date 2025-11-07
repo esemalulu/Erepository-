@@ -1,0 +1,2298 @@
+﻿<?xml version = '1.0' encoding = 'utf-8' standalone = 'yes'?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+   <file datatype="x-suiteapps-rac" source-language="en-US" original="xliff-core-1.2-strict.xsd" target-language="ja-JP">
+      <body>
+         <trans-unit id="APP.TITLE">
+            <source>Resource Allocation Chart/Grid 2.0</source>
+            <target>リソース割当チャート/グリッド 2.0</target>
+            <note>print->RACG resource; title label; this label is a header of the printing page</note>
+         </trans-unit>
+         <trans-unit id="BAR.UNIT.HOUR">
+            <source>Hour</source>
+            <target>時間</target>
+            <note>A number precedes the noun (1 Hour).</note>
+         </trans-unit>
+         <trans-unit id="BAR.UNIT.HOURS">
+            <source>Hours</source>
+            <target>時間</target>
+            <note>A number precedes the noun (x Hours).</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.CANCEL">
+            <source>Cancel</source>
+            <target>キャンセル</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.CLOSE">
+            <source>Close</source>
+            <target>終了</target>
+            <note>RACG resource; verb; label of a button, pressing the button closes the popup</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.COLLAPSE_ALL">
+            <source>Collapse all</source>
+            <target>すべて折りたたむ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.CUSTOMIZE">
+            <source>Customize</source>
+            <target>カスタマイズ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.CUSTOMIZE_VIEW">
+            <source>Customize View</source>
+            <target>ビューをカスタマイズ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.CUSTOMIZE_FILTER">
+            <source>Customize Filter</source>
+            <target>フィルターをカスタマイズ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.DELETE">
+            <source>Delete</source>
+            <target>削除</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EDIT_VIEW">
+            <source>Edit View</source>
+            <target>編集ビュー</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EDIT_FILTER">
+            <source>Edit Filter</source>
+            <target>フィルターを編集</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPAND_ALL">
+            <source>Expand all</source>
+            <target>すべて展開</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPORT.CSV">
+            <source>Export - CSV</source>
+            <target>エクスポート - CSV</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPORT.PDF">
+            <source>Export - PDF</source>
+            <target>エクスポート - PDF</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPORT.XLS">
+            <source>Export - Microsoft ® Excel</source>
+            <target>エクスポート - Microsoft ® Excel</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.NEW_ALLOCATION">
+            <source>New Resource Allocation</source>
+            <target>新規リソース割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.OK">
+            <source>OK</source>
+            <target>OK</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.PRINT">
+            <source>Print</source>
+            <target>印刷</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPORT">
+            <source>Export</source>
+            <target>エクスポート</target>
+            <note>Domain: RACG resource; verb; button label; clicking this button triggers an exporting action (for example to pdf, or xls)</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.RESET">
+            <source>Reset</source>
+            <target>リセット</target>
+            <note>Domain: RACG resource; verb; button label; the reset button is located next to save button, clicking this button will either save changes made in app, or makes a reset to the default behavior (last saved state)</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.RESTORE_DEFAULTS">
+            <source>Restore Defaults</source>
+            <target>デフォルトを復元</target>
+            <note>Domain: RACG resource; verb; button label; the restore defaults button is located in popup settings for the app, clicking this button means restoring settings to the default state when you install the suiteapp, it does not affect any data, this action is connected only to the settings</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.RETURN_TO_CRITERIA">
+            <source>Return to Criteria</source>
+            <target>条件に戻る</target>
+            <note>Domain: RACG resource; verb; button label; the return to criteria button appears on a popup after submiting criteria for searching resources by skills of a person, it returns the user back to the criteria</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.SAVE">
+            <source>Save</source>
+            <target>保存</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.SETTINGS">
+            <source>Settings</source>
+            <target>設定</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.SUBMIT">
+            <source>Submit</source>
+            <target>送信</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.VIEW_DETAILS" translate="no">
+            <source>View Details</source>
+            <target>View Details</target>
+            <note>DNT, didnt find in code (but we leave it here just to be sure)</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.FILTER_DETAILS">
+            <source>Filter Details</source>
+            <target>フィルターの詳細</target>
+            <note>Domain: RACG resource; verb; button label; the user can view details of a filter - button, shared customized filter, it displays details of a filter that is shared by someone else</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.INCLUDE_RESOURCES_WO_ALLOCS">
+            <source>Include resources without allocations</source>
+            <target>割当のないリソースを含める</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.INCLUDE_SUB-SUBSIDIARIES">
+            <source>Include Sub-subsidiaries</source>
+            <target>孫会社を含める</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHARE_THIS_VIEW" translate="no">
+            <source>Share this view</source>
+            <target>Share this view</target>
+            <note>DNT, not found in code</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHARE_THIS_FILTER">
+            <source>Share this filter</source>
+            <target>このフィルターを共有</target>
+            <note>Domain: RACG resource; verb; checkbox label; the share this filter checkbox is located in customization of filters, you can share it with other users ( = make it public), otherwise it is private - your own.</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHARED_FILTER">
+            <source>Shared Filter</source>
+            <target>共有フィルター</target>
+            <note>Domain: RACG resource; checkbox label; the shared filter checkbox filter is visible and can be used by multiple users, it is not private</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHOW_DETAILS_ON_HOVER">
+            <source>Show details on hover</source>
+            <target>カーソルを置くと詳細を表示</target>
+            <note>Domain: RACG resource; verb; checkbox label; the checkbox is located in Settings popup, checkbox preference, if you hover over data in the app, it will show you the details</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHOW_NUMBERS_ON_BARS">
+            <source>Show numbers on bars</source>
+            <target>バーに番号を表示</target>
+            <note>Domain: RACG resource; checkbox label; the checkbox is located in Settings popup, checkbox preference, the bars represent allocations (graphical bar), numbers are either hours or percentage, they represent "how big the allocation is" </note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHOW_REJECTED_ALLOCATIONS">
+            <source>Show rejected allocations</source>
+            <target>却下済の割当を表示</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.INCLUDE_PROJECT_TEMPLATE">
+            <source>Include project templates</source>
+            <target>プロジェクト・テンプレートを含める</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.ALLOW_NON_WORK_ALLOCATION">
+            <source>Allow allocations on non-working days</source>
+            <target>休業日に基づいた割当を許可</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHOW_PROJECT_TASKS">
+            <source>Show project tasks</source>
+            <target>プロジェクト・タスクの表示</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLORFIELD.OVERBOOKED">
+            <source>Overbooked</source>
+            <target>予約過多</target>
+            <note>Domain: RACG resource; adverb; colorfield overbooked label; it is located in the settings popup, it shows allocations over 100 %, "overbooked" means over in RACG</note>
+         </trans-unit>
+         <trans-unit id="COLUMN.AVAILABILITY">
+            <source>Availability</source>
+            <target>空き状況</target>
+            <note>Domain: RACG resource; noun; column label; this column shows the availability of a person to be assigned to a project</note>
+         </trans-unit>
+         <trans-unit id="COLUMN.BILLING_CLASS">
+            <source>Billing Class</source>
+            <target>請求クラス</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.LABOR_COST">
+            <source>Labor Cost</source>
+            <target>労賃</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.NAME">
+            <source>Name</source>
+            <target>名前</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.RESUME">
+            <source>Resume</source>
+            <target>再開</target>
+            <note>Domain: RACG resource; column label; this is a document, a part of skill set of a person, the person can add resume to their My skill set page, (resume - CV like, set of accomplishments)</note>
+         </trans-unit>
+         <trans-unit id="COLUMN.SELECT">
+            <source>Select</source>
+            <target>選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.SKILLSET_SCORE">
+            <source>Skill Set Score</source>
+            <target>スキル・セット・スコア</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.TYPE">
+            <source>Type</source>
+            <target>タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.TYPE.EMPLOYEE">
+            <source>Employee</source>
+            <target>従業員</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.TYPE.VENDOR">
+            <source>Vendor</source>
+            <target>仕入先</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.YRS_OF_EXP">
+            <source>Years of Experience</source>
+            <target>経験年数</target>
+            <note>Domain: RACG resource; noun; column label; this is the column title for a column that shows the years of resource's skills in numbers</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.ALLOCATE_USING">
+            <source>Allocation Method:</source>
+            <target>割当方法:</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.ALLOCATION_TYPE">
+            <source>Allocation Type</source>
+            <target>割当タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.ALLOCATION_LEVEL">
+            <source>Allocation Level</source>
+            <target>割当レベル</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.APPROVAL_STATUS">
+            <source>Approval Status</source>
+            <target>承認ステータス</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.BILLING_CLASS">
+            <source>Billing Class</source>
+            <target>請求クラス</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.CATEGORY">
+            <source>Category</source>
+            <target>カテゴリ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.CLASS">
+            <source>Class</source>
+            <target>クラス</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.CUSTOMER_PROJECT">
+            <source>Customer:Project</source>
+            <target>顧客:プロジェクト</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.CUSTOMER">
+            <source>Customer</source>
+            <target>顧客</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.PROJECT">
+            <source>Project</source>
+            <target>プロジェクト</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.PROJECT_TASK">
+            <source>Project Task</source>
+            <target>プロジェクト・タスク</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.DEPARTMENT">
+            <source>Department</source>
+            <target>部門</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.LIMIT_DECIMAL_PLACES">
+            <source>Limit Decimal Places Display</source>
+            <target>小数点以下の表示を制限</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VIEW_PRESET">
+            <source>Default Date Range</source>
+            <target>デフォルトの日付範囲</target>
+            <note>Domain: RACG resource; combobox label; the default date range is located in the settings popup, it determines whether the data are displayed in days/weeks/months defaultly in the chart/grid</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VIEW_ALLOCATIONS_BY" translate="no">
+            <source>View Allocations By</source>
+            <target>View Allocations By</target>
+            <note>DNT, not found</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.LOCATION">
+            <source>Location</source>
+            <target>場所</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.NEXT_APPROVER">
+            <source>Next Approver</source>
+            <target>次の承認者</target>
+            <note>Domain: RACG resource; combobox label; this is a string in popup with dropdown of possible next approvers, you can right click the grid, and Edit next approver, it is not higher or timely, it depends on workflow (who is the next one in the chain of approvers)</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.RESOURCE">
+            <source>Resource</source>
+            <target>リソース</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.RESOURCE_TYPE">
+            <source>Resource Type</source>
+            <target>リソース・タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.RESOURCES">
+            <source>Resources</source>
+            <target>リソース</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.SUBSIDIARY">
+            <source>Subsidiary</source>
+            <target>子会社</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.TYPE">
+            <source>Type</source>
+            <target>タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VIEW" translate="no">
+            <source>View</source>
+            <target>View</target>
+            <note>DNT, it seems that it used to be what is now filter</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.FILTER">
+            <source>Filter</source>
+            <target>フィルター</target>
+            <note>Domain: RACG resource; noun; combobox label; this string is on the top of the suiteapp, resource default/customer default/project default filters, main navigation of the app</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VENDOR" translate="no">
+            <source>Filter</source>
+            <target>Filter</target>
+            <note>DNT, did not find </note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VENDOR_TYPE">
+            <source>Vendor Type</source>
+            <target>仕入先タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VENDOR_CATEGORY">
+            <source>Vendor Category</source>
+            <target>仕入先カテゴリ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DATE.END_DATE">
+            <source>End Date</source>
+            <target>終了日</target>
+            <note>Domain: RACG resource; date label; this is the end date for allocation (start date, end date)</note>
+         </trans-unit>
+         <trans-unit id="DATE.FROM">
+            <source>From</source>
+            <target>自</target>
+            <note>Domain: RACG resource; date label; in search resource -> availability -> from; from means FROM date TO date </note>
+         </trans-unit>
+         <trans-unit id="DATE.START_DATE">
+            <source>Start Date</source>
+            <target>開始日</target>
+            <note>Domain: RACG resource; combobox label; this is a start date of an allocation, it has a start date and an end date</note>
+         </trans-unit>
+         <trans-unit id="DATE.TO">
+            <source>To</source>
+            <target>至</target>
+            <note>Domain: RACG resource; verb; date label; this TO means FROM date - TO date </note>
+         </trans-unit>
+         <trans-unit id="DATE.SERIES_START_DATE">
+            <source>Series Start Date</source>
+            <target>シリーズ開始日</target>
+            <note>Domain: RACG resource; date label; if you set recurrence of an allocation, you have to set start date for this series</note>
+         </trans-unit>
+         <trans-unit id="DATE.END_BY">
+            <source>End By</source>
+            <target>終了日</target>
+            <note>Domain: RACG resource; date label; this is an ending date for recurrent allocation </note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.ALL" translate="no">
+            <source>All</source>
+            <target>All</target>
+            <note>DNT, did not found</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.ALL_EMPLOYEES">
+            <source>All Employees</source>
+            <target>すべての従業員</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.ALL_VENDORS">
+            <source>All Vendors</source>
+            <target>すべての仕入先</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.APPROVAL_STATUS">
+            <source>Approval Status</source>
+            <target>承認ステータス</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.BILLING_CLASS">
+            <source>Billing Class -</source>
+            <target>請求クラス -</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.CLASS" translate="no">
+            <source>Class -</source>
+            <target>Class -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.COMMENTS">
+            <source>Comments</source>
+            <target>コメント</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.CUSTOMER">
+            <source>Customer</source>
+            <target>顧客</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.CUSTOMER_PROJECT">
+            <source>Customer:Project</source>
+            <target>顧客:プロジェクト</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.PROJECT">
+            <source>Project</source>
+            <target>プロジェクト</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.PROJECT_TASK">
+            <source>Project Task</source>
+            <target>プロジェクト・タスク</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.RESOURCE_TYPE">
+            <source>Resource Type</source>
+            <target>リソース・タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.REQUESTED_BY">
+            <source>Requested By</source>
+            <target>要求者</target>
+            <note>Domain: RACG resource; adverb; display label; this is a header in exported data, followed by name of a person requesting the allocation</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.SUPERVISOR">
+            <source>Supervisor</source>
+            <target>監督者</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.TOTAL">
+            <source>Total</source>
+            <target>合計</target>
+            <note>Domain: RACG resource; noun; display label; Total represents the number of rows in a table, for example 21 (grid/chart)</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.DEPARTMENT" translate="no">
+            <source>Department -</source>
+            <target>Department -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.ALL_RESOURCES_BCLASS_SUBSIDIARY">
+            <source>Resources - All; Billing Class - All; Subsidiary - All;</source>
+            <target>リソース - すべて、請求クラス - すべて、子会社 - すべて、</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.LOCATION" translate="no">
+            <source>Location -</source>
+            <target>Location -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.OWNER">
+            <source>Owner</source>
+            <target>責任者</target>
+            <note>Domain: RACG resource; noun; display label+ in this caase the owner probably means an owner of a custom filter in the app</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.PAGING" translate="no">
+            <source>of</source>
+            <target>of</target>
+            <note>DNT, did not find</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.RESOURCES" translate="no">
+            <source>Resources -</source>
+            <target>Resources -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.START_DATE" translate="no">
+            <source>Start Date -</source>
+            <target>Start Date -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.SUBSIDIARY" translate="no">
+            <source>Subsidiary -</source>
+            <target>Subsidiary -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.VENDOR_CATEGORY" translate="no">
+            <source>Vendor Category -</source>
+            <target>Vendor Category -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.VENDOR_TYPE" translate="no">
+            <source>Vendor Type -</source>
+            <target>Vendor Type -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.NONE">
+            <source>- None -</source>
+            <target>- なし -</target>
+            <note>Domain: RACG resource; adverb; display label; "none" occurrences are all over the place, Task/supervisor/customer, they do not represent only one string at one place </note>
+         </trans-unit>
+         <trans-unit id="FIELDSET.ALLOCATION">
+            <source>Allocation</source>
+            <target>割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FIELDSET.APPEARANCE">
+            <source>Appearance</source>
+            <target>外観</target>
+            <note>Domain: RACG resource; noun; fieldset label; Appearance appears in the settings popup, it shows the appearance of the RACG settings</note>
+         </trans-unit>
+         <trans-unit id="FIELDSET.AVAILABILITY">
+            <source>Availability</source>
+            <target>空き状況</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FIELDSET.CHART_DENSITY">
+            <source>Chart Density</source>
+            <target>チャート密度</target>
+            <note>Domain: RACG resource; noun; fieldset label; Chart Density appears in popup settings, dense/standard/relaxed, it effects visuals of RACG</note>
+         </trans-unit>
+         <trans-unit id="FIELDSET.OTHERS">
+            <source>Others</source>
+            <target>その他</target>
+            <note>Domain: RACG resource; noun; fieldset label; Others is a label of category in the resource search, it includes for example Labor Cost, Years of Experience, .. </note>
+         </trans-unit>
+         <trans-unit id="FIELDSET.RESOURCE_TYPE">
+            <source>Resource Type</source>
+            <target>リソース・タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FIELDSET.AVAILABLE_FILTERS">
+            <source>Available Filters</source>
+            <target>利用可能なフィルター</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FILTER.PROJECT_DEFAULT">
+            <source>Project Default</source>
+            <target>プロジェクトのデフォルト</target>
+            <note>RACG resource; noun; name of a default filter in dropdown, one of RACG default filters - views on data</note>
+         </trans-unit>
+         <trans-unit id="FILTER.CUSTOMER_DEFAULT">
+            <source>Customer Default</source>
+            <target>顧客のデフォルト</target>
+            <note>RACG resource; noun;name of a default filter in dropdown,  one of RACG default filters - views on data</note>
+         </trans-unit>
+         <trans-unit id="FILTER.RESOURCE_DEFAULT">
+            <source>Resource Default</source>
+            <target>リソースのデフォルト</target>
+            <note>RACG resource; noun; name of a default filter in dropdown,  one of RACG default filters - views on data</note>
+         </trans-unit>
+         <trans-unit id="GRIDPANEL.SEARCH_RESULTS_EMPTY_TEXT">
+            <source>No resources found!</source>
+            <target>リソースが見つかりません!</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="GRIDPANEL.SEARCH_RESULTS_TITLE">
+            <source>Select minimum level.</source>
+            <target>最小レベルを選択します。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="ITEMSELECTOR.AVAILABLE_SKILLS">
+            <source>Available Skills</source>
+            <target>利用可能な技能</target>
+            <note>Domain: RACG resource; noun; item selector label;this is a popup search for resources with specific skills, it displays available skills which you can then move them to Required skills</note>
+         </trans-unit>
+         <trans-unit id="ITEMSELECTOR.REQUIRED_SKILLS">
+            <source>Required Skills</source>
+            <target>必要な技能</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="LEGEND.HARD">
+            <source>Hard</source>
+            <target>ハード</target>
+            <note>Domain: RACG resource; adverb; legend label; "Hard" displays legend to graphical elements, "Hard" stands for Hard Allocation which is not flexible; the resource is committed to the dates and hours required on this request. The whole string is Hard allocation.</note>
+         </trans-unit>
+         <trans-unit id="LEGEND.NON_WORKING">
+            <source>Non-Working</source>
+            <target>非勤務</target>
+            <note>Domain: RACG resource; adverb; legend label; it means non-working days</note>
+         </trans-unit>
+         <trans-unit id="LEGEND.OVER">
+            <source>>100%</source>
+            <target>>100%</target>
+            <note>Domain: RACG resource; number; legend label; it shows a legend to graphical elements, it means that there is allocated more than 100%</note>
+         </trans-unit>
+         <trans-unit id="LEGEND.SOFT">
+            <source>Soft</source>
+            <target>ソフト</target>
+            <note>Domain: RACG resource; adverb; legend label; "Soft" shows a legend to graphical elements, "Soft" stands for Soft Allocation which is flexible; adjustments can be made to the date and hours if needed to accommodate other priorities. The whole string is Soft allocation.</note>
+         </trans-unit>
+         <trans-unit id="MASK.LOADING.RESOURCES" translate="no">
+            <source>Loading Resources...</source>
+            <target>Loading Resources...</target>
+            <note>DNT, not found</note>
+         </trans-unit>
+         <trans-unit id="MASK.LOADING.ALLOCATIONS" translate="no">
+            <source>Loading Allocations...</source>
+            <target>Loading Allocations...</target>
+            <note>DNT, not found</note>
+         </trans-unit>
+         <trans-unit id="MASK.WORKING">
+            <source>Working...</source>
+            <target>作業中...</target>
+            <note>Domain: RACG resource; mask label; Working... means something like loading, it appears when the app is loading </note>
+         </trans-unit>
+         <trans-unit id="MENU.ADD_PROJECT">
+            <source>Add Project</source>
+            <target>プロジェクトの追加</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_RESOURCE">
+            <source>Edit Resource</source>
+            <target>リソースを編集</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.ADD_RESOURCE">
+            <source>Add Resource</source>
+            <target>リソースを追加</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REMOVE_ALLOCATIONS">
+            <source>Remove Allocations</source>
+            <target>割当を削除</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REASSIGN_ALLOCATION">
+            <source>Re-assign Allocation</source>
+            <target>割当の再割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.ADD_TASK">
+            <source>Add Project Task</source>
+            <target>プロジェクト・タスクを追加</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_TASK">
+            <source>Edit Project Task</source>
+            <target>プロジェクト・タスクを編集</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_PROJECT">
+            <source>Edit Project</source>
+            <target>プロジェクトを編集</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.CUT">
+            <source>Cut</source>
+            <target>カット</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.COPY">
+            <source>Copy</source>
+            <target>コピー</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.PASTE">
+            <source>Paste</source>
+            <target>ペースト</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_ALLOCATION_TYPE">
+            <source>Edit Allocation Type to</source>
+            <target>次の割当タイプへの編集: </target>
+            <note>Complete string will be either "Edit Allocation Type to soft" or "Edit Allocation Type to hard"</note>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_END_DATE">
+            <source>Edit End Date</source>
+            <target>終了日の編集</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_NEXT_APPROVER">
+            <source>Edit Next Approver</source>
+            <target>次の承認者を編集</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REALLOCATE_PROJECT">
+            <source>Re-allocate Project</source>
+            <target>プロジェクトの再割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REALLOCATE_TASK">
+            <source>Re-allocate Project Task</source>
+            <target>プロジェクト・タスクの再割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_COMMENT">
+            <source>Edit Comment</source>
+            <target>コメントの編集</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REMOVE_PROJECT">
+            <source>Remove Project</source>
+            <target>プロジェクトを削除</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REMOVE_TASK">
+            <source>Remove Project Task</source>
+            <target>プロジェクト・タスクを削除</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.SORT_ASC">
+            <source>Sort Ascending</source>
+            <target>昇順に並替え</target>
+            <note>RACG resource; menu label; this label is located in the menu, it sorts the resources by name</note>
+         </trans-unit>
+         <trans-unit id="MENU.SORT_DESC">
+            <source>Sort Descending</source>
+            <target>降順に並替え</target>
+            <note>RACG resource; menu label; this label is located in the menu, it sorts the resources by name</note>
+         </trans-unit>
+         <trans-unit id="MENU.COLUMNS">
+            <source>Columns</source>
+            <target>列</target>
+            <note>RACG resource; menu label; this label is located in the menu, it defines which columns should be displayed</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.DISABLED.IS_TASK_ALLOCATION">
+            <source>This is already a Project Task.</source>
+            <target>これはすでにプロジェクト・タスクです。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.DISABLED.NO_PROJECT_TASK">
+            <source>No Project Tasks available.</source>
+            <target>利用できるプロジェクト・タスクがありません。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.ALL">
+            <source>All</source>
+            <target>すべて</target>
+            <note>Domain: RACG resource; message label; "All" is a default combobox (non-multiselect), an empty option (e.g. resource type)</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.BLANK">
+            <source/>
+            <target></target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.CUSTOMER_PROJECT">
+            <source>Select a project...</source>
+            <target>プロジェクトを選択...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.PROJECT_TASK">
+            <source>Select a project task...</source>
+            <target>プロジェクト・タスクを選択...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.NEXT_APPROVER">
+            <source>Select an approver...</source>
+            <target>承認者を選択...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.RESOURCE">
+            <source>Select a resource...</source>
+            <target>リソースを選択...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.BILLINGCLASS">
+            <source>Select a billing class...</source>
+            <target>請求クラスを選択...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.SEARCH_RESOURCE">
+            <source>Search Resource</source>
+            <target>リソースを検索</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.VIEW">
+            <source>- Default -</source>
+            <target>- デフォルト -</target>
+            <note>Domain: RACG resource; message label; "Default" means an empty option for any filter selection</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.NO_MATCHING_RECORDS">
+            <source>No matching records</source>
+            <target>該当データなし</target>
+            <note>Domain: RACG resource; message label; matching is for a large data selection when it receives no data </note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.DATE">
+            <source>Set a start date.</source>
+            <target>開始日を設定してください。</target>
+            <note>RACG resource; action; a warning message, a warning pop-up message telling the user that setting a date is mandatory</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DATE">
+            <source>Set a start date to a valid date in the preferred format</source>
+            <target>開始日を優先書式の有効な日付に設定してください。</target>
+            <note>RACG resource; warning; a warning message, it shows a warning that you must set a start date to a valid date in the preferred format</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.ALREADY_ON_FIRST_PAGE">
+            <source>You are already on the first page</source>
+            <target>最初のページがすでに表示されています</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.ALREADY_ON_LAST_PAGE">
+            <source>You are already on the last page.</source>
+            <target>最後のページがすでに表示されています。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_NAME">
+            <source>Name is already used. Try another name</source>
+            <target>名前はすでに使用されています。別の名前をお試しください</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_FILTER_FIELD">
+            <source>A field is selected more than once. Please add a different field.</source>
+            <target>フィールドは、2回以上選択されています。別のフィールドを追加してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.NO_SELECTED_FILTER_FIELDS">
+            <source>There are no selected fields. Please add at least one field.</source>
+            <target>選択されたフィールドはありません。少なくとも1つのフィールドを追加してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.BLANK_FILTER_FIELD">
+            <source>There is a blank filter field. Please select a field name.</source>
+            <target>空白のフィルター・フィールドがあります。フィールド名を選択してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_PROJECT_TASK">
+            <source>Duplicate Project Task exists.</source>
+            <target>重複したプロジェクト・タスクがあります。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_PROJECT">
+            <source>Duplicate Project exists.</source>
+            <target>重複したプロジェクトがあります。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_RESOURCE">
+            <source>Duplicate Resource exists.</source>
+            <target>重複したリソースがあります。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.FEATURE_DISABLED">
+            <source>The following feature(s) required to access this page are not enabled in this account:</source>
+            <target>このページへのアクセスに必要な次の機能がこのアカウントで有効になっていません:</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.MIN_CHAR_SEARCH">
+            <source>Please enter 3 or more characters to perform a search.</source>
+            <target>検索を実行するには、3文字以上の検索語を入力してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.NO_CHANGES">
+            <source>No changes to save.</source>
+            <target>保存する変更内容がありません。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.OPERATION_TIMED_OUT">
+            <source>Operation timed out. Please refine your filter and try again.</source>
+            <target>処理がタイム・アウトしました。フィルターを絞り込んで、もう一度お試しください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.RA_CHOSEN_DATE_OVERLAP">
+            <source>Chosen date overlaps with an existing allocation.</source>
+            <target>選択した日付は既存の割当と重なっています。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.RA_INVALID_DATES">
+            <source>End Date must be greater than or equal to the Start Date</source>
+            <target>「終了日」は「開始日」と同じか、それ以降にしてください</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.RA_NON_WORKING_DAY">
+            <source>Unable to allocate resource on non-working day/s.</source>
+            <target>非勤務日にリソースを割当てることはできません。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.REALLOCATE_RA_OVERLAP">
+            <source>Unable to re-allocate. There is an overlap with the target resource's existing allocations.</source>
+            <target>再割当はできません。ターゲット・リソースの既存の割当と重複する部分があります。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.REASSIGN_RA_ALREADY_ASSIGNED">
+            <source>These allocations are already assigned to the selected resource/project.</source>
+            <target>これらの割当は、選択したリソース/プロジェクトにすでに割り当てられています。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.REASSIGN_RA_OVERLAP">
+            <source>Unable to reassign. There is an overlap with the target resource's existing allocations.</source>
+            <target>再割当はできません。ターゲット・リソースの既存の割当と重複する部分があります。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.REASSIGN_RA_TARGET_CONFLICT">
+            <source>Unable to reassign. There is a conflict with the target resource's working schedule.</source>
+            <target>再割当はできません。ターゲット・リソースの作業スケジュールとの競合があります。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.EDIT_PROJECT_HAS_OVERLAP">
+            <source>Unable to update Project Task. There is an overlap with the target Project Task's existing allocations.</source>
+            <target>プロジェクト・タスクをアップデートできません。ターゲット・プロジェクト・タスクの既存の割当と重複する部分があります。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.SAVE_FAILED">
+            <source>Save Failed</source>
+            <target>保存に失敗しました</target>
+            <note>Domain: RACG resource; message label; this is an alert for a situation where saving action fails</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.SEARCH_ERROR">
+            <source>Error in displaying Search Results.</source>
+            <target>検索結果の表示にエラーが発生しました。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.SEARCH_TIMED_OUT">
+            <source>Search timed out. Please refine your search criteria and try again.</source>
+            <target>検索がタイム・アウトしました。検索条件を絞り込んで、もう一度お試しください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.SETTINGS_UNSAVED_CHANGES">
+            <source>Please save changes before updating the settings.</source>
+            <target>設定を更新する前に変更内容を保存してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.UNSAVED_PENDING_CHANGES">
+            <source>There are pending changes you need to save first.</source>
+            <target>保留中の変更があります。まず保存してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DEFAULT_NOT_ALLOWED">
+            <source>Default filter name is not allowed.</source>
+            <target>デフォルトのフィルター名は許可されていません。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.BACKEND_ERROR">
+            <source>An error occurred while gathering resource allocation data, please check script logs for more information.</source>
+            <target>リソース割当データの収集中にエラーが発生しました。詳細はスクリプトのログを確認してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.UNABLE_TO_SAVE_FILTERS">
+            <source>Error: Unable to save selected filter values.</source>
+            <target>エラー: 選択されたフィルター値を保存できません。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.NOTIF.MOD_COUNTER">
+            <source>Number of updates:</source>
+            <target>更新数:</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.NOTIF.SAVE_CHANGES">
+            <source>Please save your changes.</source>
+            <target>変更内容を保存してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.NOTIF.SAVE_SUCCESS">
+            <source>Successfully saved changes.</source>
+            <target>変更が正常に保存されました。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.DELETE_THIS_ALLOCATION">
+            <source>Delete this allocation?</source>
+            <target>この割当を削除しますか?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.DELETE_ALLOCATIONS">
+            <source>Are you sure you want to delete these allocations?</source>
+            <target>これらの割当を削除しますか?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.DELETE_THIS_FILTER">
+            <source>Delete this filter?</source>
+            <target>このフィルターを削除しますか?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.PERFORMING_SEARCH">
+            <source>Performing search, please wait...</source>
+            <target>検索を実行しています。しばらくお待ちください...</target>
+            <note>Domain: RACG resource; message label; search resource -> submit -> message while searching</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.SEARCHING">
+            <source>Searching...</source>
+            <target>検索中...</target>
+            <note>Domain: RACG resource; message label; Searching is a progress bar while searching for resources via their skill sets</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_START_LT_PROJECT_TASK">
+            <source>Start date of resource allocation is earlier than the duration of project task.
+						Task Start Date : $1
+						Task End Date : $2</source>
+            <target>リソース割当の開始日が、プロジェクト・タスクの期間よりも前になっています。
+						タスク開始日: $1
+						タスク終了日: $2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_START_GT_PROJECT_TASK">
+            <source>Start date of resource allocation is beyond the duration of project task.
+						Task Start Date : $1
+						Task End Date : $2</source>
+            <target>リソース割当の開始日が、プロジェクト・タスクの期間を超えています。
+						タスク開始日: $1
+						タスク終了日: $2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_END_LT_PROJECT_TASK">
+            <source>End date of resource allocation is earlier than the duration of project task.
+						Task Start Date : $1
+						Task End Date : $2</source>
+            <target>リソース割当終了日が、プロジェクト・タスクの期間よりも早くなっています。
+						タスク開始日: $1
+						タスク終了日: $2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_END_GT_PROJECT_TASK">
+            <source>End date of resource allocation is beyond the duration of project task.
+						Task Start Date : $1
+						Task End Date : $2</source>
+            <target>リソース割当の終了日が、プロジェクト・タスクの期間を超えています。
+						タスク開始日: $1
+						タスク終了日: $2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.ALLOCATE_TO_PROJECT_WITHOUT_CUSTOMER">
+            <source>You are allocating to a project not assigned to a customer. Changes will be saved, but the updates will not be available in your current view (View by Customer). Do you want to proceed?</source>
+            <target>顧客に割り当てられていないプロジェクトに割り当てています。変更は保存されますが、現在のビュー(顧客別ビュー)では更新は利用できません。続行しますか?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_TIMEOFF_CONFLICT">
+            <source>Time-off conflict found for allocation date(s):</source>
+            <target>次の割当日に休暇の競合が見つかりました。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.LARGE_CHILDREN">
+            <source>There was a large volume of {0} record found under an entry. Allocation info will be truncated. Please use filters to reduce the number of {0}.</source>
+            <target>あるエントリーの下に大量の{0}レコードが発見されました。割当情報は切り捨てられます。フィルターを使用して、{0}の数を減らしてください。</target>
+            <note>Domain: RACG resource; message warning label; this occurs while loading resource node with too many children (120 is a maximum). {0} can be customer/project/resource</note>
+         </trans-unit>
+         <trans-unit id="TODAY">
+            <source>Today</source>
+            <target>今日</target>
+            <note>RACG resource; button label; this button is located in the calendar, it redirects the calendar to today</note>
+         </trans-unit>
+         <trans-unit id="TODAY_TIP">
+            <source>{0} (Spacebar)</source>
+            <target>{0} (スペースバー)</target>
+            <note>RACG resource; tooltip label; this label is a tooltip on how to use the Today button</note>
+         </trans-unit>
+         <trans-unit id="NEXT_MONTH">
+            <source>Next Month (Control+Right)</source>
+            <target>翌月([Ctrl]+[→])</target>
+            <note>RACG resource; tooltip label; this label is a tooltip for an arrow redirecting to the next month, it is a part of the calendar</note>
+         </trans-unit>
+         <trans-unit id="PREV_MONTH">
+            <source>Previous Month (Control+Left)</source>
+            <target>前月([Ctrl]+[←])</target>
+            <note>RACG resource; tooltip label; this label is a tooltip for an arrow redirecting to the previous month, it is a part of the calendar</note>
+         </trans-unit>
+         <trans-unit id="MONTH.JANUARY">
+            <source>January</source>
+            <target>1月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.FEBRUARY">
+            <source>February</source>
+            <target>2月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.MARCH">
+            <source>March</source>
+            <target>3月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.APRIL">
+            <source>April</source>
+            <target>4月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.MAY">
+            <source>May</source>
+            <target>5月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.JUNE">
+            <source>June</source>
+            <target>6月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.JULY">
+            <source>July</source>
+            <target>7月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.AUGUST">
+            <source>August</source>
+            <target>8月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.SEPTEMBER">
+            <source>September</source>
+            <target>9月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.OCTOBER">
+            <source>October</source>
+            <target>10月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.NOVEMBER">
+            <source>November</source>
+            <target>11月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.DECEMBER">
+            <source>December</source>
+            <target>12月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="NUMBER.ALLOCATE">
+            <source>Allocate</source>
+            <target>割当</target>
+            <note>RACG resource; number label; this label is for textfield and it alocates xx of hours/percent; it appears in new allocation/edit allocation popup</note>
+         </trans-unit>
+         <trans-unit id="NUMBER.MAX_LABOR_COST">
+            <source>Max. Labor Cost</source>
+            <target>最大人件費</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="NUMBER.MIN_YEARS_OF_EXP">
+            <source>Min. Yrs of Exp.</source>
+            <target>最小経験年数</target>
+            <note>Minimal Years of Experience; related to Skill Set SuiteApp" </note>
+         </trans-unit>
+         <trans-unit id="NUMBER.PERCENT_AVAILABLE">
+            <source>% Available</source>
+            <target>空き状況(%)</target>
+            <note>RACG resource; number label; available means that it is in a search for a resource which is % available, for example 20 % available</note>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.ALLOCATE">
+            <source>Allocate</source>
+            <target>割当</target>
+            <note>RACG resource; column label; the allocate column label shows the hours/percentage of allocation for the resource</note>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.APPROVAL_STATUS">
+            <source>Approval Status</source>
+            <target>承認ステータス</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.COMMENT">
+            <source>Comment</source>
+            <target>コメント</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.END_DATE">
+            <source>End Date</source>
+            <target>終了日</target>
+            <note>RACG resource; column label;the end date column label showing end date for allocation </note>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.NEXT_APPROVER">
+            <source>Next Approver</source>
+            <target>次の承認者</target>
+            <note>RACG resource; column label;the next approver is a person supposed to approve the allocation, they can have a workflow for approvals, meaning sequence of people approving</note>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.START_DATE">
+            <source>Start Date</source>
+            <target>開始日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.TYPE">
+            <source>Type</source>
+            <target>タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.UNIT">
+            <source>Unit</source>
+            <target>単位</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.RECORD">
+            <source>Record</source>
+            <target>レコード</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.FIELD_NAME">
+            <source>Field Name</source>
+            <target>フィールド名</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RADIO.ALL_RESOURCES">
+            <source>All Resources</source>
+            <target>すべてのリソース</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RADIO.DENSE">
+            <source>Dense</source>
+            <target>過密</target>
+            <note>RACG resource; adjective; radio label; “Dense” shows the chart density of a visual representation, which is either standard/relaxed/dense, it is located in the UI of the app</note>
+         </trans-unit>
+         <trans-unit id="RADIO.EMPLOYEES_ONLY">
+            <source>Employees Only</source>
+            <target>従業員のみ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RADIO.RELAXED">
+            <source>Relaxed</source>
+            <target>緩やか</target>
+            <note>RACG resource; adjective; radio label; “Relaxed” shows the chart density of a visual representation, which is either standard/relaxed/dense, it is located in the UI of the app</note>
+         </trans-unit>
+         <trans-unit id="RADIO.STANDARD">
+            <source>Standard</source>
+            <target>標準</target>
+            <note>RACG resource; adjective; radio label; “Standard” shows the chart density of a visual representation, which is either standard/relaxed/dense, it is located in the UI of the app</note>
+         </trans-unit>
+         <trans-unit id="RADIO.VENDORS_ONLY">
+            <source>Vendors Only</source>
+            <target>仕入先のみ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.-ALL-">
+            <source>-All-</source>
+            <target>-すべて-</target>
+            <note>RACG resource; store label; All means whichever dataset. for example a list of employees contains -All- with no id, the same is with other lists</note>
+         </trans-unit>
+         <trans-unit id="STORE.ALL">
+            <source>All</source>
+            <target>すべて</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.EMPLOYEE">
+            <source>Employee</source>
+            <target>従業員</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.VENDOR">
+            <source>Vendor</source>
+            <target>仕入先</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.GENERIC_RESOURCE">
+            <source>Generic Resource</source>
+            <target>一般リソース</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.APPROVED">
+            <source>Approved</source>
+            <target>承認済</target>
+            <note>RACG resource; store label; Approved is used in many places, for example in tooltips, or forms for single allocation</note>
+         </trans-unit>
+         <trans-unit id="STORE.CLIENT_SUITESCRIPTS">
+            <source>Client SuiteScripts</source>
+            <target>クライアントSuiteScript</target>
+            <note>RACG resource; store label; This refers to the clientScript NS feature, so translation should be consistent with it</note>
+         </trans-unit>
+         <trans-unit id="STORE.COMPANY">
+            <source>Company</source>
+            <target>会社</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.CUSTOM_RECORDS">
+            <source>Custom Records</source>
+            <target>カスタム・レコード</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.DEFAULT">
+            <source>- Default -</source>
+            <target>- デフォルト -</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.GETTING">
+            <source>Getting...</source>
+            <target>取得中...</target>
+            <note>RACG resource; verb; app is retrieving data</note>
+         </trans-unit>
+         <trans-unit id="STORE.HARD">
+            <source>Hard</source>
+            <target>ハード</target>
+            <note>RACG resource; adjective; store label; "Hard" shows a legend to graphical elements, "Hard" stands for Hard Allocation which not flexible; the resource is committed to the dates and hours required on this request</note>
+         </trans-unit>
+         <trans-unit id="STORE.HOURS">
+            <source>Hours</source>
+            <target>時間</target>
+            <note>A number precedes the noun (x Hours).</note>
+         </trans-unit>
+         <trans-unit id="STORE.INDIVIDUAL">
+            <source>Individual</source>
+            <target>個人</target>
+            <note>RACG resource; store label;The Vendor Type filter has 2 options, Individual(this one) and Company</note>
+         </trans-unit>
+         <trans-unit id="STORE.NUMBER_OF_UPDATES">
+            <source>Number of updates:</source>
+            <target>更新数:</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.PAGING" translate="no">
+            <source>of</source>
+            <target>of</target>
+            <note>DNT</note>
+         </trans-unit>
+         <trans-unit id="STORE.PENDING_APPROVAL">
+            <source>Pending Approval</source>
+            <target>承認保留</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.PERCENTAGE">
+            <source>Percentage</source>
+            <target>割合</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.REJECTED">
+            <source>Rejected</source>
+            <target>却下済</target>
+            <note>RACG resource; store label; Rejected is used in many places, for example in tooltips, or forms for single allocation</note>
+         </trans-unit>
+         <trans-unit id="STORE.RESOURCE_ALLOCATIONS">
+            <source>Resource Allocations</source>
+            <target>リソース割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.SAVE_YOUR_CHANGES">
+            <source>. Please save your changes.</source>
+            <target>。変更内容を保存してください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.SERVER_SUITESCRIPTS">
+            <source>Server SuiteScripts</source>
+            <target>サーバーSuiteScript</target>
+            <note>RACG resource; store label; This refers to serverScript NS feature, so translation should be consistent with it</note>
+         </trans-unit>
+         <trans-unit id="STORE.SINGLE">
+            <source>Single</source>
+            <target>単一</target>
+            <note>RACG resource; adjective; store label; This is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="STORE.DAILY">
+            <source>Daily</source>
+            <target>毎日</target>
+            <note>RACG resource; adjective; store label; it is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="STORE.WEEKLY">
+            <source>Weekly</source>
+            <target>毎週</target>
+            <note>RACG resource; adjective; store label; it is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="STORE.MONTHLY">
+            <source>Monthly</source>
+            <target>毎月</target>
+            <note>RACG resource; adjective; store label; it is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="STORE.YEARLY">
+            <source>Yearly</source>
+            <target>毎年</target>
+            <note>RACG resource; adjective; store label; it is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="TEXT.NAME">
+            <source>Name</source>
+            <target>名前</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXT.REPEAT_EVERY">
+            <source>Repeat every</source>
+            <target>繰り返し周期</target>
+            <note>RACG resource; text label; it is a recurrence of the allocation, "repeat every" + number field + "Day(s)"/"Week(s)"</note>
+         </trans-unit>
+         <trans-unit id="TEXT.DAY(S)">
+            <source>day(s)</source>
+            <target>日</target>
+            <note>RACG resource; text label; it is a recurrence of from the new/edit RA form, "repeat every" + number field + "Day(s)"/"Week(s)"</note>
+         </trans-unit>
+         <trans-unit id="TEXT.WEEK(S)">
+            <source>week(s)</source>
+            <target>週</target>
+            <note>RACG resource; text label; it is a recurrence of from the new/edit RA form, "repeat every" + number field + "Day(s)"/"Week(s)"</note>
+         </trans-unit>
+         <trans-unit id="TEXT.REPEAT_EVERY_WEEKDAY">
+            <source>Repeat every weekday</source>
+            <target>平日に毎日実行</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXT.FILTER_NAME">
+            <source>Filter Name</source>
+            <target>フィルター名</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXT.FILTERS">
+            <source>Filters</source>
+            <target>フィルター</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXT.SEARCH">
+            <source>Search</source>
+            <target>検索</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXTAREA.COMMENTS">
+            <source>Comments</source>
+            <target>コメント</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ADD_TO_SELECTED">
+            <source>Add to Selected</source>
+            <target>選択済に追加</target>
+            <note>RACG resource; tooltip label; it is a text version of a graphical arrow, moving values for skill sets from available to required boxes</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CATEGORY">
+            <source>Category</source>
+            <target>カテゴリ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.EMPLOYEE_DETAILS">
+            <source>Employee Details</source>
+            <target>従業員詳細</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.EMPLOYEE_NAME">
+            <source>Employee Name</source>
+            <target>従業員名</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.EMPLOYEE_TYPE">
+            <source>Employee Type</source>
+            <target>従業員の種類</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.GENERIC_DETAILS">
+            <source>Generic Resource Details</source>
+            <target>一般リソース詳細</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.GENERIC_NAME">
+            <source>Generic Resource Name</source>
+            <target>一般リソース名</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.GENERIC_LINK">
+            <source>Generic Resource Link</source>
+            <target>一般リソース・リンク</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PRICE">
+            <source>Price</source>
+            <target>価格</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.BILLING_RATE">
+            <source>Employee Type</source>
+            <target>従業員の種類</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.SKILLS">
+            <source>Skills and Expertise</source>
+            <target>スキルおよび専門知識</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CUSTOMER_DETAILS">
+            <source>Customer Details</source>
+            <target>顧客の詳細</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CUSTOMER_ID">
+            <source>Customer ID</source>
+            <target>顧客ID</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.COMPANY_NAME">
+            <source>Company Name</source>
+            <target>会社名</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PRIMARY_SUBSIDIARY">
+            <source>Primary Subsidiary</source>
+            <target>プライマリ子会社</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PRIMARY_CONTACT">
+            <source>Primary Contact</source>
+            <target>第一連絡先</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CITY">
+            <source>City</source>
+            <target>市区町村</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.STATE_PROVINCE">
+            <source>State/Province</source>
+            <target>都道府県</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.COUNTRY">
+            <source>Country</source>
+            <target>国</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VENDOR_DETAILS">
+            <source>Vendor Details</source>
+            <target>仕入先の詳細</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VENDOR_NAME">
+            <source>Vendor Name</source>
+            <target>仕入先名</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VENDOR_1099">
+            <source>1099 Eligible</source>
+            <target>1099適格</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VIEW_RECORD">
+            <source>View Record</source>
+            <target>レコードを表示</target>
+            <note>RACG resource; tooltip label; it is a recurrence of from the new/edit RA form, customer default filter: tooltip view record a VIEW, this is not a button, it is a label in a tooltip and next to it is a link to the record</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LINK">
+            <source>Link</source>
+            <target>リンク</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LOADING">
+            <source>Loading...</source>
+            <target>読み込んでいます...</target>
+            <note>RACG resource; tooltip label; this is a text</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.DEPARTMENT">
+            <source>Department</source>
+            <target>部門</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.DOWNLOAD">
+            <source>Download</source>
+            <target>ダウンロード</target>
+            <note>RACG resource; verb; tooltip label; it is a tooltip of an icon which downloads resume file (CV like, set of accomplishments)</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.EMAIL">
+            <source>Email</source>
+            <target>電子メール</target>
+            <note>RACG resource; noun; tooltip label; it is a tooltip for e-mail</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ICON_INFO">
+            <source>Click bar to edit. Resize to change date range. Drag to move to another resource.</source>
+            <target>バーをクリックして編集します。サイズを調整して日付範囲を変更します。ドラッグして別のリソースに移します。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ICON_INFO_GRID">
+            <source>Click cell to edit. Ctrl+click to drill down cells with multiple allocations. Roll up values with red text means overbooked.</source>
+            <target>セルをクリックして編集します。Ctrlキーを押しながらクリックすると、複数の割当があるセルをドリル・ダウンできます。赤字のまとめ値はオーバーブッキングを意味します。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ITEMS">
+            <source>Item(s)</source>
+            <target>アイテム</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LARGE_DATA.CHOOSE_APPROVER">
+            <source>Choose Next Approver</source>
+            <target>次の承認者を選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LARGE_DATA.CHOOSE_PROJECT">
+            <source>Choose Customer:Project</source>
+            <target>顧客を選択:プロジェクト</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LARGE_DATA.CHOOSE_PROJECTTASK">
+            <source>Choose Project Task</source>
+            <target>プロジェクト・タスクを選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LARGE_DATA.CHOOSE_RESOURCE">
+            <source>Choose Resource</source>
+            <target>リソースを選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.JOB_TITLE">
+            <source>Job Title</source>
+            <target>役職</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.ALLOCATE">
+            <source>Allocate</source>
+            <target>割当</target>
+            <note>RACG resource; verb; tooltip label; this tooltip is for allocation, located in the chart.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.ALLOCATION_TYPE">
+            <source>Allocation Type</source>
+            <target>割当タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.APPROVAL_STATUS">
+            <source>Approval Status</source>
+            <target>承認ステータス</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.COMMENT">
+            <source>Comment</source>
+            <target>コメント</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip for the comment</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.CUSTOMER_PROJECT">
+            <source>Customer:Project</source>
+            <target>顧客:プロジェクト</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.PROJECT">
+            <source>Project</source>
+            <target>プロジェクト</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.PROJECT_TASK">
+            <source>Project Task</source>
+            <target>プロジェクト・タスク</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.END_DATE">
+            <source>End Date</source>
+            <target>終了日</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip for an end date of an allocation</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.NEXT_APPROVER">
+            <source>Next Approver</source>
+            <target>次の承認者</target>
+            <note>RACG resourse; noun; tooltip label; this is a tooltip for an approval of the workflow, one in the sequence of approvers, it is customizable.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.APPROVER">
+            <source>Approver</source>
+            <target>承認者</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.RESOURCE">
+            <source>Resource</source>
+            <target>リソース</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.START_DATE">
+            <source>Start Date</source>
+            <target>開始日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.TASK">
+            <source>Task</source>
+            <target>タスク</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.RECURRENCE">
+            <source>Recurrence</source>
+            <target>繰り返し</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.FREQUENCY.DAY">
+            <source>Daily</source>
+            <target>毎日</target>
+            <note>RACG resource; adverb; tooltip label; this tooltip label refers to recurrence or frenquency in time of a task, this tooltip is located in the grid.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.FREQUENCY.WEEK">
+            <source>Weekly</source>
+            <target>週1回</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.FREQUENCY.MONTH">
+            <source>Monthly</source>
+            <target>月次</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.FREQUENCY.YEAR">
+            <source>Yearly</source>
+            <target>毎年</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.NONE">
+            <source>None</source>
+            <target>なし</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip that reference to frequency (recurrence), in this case NONE.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.MOVE_DOWN">
+            <source>Move Down</source>
+            <target>下へ移動</target>
+            <note>RACG resource; verb; tooltip label; this is a tooltip for a graphical element, it is a symbol of an arrow, which moves order or skill items down.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.MOVE_UP">
+            <source>Move Up</source>
+            <target>上へ移動</target>
+            <note>RACG resource; verb; tooltip label; this is a tooltip for a graphical element, it is a symbol of an arrow, which moves order or skill items up.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.NEXT">
+            <source>Next</source>
+            <target>次へ</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip for a graphical element, it is a symbol of an arrow that controls DATES. by clicking NEXT you can select month/day/week.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PHONE">
+            <source>Phone</source>
+            <target>電話</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PREVIOUS">
+            <source>Previous</source>
+            <target>前期</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip for a graphical element, it is a symbol of an arrow that controls DATES. by clicking PREVIOUS you can select month/day/week</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.REMOVE_FROM_SELECTED">
+            <source>Remove from Selected</source>
+            <target>選択済から削除</target>
+            <note>RACG resource; verb; tooltip label; the tooltip is a text version of a graphical symbol of an arrow, it removes values for skillsets from required and moves them back to the available boxes.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.REQUIRED_FIELD">
+            <source>Required Field</source>
+            <target>必須フィールド</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.RESOURCE">
+            <source>Resource</source>
+            <target>リソース</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.RESOURCE_ID">
+            <source>Resource ID</source>
+            <target>リソースID</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.RESOURCE_SEARCH">
+            <source>Resource Search</source>
+            <target>リソースの検索</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip that stands for the general search of resources.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.SELECT">
+            <source>Select</source>
+            <target>選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.SKILLSET_SCORE">
+            <source>Skill Set Score = sum of skill levels across required skills</source>
+            <target>スキル・セット・スコア = 必要な技能全体の技能レベルの合計</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.SUPERVISOR">
+            <source>Supervisor</source>
+            <target>監督者</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TITLE.RESOURCE_ALLOCATION">
+            <source>Resource Allocation</source>
+            <target>リソース割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TYPE">
+            <source>Type</source>
+            <target>タイプ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VIEW">
+            <source>View</source>
+            <target>表示</target>
+            <note>RACG resource; verb; tooltip label; this is a tooltip used as a link to view a record (customer/project/...).</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.YES">
+            <source>Yes</source>
+            <target>はい</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.NO">
+            <source>No</source>
+            <target>いいえ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TITLE.TIMEOFF">
+            <source>Approved Time-off</source>
+            <target>承認済の休暇</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TIMEOFFDATE">
+            <source>Time-off Date</source>
+            <target>休暇日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TIMEOFFHOUR">
+            <source>Time-off Hours</source>
+            <target>休暇時間</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TIMEOFFCONFLICT">
+            <source>Conflicting Hours</source>
+            <target>競合時間</target>
+            <note>RACG resource; noun; tooltip label; this tooltip can be found in the grid, Conflicting Hours are displayed if there is a colision in time between inserted time off and allocations (e.g. a resourse can have a time off and be allocated to a project at the same time).</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_DETAILS">
+            <source>Project Details</source>
+            <target>プロジェクト詳細</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_NAME">
+            <source>Project Name</source>
+            <target>プロジェクト名</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_TEMPLATE_DETAILS">
+            <source>Project Details</source>
+            <target>プロジェクト詳細</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_TEMPLATE_LINK">
+            <source>Project Template Link</source>
+            <target>プロジェクト・テンプレート・リンク</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PERCENT_WORK_COMPLETE">
+            <source>Percent Work Complete</source>
+            <target>作業進捗率</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ESTIMATED_WORK">
+            <source>Estimated Work</source>
+            <target>見積作業</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ALLOCATED_WORK">
+            <source>Allocated Work</source>
+            <target>割当作業</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ACTUAL_WORK">
+            <source>Actual Work</source>
+            <target>実際の作業</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.REMAINING_WORK">
+            <source>Remaining Work</source>
+            <target>残余作業</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.START_DATE">
+            <source>Start Date</source>
+            <target>開始日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CALCULATED_END_DATE">
+            <source>Calculated End Date</source>
+            <target>計算された終了日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_LINK">
+            <source>Project Link</source>
+            <target>プロジェクト・リンク</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="VIEWPRESET.DAILY">
+            <source>Daily</source>
+            <target>毎日</target>
+            <note>RACG resource; adverb; viewpreset label; this viewpreset sets granularity of the chart or grid, it is located on top of the chart/grid.</note>
+         </trans-unit>
+         <trans-unit id="VIEWPRESET.MONTHLY">
+            <source>Monthly</source>
+            <target>月次</target>
+            <note>RACG resource; adverb; viewpreset label; this viewpreset sets granularity of the chart or grid, it is located on top of the chart/grid.</note>
+         </trans-unit>
+         <trans-unit id="VIEWPRESET.WEEKLY">
+            <source>Weekly</source>
+            <target>週1回</target>
+            <note>RACG resource; adverb; viewpreset label; this viewpreset sets granularity of the chart or grid, it is located on top of the chart/grid.</note>
+         </trans-unit>
+         <trans-unit id="VIEWPRESET.WEEK_OF" translate="no">
+            <source>Week of</source>
+            <target>Week of</target>
+            <note>DNT</note>
+         </trans-unit>
+         <trans-unit id="WINDOW.CUSTOM_VIEW_PREFIX">
+            <source>Custom View</source>
+            <target>カスタム・ビュー</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.EDIT_RESOURCE_ALLOCATION">
+            <source>Edit Resource Allocation</source>
+            <target>リソース割当を編集</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.EDIT_VIEW">
+            <source>Edit View</source>
+            <target>編集ビュー</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.NEW_RESOURCE_ALLOCATION">
+            <source>New Resource Allocation</source>
+            <target>新規リソース割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.NEW_VIEW">
+            <source>New View</source>
+            <target>新しいビュー</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CUSTOMIZE_RESOURCE_FILTER">
+            <source>Customize Resource Filter Fields</source>
+            <target>リソース・フィルター・フィールドをカスタマイズ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CUSTOMIZE_CUSTOMER_FILTER">
+            <source>Customize Customer Filter Fields</source>
+            <target>顧客フィルター・フィールドをカスタマイズ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CUSTOMIZE_PROJECT_FILTER">
+            <source>Customize Project Filter Fields</source>
+            <target>プロジェクト・フィルター・フィールドをカスタマイズ</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.NEW_FILTER_DEFAULT_NAME">
+            <source>Custom Filter</source>
+            <target>カスタム・フィルター</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.REASSIGN_ALLOCATIONS">
+            <source>Reassign Allocations</source>
+            <target>割当を再割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.SEARCH_RESOURCE">
+            <source>Search Resource</source>
+            <target>リソースを検索</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.SELECT_RESOURCE">
+            <source>Select Resource</source>
+            <target>リソースを選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.SETTINGS">
+            <source>Settings</source>
+            <target>設定</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.VIEW_DETAILS">
+            <source>View Details</source>
+            <target>詳細を表示</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.FILTER_DETAILS">
+            <source>Filter Details</source>
+            <target>フィルターの詳細</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_RESOURCE">
+            <source>Choose Resource</source>
+            <target>リソースの選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_PROJECT">
+            <source>Choose Project</source>
+            <target>プロジェクトの選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_PROJECT_TASK">
+            <source>Choose Project Task</source>
+            <target>プロジェクト・タスクを選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_APPROVER">
+            <source>Choose Approver</source>
+            <target>承認者の選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_CLASS">
+            <source>Choose Class</source>
+            <target>クラスの選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_DEPARTMENT">
+            <source>Choose Department</source>
+            <target>部門の選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_SUBSIDIARY">
+            <source>Choose Subsidiary</source>
+            <target>子会社の選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_LOCATION">
+            <source>Choose Location</source>
+            <target>場所の選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_BILLING_CLASS">
+            <source>Choose Billing Class</source>
+            <target>請求クラスの選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_CUSTOMER">
+            <source>Choose Customer</source>
+            <target>顧客の選択</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DAY">
+            <source>Day</source>
+            <target>日</target>
+            <note>RACG resource; noun; day label; DAY is be found in the new/edit Resource Allocation form under Recurrence and then Monthly. The string is in form 'Day"(this label) + "number selection" + "of every" + number selection + "month."</note>
+         </trans-unit>
+         <trans-unit id="OF_EVERY">
+            <source>of every</source>
+            <target>/次ごと</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="OF">
+            <source>of</source>
+            <target>/</target>
+            <note>RACG resource; noun; week label; of can be found in the new/edit Resource Allocation form under Recurrence and then Weekly. The string is in form "week of {date}"</note>
+         </trans-unit>
+         <trans-unit id="MONTH(S)">
+            <source>month(s)</source>
+            <target>か月</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="THE">
+            <source>The</source>
+            <target> </target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="1ST">
+            <source>1st</source>
+            <target>第1</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="2ND">
+            <source>2nd</source>
+            <target>第2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="3RD">
+            <source>3rd</source>
+            <target>第3</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="4TH">
+            <source>4th</source>
+            <target>第4</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="LAST">
+            <source>Last</source>
+            <target>最終</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SUN">
+            <source>Sun</source>
+            <target>日曜</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MON">
+            <source>Mon</source>
+            <target>月曜</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TUE">
+            <source>Tue</source>
+            <target>火曜</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WED">
+            <source>Wed</source>
+            <target>水曜</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="THU">
+            <source>Thu</source>
+            <target>木曜</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FRI">
+            <source>Fri</source>
+            <target>金曜</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SAT">
+            <source>Sat</source>
+            <target>土曜</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SUNDAY">
+            <source>Sunday</source>
+            <target>日曜日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONDAY">
+            <source>Monday</source>
+            <target>月曜日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TUESDAY">
+            <source>Tuesday</source>
+            <target>火曜日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WEDNESDAY">
+            <source>Wednesday</source>
+            <target>水曜日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="THURSDAY">
+            <source>Thursday</source>
+            <target>木曜日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FRIDAY">
+            <source>Friday</source>
+            <target>金曜日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SATURDAY">
+            <source>Saturday</source>
+            <target>土曜日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="OCCURRENCE">
+            <source>occurrence</source>
+            <target>発生</target>
+            <note>A number precedes the noun (1 occurrence).</note>
+         </trans-unit>
+         <trans-unit id="OCCURRENCES">
+            <source>occurrences</source>
+            <target>発生</target>
+            <note>A number precedes the noun (x occurrences).</note>
+         </trans-unit>
+         <trans-unit id="ERROR_END_DATE_EARLIER_THAN_START_DATE">
+            <source>Error: End By Date cannot be earlier than Series Start Date.</source>
+            <target>エラー: 終了日をシリーズの開始日より前にすることはできません。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="REASSIGN_SERIES_OF_ALLOCATIONS_PROCEED">
+            <source>You are about to reassign a series of allocations. Do you want to proceed?</source>
+            <target>一連の割当を再割当しようとしています。続行しますか?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="NEW_RESOURCE_ALLOCATION_CONFLICT">
+            <source>The requested resource allocation conflicts with the following approved time-off</source>
+            <target>リクエストされたリソース割当が次の承認済休暇と競合しています</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DO_YOU_WANT_TO_PROCEED">
+            <source>The allocation will be accepted, but the system will not override the approved time-off. You may contact the resource or their supervisor to resolve scheduling conflicts. Do you want to proceed?</source>
+            <target>割当は承認されますが、承認済の休暇は上書きされません。スケジュールの競合を解決するために、リソースまたは監督者に連絡することができます。続行しますか?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="NEW_RESOURCE_ALLOCATION_CONFLICT_CELL">
+            <source>You are creating or updating an allocation that falls on a day with an approved time-off. Do you want to proceed?</source>
+            <target>承認済の休暇がある日に当たる割当を作成または更新しようとしています。続行しますか?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TIME_OFF_REQUEST">
+            <source>Time-off Request</source>
+            <target>休暇申請</target>
+            <note>RACG resource; noun; Time Off Request label; It is a part of a warning message your receive when submitting Resource Allocation, and the allocation is in conflict with the time off request. The full string looks like this: "Time-off Request" + ": " + (start date of the timeoff) + " - " + (end date of the time off) + " " + "conflicting" + (time unit-e.g. hrs) + ": " + (amount of time)</note>
+         </trans-unit>
+         <trans-unit id="CONFLICTING">
+            <source>Conflicting</source>
+            <target>矛盾</target>
+            <note>RACG resource; verb; Conflicting label; It is a part of the warning message you receive when submitting Resource Allocation and the allocation is in conflict with the time off request. The full string looks like this: "Time-off Request" + ": " + (start date of the timeoff) + " - " + (end date of the time off) + " " + "conflicting" + (time unit-e.g. hrs) + ": " + (amount of time)</note>
+         </trans-unit>
+         <trans-unit id="REALLOCATE_SERIES_OF_ALLOCATIONS_PROCEED">
+            <source>You are about to reallocate a series of allocations. Do you want to proceed?</source>
+            <target>一連の割当を再割当しようとしています。続行しますか?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="EDIT_NOT_AVAILABLE_IN_GRID_FOR_RECURRING">
+            <source>Editing options are not available in grid view for recurring allocations.</source>
+            <target>グリッド・ビューでは、繰り返しの割当の編集オプションは使用できません。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TO_LIMIT_NUMBER_OF_PROJECTS">
+            <source>To limit number of projects in the view adjust start date filter.</source>
+            <target>ビュー内のプロジェクト数を制限するには、開始日のフィルターを調整します。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHART">
+            <source>Chart</source>
+            <target>チャート</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CLICK_BAR_TO_EDIT">
+            <source>Click bar to edit allocation.</source>
+            <target>バーをクリックすると、割当を編集できます。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DRAG_AND_DROP_BAR_TO_MOVE">
+            <source>Drag and drop bar to move to another project or resource.</source>
+            <target>バーをドラッグ＆ドロップすると、別のプロジェクトまたはリソースに移動できます。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="GRID">
+            <source>Grid</source>
+            <target>グリッド</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CLICK_CELL_TO_EDIT">
+            <source>Click cell to edit allocation.</source>
+            <target>セルをクリックすると、割当を編集できます。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CONTROL_CLICK_TO_DRILL_DOWN">
+            <source>Control + click to drill down cells with multiple allocations.</source>
+            <target>コントロール・キーを押しながらクリックすると、複数の割当があるセルをドリル・ダウンできます。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RIGHT_CLICK_TO_ADJUST">
+            <source>Right click to adjust allocation properties.</source>
+            <target>右クリックすると、割当のプロパティが調整できます。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RECURRING_ALLOCATION">
+            <source>Recurring Allocation</source>
+            <target>繰り返しの割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MULTIPLE_ALLOCATION">
+            <source>Multiple Allocation</source>
+            <target>複数の割当</target>
+            <note>RACG resource; noun; Multiple Allocation label; Multiple Allocation hints that if the number is underlined, the reseource has multiple allocations for particular time period.</note>
+         </trans-unit>
+         <trans-unit id="NON_WORKING_DAY">
+            <source>Non-Working Day</source>
+            <target>非勤務日</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.RESOURCE_ALLOC_CHART">
+            <source>Resource Allocation Chart</source>
+            <target>リソース割当チャート</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.RESOURCE_ALLOCATIONS">
+            <source>Resource Allocations</source>
+            <target>リソース割当</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.MESSAGE.NO_RESULTS_VIEW">
+            <source>No Results Found Within Limits of Selected View</source>
+            <target>選択したビューの制限範囲内に結果が見つかりません</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.MESSAGE.NO_RESULTS_SEARCH">
+            <source>No Results Found.</source>
+            <target>結果が見つかりません。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.MESSAGE.RESOURCE_ALLOC_FEATURE_CHECK">
+            <source>This feature requires the Resource Allocations feature be enabled to use.</source>
+            <target>この機能を使用するには、「リソース割当」機能を有効にする必要があります。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.MESSAGE.INSTALL_FEATURE_CHECK">
+            <source>Feature [Resource Allocations], [Custom Records], [Client SuiteScript], and [Server SuiteScript] must be enabled. Please enable the features and re-try.</source>
+            <target>[リソース割当]、[カスタム・レコード]、[クライアントSuiteScript]、[サーバーSuiteScript] の各機能を有効にする必要があります。機能を有効にしてもう一度お試しください。</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MULTISELECT.CLICKTOADD">
+            <source>Click Selection to Add</source>
+            <target>追加するアイテムをクリックします。</target>
+            <note>RACG resource; noun; Multiselect label; when working with big data, you can select multiple fields and create a currect selection {e.g. used when filtering).</note>
+         </trans-unit>
+         <trans-unit id="MULTISELECT.CURRENTSELECTIONS">
+            <source>Current Selections</source>
+            <target>現在の選択</target>
+            <note>RACG resource; noun; Multiselect label; when working with big data, you can select multiple fields and create a currect selection {e.g. used when filtering).</note>
+         </trans-unit>
+      </body>
+   </file>
+</xliff>

@@ -1,0 +1,36 @@
+/* Styles used by Ext.ux.form.ItemSelector */
+
+.x4-form-multiselect-body .x4-boundlist .x4-mask {
+    background: none;
+}
+
+.x4-form-itemselector-body .x4-form-item {
+    margin: 0;
+}
+
+.x4-form-itemselector-top {
+    /*background-image: url(images/top2.gif);*/
+}
+.x4-form-itemselector-up {
+    /*background-image: url(images/up2.gif);*/
+    background: url('images/shuttle_cntl_arrows.png') no-repeat top left;
+    background-position: 4px -45px;
+}
+.x4-form-itemselector-add {
+    /*background-image: url(images/right2.gif);*/
+    background: url('images/shuttle_cntl_arrows.png') no-repeat top left;
+    background-position: 6px -29px;
+}
+.x4-form-itemselector-remove {
+    /*background-image: url(images/left2.gif);*/
+    background: url('images/shuttle_cntl_arrows.png') no-repeat top left;
+    background-position: 5px -11px;
+}
+.x4-form-itemselector-down {
+    /*background-image: url(images/down2.gif);*/
+    background: url('images/shuttle_cntl_arrows.png') no-repeat top left;
+    background-position: 4px 6px;
+}
+.x4-form-itemselector-bottom {
+    /*background-image: url(images/bottom2.gif);*/
+}

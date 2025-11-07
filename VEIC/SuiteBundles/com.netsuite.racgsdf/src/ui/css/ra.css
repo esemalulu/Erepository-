@@ -1,0 +1,2175 @@
+/**
+ * Copyright © 2018, Oracle and/or its affiliates. All rights reserved.
+ */
+
+ body {
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+#ra-toggle *, #ra-menu *, #advFilterMain *, #ra-main-toolbar *, #ra-chart *, #ra-grid *, .ra-form-window * {
+    font-family: Serif;
+    font-size: 14px;
+}
+
+/* include all tooltips here */
+#ext-quicktips-tip *, #ra-tip-alloc-grid *, #ra-tip-alloc-chart * , #ra-tip-project *, #ra-tip-column-header-grid *, #ra-tip-column-header-chart *{
+    font-family: Serif;
+}
+
+.pt_body {
+    height: 28px;
+}
+
+/*
+=================================================
+    Toolbar Classes
+=================================================
+*/
+
+.toolbar-gray{
+    background: transparent;
+}
+
+.icon-info {
+    background: url(../css/images/racg/icon_info2.png) no-repeat center center !important;
+}
+
+/* for content viewport (everything below NS main and sub menus) */
+.x4-border-layout-ct {
+    background-color: transparent;
+}
+
+/* for panel containing Save, Cancel, Reset buttons */
+.x4-panel-body {
+    background-color: transparent;
+}
+
+/* for div containing the Hide/Show Filters link/button: set minus icon */
+.ra-filter-div {
+    background: url(../css/images/racg/default/tree/elbow-minus-nl.gif) no-repeat -2px 1px;
+    padding: 4px 4px 4px 17px; /* adjust padding to center image */
+    cursor: pointer;
+}
+
+/* for div containing the Hide/Show Filters link/button: set plus icon */
+.ra-filter-div-plus {
+    background: url(../css/images/racg/default/tree/elbow-plus-nl.gif) no-repeat -2px 1px;
+    padding: 4px 4px 4px 17px; /* adjust padding to center image */
+    cursor: pointer;
+}
+
+/* standardized button class, override from NS CSS */
+.pgBntG .bntBgT, .pgBntY .bntBgT{
+    height: 20px;           /* standard button height */
+    padding: 1px 6px 3px;   /* adjust padding to make sure text is centered in the buttons */
+}
+
+/* for selected toggle links */
+.x4-btn-pressed a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #051526 !important;
+}
+
+.icon-prev {
+    background: url(../css/images/racg/da-prevwhite.png) no-repeat center center !important;
+    height: 17px !important;
+}
+
+.icon-next {
+    background: url(../css/images/racg/da-nextwhite.png) no-repeat center center !important;
+    height: 17px !important;
+}
+
+.icon-new {
+    background: url(../css/images/racg/icon_add.png) no-repeat center center !important;
+}
+
+.icon-options {
+    background: url(../css/images/racg/icon_cog.png) no-repeat center center !important;
+}
+
+.icon-print {
+    background: url(../css/images/racg/li-print.png) no-repeat center center !important;
+}
+
+.icon-all-export {
+    background: url(../css/images/racg/icon_download.png) no-repeat center center !important;
+}
+
+.icon-pdf {
+    background: url(../css/images/racg/li-pdf.png) no-repeat center center !important;
+}
+
+.icon-excel {
+    background: url(../css/images/racg/li-excel.png) no-repeat center center !important;
+}
+
+.icon-csv {
+    background: url(../css/images/racg/li-csv.png) no-repeat center center !important;
+}
+
+.icon-expand {
+    background: url(../css/images/racg/icon_expand.png) no-repeat center center !important;
+    margin-top: -3px;
+    margin-left: 3px;
+}
+
+.icon-collapse {
+    background: url(../css/images/racg/icon_collapse.png) no-repeat center center !important;
+    margin-top: -3px;
+    margin-left: 3px;
+}
+
+#ra-page-toolbar {
+    border: none !important;
+    background-color: #FFF !important;
+}
+
+/*.x4-toolbar-default {
+    background-image: none !important;
+    background-color: #E0E6EF !important;
+    border: 1px solid #ccc !important;
+}*/
+
+.ra-toolbar-main {
+    background-image: none !important;
+    background-color: #E0E6EF !important;
+    /*border: 1px solid #ccc !important;*/
+    border-color: #CCCCCC;
+}
+
+.ra-toolbar-legend {
+    background-image: none !important;
+    background-color: transparent !important;
+    border: none;
+    border-top: 1px solid #ccc !important;
+}
+
+.ra-legend-fieldset {
+}
+
+.x4-panel-body-default {
+    border-color: #ccc;
+}
+
+.x4-toolbar-separator {
+    border-left: none !important;
+    border-right: none !important;
+    background-color: #666666;
+    width: 1px !important;
+}
+
+#rangefield {
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+    /*width: 225px;*/
+}
+
+.toggle-link-a {
+    text-decoration: none;
+}
+
+.toggle-link {
+    color: #255599 !important;
+}
+
+/* ignore pressed state for styling of expand/collapse links */
+#ra-chartExpandBtn-linkInnerEl {
+    color: #255599 !important;
+}
+
+.toggle-link-pressed a span.toggle-link {
+    color: #333333 !important;
+    /*font-weight: bold;*/
+}
+
+.toggle-link-preset-pressed a span.toggle-link {
+    font-weight: bold;
+}
+
+.ra-round-btn {
+    height: 26px;
+    border-color: #cccccc;
+    background-color: #e0e0e0;
+    background-image: -webkit-linear-gradient(top, #ffffff, #e0e0e0) !important; /* For Chrome and Safari */
+    background-image: -moz-linear-gradient(top, #ffffff, #e0e0e0) !important; /* For old Fx (3.6 to 15) */
+    background-image: -ms-linear-gradient(top, #ffffff, #e0e0e0) !important; /* For pre-releases of IE 10*/
+    background-image: -o-linear-gradient(top, #ffffff, #e0e0e0) !important; /* For old Opera (11.1 to 12.0) */
+    background-image: linear-gradient(to bottom, #ffffff, #e0e0e0) !important; /* Standard syntax; must be last */
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+
+    /* unselectable */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ra-round-btn-icon .x4-btn-wrap {
+    margin-top: -3px;
+    margin-left: -3px;
+
+}
+
+.ra-round-btn-icon .x4-btn-inner {
+    text-align: left;
+}
+
+
+.ra-round-btn-start {
+    -webkit-border-radius: 15px 0px 0px 15px;
+    -moz-border-radius: 15px 0px 0px 15px;
+    border-radius: 15px 0px 0px 15px;
+}
+
+.ra-round-btn-end {
+    height: 26px;
+    -webkit-border-radius: 0px 15px 15px 0px;
+    -moz-border-radius: 0px 15px 15px 0px;
+    border-radius: 0px 15px 15px 0px;
+}
+
+.ra-icon-btn, .ra-icon-btn2 {
+    border-color: transparent;
+    background-image: none;
+    background-color: transparent;
+}
+
+.ra-icon-btn .x4-btn-inner, .ra-icon-btn .x4-btn-icon-el {
+    width: 20px;
+}
+
+.ra-icon-btn span.x4-btn-arrow {
+    padding-right: 0px;
+}
+
+.ra-icon-btn2 .x4-btn-inner, .ra-icon-btn2 .x4-btn-icon-el {
+    width: 16px;
+}
+
+
+.ra-rect-btn {
+    height: 28px;
+    background-image: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 0px 12px 0px 12px;
+}
+
+.ra-rect-btn * {
+    height: 100% !important;
+}
+
+.ra-rect-btn .x4-btn-wrap {
+    margin-top: 0px;
+}
+
+.ra-rect-btn .x4-btn-inner {
+    line-height: 25px;
+    font-size: 14px !important;
+    padding: 0px;
+}
+
+.ra-rect-btn-gray {
+    border-color: #b2b2b2;
+    background-color: #e5e5e5;
+    background-image: -webkit-linear-gradient(top, #fafafa, #e5e5e5) !important; /* For Chrome and Safari */
+    background-image: -moz-linear-gradient(top, #fafafa, #e5e5e5) !important; /* For old Fx (3.6 to 15) */
+    background-image: -ms-linear-gradient(top, #fafafa, #e5e5e5) !important; /* For pre-releases of IE 10*/
+    background-image: -o-linear-gradient(top, #fafafa, #e5e5e5) !important; /* For old Opera (11.1 to 12.0) */
+    background-image: linear-gradient(to bottom, #fafafa, #e5e5e5) !important; /* Standard syntax; must be last */
+}
+
+.ra-rect-btn-gray:focus {
+    -webkit-box-shadow: 0px 0px 2px 2px rgba(24,123,242,.75);
+    -moz-box-shadow: 0px 0px 2px 2px rgba(24,123,242,.75);
+    -ms-box-shadow: 0px 0px 2px 2px rgba(24,123,242,.75);
+    box-shadow: 0px 0px 2px 2px rgba(24,123,242,.75);
+}
+
+.ra-rect-btn-gray:hover {
+    background-color: #e5e5e5;
+    background-image: none !important;
+}
+
+.ra-rect-btn-gray:active {
+    background-color: #b2b2b2;
+    background-image: none !important;
+}
+
+.ra-rect-btn-gray:disabled {
+    background-color: #e5e5e5;
+    background-image: none !important;
+    border: 1px solid #ccc;
+}
+
+.ra-rect-btn-gray .x4-btn-inner {
+    color: #333333;
+    font-weight: 600;
+}
+
+.ra-rect-btn-gray:disabled .x4-btn-inner {
+    color: #999999;
+}
+
+.ra-rect-btn-blue {
+    border-color: #125AB2;
+    background-color: #004BA4;
+    background-image: -webkit-linear-gradient(top, #0B9DE5, #004BA4) !important; /* For Chrome and Safari */
+    background-image: -moz-linear-gradient(top, #0B9DE5, #004BA4) !important; /* For old Fx (3.6 to 15) */
+    background-image: -ms-linear-gradient(top, #0B9DE5, #004BA4) !important; /* For pre-releases of IE 10*/
+    background-image: -o-linear-gradient(top, #0B9DE5, #004BA4) !important; /* For old Opera (11.1 to 12.0) */
+    background-image: linear-gradient(to bottom, #0B9DE5, #004BA4) !important; /* Standard syntax; must be last */
+}
+
+.ra-rect-btn-blue:focus {
+    -webkit-box-shadow: 0px 0px 2px 2px rgba(24,123,242,.75);
+    -moz-box-shadow: 0px 0px 2px 2px rgba(24,123,242,.75);
+    -ms-box-shadow: 0px 0px 2px 2px rgba(24,123,242,.75);
+    box-shadow: 0px 0px 2px 2px rgba(24,123,242,.75);
+}
+
+.ra-rect-btn-blue:hover {
+    background-color: #1467cc;
+    background-image: none !important;
+}
+
+.ra-rect-btn-blue:active {
+    background-color: #004599;
+    background-image: none !important;
+}
+
+.ra-rect-btn-blue:disabled {
+    background-color: #e5e5e5;
+    background-image: none !important;
+    border: 1px solid #ccc;
+}
+
+.ra-rect-btn-blue .x4-btn-inner {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.ra-rect-btn-blue:disabled .x4-btn-inner {
+    color: #999999;
+}
+
+.ra-rect-btn-arrow  {
+    border:1px solid #CECECE;
+    background: #ffffff !important;
+    outline: none;
+    display: block;
+}
+
+/*.ra-export-all-menu a.ra-icon-btn2 {
+    width: 25px !important;
+    height: 40px !important;
+    position: relative !important;
+    left: 0px !important;
+}*/
+
+.x4-btn {
+    /* unselectable */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.ra-rect-btn-arrow :hover {
+    /*border:2px solid #eaeaea;*/
+    /*background: #ffffff !important;*/
+    outline: none;
+    display: block;
+}
+
+.ra-largedata-icon {
+    background: url(../css/images/racg/more.png) no-repeat center center !important;
+}
+
+.ra-largedata-btn {
+    border: none;
+    background: transparent;
+    padding-top: 5px;
+}
+
+.x4-boundlist {
+    border-color: #CCCCCC;
+}
+
+.x4-tree-node-text {
+    line-height: 22px;
+}
+
+.ra-action-header-icon {
+    background: url(../css/images/racg/da-actionsmenu.png) no-repeat center center !important;
+    margin:  0px 0px 0px 5px !important;
+    text-align: center !important;
+    display: block;
+    border: none !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-width: 0px !important;
+}
+
+.ra-action-cell-icon {
+    background: #fffdc0 url(../css/images/racg/da-actionsmenu.png) no-repeat center center !important;
+}
+
+.x4-menu {
+    display: block;
+    opacity: 1;
+    background: #ffffff !important;
+}
+
+/*#filterMain {
+    border: 1px solid #ccc;
+    border-bottom: none;
+    margin: 8px 0px 0px 0px;
+    padding: 8px 0px 8px 0px;
+    background: #f5f5f5;
+}*/
+
+/* start override NS styles */
+
+.uir-header-buttons {
+    padding: 0 !important
+}
+
+#main_form {
+    padding-bottom: 0px !important;
+}
+
+#div__body {
+    padding-bottom: 0px !important;
+    min-width: 1650px;
+}
+
+/* end override NS styles */
+
+.x4-nlg .x4-toolbar-default {
+    background-image: none !important;
+}
+
+#filterMain {
+    border: none;
+    background: transparent;
+    margin: 8px 0px 0px 0px;
+    padding: 8px 0px 8px 0px;
+}
+
+#advFilterMain {
+    border: none;
+    background: transparent;
+    margin: 15px 1px 10px 1px;
+}
+
+#advfilter-filterBody-innerCt {
+    overflow: visible;
+}
+
+#advfilter-summary {
+    margin-top: 10px !important;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #EAEAEA;
+    background-color: #EAEAEA;
+}
+
+#advfilter-summary-body {
+    border: none;
+}
+
+#ra-menu {
+    margin: 5px 1px 0px 1px;
+}
+
+#ra-main-toolbar {
+    margin: 0px 1px 0px 1px;
+}
+
+#ra-grid {
+    margin: 0px 1px 0px 1px;
+}
+
+.x4-toolbar-footer {
+    margin: 0;
+}
+
+.x4-fieldset {
+    margin: 0;
+}
+
+#ra-settingsWindow .x4-fieldset {
+    padding: 0;
+}
+
+.x4-form-layout-table {
+}
+
+/* start rules for ns box-shadow */
+
+#ra-menu, #ra-menu-body, #ra-menu-innerCt{
+    overflow: visible;
+}
+
+#advFilterMain, #advFilterMain-body, #advFilterMain-outerCt, #advFilterMain-innerCt, #ra-view-controls-row, #ra-view-controls-row-body, #ra-view-controls-row-innerCt {
+    overflow: visible;
+}
+
+#ra-viewWindow-body div, #new-ra-body div, #ra-reassignWindow-body div, #edit-ra-body div, #ra-settingsWindow-body div, #ra-resourceSearchWindow-body div {
+    overflow: visible;
+}
+
+/* end rules for ns box-shadow */
+
+#saveButton {
+    /*margin-left: 2px !important;*/
+}
+
+#filterBody{
+    margin-top: 5px;
+}
+
+#filterBody .x4-form-item {
+    float: left;
+    margin-left: 20px;
+    width: 150px;
+}
+
+#filterBody .x4-form-item-label {
+    font-weight: bold;
+}
+
+.x4-toolbar {
+    padding: 0;
+}
+
+.x4-btn-default-toolbar-medium {
+    border: none;
+    padding: 0;
+}
+
+.ra-menu-separator {
+    background-color: #b3b3b3;
+    width: 1px;
+    height: 28px;
+    margin: 0;
+}
+
+.ra-menu-separator-small {
+    background-color: #b3b3b3;
+    width: 1px;
+    height: 15px;
+    margin: 3px 0px;
+}
+
+.x4-form-text {
+    background-image : none;
+}
+
+.ra-resource-search .x4-form-text {
+    margin: 0px;
+}
+
+.ra-search-resource-trigger {
+    background:url(../css/images/racg/icon_quicksearch2.png) no-repeat 4px 4px transparent !important;
+    border-top: 1px solid #B5B8C8;
+    border-right: 1px solid #B5B8C8;
+    /*width: 20px;*/
+}
+
+/*
+=================================================
+    Grid Classes
+=================================================
+*/
+#ra-chart {
+    margin: 0px 1px;
+    border-bottom: 1px solid #ccc;
+}
+
+.sch-schedulerpanel {
+    background-color: #ffffff;
+}
+
+.x4-grid3-body {
+    height: 100% !important;
+}
+
+.icon-edit {
+    width: 20px;
+    height: 20px;
+    background:url(../css/images/racg/20.png) no-repeat -293px -360px transparent;
+    cursor: pointer;
+}
+
+.sch-event {
+    text-align: left;
+    vertical-align: middle;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border-color: #b2b2b2;
+    cursor: move;
+    z-index: 5;
+    margin-top: 3px;
+    -webkit-print-color-adjust: exact;
+    background: #FFFFFF;
+}
+
+.sch-event-inner {
+    margin-top: 11px;
+    padding-left: 8px;
+    color: #262626 !important;
+}
+
+.ra-resource-row {
+    background-color: #efefef;
+}
+
+.ra-resource-row .sch-event {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.sch-event-fixed .sch-resizable-handle {
+    display: none;
+}
+
+.ra-resource-row .sch-event-inner {
+    font-weight: bold;
+}
+
+.ra-grid-cell-multiple-alloc {
+    color: #255599 !important;
+    text-decoration: underline;
+}
+
+.ra-grid-resource-row .x4-grid-cell {
+    background-color: #f0f0f0;
+    color: #8e8e8e;
+    height: 35px;
+}
+
+.ra-grid-leaf-row {
+    height: 35px;
+}
+
+#ra-grid-normal .ra-grid-leaf-row *,
+#ra-grid-locked .x4-grid-cell-ra-grid-axn-hdr, #ra-grid-locked .x4-grid-cell-ra-grid-axn-hdr * {
+    cursor: pointer;
+}
+
+.x4-grid-cell-inner {
+    padding: 6px 6px 4px;
+}
+
+.x4-tree-view .x4-grid-cell-inner {
+	cursor: default;
+}
+
+.x4-monthpicker-body {
+    height: 100%;
+    width: 101%; /* Extjs bug fix when date picker has missing year */
+}
+
+.ra-grid-rollup-overbooked .x4-grid-cell-inner span {
+    color: #ff0000 !important;
+    font-weight: bold;
+}
+
+/*
+=================================================
+    Density 1 (Dense)
+=================================================
+*/
+
+.ra-density-1 .sch-event { /* RA height */
+    height: 21px !important;
+}
+
+.ra-density-1-resource .sch-event { /* roll-up height */
+    height: 17px !important;
+    margin-top: 4px;
+}
+
+.ra-density-1 .sch-event-inner { /* vertical align of text in RA's */
+    margin-top: 3px;
+}
+
+.ra-density-1-resource .sch-event-inner { /* vertical align of text in roll-ups */
+    margin-top: 1px;
+}
+
+.ra-density-1 .x4-grid-cell-resourceColumn .x4-grid-cell-inner, .ra-density-1-resource .x4-grid-cell-resourceColumn .x4-grid-cell-inner { /* vertical align of text in resource column */
+    padding-top: 2px;
+}
+
+/*
+=================================================
+    Density 2 (Standard)
+=================================================
+*/
+
+.ra-density-2 .sch-event {
+    height: 21px !important;
+    margin-top: 6px;
+}
+
+.ra-density-2-resource .sch-event {
+    height: 27px !important;
+    margin-top: 3px;
+}
+
+.ra-density-2 .sch-event-inner {
+    margin-top: 3px;
+}
+
+.ra-density-2-resource .sch-event-inner {
+    margin-top: 7px;
+}
+
+.ra-density-2 .x4-grid-cell-resourceColumn .x4-grid-cell-inner, .ra-density-2-resource .x4-grid-cell-resourceColumn .x4-grid-cell-inner {
+    padding-top: 5px;
+}
+
+/*
+=================================================
+    Density 3 (Relaxed)
+=================================================
+*/
+
+.ra-density-3 .sch-event {
+    height: 33px !important;
+}
+
+.ra-density-3-resource .sch-event {
+    height: 25px !important;
+    margin-top: 6px;
+}
+
+.ra-density-3 .sch-event-inner {
+    margin-top: 9px;
+}
+
+.ra-density-3-resource .sch-event-inner {
+    margin-top: 5px;
+}
+
+.ra-density-3 .x4-grid-cell-resourceColumn .x4-grid-cell-inner, .ra-density-3-resource .x4-grid-cell-resourceColumn .x4-grid-cell-inner {
+    padding-top: 8px;
+}
+
+/*
+=================================================
+    END Density Styles
+=================================================
+*/
+
+div.sch-event-hover {
+    border-color:#b2b2b2;
+}
+
+div.sch-event-selected {
+    border-color: #b2b2b2;
+    /* border-width:2px !important; */
+}
+
+.Hard {
+}
+
+.Soft {
+    background-image: url(../css/images/racg/pattern_soft_alloc.png);
+    background-repeat: repeat;
+}
+
+.ra-rejected,.ra-rejected div.sch-event-hover,.ra-rejected div.sch-event-selected {
+    /*background: #2b2b2b url(../css/images/racg/pattern_rejected_alloc.png) repeat left top;*/
+    border-color: #ff1919 !important;
+}
+
+.ra-rejected * {
+    color: #ff1919 !important;
+    text-decoration: line-through;
+}
+
+.ra-pending-approval {
+    border-style: dashed;
+}
+
+.ra-pending-approval * {
+    color: #808080 !important;
+}
+
+.Exception {
+    background:url(../css/images/racg/event-big.png) repeat-x left top;
+}
+
+/* for Resource rows (rows with expand/collapse button and rollup) */
+.x4-grid-group-hd div.x4-grid-group-title {
+    background-position: 11px 6px;  /* put expand/collapse icon to center */
+    padding: 4px 4px 4px 30px;      /* match text positioning with filter toolbar 'Hide Filters' link */
+    background-color: #e1e5f3;
+    opacity:.6;
+    filter:alpha(opacity=60);
+    font-weight: normal !important;
+    color: #051526 !important;
+}
+
+.x4-grid-group .x4-grid-group-collapsed {
+    height: 27px !important;
+}
+
+/* for Resource:Project cells (under Resource Allocation column) */
+.x4-grid3-col-name-project {
+    padding-left: 45px !important;  /* insert "tab" before each entry */
+    height: 100%;
+    cursor: pointer;
+}
+
+.x4-grid3-col-name-project div {
+    text-decoration: none;
+    font-weight: bold !important;
+    color: #1d86f9 !important;
+    border-bottom: 1px dashed #000;
+    height: 100%;
+    padding-top: 5px;
+}
+
+.x4-grid3-cell-inner, .x4-grid3-hd-inner {
+    padding: none;
+}
+
+.x4-grid3-header-inner {
+    background-color: #ffffff;
+    height: 100%;
+}
+
+.sch-simple-timeaxis .sch-simple-timeheader {
+    display : block;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    color: #555555;
+    font-size: 11px !important;
+}
+
+.sch-column-header {
+    /*background-color: #EAEAEA !important;*/
+}
+
+.sch-simple-timeheader {
+    /*background-color: #EAEAEA !important;*/
+}
+
+.x4-grid3-header-offset {
+    height: 100%;
+}
+
+.sch-event-endsoutside {
+    -moz-border-radius-topright:0 !important;
+    -moz-border-radius-bottomright:0 !important;
+    -webkit-border-radius-top-right:0 !important;
+    -webkit-border-radius-bottom-right:0 !important;
+}
+
+.sch-event-startsoutside {
+    -moz-border-radius-topleft:0 !important;
+    -moz-border-radius-bottomleft:0 !important;
+    -webkit-border-radius-top-left:0 !important;
+    -webkit-border-radius-bottom-left:0 !important;
+}
+
+/*.sch-event {
+    -webkit-box-shadow: 1px 1px 1px rgba(150, 150, 150, 0.3);
+    -moz-box-shadow: 1px 1px 1px rgba(150, 150, 150, 0.3);
+    -ms-box-shadow: 1px 1px 1px rgba(150, 150, 150, 0.3);
+    box-shadow: 1px 1px 1px rgba(150, 150, 150, 0.3);
+}*/
+
+.non-working-days {
+    background: url(images/racg/pattern_non_working.png);
+    cursor: default !important;
+}
+
+.x4-grid-group-collapsed {
+    padding-bottom: 2px !important;
+    margin-bottom: 2px;
+    height: 27px !important;
+    /*border-bottom: 2px solid #ffffff !important;*/
+}
+
+.x4-grid-group-hd {
+    width: 100% !important;
+    border-right: none !important;/*1px #cccccc !important;*/
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.x4-grid3-row {
+    border: none !important;
+}
+
+.sch-header-row-middle {
+    background: #ffffff;
+    height: 100%;
+}
+
+.sch-timeheader {
+    border-left-color: #ffffff !important;
+    border-right-color: #cccccc;
+}
+
+
+.x4-grid3-header {
+    padding-top: 0px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.x4-grid3-body {
+    border-right: none !important;/*1px solid #cccccc;*/
+}
+
+.x4-grid-with-col-lines .x4-grid3-row td.x4-grid3-cell {
+    border-right-color: transparent;
+}
+
+.x4-grid3-cell-last {
+    border-right-color: transparent;
+}
+
+.x4-grid3-cell-last .sch-timeheader{
+    border-right-color: #cccccc !important;
+}
+
+.x4-grid3-td-name-project {
+    border-left: none !important;
+}
+
+.ra-resource-row .x4-grid-cell-inner {
+    border-top: 1px solid #cccccc !important;
+    margin-bottom: 0px !important;
+    cursor: default !important;
+}
+
+#ra-chart .x4-grid-row .x4-grid-cell {
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+}
+
+.sch-horizontal .sch-resizable-handle {
+    background: transparent url(../css/images/racg/drag_handle.png) no-repeat center center !important;
+}
+
+.sch-resizable-handle-start {
+    padding-right: 10px;
+    cursor: w-resize;
+}
+
+.sch-resizable-handle-end {
+    padding-left: 10px;
+    cursor: e-resize;
+}
+
+.x4-column-header, .x4-column-header-over, .sch-column-header, .x4-grid-header-ct {
+    background-image: none;
+    background-color: #EAEAEA;
+    text-align: center;
+}
+
+#ra-chart-normal div .x4-box-inner {
+    border-bottom: 1px solid #ccc;
+}
+
+#ra-expand-collapse-container{
+    background-color: #FFFFFF;
+}
+
+.sch-column-header {
+    border-right-color: #EAEAEA;
+}
+
+#ra-chart .x4-column-header, #ra-chart .x4-column-header-over, #ra-chart .sch-column-header, #ra-chart .x4-grid-header-ct {
+    height: 36px;
+    z-index: 10;
+}
+
+#ra-chart-body {
+    /*top: 38px !important;*/
+}
+
+#ra-chart .x4-grid-body {
+    border-top: none;
+    border-bottom: none;
+    border-color: #ccc;
+}
+
+#ra-chart-locked-east-handle {
+    width: 6px;
+    border-left: 1px solid #ccc !important;
+    border-right: 1px solid #ccc !important;
+}
+
+#ra-chart-locked .x4-box-inner, .sch-column-header {
+    border-bottom: 1px solid #ccc;
+    height: 36px !important;
+}
+
+#ra-chart-locked-body, #ra-chart-normal-body {
+    /*top: 35px !important;*/
+    margin-top: -1px;
+}
+
+#resourceColumn-titleEl { /* resource column: header cell */
+    text-align: left;
+    padding: 0; /*6px 6px 5px 27px !important;*/
+}
+
+#resourceColumn-textEl { /* resource column: header text */
+    font-size: 13px;
+    /*font-weight: bold;*/
+    color: #333333;
+}
+
+.x4-tree-elbow, .x4-tree-elbow-end, .x4-tree-arrows .x4-tree-expander { /* resource column: expand/collapse icons */
+    margin-left: 16px;
+}
+
+.x4-tree-icon-parent, .x4-tree-icon-leaf { /* resource column: folder icons */
+    visibility: hidden !important;
+}
+
+/* locked columns: add ellipses to text that are too long */
+.x4-grid-cell-treecolumn .x4-grid-cell-inner {
+    display : block;
+    overflow : hidden;
+    text-overflow : ellipsis;
+}
+
+.x4-grid-cell-inner .x4-grid-cell-inner-treecolumn  {
+}
+
+.x4-grid-row .x4-tree-node-text { /* resource column: project name */
+    margin-left: 0px;
+}
+
+.ra-resource-row .x4-tree-node-text { /* resource column: resource name */
+    margin-left: -10px !important;
+    color: #333333 !important;
+    font-weight: bold;
+    cursor: default;
+    border-bottom: none;
+}
+
+.sch-column-line, .sch-timeline, div.sch-timeline:hover {
+    cursor: default;
+    border-style: solid;
+    border-color: #ccc;
+    border-right: 0px;
+}
+
+#ra-grid-locked {
+    border-style: solid;
+    border-right: 3px solid #d2d2d2;
+}
+
+.x4-column-header-text {
+    font-size: 11px !important;
+    color: #555555 !important;
+    text-transform: uppercase;
+}
+
+.sch-column-line {
+    border-color: #ededed;
+}
+
+/*
+.sch-column-line {
+    border-color: #AAA;
+}
+
+.sch-secondary-canvas, .sch-horizontal .sch-resourcezone {
+    z-index: 10;
+    opacity: 0.5;
+}
+*/
+.sch-resourcezone {
+    background: transparent url(../css/images/racg/pattern_non_working.png);
+}
+
+.ra-time-off {
+    background: url(../css/images/racg/blue_triangle.png) no-repeat right bottom/7px 7px;
+}
+
+.ra-chart-time-off {
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.ra-grid-time-off {
+    cursor: default !important;
+}
+
+#ra-sublist {
+    margin-top: -15px;
+}
+
+#ra-sublist .x4-grid-header-ct, #ra-sublist .x4-grid-body {
+    border-color: #ccc !important;
+}
+
+#ra-sublist .x4-column-header-inner, #ra-sublist .x4-column-header-over {
+    /*height: 40px;*/
+    background-color: #fafafa !important;
+    background-image: linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -o-linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -moz-linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -webkit-linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -ms-linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #fafafa), color-stop(0, #d4d4d4)) !important;
+}
+
+#ra-sublist .x4-grid-cell-inner {
+    text-align: center !important;
+}
+
+#ra-sublist .x4-grid-table {
+    border-bottom: none !important;
+}
+
+.x4-grid-table {
+    border-bottom: 1px solid #ccc;
+}
+
+.x4-panel-default {
+    border-color: #ccc;
+}
+
+div.sch-event-selected {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+}
+
+td.x4-grid-cell, tr.x4-grid-row-selected td.x4-grid-cell{
+	background-color: #ffffff !important;
+}
+
+tr.ra-grid-resource-row td.x4-grid-cell, tr.ra-resource-row td.x4-grid-cell {
+    background-color: #f0f0f0 !important;
+}
+
+tr.ra-grid-mid-row td.x4-grid-cell {
+	background-color: #fafafa !important;
+}
+
+tr.x4-grid-row-over td.x4-grid-cell  {
+    background-color: #FFFDC0 !important;
+}
+
+tr.x4-grid-row-over td.ra-action-hover-icon  {
+    background: #fffdc0 url(../css/images/racg/da-actionsmenu.png) no-repeat center center !important;
+}
+
+/*
+=================================================
+    Forms (Pop-Up) Classes
+=================================================
+*/
+
+/* imitate NS input text drop shadow */
+.x4-form-text:focus {
+    border: 1px solid #408FDB !important;
+    -webkit-box-shadow: 0px 0px 2px 2px rgba(64, 143, 219, 0.75);
+    -moz-box-shadow: 0px 0px 2px 2px rgba(64, 143, 219, 0.75);
+    -ms-box-shadow: 0px 0px 2px 2px rgba(64, 143, 219, 0.75);
+    box-shadow: 0px 0px 2px 2px rgba(64, 143, 219, 0.75);
+}
+
+.x4-editor {
+    overflow: visible;
+}
+
+.icon-search {
+    background:url(../css/images/racg/20.png) no-repeat -266px -424px transparent !important;
+}
+
+.staticlist {
+    width: 460px;
+    height: 135px;
+    background: url(../css/images/racg/staticlist2.jpg) no-repeat;
+}
+
+.x4-window-plain .x4-window-body {
+    background-color: #FAFAFA !important;
+}
+
+.x4-window-body *{
+    color: #222222;
+}
+
+.x4-header-text {
+    padding-left: 3px;
+}
+
+.x4-window-header-text-container-default {
+    /*margin-left: 3px !important;*/
+    margin-top: 4px !important;
+}
+
+.ra-form-label {
+    padding: 5px;
+}
+
+.ra-color-picker .x4-panel-body {
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.x4-fieldset-header {
+    padding: 0 !important;
+}
+
+.x4-fieldset-header-text {
+    font-weight: bold;
+}
+
+fieldset .toggle-link {
+}
+
+.x4-menu-scroll-top, .x4-menu-scroll-bottom {
+    background-image: none;
+}
+
+/*
+=================================================
+    Legend Classes (Bottom Toolbar)
+=================================================
+*/
+
+.legend-box { /* all legend boxes */
+    width: 22px;
+    height: 22px;
+    border: 1px solid #b2b2b2;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    text-align: center;
+    padding-top: 3px;
+    color: #262626;
+    font-weight: bold;
+}
+
+.legend-25 { /* 1-25 legend and rollups */
+    background: #c1d7e3;
+}
+
+.legend-50 { /* 26-50 legend and rollups */
+    background: #b6deaa;
+}
+
+.legend-75 { /* 51-75 legend and rollups */
+    background: #eae3ab;
+}
+
+.legend-100 { /* 76-100 legend and rollups */
+    background: #d67e7c;
+}
+
+.legend-overbooked { /* overbooked legend and rollups */
+    background: #d54238;
+}
+
+.legend-overbooked,.legend-overbooked .sch-event-inner {
+    color: #ffffff !important;
+}
+
+.legend-hard { /* hard legend and rollups */
+    background: #d5d5d5;
+}
+
+.legend-soft { /* soft legend and rollups */
+    background: #fff url(../css/images/racg/pattern_soft_alloc.png) repeat left top;
+}
+
+.legend-non-working { /* non-working legend and rollups */
+    background: #fff url(../css/images/racg/pattern_non_working.png) repeat left top;
+    font-size: 10px !important;
+    padding-top: 3px !important;
+}
+
+.x4-btn-mc em.x4-btn-arrow {
+    background-image: none;
+}
+
+.x4-form-focus, textarea.x4-form-focus { /* global border color for field focus */
+    border-color: #c1c1c1;
+}
+
+/*
+=================================================
+    RAToolTip Classes
+    -most values are copied from NS LAF
+=================================================
+*/
+
+.x4-tip-default {
+    /* width: auto !important; */
+    padding: 5px;
+    background-color: #fff;
+    max-width: 500px;
+}
+
+.x4-tip-body-default {
+    width: auto !important;
+    padding: 0;
+}
+
+/* avoid minimum-width tooltips from spanning 500px */
+.x4-tip-body-default span {
+    display: inline-block !important;
+}
+
+/* always hide anchors (sch bug) */
+.x4-tip-anchor {
+    visibility: hidden !important;
+}
+
+.record-tooltip-padding {
+    padding: 15px;
+}
+
+.record-tooltip {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    /*word-wrap: normal;*/
+}
+
+.record-tooltip-data {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 2px;
+    /*word-wrap: normal;*/
+}
+
+.record-tooltip-data tr td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.record-tooltip, .record-tooltip * {
+    font: inherit;
+}
+
+.record-tooltip .header{
+    /*background-color: #DCE1E8;*/
+}
+
+.record-tooltip .header div {
+    vertical-align: middle;
+    font-weight: 600;
+    font-size: 18px !important;
+    color: #666666;
+    background: transparent url(../css/images/racg/allocateresources.png) no-repeat;
+    background-size: 25px 25px;
+    padding-left: 30px;
+}
+
+.record-tooltip .employee-header div {
+    background: transparent url(../css/images/racg/recordTypeIcon-employee.png) no-repeat;
+    background-size: 25px 25px;
+}
+
+.record-tooltip .vendor-header div {
+    background: transparent url(../css/images/racg/vendor.png) no-repeat;
+    background-size: 25px 25px;
+}
+
+.record-tooltip .label {
+    text-align: right;
+    vertical-align: top;
+    color: #666666;
+    font-size: 14px;
+}
+
+.record-tooltip .value {
+    vertical-align: top;
+    padding-left: 5px;
+    color: #666666;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.icon-warning {
+	width: 15px;
+	margin-left: 5px;
+	background: url(../css/images/shared/icon-warning.gif);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 15px 15px;
+}
+
+.x4-tip-tl, .x4-tip-tr, .x4-tip-tc {
+    background: transparent !important;
+}
+
+.x4-tip-tl {
+    float: right;
+    margin-top: 3px;
+}
+
+.x4-tip {
+    border: 1px solid #a6a6a6 !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/*
+================================
+Link Button
+================================
+*/
+.linkButton {
+    background-image: none;
+    background-color: transparent;
+    border-style: none;
+    text-decoration: none;
+    color: #1d86f9;
+}
+
+.linkButton.over {
+    background-color: white;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(48%, #f9f9f9), color-stop(52%, #e2e2e2), color-stop(100%, #e7e7e7));
+    background-image: -webkit-linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+    background-image: -moz-linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+    background-image: -o-linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+    background-image: -ms-linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+    background-image: linear-gradient(top, #ffffff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+    border-style: solid;
+    padding: 0px;
+}
+
+/*
+===============================
+Search Results Ext Grid
+===============================
+*/
+
+#ra-search-results-grid .x4-column-header-inner .x4-column-header-text {
+    white-space: normal;
+    font-weight: bold;
+}
+
+#ra-search-results-grid .x4-grid-cell-inner {
+    white-space: normal;
+}
+
+#ra-search-results-grid .x4-grid-header-ct, #ra-search-results-grid .x4-grid-body {
+    border-color: #ccc !important;
+}
+
+#ra-search-results-grid .x4-column-header-inner, #ra-search-results-grid .x4-column-header-over {
+    background-color: #fafafa !important;
+    background-image: linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -o-linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -moz-linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -webkit-linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -ms-linear-gradient(bottom, #fafafa 100%, #d4d4d4 0%) !important;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(1, #fafafa), color-stop(0, #d4d4d4)) !important;
+}
+.ra-select-icon {
+    background: url(../css/images/racg/icon_select_arrow.png) no-repeat center center !important;
+}
+
+.ra-download-icon {
+    background: url(../css/images/racg/icon_download.png) no-repeat center center !important;
+}
+
+.ra-search-icon {
+    background: url(../css/images/racg/icon_quicksearch2.png) no-repeat center center !important;
+}
+
+.ra-search-header {
+    background-color: transparent !important;
+}
+
+.ra-search-header-text {
+    color: #0000FF !important;
+}
+
+.ra-search-btn {
+    border: none;
+    background: transparent;
+    padding-top: 7px;
+}
+
+#ra-grid .ra-search-btn, #ra-grid .ra-largedata-btn {
+	top: 0px !important;
+}
+
+.x4-tree-arrows .x4-tree-expander  {
+    background: url(../css/images/racg/da-expand.png) no-repeat 0 0;
+    margin: 7px 0px 7px 15px;
+}
+
+.x4-tree-arrows .x4-grid-tree-node-expanded .x4-tree-expander {
+    background: url(../css/images/racg/da-collapse.png) no-repeat 0 0;
+    margin: 7px 0px 7px 15px;
+}
+
+.x4-tree-arrows .x4-tree-expander-over .x4-tree-expander {
+    background: url(../css/images/racg/da-expand.png) no-repeat 0 0;
+    margin: 7px 0px 7px 15px;
+}
+
+.x4-tree-arrows .x4-grid-tree-node-expanded .x4-tree-expander-over .x4-tree-expander {
+    background: url(../css/images/racg/da-collapse.png) no-repeat 0 0;
+    margin: 7px 0px 7px 15px;
+}
+
+/* override default Ext expand/collapse icons on grid */
+
+#ra-grid .x4-tree-lines .x4-tree-elbow-end-plus {
+    background-image: url(../css/images/racg/da-expand.png);
+    background-repeat: no-repeat;
+    margin-top: 12px;
+    margin-left: 12px;
+}
+
+#ra-grid .x4-tree-lines .x4-tree-elbow-plus {
+    background-image: url(../css/images/racg/da-expand.png);
+    background-repeat: no-repeat;
+    margin-top: 12px;
+    margin-left: 12px;
+}
+
+#ra-grid .x4-tree-lines .x4-grid-tree-node-expanded .x4-tree-elbow-end-plus {
+    background-image: url(../css/images/racg/da-collapse.png);
+    background-repeat: no-repeat;
+    margin-top: 11px;
+    margin-left: 12px;
+}
+
+#ra-grid .x4-tree-lines .x4-grid-tree-node-expanded .x4-tree-elbow-plus {
+    background-image: url(../css/images/racg/da-collapse.png);
+    background-repeat: no-repeat;
+    margin-top: 11px;
+    margin-left: 12px;
+}
+
+/* hide default Ext tree icons from grid */
+#ra-grid .x4-tree-icon-parent {
+    display: none;
+}
+
+#ra-grid .x4-tree-icon-leaf {
+    display: none;
+}
+
+/* hide default Ext elbow icons from grid */
+#ra-grid img.x4-tree-elbow-img.x4-tree-elbow-empty {
+    display: none;
+}
+
+#ra-grid img.x4-tree-elbow-img.x4-tree-elbow, #ra-grid img.x4-tree-elbow-img.x4-tree-elbow-end {
+    background: none;
+    margin-top: 10px;
+    margin-left: 12px;
+}
+
+#ra-grid img.x4-tree-elbow-img.x4-tree-elbow-line {
+    display: none;
+}
+
+/* update font size & color of grid row text */
+#ra-grid .x4-grid-row * {
+    color: #333333;
+    font-size: 13px !important;
+}
+
+
+/* align resource / project text properly according to mockup (approximate) */
+#ra-grid tr.x4-grid-tree-node-leaf td.x4-grid-cell-treecolumn div.x4-grid-cell-inner {
+    padding-left: 33px;
+}
+
+/* Indention for project (midlevel) on View By Customer*/
+#ra-grid tr.ra-grid-mid-row div.x4-grid-cell-inner-treecolumn{
+    padding-left: 20px;
+}
+
+
+#ra-grid .x4-grid-row .x4-tree-node-text {
+    position: relative;
+    top: 2px;
+    left: 7px;
+}
+
+#ra-grid tr.x4-grid-tree-node-leaf .x4-tree-node-text {
+    top: 2px;
+}
+
+#ra-grid .x4-grid-cell-inner {
+    line-height: 20px;
+}
+
+/*
+==============
+Item Selector
+==============
+*/
+
+#itemselector .x4-panel-header {
+    background-image: none;
+    background-color: #FFFFFF;
+}
+
+#itemselector .x4-panel-header, #itemselector .x4-panel-body {
+    border-color: #B5B8C8;
+}
+
+
+/*----------------------------*/
+
+#ra-page-combo-box * {
+    cursor: hand;
+}
+
+#ra-page-combo-box-inputEl {
+    background: transparent;
+    border: none !important;
+    text-align: right;
+    padding: 0;
+    font-weight: bold;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+}
+
+#ra-page-combo-box-triggerWrap .x4-form-trigger {
+    background: transparent url(../css/images/racg/dropdown.png) 0px 1px;
+    border-bottom: none;
+    width: 100%;
+}
+
+#ra-page-combo-box-triggerWrap .x4-trigger-cell {
+    background: transparent;
+    width: 20px !important;
+}
+
+#ra-page-combo-box-triggerWrap .x4-form-trigger-over {
+    border-bottom-color: transparent;
+    background-position: 0px 1px;
+}
+
+#ra-page-combo-box-triggerWrap .x4-form-trigger-wrap-focus .x4-form-trigger {
+    background-position: 0px 1px;
+}
+#ra-page-combo-box-triggerWrap .x4-form-trigger-wrap-focus .x4-form-trigger-over {
+    background-position: 0px 1px;
+}
+/*----------------------------*/
+
+.ra-dd-clear-icon-cls {
+    border: 0 !important;
+    height: 20px;
+    width: 20px;
+    background: url('../css/images/racg/clear.png') no-repeat center center !important;
+}
+
+.ra-dd-check-icon-cls {
+    border: 0 !important;
+    height: 15px;
+    width: 15px;
+    background: url('../css/images/racg/check.png') no-repeat center center !important;
+}
+
+.ra-dd-down-icon-cls {
+    border: 0 !important;
+    height: 15px;
+    width: 15px;
+    vertical-align: top;
+    top: 4px !important;
+    margin: 1px 0 0 0 !important;
+    background: url('../css/images/racg/dropdown.png') no-repeat center center !important;
+}
+
+.ra-dd-move-icon-cls {
+    height: 13px;
+    width: 13px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: -4px;
+    margin-right: 3px;
+}
+
+.ra-dd-move-left-icon-cls {
+    background: url('../css/images/racg/multi_dd_clear.png') no-repeat 0px 1px !important;
+}
+
+.ra-dd-move-right-icon-cls {
+    background: url('../css/images/racg/multi_dd_select.png') no-repeat 0px 1px !important;
+}
+
+.ra-dd-delete-bg-cls {
+    border-radius: 0px;
+    border: 0 !important;
+    height: 24px;
+    width: 22px;
+    background: rgba(235,235,235,1);
+}
+
+.ra-dd-delete-icon-cls {
+    background: rgba(235,235,235,1) url('../css/images/racg/icon-delete.png') no-repeat center center;
+    background-size: 12px;
+}
+
+.ra-dd-entry-cls {
+    /* unselectable */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.ra-dd-container {
+    border: 1px solid #CCCCCC !important;
+}
+
+.ra-dd-filter-disabled {
+    opacity: .3;
+    -moz-opacity: .3;
+    filter: alpha(opacity=30);
+}
+
+#ra-paging-bound-list {
+    background: #F9F9F9;
+    border: 1px solid #ccc;
+}
+
+.ra-paging-bound-list-floating {
+    border-top-width: 1px;
+}
+
+.ra-paging-bound-list li.x4-boundlist-item {
+    font-size: 14px;
+    border-style: none;
+    padding: 5px 20px 5px 10px;
+}
+
+li.ra-paging-bound-list-selected {
+    background: transparent;
+    font-weight: bold;
+}
+
+li.ra-paging-bound-list-item-over {
+    border-color:#808080;
+    background: #999;
+    color: #FAFAFA;
+}
+
+#ra-total-page-inputEl {
+    font-weight: normal !important;
+}
+
+.ra-required-field {
+    background: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #C77F02;
+    padding: 0 2px;
+}
+.ra-link {
+    text-decoration: none;
+    color: #255599;
+}
+
+#racview-filter-link-linkEl {
+   padding-left: 22px;
+   background: url(../css/images/racg/da-collapse.png) no-repeat 5px 3px;
+}
+
+.ra-filter-hidden #racview-filter-link-linkEl{
+   background: url(../css/images/racg/da-expand.png) no-repeat 5px 3px;
+}
+
+.filter-toggle-link {
+    font-weight: bold;
+    font-size: 13px !important;
+    color: #333333;
+    text-decoration: none;
+    display: block;
+}
+
+#ra-bind-14px {
+    font-size: 14px;
+}
+
+#ra-bind-13px {
+    font-size: 13px;
+}
+
+#ra-bind-12px {
+    font-size: 12px;
+}
+
+/* not final */
+.ra-date-column div span {
+    font-size: 11px !important;
+}
+
+.sch-tip-ok {
+  padding-left:20px;
+  background: url(../css/images/racg/drop-yes.gif) no-repeat left top;
+}
+
+.sch-tip-notok {
+  padding-left:20px;
+  background: url(../css/images/racg/drop-no.gif) no-repeat left top;
+}
+
+.ra-form-window .x4-window-header * {
+    overflow: visible;
+}
+
+.ra-form-window .x4-form-layout-table {
+    border-spacing: 0;
+}
+
+.x4-form-text, .x4-border-box .x4-grid-editor .x4-form-text {
+    height: 25px;
+}
+
+.x4-form-date-trigger {
+    background-image: url(images/racg/calendar.png) !important;
+}
+
+.ra-date-picker .x4-trigger-cell .x4-form-date-trigger {
+    height: 22px;
+    background-position: 1px 1px;
+}
+
+.x4-border-box .x4-form-trigger, .x4-form-trigger, .x4-border-box .x4-grid-editor .x4-form-trigger {
+    background: url(images/racg/dropdown.png) 1px 2px;
+    height: 25px;
+    width: 24px;
+    border: 1px solid #b5b8c8;
+    border-left: 0;
+}
+
+.x4-form-trigger-over, .x4-form-trigger-wrap-focus .x4-form-trigger {
+    background-position: 1px 2px;
+}
+
+#ra-page-combo-box .x4-form-trigger {
+    border: none;
+}
+
+#ra-itemselector .x4-panel-header-default {
+    background: #E0E6EF;
+    border: 1px solid #ccc;
+}
+
+#ra-itemselector .x4-panel-header-default-top {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none;
+}
+
+.x4-menu-icon-separator {
+    display: none;
+}
+
+a.x4-menu-item-link {
+    padding: 0;
+}
+
+a.x4-menu-item-link div.x4-menu-item-icon {
+    display: none;
+}
+
+a.x4-menu-item-link span.x4-menu-item-text {
+    margin: 0;
+    padding: 0 21px;
+}
+
+#ra-grid-column-menu-body a.x4-menu-item-link span.x4-menu-item-text {
+    margin: 0;
+    padding: 0 3px;
+}
+
+.x4-grid-dirty-cell {
+    background: none;
+}
+
+.x4-form-form-item td {
+    border-top: none;
+}
+
+div.ra-form-panel-column > div.x4-panel-body > table.x4-form-layout-table > tbody:after {
+    content: '';
+    display: block;
+    height: 10px;
+}
+
+.ra-form-window .x4-draw-text {
+    padding-top: 3px;
+}
+
+.x4-form-cb-wrap {
+    line-height: 25px;
+}
+
+input[type="text"], input[type="password"], select, textarea {
+    padding-top: 3px;
+}
+
+/*====================================================*/
+/* for printing                                       */
+/*====================================================*/
+
+#lockedRowsCt, #normalRowsCt {
+    overflow: visible !important;
+}
+
+#lockedRowsCt table {
+    width: inherit;
+}
+
+.sch-print-body #ra-chart-locked .x4-box-inner, .sch-print-body .sch-column-header {
+    border-bottom: 0px !important;
+}
+
+.sch-print-body #ra-chartResourceColumn-innerCt {
+    display: none;
+}
+
+.sch-print-body .sch-column-header {
+    background: #EAEAEA !important;
+}
+
+.sch-print-body #ra-chart-timelineview-table, .sch-print-body .sch-print-normalheader {
+    border-left: 1px solid #ccc !important;
+}
+
+.sch-print-headerbg {
+    border-left: none;
+}
+
+@media print
+{
+    * {
+        page-break-inside: avoid !important;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/*[RAC] Issue 310211: 2014.2 > No bottom border found for Item Selector for Resources field*/
+/*this css lifts the control to show the bottom border*/
+#ra-largedata-itemselector #ra-largedata-itemselector-targetEl table {top: -1px!important;}
+
+/*
+* the icon used is temporary until otakar provides the image.
+*/
+div.ra-recurrence-indicator-icon {
+    background: url(../css/images/racg/recurrenceIcon.png) no-repeat right 0/auto 14px !important;
+}
+
+/*
+*   grid
+*/
+div#ra-grid .x4-grid-row-over .x4-grid-td.ra-recurrence-indicator-icon[role=gridcell]  {
+    background: url(../css/images/racg/recurrenceIcon.png) no-repeat 90% 45%/auto 14px #FFFDC0;
+}
+div#ra-grid .ra-recurrence-indicator-icon[role=gridcell] {
+    background: url(../css/images/racg/recurrenceIcon.png) no-repeat 90% 45%/auto 14px;
+}
+div#ra-grid tr.x4-grid-row .ra-recurrence-indicator-icon.non-working-days[role=gridcell] {
+    background: url(../css/images/racg/recurrenceIcon.png) no-repeat 90% 45%/auto 14px, url(images/racg/pattern_non_working.png);
+}
+
+/*
+*   reassign form
+*/
+.x4-grid-row-alt .x4-grid-td.x4-grid-cell-ra-sublist-allocate.ra-recurrence-indicator-icon[role=gridcell] {
+    background: url(../css/images/racg/recurrenceIcon.png) no-repeat 90% 45%/auto 14px #FAFAFA !important;
+}
+.x4-grid-row:not(.x4-grid-row-alt):not(.x4-grid-row-selected) .x4-grid-td.x4-grid-cell-ra-sublist-allocate.ra-recurrence-indicator-icon[role=gridcell] {
+    background: url(../css/images/racg/recurrenceIcon.png) no-repeat 90% 45%/auto 14px #FFF !important;
+}
+.x4-grid-row.x4-grid-row-over:not(.x4-grid-row-selected) .x4-grid-td.x4-grid-cell-ra-sublist-allocate.ra-recurrence-indicator-icon[role=gridcell] {
+    background: url(../css/images/racg/recurrenceIcon.png) no-repeat 90% 45%/auto 14px #FFFDC0 !important;
+}
+.x4-grid-row.x4-grid-row-selected .x4-grid-td.x4-grid-cell-ra-sublist-allocate.ra-recurrence-indicator-icon[role=gridcell] {
+    background: url(../css/images/racg/recurrenceIcon.png) no-repeat 90% 45%/auto 14px #FAFAFA !important;
+}
+
+#ra-export-menu .x4-menu-item-icon {
+    display: inline !important;
+    margin-left: 3px !important;
+    height: 20px;
+    top: 3px;
+}
+
+#ra-export-menu .x4-menu-item-active {
+    border: none !important;
+    background: none !important;
+}
+
+#record-tooltip-legend-table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+#record-tooltip-legend-table div {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+}
+
+#record-tooltip-legend-table span {
+    vertical-align: top;
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+#fsAvailability .x4-form-trigger-input-cell {
+    width: 25px !important;
+}
+
+.racg-filter-popup-header {
+    background-color: #EAEAEA;
+}
+
+.x4-panel-header-default {
+    background: #E0E6EF !important;
+}
+
+.racg-filter-popup-header > .x4-panel-body-default {
+    border: 1px solid #99bce8 !important;
+}
+
+#advfilter-record1-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-field1-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-record2-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-field2-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-record3-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-field3-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-record4-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-field4-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-record5-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-field5-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-record6-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-field6-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-record7-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-field7-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-record8-triggerWrap {
+    width: 100% !important;
+}
+
+#advfilter-field8-triggerWrap {
+    width: 100% !important;
+}
+
+.customer-info-sub-chooser-gold-icon {
+    background-repeat: no-repeat;
+    background-image: url('../css/images/racg/clear.png');
+    background: url('../css/images/racg/clear.png') no-repeat center center !important;
+    content: url('../css/images/racg/clear.png');
+    width: 80px;
+    display: inline-block;
+}
+
+.x4-trigger-cell {
+	background-color: transparent;
+}
+
+.ra-form-window div.x4-panel.x4-window-item, .ra-form-window div.x4-panel.x4-window-item div.x4-toolbar.x4-docked, .ra-form-window div.x4-panel.x4-window-item div.x4-toolbar.x4-docked div.x4-box-inner {
+	overflow: visible;
+}
+
+.ra-filter-default-false {
+    padding-left: 30px;
+}
+
+.ra-large-data-search-no-match li.x4-boundlist-item {
+    background: #efefef;
+    height: 50px;
+    padding-top: 12px;
+    text-align: center;
+}
+
+.ra-large-data-search-no-match li.x4-boundlist-item-over, .ra-large-data-search-no-match li.x4-boundlist-selected {
+    border-color: #ffffff;
+}
+
+.ra-large-data-search-no-match .ra-dd-move-right-icon-cls {
+    display: none;
+}

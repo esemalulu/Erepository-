@@ -1,0 +1,2298 @@
+<?xml version = '1.0' encoding = 'utf-8' standalone = 'yes'?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+   <file datatype="x-suiteapps-rac" source-language="en-US" original="xliff-core-1.2-strict.xsd" target-language="da-DK">
+      <body>
+         <trans-unit id="APP.TITLE">
+            <source>Resource Allocation Chart/Grid 2.0</source>
+            <target>Ressourceallokeringsdiagram/-gitter 2.0</target>
+            <note>print->RACG resource; title label; this label is a header of the printing page</note>
+         </trans-unit>
+         <trans-unit id="BAR.UNIT.HOUR">
+            <source>Hour</source>
+            <target>Time</target>
+            <note>A number precedes the noun (1 Hour).</note>
+         </trans-unit>
+         <trans-unit id="BAR.UNIT.HOURS">
+            <source>Hours</source>
+            <target>Timer</target>
+            <note>A number precedes the noun (x Hours).</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.CANCEL">
+            <source>Cancel</source>
+            <target>Annuller</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.CLOSE">
+            <source>Close</source>
+            <target>Luk</target>
+            <note>RACG resource; verb; label of a button, pressing the button closes the popup</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.COLLAPSE_ALL">
+            <source>Collapse all</source>
+            <target>Skjul alle</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.CUSTOMIZE">
+            <source>Customize</source>
+            <target>Tilpas</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.CUSTOMIZE_VIEW">
+            <source>Customize View</source>
+            <target>Tilpas visning</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.CUSTOMIZE_FILTER">
+            <source>Customize Filter</source>
+            <target>Tilpas filter</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.DELETE">
+            <source>Delete</source>
+            <target>Slet</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EDIT_VIEW">
+            <source>Edit View</source>
+            <target>Rediger visning</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EDIT_FILTER">
+            <source>Edit Filter</source>
+            <target>Rediger filter</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPAND_ALL">
+            <source>Expand all</source>
+            <target>Udvid alle</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPORT.CSV">
+            <source>Export - CSV</source>
+            <target>Eksporter – CSV</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPORT.PDF">
+            <source>Export - PDF</source>
+            <target>Eksporter – PDF</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPORT.XLS">
+            <source>Export - Microsoft ® Excel</source>
+            <target>Eksporter – Microsoft ® Excel</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.NEW_ALLOCATION">
+            <source>New Resource Allocation</source>
+            <target>Ny ressourceallokering</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.OK">
+            <source>OK</source>
+            <target>OK</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.PRINT">
+            <source>Print</source>
+            <target>Udskriv</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.EXPORT">
+            <source>Export</source>
+            <target>Eksporter</target>
+            <note>Domain: RACG resource; verb; button label; clicking this button triggers an exporting action (for example to pdf, or xls)</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.RESET">
+            <source>Reset</source>
+            <target>Nulstil</target>
+            <note>Domain: RACG resource; verb; button label; the reset button is located next to save button, clicking this button will either save changes made in app, or makes a reset to the default behavior (last saved state)</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.RESTORE_DEFAULTS">
+            <source>Restore Defaults</source>
+            <target>Gendan standardindstillinger</target>
+            <note>Domain: RACG resource; verb; button label; the restore defaults button is located in popup settings for the app, clicking this button means restoring settings to the default state when you install the suiteapp, it does not affect any data, this action is connected only to the settings</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.RETURN_TO_CRITERIA">
+            <source>Return to Criteria</source>
+            <target>Returner til kriterier</target>
+            <note>Domain: RACG resource; verb; button label; the return to criteria button appears on a popup after submiting criteria for searching resources by skills of a person, it returns the user back to the criteria</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.SAVE">
+            <source>Save</source>
+            <target>Gem</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.SETTINGS">
+            <source>Settings</source>
+            <target>Indstillinger</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.SUBMIT">
+            <source>Submit</source>
+            <target>Afsend</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="BUTTON.VIEW_DETAILS" translate="no">
+            <source>View Details</source>
+            <target>View Details</target>
+            <note>DNT, didnt find in code (but we leave it here just to be sure)</note>
+         </trans-unit>
+         <trans-unit id="BUTTON.FILTER_DETAILS">
+            <source>Filter Details</source>
+            <target>Filtrer detaljer</target>
+            <note>Domain: RACG resource; verb; button label; the user can view details of a filter - button, shared customized filter, it displays details of a filter that is shared by someone else</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.INCLUDE_RESOURCES_WO_ALLOCS">
+            <source>Include resources without allocations</source>
+            <target>Medtag ressourcer uden allokeringer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.INCLUDE_SUB-SUBSIDIARIES">
+            <source>Include Sub-subsidiaries</source>
+            <target>Medtag underdatterselskaber</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHARE_THIS_VIEW" translate="no">
+            <source>Share this view</source>
+            <target>Share this view</target>
+            <note>DNT, not found in code</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHARE_THIS_FILTER">
+            <source>Share this filter</source>
+            <target>Del dette filter</target>
+            <note>Domain: RACG resource; verb; checkbox label; the share this filter checkbox is located in customization of filters, you can share it with other users ( = make it public), otherwise it is private - your own.</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHARED_FILTER">
+            <source>Shared Filter</source>
+            <target>Delt filter</target>
+            <note>Domain: RACG resource; checkbox label; the shared filter checkbox filter is visible and can be used by multiple users, it is not private</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHOW_DETAILS_ON_HOVER">
+            <source>Show details on hover</source>
+            <target>Vis detaljer, når der peges</target>
+            <note>Domain: RACG resource; verb; checkbox label; the checkbox is located in Settings popup, checkbox preference, if you hover over data in the app, it will show you the details</note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHOW_NUMBERS_ON_BARS">
+            <source>Show numbers on bars</source>
+            <target>Vis tal på linjer</target>
+            <note>Domain: RACG resource; checkbox label; the checkbox is located in Settings popup, checkbox preference, the bars represent allocations (graphical bar), numbers are either hours or percentage, they represent "how big the allocation is" </note>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHOW_REJECTED_ALLOCATIONS">
+            <source>Show rejected allocations</source>
+            <target>Vis afviste allokeringer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.INCLUDE_PROJECT_TEMPLATE">
+            <source>Include project templates</source>
+            <target>Medtag projektskabeloner</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.ALLOW_NON_WORK_ALLOCATION">
+            <source>Allow allocations on non-working days</source>
+            <target>Tillad allokeringer på fridage</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHECKBOX.SHOW_PROJECT_TASKS">
+            <source>Show project tasks</source>
+            <target>Vis projektopgaver</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLORFIELD.OVERBOOKED">
+            <source>Overbooked</source>
+            <target>Overbooket</target>
+            <note>Domain: RACG resource; adverb; colorfield overbooked label; it is located in the settings popup, it shows allocations over 100 %, "overbooked" means over in RACG</note>
+         </trans-unit>
+         <trans-unit id="COLUMN.AVAILABILITY">
+            <source>Availability</source>
+            <target>Tilgængelighed</target>
+            <note>Domain: RACG resource; noun; column label; this column shows the availability of a person to be assigned to a project</note>
+         </trans-unit>
+         <trans-unit id="COLUMN.BILLING_CLASS">
+            <source>Billing Class</source>
+            <target>Regningsklasse</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.LABOR_COST">
+            <source>Labor Cost</source>
+            <target>Arbejdsomkostning</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.NAME">
+            <source>Name</source>
+            <target>Navn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.RESUME">
+            <source>Resume</source>
+            <target>CV</target>
+            <note>Domain: RACG resource; column label; this is a document, a part of skill set of a person, the person can add resume to their My skill set page, (resume - CV like, set of accomplishments)</note>
+         </trans-unit>
+         <trans-unit id="COLUMN.SELECT">
+            <source>Select</source>
+            <target>Vælg</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.SKILLSET_SCORE">
+            <source>Skill Set Score</source>
+            <target>Score for samling af faglig kunnen</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.TYPE">
+            <source>Type</source>
+            <target>Type</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.TYPE.EMPLOYEE">
+            <source>Employee</source>
+            <target>Medarbejder</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.TYPE.VENDOR">
+            <source>Vendor</source>
+            <target>Leverandør</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COLUMN.YRS_OF_EXP">
+            <source>Years of Experience</source>
+            <target>Års erfaring</target>
+            <note>Domain: RACG resource; noun; column label; this is the column title for a column that shows the years of resource's skills in numbers</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.ALLOCATE_USING">
+            <source>Allocation Method:</source>
+            <target>Allokeringsmetode:</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.ALLOCATION_TYPE">
+            <source>Allocation Type</source>
+            <target>Allokeringstype</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.ALLOCATION_LEVEL">
+            <source>Allocation Level</source>
+            <target>Allokeringsniveau</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.APPROVAL_STATUS">
+            <source>Approval Status</source>
+            <target>Godkendelsesstatus</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.BILLING_CLASS">
+            <source>Billing Class</source>
+            <target>Regningsklasse</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.CATEGORY">
+            <source>Category</source>
+            <target>Kategori</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.CLASS">
+            <source>Class</source>
+            <target>Klasse</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.CUSTOMER_PROJECT">
+            <source>Customer:Project</source>
+            <target>Kunde:projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.CUSTOMER">
+            <source>Customer</source>
+            <target>Kunde</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.PROJECT">
+            <source>Project</source>
+            <target>Projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.PROJECT_TASK">
+            <source>Project Task</source>
+            <target>Projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.DEPARTMENT">
+            <source>Department</source>
+            <target>Afdeling</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.LIMIT_DECIMAL_PLACES">
+            <source>Limit Decimal Places Display</source>
+            <target>Begræns visning af antal decimaler</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VIEW_PRESET">
+            <source>Default Date Range</source>
+            <target>Standard datoområde</target>
+            <note>Domain: RACG resource; combobox label; the default date range is located in the settings popup, it determines whether the data are displayed in days/weeks/months defaultly in the chart/grid</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VIEW_ALLOCATIONS_BY" translate="no">
+            <source>View Allocations By</source>
+            <target>View Allocations By</target>
+            <note>DNT, not found</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.LOCATION">
+            <source>Location</source>
+            <target>Lokation</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.NEXT_APPROVER">
+            <source>Next Approver</source>
+            <target>Næste godkender</target>
+            <note>Domain: RACG resource; combobox label; this is a string in popup with dropdown of possible next approvers, you can right click the grid, and Edit next approver, it is not higher or timely, it depends on workflow (who is the next one in the chain of approvers)</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.RESOURCE">
+            <source>Resource</source>
+            <target>Ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.RESOURCE_TYPE">
+            <source>Resource Type</source>
+            <target>Ressourcetype</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.RESOURCES">
+            <source>Resources</source>
+            <target>Ressourcer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.SUBSIDIARY">
+            <source>Subsidiary</source>
+            <target>Datterselskab</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.TYPE">
+            <source>Type</source>
+            <target>Type</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VIEW" translate="no">
+            <source>View</source>
+            <target>View</target>
+            <note>DNT, it seems that it used to be what is now filter</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.FILTER">
+            <source>Filter</source>
+            <target>Filter</target>
+            <note>Domain: RACG resource; noun; combobox label; this string is on the top of the suiteapp, resource default/customer default/project default filters, main navigation of the app</note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VENDOR" translate="no">
+            <source>Filter</source>
+            <target>Filter</target>
+            <note>DNT, did not find </note>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VENDOR_TYPE">
+            <source>Vendor Type</source>
+            <target>Leverandørtype</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="COMBOBOX.VENDOR_CATEGORY">
+            <source>Vendor Category</source>
+            <target>Leverandørkategori</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DATE.END_DATE">
+            <source>End Date</source>
+            <target>Slutdato</target>
+            <note>Domain: RACG resource; date label; this is the end date for allocation (start date, end date)</note>
+         </trans-unit>
+         <trans-unit id="DATE.FROM">
+            <source>From</source>
+            <target>Fra</target>
+            <note>Domain: RACG resource; date label; in search resource -> availability -> from; from means FROM date TO date </note>
+         </trans-unit>
+         <trans-unit id="DATE.START_DATE">
+            <source>Start Date</source>
+            <target>Startdato</target>
+            <note>Domain: RACG resource; combobox label; this is a start date of an allocation, it has a start date and an end date</note>
+         </trans-unit>
+         <trans-unit id="DATE.TO">
+            <source>To</source>
+            <target>Til</target>
+            <note>Domain: RACG resource; verb; date label; this TO means FROM date - TO date </note>
+         </trans-unit>
+         <trans-unit id="DATE.SERIES_START_DATE">
+            <source>Series Start Date</source>
+            <target>Startdato for serie</target>
+            <note>Domain: RACG resource; date label; if you set recurrence of an allocation, you have to set start date for this series</note>
+         </trans-unit>
+         <trans-unit id="DATE.END_BY">
+            <source>End By</source>
+            <target>Slut pr.</target>
+            <note>Domain: RACG resource; date label; this is an ending date for recurrent allocation </note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.ALL" translate="no">
+            <source>All</source>
+            <target>All</target>
+            <note>DNT, did not found</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.ALL_EMPLOYEES">
+            <source>All Employees</source>
+            <target>Alle medarbejdere</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.ALL_VENDORS">
+            <source>All Vendors</source>
+            <target>Alle leverandører</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.APPROVAL_STATUS">
+            <source>Approval Status</source>
+            <target>Godkendelsesstatus</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.BILLING_CLASS">
+            <source>Billing Class -</source>
+            <target>Regningsklasse -</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.CLASS" translate="no">
+            <source>Class -</source>
+            <target>Class -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.COMMENTS">
+            <source>Comments</source>
+            <target>Kommentarer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.CUSTOMER">
+            <source>Customer</source>
+            <target>Kunde</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.CUSTOMER_PROJECT">
+            <source>Customer:Project</source>
+            <target>Kunde:projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.PROJECT">
+            <source>Project</source>
+            <target>Projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.PROJECT_TASK">
+            <source>Project Task</source>
+            <target>Projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.RESOURCE_TYPE">
+            <source>Resource Type</source>
+            <target>Ressourcetype</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.REQUESTED_BY">
+            <source>Requested By</source>
+            <target>Anmodet af</target>
+            <note>Domain: RACG resource; adverb; display label; this is a header in exported data, followed by name of a person requesting the allocation</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.SUPERVISOR">
+            <source>Supervisor</source>
+            <target>Supervisor</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.TOTAL">
+            <source>Total</source>
+            <target>Total</target>
+            <note>Domain: RACG resource; noun; display label; Total represents the number of rows in a table, for example 21 (grid/chart)</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.DEPARTMENT" translate="no">
+            <source>Department -</source>
+            <target>Department -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.ALL_RESOURCES_BCLASS_SUBSIDIARY">
+            <source>Resources - All; Billing Class - All; Subsidiary - All;</source>
+            <target>Ressourcer – Alle; Regningsklasse – Alle; Datterselskab – Alle;</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DISPLAY.LOCATION" translate="no">
+            <source>Location -</source>
+            <target>Location -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.OWNER">
+            <source>Owner</source>
+            <target>Ejer</target>
+            <note>Domain: RACG resource; noun; display label+ in this caase the owner probably means an owner of a custom filter in the app</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.PAGING" translate="no">
+            <source>of</source>
+            <target>of</target>
+            <note>DNT, did not find</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.RESOURCES" translate="no">
+            <source>Resources -</source>
+            <target>Resources -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.START_DATE" translate="no">
+            <source>Start Date -</source>
+            <target>Start Date -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.SUBSIDIARY" translate="no">
+            <source>Subsidiary -</source>
+            <target>Subsidiary -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.VENDOR_CATEGORY" translate="no">
+            <source>Vendor Category -</source>
+            <target>Vendor Category -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.VENDOR_TYPE" translate="no">
+            <source>Vendor Type -</source>
+            <target>Vendor Type -</target>
+            <note>DNT, didnt find in code</note>
+         </trans-unit>
+         <trans-unit id="DISPLAY.NONE">
+            <source>- None -</source>
+            <target>- Ingen -</target>
+            <note>Domain: RACG resource; adverb; display label; "none" occurrences are all over the place, Task/supervisor/customer, they do not represent only one string at one place </note>
+         </trans-unit>
+         <trans-unit id="FIELDSET.ALLOCATION">
+            <source>Allocation</source>
+            <target>Allokering</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FIELDSET.APPEARANCE">
+            <source>Appearance</source>
+            <target>Udseende</target>
+            <note>Domain: RACG resource; noun; fieldset label; Appearance appears in the settings popup, it shows the appearance of the RACG settings</note>
+         </trans-unit>
+         <trans-unit id="FIELDSET.AVAILABILITY">
+            <source>Availability</source>
+            <target>Tilgængelighed</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FIELDSET.CHART_DENSITY">
+            <source>Chart Density</source>
+            <target>Diagramtæthed</target>
+            <note>Domain: RACG resource; noun; fieldset label; Chart Density appears in popup settings, dense/standard/relaxed, it effects visuals of RACG</note>
+         </trans-unit>
+         <trans-unit id="FIELDSET.OTHERS">
+            <source>Others</source>
+            <target>Andre</target>
+            <note>Domain: RACG resource; noun; fieldset label; Others is a label of category in the resource search, it includes for example Labor Cost, Years of Experience, .. </note>
+         </trans-unit>
+         <trans-unit id="FIELDSET.RESOURCE_TYPE">
+            <source>Resource Type</source>
+            <target>Ressourcetype</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FIELDSET.AVAILABLE_FILTERS">
+            <source>Available Filters</source>
+            <target>Tilgængelige filtre</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FILTER.PROJECT_DEFAULT">
+            <source>Project Default</source>
+            <target>Projektstandard</target>
+            <note>RACG resource; noun; name of a default filter in dropdown, one of RACG default filters - views on data</note>
+         </trans-unit>
+         <trans-unit id="FILTER.CUSTOMER_DEFAULT">
+            <source>Customer Default</source>
+            <target>Kundestandard</target>
+            <note>RACG resource; noun;name of a default filter in dropdown,  one of RACG default filters - views on data</note>
+         </trans-unit>
+         <trans-unit id="FILTER.RESOURCE_DEFAULT">
+            <source>Resource Default</source>
+            <target>Ressourcestandard</target>
+            <note>RACG resource; noun; name of a default filter in dropdown,  one of RACG default filters - views on data</note>
+         </trans-unit>
+         <trans-unit id="GRIDPANEL.SEARCH_RESULTS_EMPTY_TEXT">
+            <source>No resources found!</source>
+            <target>Ingen ressourcer fundet!</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="GRIDPANEL.SEARCH_RESULTS_TITLE">
+            <source>Select minimum level.</source>
+            <target>Vælg minimumsniveau.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="ITEMSELECTOR.AVAILABLE_SKILLS">
+            <source>Available Skills</source>
+            <target>Tilgængelig faglig kunnen</target>
+            <note>Domain: RACG resource; noun; item selector label;this is a popup search for resources with specific skills, it displays available skills which you can then move them to Required skills</note>
+         </trans-unit>
+         <trans-unit id="ITEMSELECTOR.REQUIRED_SKILLS">
+            <source>Required Skills</source>
+            <target>Påkrævet faglig kunnen</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="LEGEND.HARD">
+            <source>Hard</source>
+            <target>Ikke-fleksibel</target>
+            <note>Domain: RACG resource; adverb; legend label; "Hard" displays legend to graphical elements, "Hard" stands for Hard Allocation which is not flexible; the resource is committed to the dates and hours required on this request. The whole string is Hard allocation.</note>
+         </trans-unit>
+         <trans-unit id="LEGEND.NON_WORKING">
+            <source>Non-Working</source>
+            <target>Ikke-arbejdsdag</target>
+            <note>Domain: RACG resource; adverb; legend label; it means non-working days</note>
+         </trans-unit>
+         <trans-unit id="LEGEND.OVER">
+            <source>>100%</source>
+            <target>>100%</target>
+            <note>Domain: RACG resource; number; legend label; it shows a legend to graphical elements, it means that there is allocated more than 100%</note>
+         </trans-unit>
+         <trans-unit id="LEGEND.SOFT">
+            <source>Soft</source>
+            <target>Fleksibel</target>
+            <note>Domain: RACG resource; adverb; legend label; "Soft" shows a legend to graphical elements, "Soft" stands for Soft Allocation which is flexible; adjustments can be made to the date and hours if needed to accommodate other priorities. The whole string is Soft allocation.</note>
+         </trans-unit>
+         <trans-unit id="MASK.LOADING.RESOURCES" translate="no">
+            <source>Loading Resources...</source>
+            <target>Loading Resources...</target>
+            <note>DNT, not found</note>
+         </trans-unit>
+         <trans-unit id="MASK.LOADING.ALLOCATIONS" translate="no">
+            <source>Loading Allocations...</source>
+            <target>Loading Allocations...</target>
+            <note>DNT, not found</note>
+         </trans-unit>
+         <trans-unit id="MASK.WORKING">
+            <source>Working...</source>
+            <target>Arbejder...</target>
+            <note>Domain: RACG resource; mask label; Working... means something like loading, it appears when the app is loading </note>
+         </trans-unit>
+         <trans-unit id="MENU.ADD_PROJECT">
+            <source>Add Project</source>
+            <target>Tilføj projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_RESOURCE">
+            <source>Edit Resource</source>
+            <target>Rediger ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.ADD_RESOURCE">
+            <source>Add Resource</source>
+            <target>Tilføj ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REMOVE_ALLOCATIONS">
+            <source>Remove Allocations</source>
+            <target>Fjern allokeringer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REASSIGN_ALLOCATION">
+            <source>Re-assign Allocation</source>
+            <target>Omtildel allokering</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.ADD_TASK">
+            <source>Add Project Task</source>
+            <target>Tilføj projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_TASK">
+            <source>Edit Project Task</source>
+            <target>Rediger projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_PROJECT">
+            <source>Edit Project</source>
+            <target>Rediger projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.CUT">
+            <source>Cut</source>
+            <target>Klip</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.COPY">
+            <source>Copy</source>
+            <target>Kopier</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.PASTE">
+            <source>Paste</source>
+            <target>Indsæt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_ALLOCATION_TYPE">
+            <source>Edit Allocation Type to</source>
+            <target>Rediger allokeringstype til</target>
+            <note>Complete string will be either "Edit Allocation Type to soft" or "Edit Allocation Type to hard"</note>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_END_DATE">
+            <source>Edit End Date</source>
+            <target>Rediger slutdato</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_NEXT_APPROVER">
+            <source>Edit Next Approver</source>
+            <target>Rediger næste godkender</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REALLOCATE_PROJECT">
+            <source>Re-allocate Project</source>
+            <target>Omalloker projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REALLOCATE_TASK">
+            <source>Re-allocate Project Task</source>
+            <target>Omalloker projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.EDIT_COMMENT">
+            <source>Edit Comment</source>
+            <target>Rediger kommentar</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REMOVE_PROJECT">
+            <source>Remove Project</source>
+            <target>Fjern projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.REMOVE_TASK">
+            <source>Remove Project Task</source>
+            <target>Fjern projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MENU.SORT_ASC">
+            <source>Sort Ascending</source>
+            <target>Sorter stigende</target>
+            <note>RACG resource; menu label; this label is located in the menu, it sorts the resources by name</note>
+         </trans-unit>
+         <trans-unit id="MENU.SORT_DESC">
+            <source>Sort Descending</source>
+            <target>Sorter faldende</target>
+            <note>RACG resource; menu label; this label is located in the menu, it sorts the resources by name</note>
+         </trans-unit>
+         <trans-unit id="MENU.COLUMNS">
+            <source>Columns</source>
+            <target>Kolonner</target>
+            <note>RACG resource; menu label; this label is located in the menu, it defines which columns should be displayed</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.DISABLED.IS_TASK_ALLOCATION">
+            <source>This is already a Project Task.</source>
+            <target>Dette er allerede en projektopgave.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.DISABLED.NO_PROJECT_TASK">
+            <source>No Project Tasks available.</source>
+            <target>Ingen projektopgaver tilgængelige.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.ALL">
+            <source>All</source>
+            <target>Alle</target>
+            <note>Domain: RACG resource; message label; "All" is a default combobox (non-multiselect), an empty option (e.g. resource type)</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.BLANK">
+            <source/>
+            <target></target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.CUSTOMER_PROJECT">
+            <source>Select a project...</source>
+            <target>Vælg et projekt...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.PROJECT_TASK">
+            <source>Select a project task...</source>
+            <target>Vælg en projektopgave...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.NEXT_APPROVER">
+            <source>Select an approver...</source>
+            <target>Vælg en godkender...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.RESOURCE">
+            <source>Select a resource...</source>
+            <target>Vælg en ressource...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.BILLINGCLASS">
+            <source>Select a billing class...</source>
+            <target>Vælg en regningsklasse...</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.SEARCH_RESOURCE">
+            <source>Search Resource</source>
+            <target>Søg efter ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.VIEW">
+            <source>- Default -</source>
+            <target>- Standard -</target>
+            <note>Domain: RACG resource; message label; "Default" means an empty option for any filter selection</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.NO_MATCHING_RECORDS">
+            <source>No matching records</source>
+            <target>Ingen matchende records</target>
+            <note>Domain: RACG resource; message label; matching is for a large data selection when it receives no data </note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.EMPTYTEXT.DATE">
+            <source>Set a start date.</source>
+            <target>Sæt en startdato.</target>
+            <note>RACG resource; action; a warning message, a warning pop-up message telling the user that setting a date is mandatory</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DATE">
+            <source>Set a start date to a valid date in the preferred format</source>
+            <target>Sæt en startdato til en gyldig dato i det foretrukne format</target>
+            <note>RACG resource; warning; a warning message, it shows a warning that you must set a start date to a valid date in the preferred format</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.ALREADY_ON_FIRST_PAGE">
+            <source>You are already on the first page</source>
+            <target>Du er allerede på den første side</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.ALREADY_ON_LAST_PAGE">
+            <source>You are already on the last page.</source>
+            <target>Du er allerede på den sidste side.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_NAME">
+            <source>Name is already used. Try another name</source>
+            <target>Navn anvendes allerede. Prøv et andet navn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_FILTER_FIELD">
+            <source>A field is selected more than once. Please add a different field.</source>
+            <target>Et felt er valgt mere end én gang. Tilføj et andet felt.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.NO_SELECTED_FILTER_FIELDS">
+            <source>There are no selected fields. Please add at least one field.</source>
+            <target>Der er ingen valgte felter. Tilføj mindst ét felt.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.BLANK_FILTER_FIELD">
+            <source>There is a blank filter field. Please select a field name.</source>
+            <target>Det er et tomt filterfelt. Vælg et feltnavn.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_PROJECT_TASK">
+            <source>Duplicate Project Task exists.</source>
+            <target>Dubletprojektopgave findes.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_PROJECT">
+            <source>Duplicate Project exists.</source>
+            <target>Dubletprojekt findes.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DUPLICATE_RESOURCE">
+            <source>Duplicate Resource exists.</source>
+            <target>Dubletressource findes.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.FEATURE_DISABLED">
+            <source>The following feature(s) required to access this page are not enabled in this account:</source>
+            <target>Følgende funktion(er), der kræves for at få adgang til denne side, er ikke aktiveret i denne konto:</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.MIN_CHAR_SEARCH">
+            <source>Please enter 3 or more characters to perform a search.</source>
+            <target>Indtast 3 eller flere tegn for at udføre en søgning.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.NO_CHANGES">
+            <source>No changes to save.</source>
+            <target>Der er ingen ændringer, der skal gemmes.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.OPERATION_TIMED_OUT">
+            <source>Operation timed out. Please refine your filter and try again.</source>
+            <target>Operation fik timeout. Afgræns filteret, og prøv igen.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.RA_CHOSEN_DATE_OVERLAP">
+            <source>Chosen date overlaps with an existing allocation.</source>
+            <target>Valgt dato overlapper en eksisterende allokering.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.RA_INVALID_DATES">
+            <source>End Date must be greater than or equal to the Start Date</source>
+            <target>Slutdato skal ligge efter eller samtidig med startdato</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.RA_NON_WORKING_DAY">
+            <source>Unable to allocate resource on non-working day/s.</source>
+            <target>Kan ikke allokere ressource på ikke-arbejdsdag(e).</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.REALLOCATE_RA_OVERLAP">
+            <source>Unable to re-allocate. There is an overlap with the target resource's existing allocations.</source>
+            <target>Kan ikke omallokere. Der er en overlapning med målressourcens eksisterende allokeringer.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.REASSIGN_RA_ALREADY_ASSIGNED">
+            <source>These allocations are already assigned to the selected resource/project.</source>
+            <target>Disse allokeringer er allerede tildelt til den valgte ressource/det valgte projekt.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.REASSIGN_RA_OVERLAP">
+            <source>Unable to reassign. There is an overlap with the target resource's existing allocations.</source>
+            <target>Kan ikke omtildele. Der er en overlapning med målressourcens eksisterende allokeringer.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.REASSIGN_RA_TARGET_CONFLICT">
+            <source>Unable to reassign. There is a conflict with the target resource's working schedule.</source>
+            <target>Kan ikke omtildele. Der er en konflikt med målressourcens arbejdstidsplan.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.EDIT_PROJECT_HAS_OVERLAP">
+            <source>Unable to update Project Task. There is an overlap with the target Project Task's existing allocations.</source>
+            <target>Kan ikke opdatere projektopgave. Der er en overlapning med målprojektopgavens eksisterende allokeringer.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.SAVE_FAILED">
+            <source>Save Failed</source>
+            <target>Der kunne ikke gemmes</target>
+            <note>Domain: RACG resource; message label; this is an alert for a situation where saving action fails</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.SEARCH_ERROR">
+            <source>Error in displaying Search Results.</source>
+            <target>Fejl i fremvisning af søgeresultater.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.SEARCH_TIMED_OUT">
+            <source>Search timed out. Please refine your search criteria and try again.</source>
+            <target>Søgning fik timeout. Afgræns søgekriterierne, og prøv igen.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.SETTINGS_UNSAVED_CHANGES">
+            <source>Please save changes before updating the settings.</source>
+            <target>Gem ændringer, før indstillingerne opdateres.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.UNSAVED_PENDING_CHANGES">
+            <source>There are pending changes you need to save first.</source>
+            <target>Der er ventende ændringer, som du skal gemme først.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.DEFAULT_NOT_ALLOWED">
+            <source>Default filter name is not allowed.</source>
+            <target>Standard filternavn er ikke tilladt.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.BACKEND_ERROR">
+            <source>An error occurred while gathering resource allocation data, please check script logs for more information.</source>
+            <target>Der opstod en fejl under indsamling af ressourceallokeringsdata. Tjek scriptloggene for at få flere oplysninger.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.ERROR.UNABLE_TO_SAVE_FILTERS">
+            <source>Error: Unable to save selected filter values.</source>
+            <target>Fejl: Kan ikke gemme valgte filterværdier.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.NOTIF.MOD_COUNTER">
+            <source>Number of updates:</source>
+            <target>Antal opdateringer:</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.NOTIF.SAVE_CHANGES">
+            <source>Please save your changes.</source>
+            <target>Gem ændringerne.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.NOTIF.SAVE_SUCCESS">
+            <source>Successfully saved changes.</source>
+            <target>Ændringer er gemt.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.DELETE_THIS_ALLOCATION">
+            <source>Delete this allocation?</source>
+            <target>Slet denne allokering?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.DELETE_ALLOCATIONS">
+            <source>Are you sure you want to delete these allocations?</source>
+            <target>Er du sikker på, at du vil slette disse allokeringer?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.DELETE_THIS_FILTER">
+            <source>Delete this filter?</source>
+            <target>Slet dette filter?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.PERFORMING_SEARCH">
+            <source>Performing search, please wait...</source>
+            <target>Udfører søgning, vent venligst...</target>
+            <note>Domain: RACG resource; message label; search resource -> submit -> message while searching</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.SEARCHING">
+            <source>Searching...</source>
+            <target>Søger...</target>
+            <note>Domain: RACG resource; message label; Searching is a progress bar while searching for resources via their skill sets</note>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_START_LT_PROJECT_TASK">
+            <source>Start date of resource allocation is earlier than the duration of project task.
+						Task Start Date : $1
+						Task End Date : $2</source>
+            <target>Startdato for ressourceallokering ligger før projektopgavens varighed.
+						Opgavens startdato: $1
+						Opgavens slutdato: $2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_START_GT_PROJECT_TASK">
+            <source>Start date of resource allocation is beyond the duration of project task.
+						Task Start Date : $1
+						Task End Date : $2</source>
+            <target>Startdato for ressourceallokering ligger efter projektopgavens varighed.
+						Opgavens startdato: $1
+						Opgavens slutdato: $2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_END_LT_PROJECT_TASK">
+            <source>End date of resource allocation is earlier than the duration of project task.
+						Task Start Date : $1
+						Task End Date : $2</source>
+            <target>Slutdato for ressourceallokering ligger før projektopgavens varighed.
+						Opgavens startdato: $1
+						Opgavens slutdato: $2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_END_GT_PROJECT_TASK">
+            <source>End date of resource allocation is beyond the duration of project task.
+						Task Start Date : $1
+						Task End Date : $2</source>
+            <target>Slutdato for ressourceallokering ligger efter projektopgavens varighed.
+						Opgavens startdato: $1
+						Opgavens slutdato: $2</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.ALLOCATE_TO_PROJECT_WITHOUT_CUSTOMER">
+            <source>You are allocating to a project not assigned to a customer. Changes will be saved, but the updates will not be available in your current view (View by Customer). Do you want to proceed?</source>
+            <target>Du allokerer til et projekt, der ikke er tildelt til en kunde. Ændringer vil blive gemt, men opdateringerne vil ikke være tilgængelige i din aktuelle visning (Se efter kunde). Vil du fortsætte?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.RA_TIMEOFF_CONFLICT">
+            <source>Time-off conflict found for allocation date(s):</source>
+            <target>Konflikt i fravær fundet til allokeringsdato(er):</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MESSAGE.WARNING.LARGE_CHILDREN">
+            <source>There was a large volume of {0} record found under an entry. Allocation info will be truncated. Please use filters to reduce the number of {0}.</source>
+            <target>Et stor antal {0}-records blev fundet under en indtastning. Allokeringsinfo vil blive afkortet. Anvend filtre for at reducere antallet af {0}.</target>
+            <note>Domain: RACG resource; message warning label; this occurs while loading resource node with too many children (120 is a maximum). {0} can be customer/project/resource</note>
+         </trans-unit>
+         <trans-unit id="TODAY">
+            <source>Today</source>
+            <target>I dag</target>
+            <note>RACG resource; button label; this button is located in the calendar, it redirects the calendar to today</note>
+         </trans-unit>
+         <trans-unit id="TODAY_TIP">
+            <source>{0} (Spacebar)</source>
+            <target>{0} (mellemrumstast)</target>
+            <note>RACG resource; tooltip label; this label is a tooltip on how to use the Today button</note>
+         </trans-unit>
+         <trans-unit id="NEXT_MONTH">
+            <source>Next Month (Control+Right)</source>
+            <target>Næste måned (Control+højre)</target>
+            <note>RACG resource; tooltip label; this label is a tooltip for an arrow redirecting to the next month, it is a part of the calendar</note>
+         </trans-unit>
+         <trans-unit id="PREV_MONTH">
+            <source>Previous Month (Control+Left)</source>
+            <target>Forrige måned (Control+venstre)</target>
+            <note>RACG resource; tooltip label; this label is a tooltip for an arrow redirecting to the previous month, it is a part of the calendar</note>
+         </trans-unit>
+         <trans-unit id="MONTH.JANUARY">
+            <source>January</source>
+            <target>Januar</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.FEBRUARY">
+            <source>February</source>
+            <target>Februar</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.MARCH">
+            <source>March</source>
+            <target>Marts</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.APRIL">
+            <source>April</source>
+            <target>April</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.MAY">
+            <source>May</source>
+            <target>Maj</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.JUNE">
+            <source>June</source>
+            <target>Juni</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.JULY">
+            <source>July</source>
+            <target>Juli</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.AUGUST">
+            <source>August</source>
+            <target>August</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.SEPTEMBER">
+            <source>September</source>
+            <target>September</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.OCTOBER">
+            <source>October</source>
+            <target>Oktober</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.NOVEMBER">
+            <source>November</source>
+            <target>November</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONTH.DECEMBER">
+            <source>December</source>
+            <target>December</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="NUMBER.ALLOCATE">
+            <source>Allocate</source>
+            <target>Alloker</target>
+            <note>RACG resource; number label; this label is for textfield and it alocates xx of hours/percent; it appears in new allocation/edit allocation popup</note>
+         </trans-unit>
+         <trans-unit id="NUMBER.MAX_LABOR_COST">
+            <source>Max. Labor Cost</source>
+            <target>Maks. arbejdsomkostning</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="NUMBER.MIN_YEARS_OF_EXP">
+            <source>Min. Yrs of Exp.</source>
+            <target>Min. års erfaring</target>
+            <note>Minimal Years of Experience; related to Skill Set SuiteApp" </note>
+         </trans-unit>
+         <trans-unit id="NUMBER.PERCENT_AVAILABLE">
+            <source>% Available</source>
+            <target>% tilgængelig</target>
+            <note>RACG resource; number label; available means that it is in a search for a resource which is % available, for example 20 % available</note>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.ALLOCATE">
+            <source>Allocate</source>
+            <target>Alloker</target>
+            <note>RACG resource; column label; the allocate column label shows the hours/percentage of allocation for the resource</note>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.APPROVAL_STATUS">
+            <source>Approval Status</source>
+            <target>Godkendelsesstatus</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.COMMENT">
+            <source>Comment</source>
+            <target>Kommentar</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.END_DATE">
+            <source>End Date</source>
+            <target>Slutdato</target>
+            <note>RACG resource; column label;the end date column label showing end date for allocation </note>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.NEXT_APPROVER">
+            <source>Next Approver</source>
+            <target>Næste godkender</target>
+            <note>RACG resource; column label;the next approver is a person supposed to approve the allocation, they can have a workflow for approvals, meaning sequence of people approving</note>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.START_DATE">
+            <source>Start Date</source>
+            <target>Startdato</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.TYPE">
+            <source>Type</source>
+            <target>Type</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.UNIT">
+            <source>Unit</source>
+            <target>Enhed</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.RECORD">
+            <source>Record</source>
+            <target>Record</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="PANEL.COLUMN.FIELD_NAME">
+            <source>Field Name</source>
+            <target>Feltnavn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RADIO.ALL_RESOURCES">
+            <source>All Resources</source>
+            <target>Alle ressourcer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RADIO.DENSE">
+            <source>Dense</source>
+            <target>Tæt</target>
+            <note>RACG resource; adjective; radio label; “Dense” shows the chart density of a visual representation, which is either standard/relaxed/dense, it is located in the UI of the app</note>
+         </trans-unit>
+         <trans-unit id="RADIO.EMPLOYEES_ONLY">
+            <source>Employees Only</source>
+            <target>Kun medarbejdere</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RADIO.RELAXED">
+            <source>Relaxed</source>
+            <target>Spredt</target>
+            <note>RACG resource; adjective; radio label; “Relaxed” shows the chart density of a visual representation, which is either standard/relaxed/dense, it is located in the UI of the app</note>
+         </trans-unit>
+         <trans-unit id="RADIO.STANDARD">
+            <source>Standard</source>
+            <target>Standard</target>
+            <note>RACG resource; adjective; radio label; “Standard” shows the chart density of a visual representation, which is either standard/relaxed/dense, it is located in the UI of the app</note>
+         </trans-unit>
+         <trans-unit id="RADIO.VENDORS_ONLY">
+            <source>Vendors Only</source>
+            <target>Kun leverandører</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.-ALL-">
+            <source>-All-</source>
+            <target>-Alle-</target>
+            <note>RACG resource; store label; All means whichever dataset. for example a list of employees contains -All- with no id, the same is with other lists</note>
+         </trans-unit>
+         <trans-unit id="STORE.ALL">
+            <source>All</source>
+            <target>Alle</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.EMPLOYEE">
+            <source>Employee</source>
+            <target>Medarbejder</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.VENDOR">
+            <source>Vendor</source>
+            <target>Leverandør</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.GENERIC_RESOURCE">
+            <source>Generic Resource</source>
+            <target>Generisk ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.APPROVED">
+            <source>Approved</source>
+            <target>Godkendt</target>
+            <note>RACG resource; store label; Approved is used in many places, for example in tooltips, or forms for single allocation</note>
+         </trans-unit>
+         <trans-unit id="STORE.CLIENT_SUITESCRIPTS">
+            <source>Client SuiteScripts</source>
+            <target>Klient-SuiteScripts</target>
+            <note>RACG resource; store label; This refers to the clientScript NS feature, so translation should be consistent with it</note>
+         </trans-unit>
+         <trans-unit id="STORE.COMPANY">
+            <source>Company</source>
+            <target>Firma</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.CUSTOM_RECORDS">
+            <source>Custom Records</source>
+            <target>Tilpassede records</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.DEFAULT">
+            <source>- Default -</source>
+            <target>- Standard -</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.GETTING">
+            <source>Getting...</source>
+            <target>Henter...</target>
+            <note>RACG resource; verb; app is retrieving data</note>
+         </trans-unit>
+         <trans-unit id="STORE.HARD">
+            <source>Hard</source>
+            <target>Ikke-fleksibel</target>
+            <note>RACG resource; adjective; store label; "Hard" shows a legend to graphical elements, "Hard" stands for Hard Allocation which not flexible; the resource is committed to the dates and hours required on this request</note>
+         </trans-unit>
+         <trans-unit id="STORE.HOURS">
+            <source>Hours</source>
+            <target>Timer</target>
+            <note>A number precedes the noun (x Hours).</note>
+         </trans-unit>
+         <trans-unit id="STORE.INDIVIDUAL">
+            <source>Individual</source>
+            <target>Individuel</target>
+            <note>RACG resource; store label;The Vendor Type filter has 2 options, Individual(this one) and Company</note>
+         </trans-unit>
+         <trans-unit id="STORE.NUMBER_OF_UPDATES">
+            <source>Number of updates:</source>
+            <target>Antal opdateringer:</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.PAGING" translate="no">
+            <source>of</source>
+            <target>of</target>
+            <note>DNT</note>
+         </trans-unit>
+         <trans-unit id="STORE.PENDING_APPROVAL">
+            <source>Pending Approval</source>
+            <target>Afventer godkendelse</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.PERCENTAGE">
+            <source>Percentage</source>
+            <target>Procent</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.REJECTED">
+            <source>Rejected</source>
+            <target>Afvist</target>
+            <note>RACG resource; store label; Rejected is used in many places, for example in tooltips, or forms for single allocation</note>
+         </trans-unit>
+         <trans-unit id="STORE.RESOURCE_ALLOCATIONS">
+            <source>Resource Allocations</source>
+            <target>Ressourceallokeringer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.SAVE_YOUR_CHANGES">
+            <source>. Please save your changes.</source>
+            <target>. Gem ændringerne.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="STORE.SERVER_SUITESCRIPTS">
+            <source>Server SuiteScripts</source>
+            <target>Server-SuiteScripts</target>
+            <note>RACG resource; store label; This refers to serverScript NS feature, so translation should be consistent with it</note>
+         </trans-unit>
+         <trans-unit id="STORE.SINGLE">
+            <source>Single</source>
+            <target>Enkel</target>
+            <note>RACG resource; adjective; store label; This is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="STORE.DAILY">
+            <source>Daily</source>
+            <target>Daglig</target>
+            <note>RACG resource; adjective; store label; it is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="STORE.WEEKLY">
+            <source>Weekly</source>
+            <target>Ugentlig</target>
+            <note>RACG resource; adjective; store label; it is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="STORE.MONTHLY">
+            <source>Monthly</source>
+            <target>Månedlig</target>
+            <note>RACG resource; adjective; store label; it is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="STORE.YEARLY">
+            <source>Yearly</source>
+            <target>Årlig</target>
+            <note>RACG resource; adjective; store label; it is a recurrence of the allocation, it is a dropdown</note>
+         </trans-unit>
+         <trans-unit id="TEXT.NAME">
+            <source>Name</source>
+            <target>Navn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXT.REPEAT_EVERY">
+            <source>Repeat every</source>
+            <target>Gentag hver</target>
+            <note>RACG resource; text label; it is a recurrence of the allocation, "repeat every" + number field + "Day(s)"/"Week(s)"</note>
+         </trans-unit>
+         <trans-unit id="TEXT.DAY(S)">
+            <source>day(s)</source>
+            <target>dag(e)</target>
+            <note>RACG resource; text label; it is a recurrence of from the new/edit RA form, "repeat every" + number field + "Day(s)"/"Week(s)"</note>
+         </trans-unit>
+         <trans-unit id="TEXT.WEEK(S)">
+            <source>week(s)</source>
+            <target>uge(r)</target>
+            <note>RACG resource; text label; it is a recurrence of from the new/edit RA form, "repeat every" + number field + "Day(s)"/"Week(s)"</note>
+         </trans-unit>
+         <trans-unit id="TEXT.REPEAT_EVERY_WEEKDAY">
+            <source>Repeat every weekday</source>
+            <target>Gentag hver ugedag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXT.FILTER_NAME">
+            <source>Filter Name</source>
+            <target>Filternavn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXT.FILTERS">
+            <source>Filters</source>
+            <target>Filtre</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXT.SEARCH">
+            <source>Search</source>
+            <target>Søg</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TEXTAREA.COMMENTS">
+            <source>Comments</source>
+            <target>Kommentarer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ADD_TO_SELECTED">
+            <source>Add to Selected</source>
+            <target>Tilføj til valgte</target>
+            <note>RACG resource; tooltip label; it is a text version of a graphical arrow, moving values for skill sets from available to required boxes</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CATEGORY">
+            <source>Category</source>
+            <target>Kategori</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.EMPLOYEE_DETAILS">
+            <source>Employee Details</source>
+            <target>Medarbejderdetaljer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.EMPLOYEE_NAME">
+            <source>Employee Name</source>
+            <target>Medarbejdernavn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.EMPLOYEE_TYPE">
+            <source>Employee Type</source>
+            <target>Medarbejdertype</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.GENERIC_DETAILS">
+            <source>Generic Resource Details</source>
+            <target>Detaljer om generisk ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.GENERIC_NAME">
+            <source>Generic Resource Name</source>
+            <target>Navn på generisk ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.GENERIC_LINK">
+            <source>Generic Resource Link</source>
+            <target>Generisk ressourcelink</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PRICE">
+            <source>Price</source>
+            <target>Pris</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.BILLING_RATE">
+            <source>Employee Type</source>
+            <target>Medarbejdertype</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.SKILLS">
+            <source>Skills and Expertise</source>
+            <target>Faglig kunnen og ekspertise</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CUSTOMER_DETAILS">
+            <source>Customer Details</source>
+            <target>Kundedetaljer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CUSTOMER_ID">
+            <source>Customer ID</source>
+            <target>Kunde-id</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.COMPANY_NAME">
+            <source>Company Name</source>
+            <target>Firmanavn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PRIMARY_SUBSIDIARY">
+            <source>Primary Subsidiary</source>
+            <target>Primært datterselskab</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PRIMARY_CONTACT">
+            <source>Primary Contact</source>
+            <target>Primær kontakt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CITY">
+            <source>City</source>
+            <target>By</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.STATE_PROVINCE">
+            <source>State/Province</source>
+            <target>Stat/provins</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.COUNTRY">
+            <source>Country</source>
+            <target>Land</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VENDOR_DETAILS">
+            <source>Vendor Details</source>
+            <target>Leverandørdetaljer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VENDOR_NAME">
+            <source>Vendor Name</source>
+            <target>Leverandørnavn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VENDOR_1099">
+            <source>1099 Eligible</source>
+            <target>1099-berettiget</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VIEW_RECORD">
+            <source>View Record</source>
+            <target>Se record</target>
+            <note>RACG resource; tooltip label; it is a recurrence of from the new/edit RA form, customer default filter: tooltip view record a VIEW, this is not a button, it is a label in a tooltip and next to it is a link to the record</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LINK">
+            <source>Link</source>
+            <target>Link</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LOADING">
+            <source>Loading...</source>
+            <target>Indlæser...</target>
+            <note>RACG resource; tooltip label; this is a text</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.DEPARTMENT">
+            <source>Department</source>
+            <target>Afdeling</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.DOWNLOAD">
+            <source>Download</source>
+            <target>Download</target>
+            <note>RACG resource; verb; tooltip label; it is a tooltip of an icon which downloads resume file (CV like, set of accomplishments)</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.EMAIL">
+            <source>Email</source>
+            <target>E-mail</target>
+            <note>RACG resource; noun; tooltip label; it is a tooltip for e-mail</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ICON_INFO">
+            <source>Click bar to edit. Resize to change date range. Drag to move to another resource.</source>
+            <target>Klik på linje for at redigere. Tilpas for at ændre datoområde. Træk for at flytte til en anden ressource.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ICON_INFO_GRID">
+            <source>Click cell to edit. Ctrl+click to drill down cells with multiple allocations. Roll up values with red text means overbooked.</source>
+            <target>Klik på celle for at redigere. Brug Ctrl+klik for at bore ned i celler med flere allokeringer. Akkumulerede værdier med rød tekst betyder overbooking.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ITEMS">
+            <source>Item(s)</source>
+            <target>Element(er)</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LARGE_DATA.CHOOSE_APPROVER">
+            <source>Choose Next Approver</source>
+            <target>Vælg næste godkender</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LARGE_DATA.CHOOSE_PROJECT">
+            <source>Choose Customer:Project</source>
+            <target>Vælg kunde:projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LARGE_DATA.CHOOSE_PROJECTTASK">
+            <source>Choose Project Task</source>
+            <target>Vælg projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LARGE_DATA.CHOOSE_RESOURCE">
+            <source>Choose Resource</source>
+            <target>Vælg ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.JOB_TITLE">
+            <source>Job Title</source>
+            <target>Jobtitel</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.ALLOCATE">
+            <source>Allocate</source>
+            <target>Alloker</target>
+            <note>RACG resource; verb; tooltip label; this tooltip is for allocation, located in the chart.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.ALLOCATION_TYPE">
+            <source>Allocation Type</source>
+            <target>Allokeringstype</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.APPROVAL_STATUS">
+            <source>Approval Status</source>
+            <target>Godkendelsesstatus</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.COMMENT">
+            <source>Comment</source>
+            <target>Kommentar</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip for the comment</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.CUSTOMER_PROJECT">
+            <source>Customer:Project</source>
+            <target>Kunde:projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.PROJECT">
+            <source>Project</source>
+            <target>Projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.PROJECT_TASK">
+            <source>Project Task</source>
+            <target>Projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.END_DATE">
+            <source>End Date</source>
+            <target>Slutdato</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip for an end date of an allocation</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.NEXT_APPROVER">
+            <source>Next Approver</source>
+            <target>Næste godkender</target>
+            <note>RACG resourse; noun; tooltip label; this is a tooltip for an approval of the workflow, one in the sequence of approvers, it is customizable.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.APPROVER">
+            <source>Approver</source>
+            <target>Godkender</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.RESOURCE">
+            <source>Resource</source>
+            <target>Ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.START_DATE">
+            <source>Start Date</source>
+            <target>Startdato</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.TASK">
+            <source>Task</source>
+            <target>Opgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.LABEL.RECURRENCE">
+            <source>Recurrence</source>
+            <target>Gentagelse</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.FREQUENCY.DAY">
+            <source>Daily</source>
+            <target>Daglig</target>
+            <note>RACG resource; adverb; tooltip label; this tooltip label refers to recurrence or frenquency in time of a task, this tooltip is located in the grid.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.FREQUENCY.WEEK">
+            <source>Weekly</source>
+            <target>Ugentlig</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.FREQUENCY.MONTH">
+            <source>Monthly</source>
+            <target>Månedlig</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.FREQUENCY.YEAR">
+            <source>Yearly</source>
+            <target>Årlig</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VALUE.NONE">
+            <source>None</source>
+            <target>Ingen</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip that reference to frequency (recurrence), in this case NONE.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.MOVE_DOWN">
+            <source>Move Down</source>
+            <target>Flyt ned</target>
+            <note>RACG resource; verb; tooltip label; this is a tooltip for a graphical element, it is a symbol of an arrow, which moves order or skill items down.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.MOVE_UP">
+            <source>Move Up</source>
+            <target>Flyt op</target>
+            <note>RACG resource; verb; tooltip label; this is a tooltip for a graphical element, it is a symbol of an arrow, which moves order or skill items up.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.NEXT">
+            <source>Next</source>
+            <target>Næste</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip for a graphical element, it is a symbol of an arrow that controls DATES. by clicking NEXT you can select month/day/week.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PHONE">
+            <source>Phone</source>
+            <target>Telefon</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PREVIOUS">
+            <source>Previous</source>
+            <target>Forrige</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip for a graphical element, it is a symbol of an arrow that controls DATES. by clicking PREVIOUS you can select month/day/week</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.REMOVE_FROM_SELECTED">
+            <source>Remove from Selected</source>
+            <target>Fjern fra valgte</target>
+            <note>RACG resource; verb; tooltip label; the tooltip is a text version of a graphical symbol of an arrow, it removes values for skillsets from required and moves them back to the available boxes.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.REQUIRED_FIELD">
+            <source>Required Field</source>
+            <target>Påkrævet felt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.RESOURCE">
+            <source>Resource</source>
+            <target>Ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.RESOURCE_ID">
+            <source>Resource ID</source>
+            <target>Ressource-id</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.RESOURCE_SEARCH">
+            <source>Resource Search</source>
+            <target>Ressourcesøgning</target>
+            <note>RACG resource; noun; tooltip label; this is a tooltip that stands for the general search of resources.</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.SELECT">
+            <source>Select</source>
+            <target>Vælg</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.SKILLSET_SCORE">
+            <source>Skill Set Score = sum of skill levels across required skills</source>
+            <target>Score for samling af faglig kunnen = sum af niveauer for faglig kunnen på tværs af påkrævet faglig kunnen</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.SUPERVISOR">
+            <source>Supervisor</source>
+            <target>Supervisor</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TITLE.RESOURCE_ALLOCATION">
+            <source>Resource Allocation</source>
+            <target>Ressourceallokering</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TYPE">
+            <source>Type</source>
+            <target>Type</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.VIEW">
+            <source>View</source>
+            <target>Se</target>
+            <note>RACG resource; verb; tooltip label; this is a tooltip used as a link to view a record (customer/project/...).</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.YES">
+            <source>Yes</source>
+            <target>Ja</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.NO">
+            <source>No</source>
+            <target>Nej</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TITLE.TIMEOFF">
+            <source>Approved Time-off</source>
+            <target>Godkendt fravær</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TIMEOFFDATE">
+            <source>Time-off Date</source>
+            <target>Fraværsdato</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TIMEOFFHOUR">
+            <source>Time-off Hours</source>
+            <target>Fraværstimer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.TIMEOFFCONFLICT">
+            <source>Conflicting Hours</source>
+            <target>Timer i konflikt</target>
+            <note>RACG resource; noun; tooltip label; this tooltip can be found in the grid, Conflicting Hours are displayed if there is a colision in time between inserted time off and allocations (e.g. a resourse can have a time off and be allocated to a project at the same time).</note>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_DETAILS">
+            <source>Project Details</source>
+            <target>Projektdetaljer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_NAME">
+            <source>Project Name</source>
+            <target>Projektnavn</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_TEMPLATE_DETAILS">
+            <source>Project Details</source>
+            <target>Projektdetaljer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_TEMPLATE_LINK">
+            <source>Project Template Link</source>
+            <target>Projektskabelonlink</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PERCENT_WORK_COMPLETE">
+            <source>Percent Work Complete</source>
+            <target>Procent fuldført arbejde</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ESTIMATED_WORK">
+            <source>Estimated Work</source>
+            <target>Anslået arbejde</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ALLOCATED_WORK">
+            <source>Allocated Work</source>
+            <target>Allokeret arbejde</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.ACTUAL_WORK">
+            <source>Actual Work</source>
+            <target>Faktisk arbejde</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.REMAINING_WORK">
+            <source>Remaining Work</source>
+            <target>Resterende arbejde</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.START_DATE">
+            <source>Start Date</source>
+            <target>Startdato</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.CALCULATED_END_DATE">
+            <source>Calculated End Date</source>
+            <target>Beregnet slutdato</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TOOLTIP.PROJECT_LINK">
+            <source>Project Link</source>
+            <target>Projektlink</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="VIEWPRESET.DAILY">
+            <source>Daily</source>
+            <target>Daglig</target>
+            <note>RACG resource; adverb; viewpreset label; this viewpreset sets granularity of the chart or grid, it is located on top of the chart/grid.</note>
+         </trans-unit>
+         <trans-unit id="VIEWPRESET.MONTHLY">
+            <source>Monthly</source>
+            <target>Månedlig</target>
+            <note>RACG resource; adverb; viewpreset label; this viewpreset sets granularity of the chart or grid, it is located on top of the chart/grid.</note>
+         </trans-unit>
+         <trans-unit id="VIEWPRESET.WEEKLY">
+            <source>Weekly</source>
+            <target>Ugentlig</target>
+            <note>RACG resource; adverb; viewpreset label; this viewpreset sets granularity of the chart or grid, it is located on top of the chart/grid.</note>
+         </trans-unit>
+         <trans-unit id="VIEWPRESET.WEEK_OF" translate="no">
+            <source>Week of</source>
+            <target>Week of</target>
+            <note>DNT</note>
+         </trans-unit>
+         <trans-unit id="WINDOW.CUSTOM_VIEW_PREFIX">
+            <source>Custom View</source>
+            <target>Tilpasset visning</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.EDIT_RESOURCE_ALLOCATION">
+            <source>Edit Resource Allocation</source>
+            <target>Rediger ressourceallokering</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.EDIT_VIEW">
+            <source>Edit View</source>
+            <target>Rediger visning</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.NEW_RESOURCE_ALLOCATION">
+            <source>New Resource Allocation</source>
+            <target>Ny ressourceallokering</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.NEW_VIEW">
+            <source>New View</source>
+            <target>Ny visning</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CUSTOMIZE_RESOURCE_FILTER">
+            <source>Customize Resource Filter Fields</source>
+            <target>Tilpas felter til ressourcefilter</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CUSTOMIZE_CUSTOMER_FILTER">
+            <source>Customize Customer Filter Fields</source>
+            <target>Tilpas felter til kundefilter</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CUSTOMIZE_PROJECT_FILTER">
+            <source>Customize Project Filter Fields</source>
+            <target>Tilpas felter til projektfilter</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.NEW_FILTER_DEFAULT_NAME">
+            <source>Custom Filter</source>
+            <target>Tilpasset filter</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.REASSIGN_ALLOCATIONS">
+            <source>Reassign Allocations</source>
+            <target>Omtildel allokeringer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.SEARCH_RESOURCE">
+            <source>Search Resource</source>
+            <target>Søg efter ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.SELECT_RESOURCE">
+            <source>Select Resource</source>
+            <target>Vælg ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.SETTINGS">
+            <source>Settings</source>
+            <target>Indstillinger</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.VIEW_DETAILS">
+            <source>View Details</source>
+            <target>Se detaljer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.FILTER_DETAILS">
+            <source>Filter Details</source>
+            <target>Filtrer detaljer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_RESOURCE">
+            <source>Choose Resource</source>
+            <target>Vælg ressource</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_PROJECT">
+            <source>Choose Project</source>
+            <target>Vælg projekt</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_PROJECT_TASK">
+            <source>Choose Project Task</source>
+            <target>Vælg projektopgave</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_APPROVER">
+            <source>Choose Approver</source>
+            <target>Vælg godkender</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_CLASS">
+            <source>Choose Class</source>
+            <target>Vælg klasse</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_DEPARTMENT">
+            <source>Choose Department</source>
+            <target>Vælg afdeling</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_SUBSIDIARY">
+            <source>Choose Subsidiary</source>
+            <target>Vælg datterselskab</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_LOCATION">
+            <source>Choose Location</source>
+            <target>Vælg lokation</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_BILLING_CLASS">
+            <source>Choose Billing Class</source>
+            <target>Vælg regningsklasse</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WINDOW.CHOOSE_CUSTOMER">
+            <source>Choose Customer</source>
+            <target>Vælg kunde</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DAY">
+            <source>Day</source>
+            <target>Dag</target>
+            <note>RACG resource; noun; day label; DAY is be found in the new/edit Resource Allocation form under Recurrence and then Monthly. The string is in form 'Day"(this label) + "number selection" + "of every" + number selection + "month."</note>
+         </trans-unit>
+         <trans-unit id="OF_EVERY">
+            <source>of every</source>
+            <target>i hver</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="OF">
+            <source>of</source>
+            <target>for</target>
+            <note>RACG resource; noun; week label; of can be found in the new/edit Resource Allocation form under Recurrence and then Weekly. The string is in form "week of {date}"</note>
+         </trans-unit>
+         <trans-unit id="MONTH(S)">
+            <source>month(s)</source>
+            <target>måned(er)</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="THE">
+            <source>The</source>
+            <target>Den</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="1ST">
+            <source>1st</source>
+            <target>1.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="2ND">
+            <source>2nd</source>
+            <target>2.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="3RD">
+            <source>3rd</source>
+            <target>3.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="4TH">
+            <source>4th</source>
+            <target>4.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="LAST">
+            <source>Last</source>
+            <target>Sidste</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SUN">
+            <source>Sun</source>
+            <target>Sø.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MON">
+            <source>Mon</source>
+            <target>Ma.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TUE">
+            <source>Tue</source>
+            <target>Ti.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WED">
+            <source>Wed</source>
+            <target>On.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="THU">
+            <source>Thu</source>
+            <target>To.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FRI">
+            <source>Fri</source>
+            <target>Fr.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SAT">
+            <source>Sat</source>
+            <target>Lø.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SUNDAY">
+            <source>Sunday</source>
+            <target>Søndag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MONDAY">
+            <source>Monday</source>
+            <target>Mandag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TUESDAY">
+            <source>Tuesday</source>
+            <target>Tirsdag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="WEDNESDAY">
+            <source>Wednesday</source>
+            <target>Onsdag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="THURSDAY">
+            <source>Thursday</source>
+            <target>Torsdag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="FRIDAY">
+            <source>Friday</source>
+            <target>Fredag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SATURDAY">
+            <source>Saturday</source>
+            <target>Lørdag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="OCCURRENCE">
+            <source>occurrence</source>
+            <target>forekomst</target>
+            <note>A number precedes the noun (1 occurrence).</note>
+         </trans-unit>
+         <trans-unit id="OCCURRENCES">
+            <source>occurrences</source>
+            <target>forekomster</target>
+            <note>A number precedes the noun (x occurrences).</note>
+         </trans-unit>
+         <trans-unit id="ERROR_END_DATE_EARLIER_THAN_START_DATE">
+            <source>Error: End By Date cannot be earlier than Series Start Date.</source>
+            <target>Fejl: Slut inden den kan ikke ligge før seriens startdato.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="REASSIGN_SERIES_OF_ALLOCATIONS_PROCEED">
+            <source>You are about to reassign a series of allocations. Do you want to proceed?</source>
+            <target>Du er ved at omtildele en serie af allokeringer. Vil du fortsætte?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="NEW_RESOURCE_ALLOCATION_CONFLICT">
+            <source>The requested resource allocation conflicts with the following approved time-off</source>
+            <target>Den anmodede ressourceallokering er i konflikt med det følgende godkendte fravær</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DO_YOU_WANT_TO_PROCEED">
+            <source>The allocation will be accepted, but the system will not override the approved time-off. You may contact the resource or their supervisor to resolve scheduling conflicts. Do you want to proceed?</source>
+            <target>Allokeringen vil blive godkendt, men systemet vil ikke tilsidesætte den godkendte ferie. Du kan kontakte ressourcen eller dennes supervisor for at få løst tidsplanlægningskonflikter. Vil du fortsætte?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="NEW_RESOURCE_ALLOCATION_CONFLICT_CELL">
+            <source>You are creating or updating an allocation that falls on a day with an approved time-off. Do you want to proceed?</source>
+            <target>Du opretter eller opdaterer en allokering, der finder sted på en dag med et godkendt fravær. Vil du fortsætte?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TIME_OFF_REQUEST">
+            <source>Time-off Request</source>
+            <target>Anmodning om fravær</target>
+            <note>RACG resource; noun; Time Off Request label; It is a part of a warning message your receive when submitting Resource Allocation, and the allocation is in conflict with the time off request. The full string looks like this: "Time-off Request" + ": " + (start date of the timeoff) + " - " + (end date of the time off) + " " + "conflicting" + (time unit-e.g. hrs) + ": " + (amount of time)</note>
+         </trans-unit>
+         <trans-unit id="CONFLICTING">
+            <source>Conflicting</source>
+            <target>I konflikt</target>
+            <note>RACG resource; verb; Conflicting label; It is a part of the warning message you receive when submitting Resource Allocation and the allocation is in conflict with the time off request. The full string looks like this: "Time-off Request" + ": " + (start date of the timeoff) + " - " + (end date of the time off) + " " + "conflicting" + (time unit-e.g. hrs) + ": " + (amount of time)</note>
+         </trans-unit>
+         <trans-unit id="REALLOCATE_SERIES_OF_ALLOCATIONS_PROCEED">
+            <source>You are about to reallocate a series of allocations. Do you want to proceed?</source>
+            <target>Du er ved at omallokere en serie af allokeringer. Vil du fortsætte?</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="EDIT_NOT_AVAILABLE_IN_GRID_FOR_RECURRING">
+            <source>Editing options are not available in grid view for recurring allocations.</source>
+            <target>Redigeringsmuligheder er ikke tilgængelige i gittervisning til tilbagevendende allokeringer.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="TO_LIMIT_NUMBER_OF_PROJECTS">
+            <source>To limit number of projects in the view adjust start date filter.</source>
+            <target>Reguler startdatofiltret for at begrænse antallet af projekter i visningen.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CHART">
+            <source>Chart</source>
+            <target>Diagram</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CLICK_BAR_TO_EDIT">
+            <source>Click bar to edit allocation.</source>
+            <target>Klik på linjen for at redigere allokering.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="DRAG_AND_DROP_BAR_TO_MOVE">
+            <source>Drag and drop bar to move to another project or resource.</source>
+            <target>Træk og slip linjen for at flytte til et andet projekt eller en anden ressource.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="GRID">
+            <source>Grid</source>
+            <target>Gitter</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CLICK_CELL_TO_EDIT">
+            <source>Click cell to edit allocation.</source>
+            <target>Klik på cellen for at redigere allokering.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="CONTROL_CLICK_TO_DRILL_DOWN">
+            <source>Control + click to drill down cells with multiple allocations.</source>
+            <target>Brug Ctrl+klik for at bore ned i celler med flere allokeringer.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RIGHT_CLICK_TO_ADJUST">
+            <source>Right click to adjust allocation properties.</source>
+            <target>Højreklik for at regulere allokeringsegenskaber.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="RECURRING_ALLOCATION">
+            <source>Recurring Allocation</source>
+            <target>Tilbagevendende allokering</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MULTIPLE_ALLOCATION">
+            <source>Multiple Allocation</source>
+            <target>Flere allokeringer</target>
+            <note>RACG resource; noun; Multiple Allocation label; Multiple Allocation hints that if the number is underlined, the reseource has multiple allocations for particular time period.</note>
+         </trans-unit>
+         <trans-unit id="NON_WORKING_DAY">
+            <source>Non-Working Day</source>
+            <target>Fridag</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.RESOURCE_ALLOC_CHART">
+            <source>Resource Allocation Chart</source>
+            <target>Ressourceallokeringsdiagram</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.RESOURCE_ALLOCATIONS">
+            <source>Resource Allocations</source>
+            <target>Ressourceallokeringer</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.MESSAGE.NO_RESULTS_VIEW">
+            <source>No Results Found Within Limits of Selected View</source>
+            <target>Ingen resultater fundet inden for grænserne af valgt visning</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.MESSAGE.NO_RESULTS_SEARCH">
+            <source>No Results Found.</source>
+            <target>Ingen resultater fundet.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.MESSAGE.RESOURCE_ALLOC_FEATURE_CHECK">
+            <source>This feature requires the Resource Allocations feature be enabled to use.</source>
+            <target>Denne funktion kræver, at funktionen Ressourceallokeringer er aktiveret til brug.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="SS.MESSAGE.INSTALL_FEATURE_CHECK">
+            <source>Feature [Resource Allocations], [Custom Records], [Client SuiteScript], and [Server SuiteScript] must be enabled. Please enable the features and re-try.</source>
+            <target>Funktionen [Ressourceallokeringer], [Tilpassede records], [Klient-SuiteScript] og [Server-SuiteScript] skal være aktiveret. Aktiver funktionerne, og prøv igen.</target>
+            <note/>
+         </trans-unit>
+         <trans-unit id="MULTISELECT.CLICKTOADD">
+            <source>Click Selection to Add</source>
+            <target>Klik på Valg for at tilføje</target>
+            <note>RACG resource; noun; Multiselect label; when working with big data, you can select multiple fields and create a currect selection {e.g. used when filtering).</note>
+         </trans-unit>
+         <trans-unit id="MULTISELECT.CURRENTSELECTIONS">
+            <source>Current Selections</source>
+            <target>Aktuelle valg</target>
+            <note>RACG resource; noun; Multiselect label; when working with big data, you can select multiple fields and create a currect selection {e.g. used when filtering).</note>
+         </trans-unit>
+      </body>
+   </file>
+</xliff>
