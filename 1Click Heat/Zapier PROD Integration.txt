@@ -1,0 +1,7 @@
+PROD 1Click Integrations
+
+https://zapier.com/dashboard/auth/oauth/return/App207308CLIAPI/
+Consumer Key / Client ID
+25dfd564df279f447f80872d2eab4035a79cca3e82d6edfe2512efb405f90db6
+Consumer Secret / Client Secret
+95a653fe4c6f9ee534dae645a9ac5c506ba73224741ea1fb065545cc57ad204e
